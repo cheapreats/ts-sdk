@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true,
+    "target": "es2017",
+    "rootDirs": ["src"],
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2017", "dom"],
+    "module": "commonjs",
+    "sourceMap": true,
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "scripts", "dist"]
+}
