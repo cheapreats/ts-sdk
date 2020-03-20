@@ -4,6 +4,10 @@
  * License: UNLICENSED
  */
 
+interface Window {
+  CE: typeof App;
+}
+
 const App = require("./app/App");
 
 let app = new App();

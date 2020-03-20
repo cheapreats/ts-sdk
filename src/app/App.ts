@@ -37,7 +37,35 @@ let config = {
 /**
  * Main entry point of the SDK
  */
-class App {
+export class App {
+  _token: string | null;
+  _adaptor: CheaprEatsGraphQLAdaptor;
+  _authorizationController: AuthorizationController;
+  _cartController: CartController;
+  _categoryController: CategoryController;
+  _customerController: CustomerController;
+  _customerTokenController: CustomerTokenController;
+  _couponController: CouponController;
+  _employeeController: EmployeeController;
+  _employeeTokenController: EmployeeTokenController;
+  _graphController: GraphController;
+  _headOfficeController: HeadOfficeController;
+  _menuItemController: MenuItemController;
+  _modifierController: ModifierController;
+  _vendorController: VendorController;
+  _verificationController: VerificationController;
+  _validationController: typeof ValidationController;
+  _surveyController: SurveyController;
+  _orderController: OrderController;
+  _imageController: typeof ImageController;
+  _payoutController: PayoutController;
+  _explorePageController: ExplorePageController;
+  _flashSaleController: FlashSaleController;
+  _tipController: TipController;
+  _loyaltyProgramController: LoyaltyProgramController;
+  _loyaltyCardController: LoyaltyCardController;
+  _redeemableItemController: RedeemableItemController;
+  _remoteConfigurationController: RemoteConfigurationController;
   /**
    * Construct the App instance.
    * @hideconstructor
