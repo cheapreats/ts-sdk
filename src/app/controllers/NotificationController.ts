@@ -1,10 +1,9 @@
 const HttpLink = require("../links/synchronouslinks/HttpLink");
-//PR - ts is okay with only decalring it in one spot, but does that actually makes sense to do? Maybe include a ignore in the tsconfig?
 
 /**
  * Controller for notifications services.
  */
-class NotificationController {
+export class NotificationController {
   app: any;
   test: any;
   constructor(app: any) {
@@ -90,5 +89,3 @@ class NotificationController {
     });
   }
 }
-
-module.exports = NotificationController;

@@ -1,7 +1,6 @@
 const HttpLink = require("../links/synchronouslinks/HttpLink");
-//PR same issue where ts is saying HttpLink has already been declared elsewhere
-// This is special, not really a model
-class Verify {
+
+export class Verify {
   _getVerificationCodeLink: any;
   _twilioController: any;
   constructor(config: { getVerificationCodeEndpoint: any }) {
@@ -26,5 +25,3 @@ class Verify {
     );
   }
 }
-
-module.exports = Verify;
