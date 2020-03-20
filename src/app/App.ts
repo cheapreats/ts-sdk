@@ -38,7 +38,7 @@ let config = {
  * Main entry point of the SDK
  */
 export class App {
-  _token: any;
+  _token: string | null;
   _adaptor: CheaprEatsGraphQLAdaptor;
   _authorizationController: AuthorizationController;
   _cartController: CartController;
