@@ -1,9 +1,8 @@
-import HttpLink from "../links/synchronouslinks/HttpLink";
-//PR ts says its already decalred somewhere else
+const HttpLink = require("../links/synchronouslinks/HttpLink");
 /**
  * Controller for validation services.
  */
-class ValidationController {
+export class ValidationController {
   app: any;
   constructor(app: any) {
     this.app = app;
@@ -63,5 +62,3 @@ class ValidationController {
     });
   }
 }
-
-module.exports = ValidationController;

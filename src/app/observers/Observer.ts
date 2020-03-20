@@ -4,15 +4,14 @@
  * License: UNLICENSED
  */
 
-//PR - Could be an error no "onNotify"
-
 module.exports = (() => {
   class Observer {
+    onNotify: Function;
     /**
      * Construct the observer class
      */
     constructor() {
-      this.onNotify = (instance, payload) => {};
+      this.onNotify = (instance: any, payload: any): void => {};
     }
 
     /**
@@ -20,7 +19,7 @@ module.exports = (() => {
      * @param {object} instance
      * @param {object} payload
      */
-    notify(instance, payload) {
+    notify(instance: object, payload: object): void {
       this.onNotify(instance, payload);
     }
   }

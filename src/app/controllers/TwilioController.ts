@@ -5,12 +5,11 @@
  */
 
 const HttpLink = require("../links/synchronouslinks/HttpLink");
-//PR ts says its already decalred somewhere else
 
 /**
  * Controller for twilio.
  */
-class TwilioController {
+export class TwilioController {
   app: any;
   constructor(app: any) {
     this.app = app;
@@ -90,5 +89,3 @@ class TwilioController {
     });
   }
 }
-
-module.exports = TwilioController;
