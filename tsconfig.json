@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "allowJs": true,
+    "declaration": true,
     "target": "es2017",
     "rootDirs": ["src"],
     "baseUrl": "src",
