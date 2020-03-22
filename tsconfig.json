@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "allowJs": true,
-    "declaration": true,
+    // "declaration": true,
     "target": "es2017",
     "rootDirs": ["src"],
     "baseUrl": "src",
@@ -16,5 +16,5 @@
     "experimentalDecorators": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "scripts", "dist"]
+  "exclude": ["node_modules", "scripts"]
 }
