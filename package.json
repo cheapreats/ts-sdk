@@ -10,7 +10,7 @@
     "test": "mocha -r ts-node/register",
     "gulp": "gulp",
     "add:mutation": "node ./src/scripts/addMutation.js",
-    "build": "rm -rf dist && tsc && babel dist -d dist",
+    "build": "rm -rf dist && tsc && babel dist -d dist && cp ./src/index.d.ts ./dist",
     "generate-docs": "./deploy-doc.sh"
   },
   "repository": {
