@@ -1,9 +1,9 @@
 const strToIdentifier = require("./util/strToIdentifier");
-const CheaprEatsGraphQLAdaptor = require("./adaptors/CheaprEatsGraphQLAdaptor");
+import CheaprEatsGraphQLAdaptor from "./adaptors/CheaprEatsGraphQLAdaptor";
 const packageDotJson = require("../../package.json");
 
 // ADD CONTROLLER IMPORTS BELOW
-const AuthorizationController = require("./controllers/AuthorizationController");
+import { AuthorizationController } from "./controllers/AuthorizationController";
 const CartController = require("./controllers/CartController");
 const CategoryController = require("./controllers/CategoryController");
 const CustomerController = require("./controllers/CustomerController");
@@ -17,10 +17,10 @@ const MenuItemController = require("./controllers/MenuItemController");
 const ModifierController = require("./controllers/ModifierController");
 const VendorController = require("./controllers/VendorController");
 const VerificationController = require("./controllers/VerificationController");
-const ValidationController = require("./controllers/ValidationController");
+import { ValidationController } from "./controllers/ValidationController";
 const SurveyController = require("./controllers/SurveyController");
 const OrderController = require("./controllers/OrderController");
-const ImageController = require("./controllers/ImageController");
+import ImageController from "./controllers/ImageController";
 const PayoutController = require("./controllers/PayoutController");
 const ExplorePageController = require("./controllers/ExplorePageController");
 const FlashSaleController = require("./controllers/FlashSaleController");
@@ -54,10 +54,10 @@ export class App {
   _modifierController: ModifierController;
   _vendorController: VendorController;
   _verificationController: VerificationController;
-  _validationController: typeof ValidationController;
+  _validationController: ValidationController;
   _surveyController: SurveyController;
   _orderController: OrderController;
-  _imageController: typeof ImageController;
+  _imageController: ImageController;
   _payoutController: PayoutController;
   _explorePageController: ExplorePageController;
   _flashSaleController: FlashSaleController;
