@@ -8,7 +8,7 @@ const Adaptor = require("./Adaptor");
 const GraphQLLink = require("../links/synchronouslinks/GraphQLLink");
 let packageDotJson = require("../../../package.json");
 
-class CheaprEatsGraphQLAdaptor extends Adaptor {
+export class CheaprEatsGraphQLAdaptor extends Adaptor {
   _config: any;
   _graphQLLink: any;
   constructor(config: { graphQLEndpoint: any }) {
@@ -56,4 +56,4 @@ class CheaprEatsGraphQLAdaptor extends Adaptor {
   }
 }
 
-module.exports = CheaprEatsGraphQLAdaptor;
+// module.exports = CheaprEatsGraphQLAdaptor;

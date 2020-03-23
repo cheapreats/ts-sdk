@@ -1,9 +1,10 @@
 /**
  * Controller for the graph.
  */
-class GraphController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class GraphController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.query = this.query.bind(this);
@@ -11,9 +12,7 @@ class GraphController {
 
   // ADD MUTATION METHODS BELOW
 
-  query(query: string, variables: any = {}) {
+  query(query: string, variables: object = {}) {
     return this.app.getAdaptor().query(query, variables);
   }
 }
-
-module.exports = GraphController;

@@ -1,4 +1,4 @@
-class AuthorizationController {
+export class AuthorizationController {
   app: any;
   constructor(app: any) {
     this.app = app;
@@ -24,5 +24,3 @@ class AuthorizationController {
     });
   }
 }
-
-module.exports = AuthorizationController;
