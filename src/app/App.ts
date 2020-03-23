@@ -1,6 +1,6 @@
 const strToIdentifier = require("./util/strToIdentifier");
 import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
-import packageDotJson from "../../package.json";
+import packageDotJson from "../version.js";
 
 // ADD CONTROLLER IMPORTS BELOW
 import { AuthorizationController } from "./controllers/AuthorizationController";
