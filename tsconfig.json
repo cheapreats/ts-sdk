@@ -14,8 +14,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "jsx": "react",
-    "experimentalDecorators": true,
-    "resolveJsonModule": true
+    "experimentalDecorators": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "scripts"]
