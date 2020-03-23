@@ -1,9 +1,9 @@
-interface UpdateRaw {
+export interface UpdateRaw {
   name?: string;
   version_mask?: string;
   data?: string;
 }
-interface AddRaw {
+export interface AddRaw {
   name: string;
   version_mask: string;
   data: string;
@@ -11,9 +11,10 @@ interface AddRaw {
 /**
  * Controller for remote configuration.
  */
-class RemoteConfigurationController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class RemoteConfigurationController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.fetch = this.fetch.bind(this);
@@ -117,5 +118,3 @@ class RemoteConfigurationController {
     });
   }
 }
-
-module.exports = RemoteConfigurationController;

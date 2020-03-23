@@ -1,10 +1,10 @@
-interface Choices {
+export interface Choices {
   name: string;
   identifier: string;
   available: boolean;
   price: number;
 }
-interface AddModifier {
+export interface AddModifier {
   name: string;
   identifier: string;
   description: string;
@@ -16,7 +16,7 @@ interface AddModifier {
   is_topping: boolean;
   max_choice?: number;
 }
-interface UpdateModifier {
+export interface UpdateModifier {
   name?: string;
   identifier?: string;
   description?: string;
@@ -30,9 +30,10 @@ interface UpdateModifier {
 /**
  * Controller for modifiers.
  */
-class ModifierController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class ModifierController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -126,5 +127,3 @@ class ModifierController {
     });
   }
 }
-
-module.exports = ModifierController;

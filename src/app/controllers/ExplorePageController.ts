@@ -1,15 +1,15 @@
-interface Advertisements {
+export interface Advertisements {
   title?: string;
   link?: string;
   image?: string;
   description?: string;
 }
-interface DailyDeals {
+export interface DailyDeals {
   link?: string;
   menu_item_id: string;
 }
-interface SpecialDeals extends DailyDeals {}
-interface TimelyDeals {
+export interface SpecialDeals extends DailyDeals {}
+export interface TimelyDeals {
   menu_item_id: string;
   title?: string;
   link?: string;
@@ -19,9 +19,10 @@ interface TimelyDeals {
 /**
  * Controller related to explore page
  */
-class ExplorePageController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class ExplorePageController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.replace = this.replace.bind(this);
@@ -73,5 +74,3 @@ class ExplorePageController {
     });
   }
 }
-
-module.exports = ExplorePageController;

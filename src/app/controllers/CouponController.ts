@@ -1,11 +1,11 @@
-interface PaymentMethods {
+export interface PaymentMethods {
   apple_pay?: boolean;
   android_pay?: boolean;
   credit_card?: boolean;
   in_person?: boolean;
   wallet?: boolean;
 }
-interface AddCoupon {
+export interface AddCoupon {
   code: string;
   coupon_type: string;
   value: number;
@@ -25,9 +25,10 @@ interface AddCoupon {
 /**
  * Controller for coupons.
  */
-class CouponController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class CouponController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -54,7 +55,7 @@ class CouponController {
         .mutate(mutationString, {
           coupon
         })
-        .then((result: { createCoupon: { _id: unknown } }) => {
+        .then((result: { createCoupon: { _id: string } }) => {
           resolve(result.createCoupon._id);
         })
         .catch((e: any) => {
@@ -63,5 +64,3 @@ class CouponController {
     });
   }
 }
-
-module.exports = CouponController;

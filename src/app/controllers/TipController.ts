@@ -1,6 +1,7 @@
-class TipController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class TipController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -40,4 +41,3 @@ class TipController {
     });
   }
 }
-module.exports = TipController;

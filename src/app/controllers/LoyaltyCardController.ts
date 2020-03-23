@@ -1,4 +1,4 @@
-interface CreateLoyalty {
+export interface CreateLoyalty {
   loyalty_program_id: string;
   customer_id?: string;
   phone_number?: string;
@@ -6,9 +6,10 @@ interface CreateLoyalty {
 /**
  * Controller for loyalty cards.
  */
-class LoyaltyCardController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class LoyaltyCardController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.createLoyaltyCardAndEnroll = this.createLoyaltyCardAndEnroll.bind(
@@ -186,5 +187,3 @@ class LoyaltyCardController {
     });
   }
 }
-
-module.exports = LoyaltyCardController;

@@ -4,11 +4,12 @@
  * License: UNLICENSED
  */
 
-const HttpLink = require("../links/synchronouslinks/HttpLink");
+import { HttpLink } from "../links/synchronouslinks/HttpLink";
 
 /**
  * Controller for twilio.
  */
+
 export class TwilioController {
   app: any;
   constructor(app: any) {
@@ -23,6 +24,7 @@ export class TwilioController {
    * @param {string} append=""
    * @returns {HttpLink}
    */
+  // Get Adaptor Mode does not exist in App
   getHttpLink(append: string = "") {
     if (this.app.getAdaptorMode() === "production") {
       return new HttpLink(

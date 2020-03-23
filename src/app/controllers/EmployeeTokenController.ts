@@ -1,9 +1,10 @@
 /**
  * Controller for employee tokens.
  */
-class EmployeeTokenController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class EmployeeTokenController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -43,5 +44,3 @@ class EmployeeTokenController {
     });
   }
 }
-
-module.exports = EmployeeTokenController;

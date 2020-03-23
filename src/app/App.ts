@@ -1,37 +1,38 @@
 const strToIdentifier = require("./util/strToIdentifier");
 import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
-const packageDotJson = require("../../package.json");
+import packageDotJson from "../../package.json";
 
 // ADD CONTROLLER IMPORTS BELOW
 import { AuthorizationController } from "./controllers/AuthorizationController";
-const CartController = require("./controllers/CartController");
-const CategoryController = require("./controllers/CategoryController");
-const CustomerController = require("./controllers/CustomerController");
-const CustomerTokenController = require("./controllers/CustomerTokenController");
-const CouponController = require("./controllers/CouponController");
-const EmployeeController = require("./controllers/EmployeeController");
-const EmployeeTokenController = require("./controllers/EmployeeTokenController");
+import { CartController } from "./controllers/CartController";
+import { CategoryController } from "./controllers/CategoryController";
+import { CustomerController } from "./controllers/CustomerController";
+import { CustomerTokenController } from "./controllers/CustomerTokenController";
+import { CouponController } from "./controllers/CouponController";
+import { EmployeeController } from "./controllers/EmployeeController";
+import { EmployeeTokenController } from "./controllers/EmployeeTokenController";
 import { GraphController } from "./controllers/GraphController";
-const HeadOfficeController = require("./controllers/HeadOfficeController");
-const MenuItemController = require("./controllers/MenuItemController");
-const ModifierController = require("./controllers/ModifierController");
-const VendorController = require("./controllers/VendorController");
-const VerificationController = require("./controllers/VerificationController");
+import { HeadOfficeController } from "./controllers/HeadOfficeController";
+import { MenuItemController } from "./controllers/MenuItemController";
+import { ModifierController } from "./controllers/ModifierController";
+import { VendorController } from "./controllers/VendorController";
+import { VerificationController } from "./controllers/VerificationController";
 import { ValidationController } from "./controllers/ValidationController";
-const SurveyController = require("./controllers/SurveyController");
-const OrderController = require("./controllers/OrderController");
+import { SurveyController } from "./controllers/SurveyController";
+import { OrderController } from "./controllers/OrderController";
 import { ImageController } from "./controllers/ImageController";
-const PayoutController = require("./controllers/PayoutController");
-const ExplorePageController = require("./controllers/ExplorePageController");
-const FlashSaleController = require("./controllers/FlashSaleController");
-const TipController = require("./controllers/TipController");
-const LoyaltyProgramController = require("./controllers/LoyaltyProgramController");
-const LoyaltyCardController = require("./controllers/LoyaltyCardController");
-const RedeemableItemController = require("./controllers/RedeemableItemController");
-const RemoteConfigurationController = require("./controllers/RemoteConfigurationController");
+import { PayoutController } from "./controllers/PayoutController";
+import { ExplorePageController } from "./controllers/ExplorePageController";
+import { FlashSaleController } from "./controllers/FlashSaleController";
+import { TipController } from "./controllers/TipController";
+import { LoyaltyProgramController } from "./controllers/LoyaltyProgramController";
+import { LoyaltyCardController } from "./controllers/LoyaltyCardController";
+import { RedeemableItemController } from "./controllers/RedeemableItemController";
+import { RemoteConfigurationController } from "./controllers/RemoteConfigurationController";
+import endpoints from "../config/endpoints";
 
 let config = {
-  endpoints: require("../config/endpoints")
+  endpoints: endpoints
 };
 
 /**
@@ -217,7 +218,7 @@ export class App {
    * Get graph related methods.
    * @returns {{query: GraphController.query}}
    */
-  get Graph() {
+  get Graph(): { query: GraphController["query"] } {
     return {
       query: this._graphController.query
     };
@@ -505,7 +506,7 @@ export class App {
         `;
     return new Promise((resolve, reject) => {
       this.Graph.query(queryString)
-        .then(data => {
+        .then((data: { is_sdk_version_supported: any }) => {
           resolve(data.is_sdk_version_supported);
         })
         .catch(e => {
@@ -529,7 +530,7 @@ export class App {
    * Set GraphQL endpoint.
    * @param endpoint
    */
-  setGraphQLEndpoint(endpoint) {
+  setGraphQLEndpoint(endpoint: string) {
     config.endpoints.graphQLEndpoint.production = endpoint;
     this._adaptor = new CheaprEatsGraphQLAdaptor({
       graphQLEndpoint: this.getConfiguration().endpoints.graphQLEndpoint

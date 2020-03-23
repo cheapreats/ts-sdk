@@ -1,10 +1,11 @@
-const HttpLink = require("../links/synchronouslinks/HttpLink");
+import { HttpLink } from "../links/synchronouslinks/HttpLink";
 /**
  * Controller for validation services.
  */
+import { App } from "../App";
 export class ValidationController {
-  app: any;
-  constructor(app: any) {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.customerSignupEmail = this.customerSignupEmail.bind(this);
@@ -32,7 +33,7 @@ export class ValidationController {
         .post({
           data: { email }
         })
-        .then(data => {
+        .then((data: { data: any }) => {
           resolve(data.data);
         })
         .catch(e => {
@@ -53,7 +54,7 @@ export class ValidationController {
         .post({
           data: { phone }
         })
-        .then(data => {
+        .then((data: { data: any }) => {
           resolve(data.data);
         })
         .catch(e => {

@@ -1,11 +1,12 @@
-interface CartItem {
+export interface CartItem {
   item_id: string;
   modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
 }
+import { App } from "../App";
 
-class CartController {
-  app: any;
-  constructor(app: any) {
+export class CartController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.updateNote = this.updateNote.bind(this);
@@ -216,4 +217,3 @@ class CartController {
     });
   }
 }
-module.exports = CartController;

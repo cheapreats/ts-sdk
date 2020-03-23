@@ -1,17 +1,18 @@
-interface AddRedeemableItem {
+export interface AddRedeemableItem {
   loyalty_program_id: string;
   menu_item_id: string;
   points_required: number;
 }
-interface UpdateRedeemableItem {
+export interface UpdateRedeemableItem {
   points_required?: number;
 }
 /**
  * Controller for redeemable items.
  */
-class RedeemableItemController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class RedeemableItemController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -105,5 +106,3 @@ class RedeemableItemController {
     });
   }
 }
-
-module.exports = RedeemableItemController;

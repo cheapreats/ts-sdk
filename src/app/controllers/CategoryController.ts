@@ -1,27 +1,27 @@
 /**
  * Controller for categories.
  */
-interface Category {
+export interface Category {
   name: string;
   identifier: string;
   description: string;
   vendor_id: string;
   sort_order?: number;
 }
-interface UpdateCategory {
+export interface UpdateCategory {
   name?: string;
   identifier?: string;
   description?: string;
   sort_order?: number;
 }
-interface BatchCategories {
+export interface BatchCategories {
   id: string;
   category: UpdateCategory;
 }
-
-class CategoryController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class CategoryController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -144,5 +144,3 @@ class CategoryController {
     });
   }
 }
-
-module.exports = CategoryController;

@@ -4,6 +4,4 @@
  * License: UNLICENSED
  */
 
-class ModelFactory {
-
-}
+export class ModelFactory {}

@@ -1,4 +1,4 @@
-module.exports = function(str: string): string {
+export function strToIdentifier(str: string): string {
   let result: string = "";
   for (let i = 0; i < str.length; i++) {
     if (str[i].match(/[A-Za-z0-9]/)) {
@@ -18,4 +18,4 @@ module.exports = function(str: string): string {
   }
 
   return result;
-};
+}

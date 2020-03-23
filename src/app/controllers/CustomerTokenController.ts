@@ -1,9 +1,10 @@
 /**
  * Controller for customer tokens.
  */
-class CustomerTokenController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class CustomerTokenController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -44,5 +45,3 @@ class CustomerTokenController {
     });
   }
 }
-
-module.exports = CustomerTokenController;

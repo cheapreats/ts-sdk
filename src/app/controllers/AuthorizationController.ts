@@ -1,6 +1,7 @@
+import { App } from "../App";
 export class AuthorizationController {
-  app: any;
-  constructor(app: any) {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     this.getTokenScope = this.getTokenScope.bind(this);
   }
@@ -15,7 +16,7 @@ export class AuthorizationController {
       return this.app
         .getAdaptor()
         .query(queryString)
-        .then((data: { auth_token_scope: unknown }) => {
+        .then((data: { auth_token_scope: string }) => {
           resolve(data.auth_token_scope);
         })
         .catch((e: any) => {

@@ -4,14 +4,14 @@
  * License: UNLICENSED
  */
 
-const Adaptor = require("./Adaptor");
-const GraphQLLink = require("../links/synchronouslinks/GraphQLLink");
-let packageDotJson = require("../../../package.json");
+import { Adaptor } from "./Adaptor";
+import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
+import packageDotJson from "../../../package.json";
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {
-  _config: any;
-  _graphQLLink: any;
-  constructor(config: { graphQLEndpoint: any }) {
+  _config: { graphQLEndpoint: string };
+  _graphQLLink: GraphQLLink;
+  constructor(config: { graphQLEndpoint: string }) {
     super(config);
     this._graphQLLink = new GraphQLLink(config.graphQLEndpoint, {
       version: packageDotJson.version || null

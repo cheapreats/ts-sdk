@@ -2,9 +2,10 @@
 /**
  * Controller for combo items.
  */
-class ComboItemController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class ComboItemController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.add = this.add.bind(this);
@@ -84,5 +85,3 @@ class ComboItemController {
     });
   }
 }
-
-module.exports = ComboItemController;

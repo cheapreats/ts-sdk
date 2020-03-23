@@ -17,9 +17,10 @@ interface UpdatePayout {
 /**
  * Controller related to payouts
  */
-class PayoutController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class PayoutController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.request = this.request.bind(this);
@@ -125,5 +126,3 @@ class PayoutController {
     });
   }
 }
-
-module.exports = PayoutController;

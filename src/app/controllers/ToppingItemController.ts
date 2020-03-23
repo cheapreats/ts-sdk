@@ -1,9 +1,10 @@
 /**
  * Controller for topping items.
  */
-class ToppingItemController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class ToppingItemController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.add = this.add.bind(this);
@@ -123,5 +124,3 @@ class ToppingItemController {
     });
   }
 }
-
-module.exports = ToppingItemController;

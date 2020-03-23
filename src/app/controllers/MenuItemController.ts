@@ -1,4 +1,4 @@
-interface AddMenuItem {
+export interface AddMenuItem {
   name: string;
   identifier: string;
   images: Array<string>;
@@ -17,7 +17,7 @@ interface AddMenuItem {
   sort_order?: number;
   estimated_time?: number;
 }
-interface UpdateMenuItem {
+export interface UpdateMenuItem {
   name?: string;
   identifier?: string;
   images?: Array<string>;
@@ -35,16 +35,17 @@ interface UpdateMenuItem {
   sort_order?: number;
   estimated_time?: number;
 }
-interface BatchUpdate {
+export interface BatchUpdate {
   id: string;
   menu_item: UpdateMenuItem;
 }
 /**
  * Controller for menu items.
  */
-class MenuItemController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class MenuItemController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -74,7 +75,7 @@ class MenuItemController {
         .mutate(mutationString, {
           menu_item
         })
-        .then((result: { createMenuItem: { _id: any } }) => {
+        .then((result: { createMenuItem: { _id: string } }) => {
           resolve(result.createMenuItem._id);
         })
         .catch((e: any) => {
@@ -167,5 +168,3 @@ class MenuItemController {
     });
   }
 }
-
-module.exports = MenuItemController;
