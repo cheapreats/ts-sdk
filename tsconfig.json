@@ -2,7 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "allowJs": true,
-    // "declaration": true,
+    "declaration": true,
+    "declarationMap": true,
     "target": "es2017",
     "rootDirs": ["src"],
     "baseUrl": "src",
@@ -13,7 +14,8 @@
     "module": "commonjs",
     "sourceMap": true,
     "jsx": "react",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "scripts"]

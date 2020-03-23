@@ -4,14 +4,14 @@
  * License: UNLICENSED
  */
 
-const Link = require("../Link");
+import { Link } from "../Link";
 
-class SynchronousLink extends Link {
-  _type: any;
+export class SynchronousLink extends Link {
+  _type: string;
   /**
    * @param  {} url
    */
-  constructor(url: any) {
+  constructor(url: string) {
     super(url);
     this._type = "sync";
   }

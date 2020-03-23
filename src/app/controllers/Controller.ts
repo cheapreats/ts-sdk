@@ -2,8 +2,8 @@
  * Controller singleton superclass
  * @abstract
  */
-class Controller {
-  static instance: any;
+export class Controller {
+  static instance: Controller;
 
   /**
    * @private
@@ -13,7 +13,7 @@ class Controller {
 
   /**
    * Return a new controller instance.
-   * @returns {Controller} //PR can a class be a type?
+   * @returns {Controller}
    */
   static getInstance() {
     if (!this.instance) {
@@ -22,5 +22,3 @@ class Controller {
     return this;
   }
 }
-
-module.exports = Controller;

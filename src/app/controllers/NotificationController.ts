@@ -1,8 +1,9 @@
-const HttpLink = require("../links/synchronouslinks/HttpLink");
+import { HttpLink } from "../links/synchronouslinks/HttpLink";
 
 /**
  * Controller for notifications services.
  */
+
 export class NotificationController {
   app: any;
   test: any;
@@ -21,6 +22,7 @@ export class NotificationController {
    * @param {string} append=""
    * @returns {HttpLink} //PR it returns a type HttpLink or a HttpLink object?
    */
+  // Get Adaptor Mode does not exist in App
   getHttpLink(append: string = "") {
     if (this.app.getAdaptorMode() === "production") {
       return new HttpLink(

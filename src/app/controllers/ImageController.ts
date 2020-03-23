@@ -1,10 +1,11 @@
-const HttpLink = require("../links/synchronouslinks/HttpLink");
+import { HttpLink } from "../links/synchronouslinks/HttpLink";
 /**
  * Controller for image services.
  */
+import { App } from "../App";
 export class ImageController {
-  app: any;
-  constructor(app) {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.upload = this.upload.bind(this);

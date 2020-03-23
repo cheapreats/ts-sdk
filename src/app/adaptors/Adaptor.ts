@@ -4,23 +4,21 @@
  * License: UNLICENSED
  */
 
-module.exports = (() => {
-  return class Adaptor {
-    _config: any;
-    constructor(config: any) {
-      /**
-       * Construct the adaptor
-       * @param {any} config
-       */
-      this._config = config;
-    }
-
+export class Adaptor {
+  _config: { graphQLEndpoint: string };
+  constructor(config: { graphQLEndpoint: string }) {
     /**
-     * Run an adaptor request
+     * Construct the adaptor
      * @param {any} config
      */
-    run(config: any) {
-      throw new Error("Not implemented");
-    }
-  };
-})();
+    this._config = config;
+  }
+
+  /**
+   * Run an adaptor request
+   * @param {any} config
+   */
+  run(config: any) {
+    throw new Error("Not implemented");
+  }
+}

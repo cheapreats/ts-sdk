@@ -1,22 +1,23 @@
-interface AddVendorWithEmployee {
+export interface AddVendorWithEmployee {
   name: string;
   email_address: string;
   username: string;
   password: string;
   plan: string;
 }
-enum ApprovalStatus {
+export enum ApprovalStatus {
   NOT_APPROVED = "NOT_APPROVED",
   PENDING = "PENDING",
   APPROVED = "APPROVED"
 }
-enum PayoutSchedule {
+export enum PayoutSchedule {
   OFF = "OFF",
   WEEKLY = "WEEKLY",
   BI_WEEKLY = "BI_WEEKLY",
   MONTHLY = "MONTHLY"
 }
-interface UpdateVendor {
+
+export interface UpdateVendor {
   name?: string;
   description?: string;
   images?: Array<string>;
@@ -49,12 +50,15 @@ interface UpdateVendor {
   payout_auto_request_schedule?: PayoutSchedule;
   global_tax_rate?: number;
 }
+
+import { PaymentMethods } from "./CouponController";
 /**
  * Controller for vendors.
  */
-class VendorController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class VendorController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.deleteVendorTester = this.deleteVendorTester.bind(this);
@@ -316,5 +320,3 @@ class VendorController {
     });
   }
 }
-
-module.exports = VendorController;

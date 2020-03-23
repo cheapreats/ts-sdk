@@ -1,9 +1,9 @@
-enum ProgramType {
+export enum ProgramType {
   DOLLAR = "DOLLAR",
   ORDER = "ORDER",
   ITEM = "ITEM"
 }
-interface LoyaltyProg {
+export interface LoyaltyProg {
   name: string;
   description?: string;
   vendor_id: string;
@@ -13,7 +13,7 @@ interface LoyaltyProg {
   min_purchase?: number;
   program_type?: ProgramType;
 }
-interface UpdateLoyaltyProg {
+export interface UpdateLoyaltyProg {
   name?: string;
   description?: string;
   items_required?: Array<string>;
@@ -25,9 +25,10 @@ interface UpdateLoyaltyProg {
 /**
  * Controller for loyalty programs.
  */
-class LoyaltyProgramController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class LoyaltyProgramController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -121,5 +122,3 @@ class LoyaltyProgramController {
     });
   }
 }
-
-module.exports = LoyaltyProgramController;

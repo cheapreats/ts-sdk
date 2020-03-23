@@ -4,18 +4,24 @@
  * License: MIT
  */
 
-const SynchronousLink = require("./SynchronousLink");
+import { SynchronousLink } from "./SynchronousLink";
 import { GraphQLClient } from "graphql-request";
 
-class GraphQLLink extends SynchronousLink {
-  _headers: any;
+export class GraphQLLink extends SynchronousLink {
+  _headers: { version: string; authorization: string } | {};
   _client: GraphQLClient;
   /**
    * Construct a new GraphQLLink
    * @param {string} url
    * @param {obejct} config = {}
    */
-  constructor(url: string, config: { headers?: any } = {}) {
+  constructor(
+    url: string,
+    config: {
+      headers?: { version: string; authorization: string };
+      version?: string | null;
+    } = {}
+  ) {
     super(url);
     this._headers = config.headers || {};
     this._constructClient();
@@ -36,7 +42,7 @@ class GraphQLLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  async query(config: any): Promise<object> {
+  async query(config: { query: string; variables: object }): Promise<object> {
     return await this.run(config);
   }
 
@@ -45,7 +51,7 @@ class GraphQLLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  async mutate(config: any): Promise<object> {
+  async mutate(config: { query: string; variables: object }): Promise<object> {
     return await this.run(config);
   }
 
@@ -54,9 +60,7 @@ class GraphQLLink extends SynchronousLink {
    * @param config
    * @returns {Promise<object>}
    */
-  async run(config: { query: any; variables: any }): Promise<object> {
+  async run(config: { query: string; variables: object }): Promise<object> {
     return await this._client.request(config.query, config.variables || {});
   }
 }
-
-module.exports = GraphQLLink;

@@ -1,4 +1,4 @@
-interface AddEmployee {
+export interface AddEmployee {
   username: string;
   password: string;
   role: string;
@@ -7,23 +7,26 @@ interface AddEmployee {
   vendor_id: string;
   email_preferences: EmailPref;
 }
-interface UpdateEmployee {
+export interface UpdateEmployee {
   email_address?: string;
   password?: string;
   phone_number?: string;
   role?: string;
   email_preferences?: EmailPref;
 }
-enum Method {
+export enum Method {
   EMAIL = "EMAIL",
   SMS = "SMS"
 }
+
+import { EmailPref } from "./CustomerController";
+import { App } from "../App";
 /**
  * Controller for employees.
  */
-class EmployeeController {
-  app: any;
-  constructor(app: any) {
+export class EmployeeController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -247,5 +250,3 @@ class EmployeeController {
     });
   }
 }
-
-module.exports = EmployeeController;

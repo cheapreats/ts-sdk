@@ -1,4 +1,4 @@
-const HttpLink = require("../links/synchronouslinks/HttpLink");
+import { HttpLink } from "../links/synchronouslinks/HttpLink";
 
 export class Verify {
   _getVerificationCodeLink: any;

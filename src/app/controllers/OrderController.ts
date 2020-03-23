@@ -1,8 +1,8 @@
-enum OrderType {
+export enum OrderType {
   EAT_IN = "EAT_IN",
   TAKE_OUT = "TAKE_OUT"
 }
-enum CancelReason {
+export enum CancelReason {
   VENDOR_CANCELLED = "VENDOR_CANCELLED",
   VENDOR_PREP_CANCELLED = "VENDOR_PREP_CANCELLED",
   VENDOR_ITEM_SOLD_OUT = "VENDOR_ITEM_SOLD_OUT",
@@ -11,11 +11,11 @@ enum CancelReason {
   CUSTOMER_CANCELLED = "CUSTOMER_CANCELLED",
   OTHER = "OTHER"
 }
-interface Items {
+export interface Items {
   item_id: string;
   modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
 }
-interface AddOrder {
+export interface AddOrder {
   vendor_id: string;
   payment_method: string;
   items: Array<Items>;
@@ -27,9 +27,10 @@ interface AddOrder {
 /**
  * Controller for orders.
  */
-class OrderController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class OrderController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -195,5 +196,3 @@ class OrderController {
     });
   }
 }
-
-module.exports = OrderController;

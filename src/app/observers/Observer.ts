@@ -4,23 +4,21 @@
  * License: UNLICENSED
  */
 
-module.exports = (() => {
-  class Observer {
-    onNotify: Function;
-    /**
-     * Construct the observer class
-     */
-    constructor() {
-      this.onNotify = (instance: any, payload: any): void => {};
-    }
-
-    /**
-     * Notify this observer
-     * @param {object} instance
-     * @param {object} payload
-     */
-    notify(instance: object, payload: object): void {
-      this.onNotify(instance, payload);
-    }
+export class Observer {
+  onNotify: Function;
+  /**
+   * Construct the observer class
+   */
+  constructor() {
+    this.onNotify = (instance, payload): void => {};
   }
-})();
+
+  /**
+   * Notify this observer
+   * @param {object} instance
+   * @param {object} payload
+   */
+  notify(instance: object, payload: object): void {
+    this.onNotify(instance, payload);
+  }
+}

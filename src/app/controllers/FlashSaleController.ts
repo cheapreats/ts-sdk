@@ -1,17 +1,18 @@
-interface FlashSaleItems {
+export interface FlashSaleItems {
   _id: string;
   price: number;
 }
-enum FlashSaleType {
+export enum FlashSaleType {
   DOLLAR = "DOLLAR",
   PERCENTAGE = "PERCENTAGE"
 }
 /**
  * Controller related to flash sales
  */
-class FlashSaleController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class FlashSaleController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -101,5 +102,3 @@ class FlashSaleController {
     });
   }
 }
-
-module.exports = FlashSaleController;

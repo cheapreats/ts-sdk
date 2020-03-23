@@ -4,12 +4,12 @@
  * License: UNLICENSED
  */
 
-const User = require("./User");
+// import { User } from "./User";
 
-class Customer extends User {
-  constructor() {
-    super();
-  }
-}
+// class Customer extends User {
+//   constructor() {
+//     super();
+//   }
+// }
 
-module.exports = Customer;
+// module.exports = Customer;

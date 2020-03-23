@@ -1,13 +1,13 @@
-interface CustomerOptions {
+export interface CustomerOptions {
   profile_picture?: string;
   birthday?: string;
 }
-interface EmailPref {
+export interface EmailPref {
   promotional: boolean;
   transactional: boolean;
   system: boolean;
 }
-interface AddCustomer extends CustomerOptions {
+export interface AddCustomer extends CustomerOptions {
   email_address: string;
   name: string;
   password: string;
@@ -16,16 +16,18 @@ interface AddCustomer extends CustomerOptions {
   verification_code: string;
   email_preferences: EmailPref;
 }
-interface UpdateCustomer extends CustomerOptions {
+export interface UpdateCustomer extends CustomerOptions {
   mobile_notifications?: boolean;
   email_preferences?: EmailPref;
 }
+import { Method } from "./EmployeeController";
 /**
  * Controller for customers.
  */
-class CustomerController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class CustomerController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -577,5 +579,3 @@ class CustomerController {
     });
   }
 }
-
-module.exports = CustomerController;

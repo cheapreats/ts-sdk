@@ -1,9 +1,10 @@
 /**
  * Controller for head offices.
  */
-class HeadOfficeController {
-  app: any;
-  constructor(app) {
+import { App } from "../App";
+export class HeadOfficeController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -97,5 +98,3 @@ class HeadOfficeController {
     });
   }
 }
-
-module.exports = HeadOfficeController;

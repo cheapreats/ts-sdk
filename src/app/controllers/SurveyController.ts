@@ -1,14 +1,14 @@
-enum QuestionType {
+export enum QuestionType {
   CHECKBOX = "CHECKBOX",
   MULTI_CHECKBOX = "MULTI_CHECKBOX",
   SHORT_ANSWER = "SHORT_ANSWER",
   RATING = "RATING"
 }
-enum DeliveryRule {
+export enum DeliveryRule {
   AFTER_ORDER = "AFTER_ORDER"
 }
 
-interface Question {
+export interface Question {
   question: string;
   description?: string;
   question_type: QuestionType;
@@ -16,7 +16,7 @@ interface Question {
   max_rating?: number;
   required?: boolean;
 }
-interface AddSurvey {
+export interface AddSurvey {
   title: string;
   vendor_id: string;
   questions: Array<Question>;
@@ -24,21 +24,22 @@ interface AddSurvey {
   loyalty_reward?: number;
   wallet_reward?: number;
 }
-interface UpdateSurvey {
+export interface UpdateSurvey {
   title?: string;
   questions?: Array<Question>;
   delivery_rule?: DeliveryRule;
   loyalty_reward?: number;
   wallet_reward?: number;
 }
-interface AddSurveyResponse {
+export interface AddSurveyResponse {
   customer_id: string;
   responses: Array<{ question_id: string; answer: Array<string> }>;
   order_id?: string;
 }
-class SurveyController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class SurveyController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
@@ -222,5 +223,3 @@ class SurveyController {
     });
   }
 }
-
-module.exports = SurveyController;

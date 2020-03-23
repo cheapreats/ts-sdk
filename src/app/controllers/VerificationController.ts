@@ -1,9 +1,10 @@
 /**
  * Controller for verification.
  */
-class VerificationController {
-  app: any;
-  constructor(app: any) {
+import { App } from "../App";
+export class VerificationController {
+  app: App;
+  constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
     this.startVerificationSession = this.startVerificationSession.bind(this);
@@ -74,5 +75,3 @@ class VerificationController {
     });
   }
 }
-
-module.exports = VerificationController;
