@@ -1,5 +1,5 @@
 const strToIdentifier = require("./util/strToIdentifier");
-import CheaprEatsGraphQLAdaptor from "./adaptors/CheaprEatsGraphQLAdaptor";
+import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
 const packageDotJson = require("../../package.json");
 
 // ADD CONTROLLER IMPORTS BELOW
@@ -11,7 +11,7 @@ const CustomerTokenController = require("./controllers/CustomerTokenController")
 const CouponController = require("./controllers/CouponController");
 const EmployeeController = require("./controllers/EmployeeController");
 const EmployeeTokenController = require("./controllers/EmployeeTokenController");
-const GraphController = require("./controllers/GraphController");
+import { GraphController } from "./controllers/GraphController";
 const HeadOfficeController = require("./controllers/HeadOfficeController");
 const MenuItemController = require("./controllers/MenuItemController");
 const ModifierController = require("./controllers/ModifierController");
@@ -20,7 +20,7 @@ const VerificationController = require("./controllers/VerificationController");
 import { ValidationController } from "./controllers/ValidationController";
 const SurveyController = require("./controllers/SurveyController");
 const OrderController = require("./controllers/OrderController");
-import ImageController from "./controllers/ImageController";
+import { ImageController } from "./controllers/ImageController";
 const PayoutController = require("./controllers/PayoutController");
 const ExplorePageController = require("./controllers/ExplorePageController");
 const FlashSaleController = require("./controllers/FlashSaleController");
