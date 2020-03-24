@@ -1,7 +1,11 @@
 /**
  * Controller for employee tokens.
  */
+export interface EmployeeToken extends DefaultController {
+  body?: string;
+}
 import { App } from "../App";
+import { DefaultController } from "./Controller";
 export class EmployeeTokenController {
   app: App;
   constructor(app: App) {
@@ -17,9 +21,13 @@ export class EmployeeTokenController {
    * @param {string} vendor_id - The id of the Vendor this employee will be assigned to
    * @param {string} username - The Username of the Employee
    * @param {string} password - The password of the Employee
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
-  create(vendor_id: string, username: string, password: string): Promise<any> {
+  create(
+    vendor_id: string,
+    username: string,
+    password: string
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createEmployeeTokenMutation ($vendor_id: String!, $username: String!, $password: String!) {
@@ -35,7 +43,7 @@ export class EmployeeTokenController {
           username,
           password
         })
-        .then((result: { createEmployeeToken: { body: any } }) => {
+        .then((result: { createEmployeeToken: { body: string } }) => {
           resolve(result.createEmployeeToken.body);
         })
         .catch((e: any) => {
