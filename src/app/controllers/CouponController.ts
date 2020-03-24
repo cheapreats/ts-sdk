@@ -47,7 +47,6 @@ export interface Coupon extends DefaultController {
   payment_methods?: PaymentMethods;
   transactions(select: SelectInput): Array<CouponTransaction>;
 }
-
 /**
  * Controller for coupons.
  */

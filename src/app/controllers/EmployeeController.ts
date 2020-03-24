@@ -14,7 +14,7 @@ export interface UpdateEmployee {
   role?: string;
   email_preferences?: EmailPref;
 }
-export enum Method {
+export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
   SMS = "SMS"
 }

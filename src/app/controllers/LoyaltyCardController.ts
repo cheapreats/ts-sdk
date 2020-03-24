@@ -3,6 +3,7 @@ export interface CreateLoyalty {
   customer_id?: string;
   phone_number?: string;
 }
+export interface LoyaltyCard {}
 /**
  * Controller for loyalty cards.
  */
