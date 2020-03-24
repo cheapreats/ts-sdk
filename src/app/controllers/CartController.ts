@@ -2,8 +2,26 @@ export interface CartItem {
   item_id: string;
   modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
 }
+export interface CartCoupon {
+  _id: string;
+  coupon: Coupon;
+}
+export interface Cart {
+  _id?: string;
+  customer?: Customer;
+  vendor?: Vendor;
+  items?: Array<CartItem>; //needs one more field
+  subtotal?: number;
+  total?: number;
+  coupons?: Array<CartCoupon>;
+  note: string;
+  created_at: string;
+  updated_at: string;
+}
 import { App } from "../App";
-
+import { Customer } from "./CustomerController";
+import { Vendor } from "./VendorController";
+import { Coupon } from "./CouponController";
 export class CartController {
   app: App;
   constructor(app: App) {

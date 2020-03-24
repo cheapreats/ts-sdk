@@ -5,6 +5,7 @@ export interface PaymentMethods {
   in_person?: boolean;
   wallet?: boolean;
 }
+
 export interface AddCoupon {
   code: string;
   coupon_type: string;
@@ -21,11 +22,34 @@ export interface AddCoupon {
   min_purchase: number;
   payment_methods?: PaymentMethods;
 }
+export interface Coupon {
+  _id?: string;
+  code: string;
+  coupon_type: string;
+  value: number;
+  real_value?: number;
+  item_scope?: MenuItem;
+  vendor_scope?: Vendor;
+  customer_scope?: Customer;
+  uses: number;
+  uses_per_customer: number;
+  can_combine: boolean;
+  carry_over: boolean;
+  expire_at: string;
+  paid_by_vendor: boolean;
+  min_purchase: number;
+  payment_methods?: PaymentMethods;
+  created_at?: string;
+  updated_at?: string;
+  transactions(select: SelectInput): Array<>;
+}
 
 /**
  * Controller for coupons.
  */
 import { App } from "../App";
+import { Vendor } from "./VendorController";
+import { Customer } from "./CustomerController";
 export class CouponController {
   app: App;
   constructor(app: App) {

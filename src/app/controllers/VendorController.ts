@@ -16,6 +16,57 @@ export enum PayoutSchedule {
   BI_WEEKLY = "BI_WEEKLY",
   MONTHLY = "MONTHLY"
 }
+export interface HeadOffice {
+  _id: string;
+  vendors: Array<>;
+  identifier: string;
+  created_at: string;
+  updated_at: string;
+}
+export interface PayoutPlan {
+  fixed_per_transaction: number;
+  perecentage_per_transaction: number;
+  fixed_per_payout: number;
+  percentage_per_payout: number;
+}
+export interface DailyDealsMenu {
+  monday?: Array<>;
+  tuesday?: Array<>;
+  wednesday?: Array<>;
+  thursday?: Array<>;
+  friday?: Array<>;
+  saturday?: Array<>;
+  sunday?: Array<>;
+}
+export interface VendorOrderTypes {
+  eat_in: boolean;
+  take_out: boolean;
+  delivery: boolean;
+}
+export interface Vendor extends UpdateVendor {
+  _id?: string;
+  employees?: Array<>;
+  categories?: Array<>;
+  head_office?: HeadOffice;
+  timezone?: string;
+  payout_plan?: PayoutPlan;
+  loyalty_programs?: Array<>;
+  payouts?: Array<>;
+  surveys?: Array<>;
+  coupons?: Arrray<>;
+  requested_payout?: boolean;
+  analytics(from: string, to:string): ;
+  active_flash_sale?: ;
+  is_test?: boolean;
+  approval_status?: ApprovalStatus;
+  testers?: Array<>;
+  daily_deals_menu: DailyDealsMenu;
+  postal_code: string;
+  order_types: VendorOrderTypes;
+  store_logo: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export interface UpdateVendor {
   name?: string;

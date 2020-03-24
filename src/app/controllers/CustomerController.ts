@@ -1,3 +1,27 @@
+export interface CreditCard {
+  id: string;
+  brand: string;
+  last4: string;
+}
+export interface Customer {
+  _id: string;
+  apns_tokens: Array<string>;
+  fcm_tokens: Array<string>;
+  credit_card: CreditCard;
+  mobile_notifications: boolean;
+  loyalty_cards: ;
+  is_test: boolean
+  wallet: ;
+  profile_picture: string;
+  cart: Cart
+  favourite_vendors: Array<>;
+  favourite_items: Array<>;
+  birthday: string;
+  test_vendors: Array<>;
+  groups: Array<>;
+  created_at: string;
+  updated_at: string;
+}
 export interface CustomerOptions {
   profile_picture?: string;
   birthday?: string;
@@ -20,10 +44,12 @@ export interface UpdateCustomer extends CustomerOptions {
   mobile_notifications?: boolean;
   email_preferences?: EmailPref;
 }
-import { Method } from "./EmployeeController";
+
 /**
  * Controller for customers.
  */
+import {Cart} from "./CartController"
+import { Method } from "./EmployeeController";
 import { App } from "../App";
 export class CustomerController {
   app: App;
