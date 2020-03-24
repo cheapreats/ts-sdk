@@ -17,14 +17,23 @@ export interface AddMenuItem {
   sort_order?: number;
   estimated_time?: number;
 }
+export interface Tag {
+  name?: string;
+  identifier?: string;
+}
+export interface Fee {
+  name?: string;
+  fee_type?: string;
+  amount?: number;
+}
 export interface UpdateMenuItem {
   name?: string;
   identifier?: string;
   images?: Array<string>;
   calories?: number;
-  tags?: Array<{ name: string; identifier: string }>;
-  ingredients?: Array<{ name: string; identifier: string }>;
-  fees?: Array<{ name: string; fee_type: string; amount: number }>;
+  tags?: Array<Tag>;
+  ingredients?: Array<Tag>;
+  fees?: Array<Fee>;
   recycle_info?: string;
   description?: string;
   daily_special_day?: string;
@@ -39,10 +48,21 @@ export interface BatchUpdate {
   id: string;
   menu_item: UpdateMenuItem;
 }
+export interface MenuItem extends UpdateMenuItem {
+  _id?: string;
+  modifiers?: Array<Modifier>;
+  category?: Category;
+  created_at?: string;
+  updated_at?: string;
+  flash_sale_info?: FlashSaleItem;
+}
 /**
  * Controller for menu items.
  */
 import { App } from "../App";
+import { Modifier } from "./ModifierController";
+import { Category } from "./CategoryController";
+import { FlashSaleItem } from "./FlashSaleController";
 export class MenuItemController {
   app: App;
   constructor(app: App) {

@@ -1,10 +1,15 @@
-export interface CartItem {
+export interface AddItemToCartInput {
   item_id: string;
   modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
 }
+export interface CartItem {
+  menu_item?: MenuItem;
+  item_id?: string;
+  modifiers?: Array<{ modifier_id: string; choices: Array<string> }>;
+}
 export interface CartCoupon {
-  _id: string;
-  coupon: Coupon;
+  _id?: string;
+  coupon?: Coupon;
 }
 export interface Cart {
   _id?: string;
@@ -14,14 +19,15 @@ export interface Cart {
   subtotal?: number;
   total?: number;
   coupons?: Array<CartCoupon>;
-  note: string;
-  created_at: string;
-  updated_at: string;
+  note?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 import { App } from "../App";
 import { Customer } from "./CustomerController";
 import { Vendor } from "./VendorController";
 import { Coupon } from "./CouponController";
+import { MenuItem } from "./MenuItemController";
 export class CartController {
   app: App;
   constructor(app: App) {
@@ -38,7 +44,7 @@ export class CartController {
 
   // ADD MUTATION METHODS BELOW
 
-  updateNote(cartId: string, note: string) {
+  updateNote(cartId: string, note: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $note: String!) {
@@ -53,7 +59,7 @@ export class CartController {
           cartId,
           note
         })
-        .then((result: { updateNoteForCart: any }) => {
+        .then((result: { updateNoteForCart: Cart }) => {
           resolve(result.updateNoteForCart);
         })
         .catch((e: any) => {
@@ -62,7 +68,7 @@ export class CartController {
     });
   }
 
-  removeCoupon(cartId: string, cartCouponId: string) {
+  removeCoupon(cartId: string, cartCouponId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $cartCouponId: String!) {
@@ -77,7 +83,7 @@ export class CartController {
           cartId,
           cartCouponId
         })
-        .then((result: { removeCouponFromCart: any }) => {
+        .then((result: { removeCouponFromCart: Cart }) => {
           resolve(result.removeCouponFromCart);
         })
         .catch((e: any) => {
@@ -86,7 +92,7 @@ export class CartController {
     });
   }
 
-  applyCoupon(cartId: string, couponCode: string) {
+  applyCoupon(cartId: string, couponCode: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $couponCode: String!) {
@@ -101,7 +107,7 @@ export class CartController {
           cartId,
           couponCode
         })
-        .then((result: { applyCouponToCart: any }) => {
+        .then((result: { applyCouponToCart: Cart }) => {
           resolve(result.applyCouponToCart);
         })
         .catch((e: any) => {
@@ -113,9 +119,9 @@ export class CartController {
   /**
    * Delete a cart
    * @param {string} cartId
-   * @returns {Promise<any>}
+   * @returns {Promise<Cart>}
    */
-  delete(cartId: string): Promise<any> {
+  delete(cartId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!) {
@@ -127,7 +133,7 @@ export class CartController {
         .mutate(mutationString, {
           cartId
         })
-        .then((result: { deleteCart: any }) => {
+        .then((result: { deleteCart: string }) => {
           resolve(result.deleteCart);
         })
         .catch((e: any) => {
@@ -140,9 +146,9 @@ export class CartController {
    * Remove an item from currently active cart.
    * @param {string} cartId
    * @param {string} cartItemId
-   * @returns {Promise<any>}
+   * @returns {Promise<Cart>}
    */
-  removeItem(cartId: string, cartItemId: string): Promise<any> {
+  removeItem(cartId: string, cartItemId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $cartItemId: String!) {
@@ -160,7 +166,7 @@ export class CartController {
           cartId,
           cartItemId
         })
-        .then((result: { removeItemFromCart: any }) => {
+        .then((result: { removeItemFromCart: Cart }) => {
           resolve(result.removeItemFromCart);
         })
         .catch((e: any) => {
@@ -172,10 +178,10 @@ export class CartController {
   /**
    * Add an new item to currently active cart.
    * @param {string} cartId
-   * @param {CartItem} item
-   * @returns {Promise<any>}
+   * @param {AddItemToCartInput} item
+   * @returns {Promise<Cart>}
    */
-  addItem(cartId: string, item: CartItem): Promise<any> {
+  addItem(cartId: string, item: AddItemToCartInput): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $item: AddItemToCartInput!) {
@@ -193,7 +199,7 @@ export class CartController {
           cartId,
           item
         })
-        .then((result: { addItemCart: any }) => {
+        .then((result: { addItemCart: Cart }) => {
           resolve(result.addItemCart);
         })
         .catch((e: any) => {
@@ -206,9 +212,9 @@ export class CartController {
    * Create a new cart, remove all old carts.
    * @param {string} customerId
    * @param {string} vendorId
-   * @returns {Promise<any>}
+   * @returns {Promise<Cart>}
    */
-  create(customerId: string, vendorId: string): Promise<any> {
+  create(customerId: string, vendorId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($customerId: String!, $vendorId: String!) {
@@ -226,7 +232,7 @@ export class CartController {
           customerId,
           vendorId
         })
-        .then((result: { createCart: any }) => {
+        .then((result: { createCart: Cart }) => {
           resolve(result.createCart);
         })
         .catch((e: any) => {
