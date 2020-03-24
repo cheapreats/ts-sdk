@@ -15,7 +15,7 @@ export interface Cart {
   _id?: string;
   customer?: Customer;
   vendor?: Vendor;
-  items?: Array<CartItem>; //needs one more field
+  items?: Array<CartItem>;
   subtotal?: number;
   total?: number;
   coupons?: Array<CartCoupon>;
