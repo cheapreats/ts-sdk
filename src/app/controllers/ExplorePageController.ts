@@ -44,6 +44,7 @@ export class ExplorePageController {
     special_deals: Array<SpecialDeals>,
     timely_deals: Array<TimelyDeals>
   ): Promise<string> {
+    //QUESTION PR coupons is not included as option in mutation but exists as an option in the schema??
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($advertisements: [AdvertisementInput], $daily_deals: [DailyDealsInput], $special_deals: [SpecialDealsInput], $timely_deals: [TimelyDealsInput]) { 
@@ -51,7 +52,7 @@ export class ExplorePageController {
                         updated_at
                     }
                 }
-            `; //PR coupons is not included as option in mutation but exists as an option in the schema
+            `;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
@@ -60,14 +61,9 @@ export class ExplorePageController {
           special_deals,
           timely_deals
         })
-        .then(
-          (result: {
-            replaceExplorePage: { updated_at: string | PromiseLike<string> };
-            //PR Is promiseLike okay?
-          }) => {
-            resolve(result.replaceExplorePage.updated_at);
-          }
-        )
+        .then((result: { replaceExplorePage: { updated_at: string } }) => {
+          resolve(result.replaceExplorePage.updated_at);
+        })
         .catch((e: any) => {
           reject(e);
         });
