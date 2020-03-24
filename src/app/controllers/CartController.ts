@@ -1,18 +1,25 @@
+export interface AddItemToCartModifierInput {
+  modifier_id: string;
+  choices: Array<string>;
+}
 export interface AddItemToCartInput {
   item_id: string;
-  modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
+  modifiers: Array<AddItemToCartModifierInput>;
+}
+export interface CartItemModifier {
+  modifier?: Modifier;
+  choices?: Array<string>;
 }
 export interface CartItem {
   menu_item?: MenuItem;
   item_id?: string;
-  modifiers?: Array<{ modifier_id: string; choices: Array<string> }>;
+  modifiers?: Array<CartItemModifier>;
 }
 export interface CartCoupon {
   _id?: string;
   coupon?: Coupon;
 }
-export interface Cart {
-  _id?: string;
+export interface Cart extends DefaultController {
   customer?: Customer;
   vendor?: Vendor;
   items?: Array<CartItem>;
@@ -20,14 +27,14 @@ export interface Cart {
   total?: number;
   coupons?: Array<CartCoupon>;
   note?: string;
-  created_at?: string;
-  updated_at?: string;
 }
 import { App } from "../App";
 import { Customer } from "./CustomerController";
 import { Vendor } from "./VendorController";
 import { Coupon } from "./CouponController";
 import { MenuItem } from "./MenuItemController";
+import { Modifier } from "./ModifierController";
+import { DefaultController } from "./Controller";
 export class CartController {
   app: App;
   constructor(app: App) {

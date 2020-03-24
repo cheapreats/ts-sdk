@@ -1,8 +1,8 @@
-export interface Choices {
-  name: string;
-  identifier: string;
-  available: boolean;
-  price: number;
+export interface ModifierChoice {
+  name?: string;
+  identifier?: string;
+  available?: boolean;
+  price?: number;
 }
 export interface AddModifier {
   name: string;
@@ -21,16 +21,18 @@ export interface UpdateModifier {
   identifier?: string;
   description?: string;
   required?: boolean;
-  choices?: Array<Choices>;
+  choices?: Array<ModifierChoice>;
   default?: string;
   default_choices?: Array<string>;
   is_topping?: boolean;
   max_choice?: number;
 }
+export interface Modifier extends UpdateModifier, DefaultController {}
 /**
  * Controller for modifiers.
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
 export class ModifierController {
   app: App;
   constructor(app: App) {

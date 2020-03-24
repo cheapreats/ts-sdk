@@ -30,10 +30,7 @@ export interface SelectInput {
   limit?: number; // default 100
   skip?: number; // default 0
 }
-export interface Category extends UpdateCategoryInput {
-  _id?: string;
-  created_at?: string;
-  updated_at?: string;
+export interface Category extends UpdateCategoryInput, DefaultController {
   menu_items(select: SelectInput): Array<MenuItem>;
   menu_item_count?: number;
   vendor: Vendor;
@@ -58,6 +55,7 @@ export interface BatchUpdateCategoriesInput {
 import { App } from "../App";
 import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
+import { DefaultController } from "./Controller";
 export class CategoryController {
   app: App;
   constructor(app: App) {
