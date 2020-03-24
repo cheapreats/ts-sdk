@@ -1,16 +1,13 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.10.16",
+  "version": "1.10.17",
   "description": "CheaprEats Typescript SDK",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "src/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register",
     "gulp": "gulp",
     "add:mutation": "node ./src/scripts/addMutation.js",
-    "build": "rm -rf dist && tsc && babel dist -d dist",
+    "build": "rm -rf dist && tsc",
     "generate-docs": "./deploy-doc.sh"
   },
   "repository": {

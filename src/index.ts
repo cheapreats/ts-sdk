@@ -10,7 +10,8 @@ declare global {
 }
 import { App } from "./app/App";
 
-export const app: App = new App();
+const app: App = new App();
+export default app;
 
 if (typeof window !== "undefined") {
   window.CE = app;
