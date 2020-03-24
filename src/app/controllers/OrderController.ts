@@ -24,6 +24,7 @@ export interface AddOrder {
   scheduled_pickup: string;
   order_type: OrderType;
 }
+export interface Order {}
 /**
  * Controller for orders.
  */
