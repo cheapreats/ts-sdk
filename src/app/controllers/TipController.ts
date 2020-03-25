@@ -1,3 +1,4 @@
+export interface Tip {}
 import { App } from "../App";
 export class TipController {
   app: App;

@@ -7,6 +7,12 @@ export enum QuestionType {
 export enum DeliveryRule {
   AFTER_ORDER = "AFTER_ORDER"
 }
+export interface SurveyResponse extends DefaultControllerRequired {
+  customer: Customer;
+  responses: Array<SurveyQuestionResponse>;
+  order: Order;
+}
+export interface Survey {}
 
 export interface Question {
   question: string;
@@ -37,6 +43,9 @@ export interface AddSurveyResponse {
   order_id?: string;
 }
 import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
+import { Customer } from "./CustomerController";
+import { Order } from "./OrderController";
 export class SurveyController {
   app: App;
   constructor(app: App) {

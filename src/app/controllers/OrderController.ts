@@ -1,8 +1,9 @@
 export enum OrderType {
   EAT_IN = "EAT_IN",
-  TAKE_OUT = "TAKE_OUT"
+  TAKE_OUT = "TAKE_OUT",
+  DELIVERY = "DELIVERY"
 }
-export enum CancelReason {
+export enum OrderCancellationReason {
   VENDOR_CANCELLED = "VENDOR_CANCELLED",
   VENDOR_PREP_CANCELLED = "VENDOR_PREP_CANCELLED",
   VENDOR_ITEM_SOLD_OUT = "VENDOR_ITEM_SOLD_OUT",
@@ -11,24 +12,102 @@ export enum CancelReason {
   CUSTOMER_CANCELLED = "CUSTOMER_CANCELLED",
   OTHER = "OTHER"
 }
-export interface Items {
-  item_id: string;
-  modifiers: Array<{ modifier_id: string; choices: Array<string> }>;
+export interface CreateOrderModifierInput {
+  modifier_id: string;
+  choices: Array<string>;
 }
-export interface AddOrder {
+export interface CreateOrdersItemsInput {
+  item_id: string;
+  modifiers: Array<CreateOrderModifierInput>;
+}
+export interface CreateOrderInput {
   vendor_id: string;
   payment_method: string;
-  items: Array<Items>;
+  items: Array<CreateOrdersItemsInput>;
   note?: string;
   coupons?: Array<string>;
   scheduled_pickup: string;
-  order_type: OrderType;
+  order_type?: OrderType; // default TAKE_OUT
 }
-export interface Order {}
+export interface OrderModifier {
+  _id?: string;
+  name?: string;
+  identifier?: string;
+  description?: string;
+  choices?: ModifierChoice;
+}
+export interface OrderItem {
+  _id?: string;
+  name?: string;
+  identifier?: string;
+  category?: Category;
+  tags?: Tag;
+  recycle_info?: string;
+  price?: number;
+  fees?: Fee;
+  estimated_time?: number;
+  modifiers?: OrderModifier;
+}
+export interface TransactionData {
+  id?: string;
+  amount?: number;
+  captured?: boolean;
+  created?: string;
+}
+export interface Transaction {
+  _id?: string;
+  data?: TransactionData;
+  status?: string;
+  refund?: Refund;
+  charge_type?: string;
+}
+export interface Refund {
+  id?: string;
+  amount?: number;
+  status?: string;
+  created?: string;
+}
+export interface OrderStatus {
+  name?: string;
+  identifier?: string;
+  data?: string;
+  created_at?: string;
+}
+export interface Order extends DefaultController {
+  items?: Array<OrderItem>;
+  transactions?: Array<Transaction>;
+  customer?: Customer;
+  vendor?: Vendor;
+  subtotal?: number;
+  total?: number;
+  note?: string;
+  payment_method?: string;
+  status_history?: Array<OrderStatus>;
+  scheduled_pickup?: string;
+  status?: string;
+  cancel_reason?: OrderCancellationReason;
+  cancel_description?: string;
+  settled_at?: string;
+  preparing_at?: string;
+  estimated_preparing_sec?: number;
+  atached_survey?: Survey;
+  attached_survey_response?: SurveyResponse;
+  tip?: Tip;
+  order_type?: OrderType;
+  discount?: number;
+}
 /**
  * Controller for orders.
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Customer } from "./CustomerController";
+import { Vendor } from "./VendorController";
+import { Survey, SurveyResponse } from "./SurveyController";
+import { Tip } from "./TipController";
+import { Category } from "./CategoryController";
+import { Tag, Fee } from "./MenuItemController";
+import { ModifierChoice } from "./ModifierController";
 export class OrderController {
   app: App;
   constructor(app: App) {
@@ -45,12 +124,16 @@ export class OrderController {
 
   /**
    * Place a new order, you must be authenticated as a customer to use this
-   * @param {AddOrder} order - The Order Object
-   * @param {Boolean} [dry] - Indicator for dry order placement
-   * @param {Boolean} [clear_cart] - Indicator to clear all cart after order placement
-   * @returns {Promise<any>} - The id of the Order Object
+   * @param {CreateOrderInput} order - The Order Object
+   * @param {boolean} [dry] - Indicator for dry order placement
+   * @param {boolean} [clear_cart] - Indicator to clear all cart after order placement
+   * @returns {Promise<string>} - The id of the Order Object
    */
-  create(order: AddOrder, dry: boolean, clear_cart: boolean): Promise<any> {
+  create(
+    order: CreateOrderInput,
+    dry: boolean | null, // default False
+    clear_cart: boolean | null // default False
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createOrderMutation ($order: CreateOrderInput!, $dry: Boolean, $clear_cart: Boolean) {
@@ -66,7 +149,7 @@ export class OrderController {
           dry,
           clear_cart
         })
-        .then((result: { createOrder: { _id: any } }) => {
+        .then((result: { createOrder: { _id: string } }) => {
           resolve(result.createOrder._id);
         })
         .catch((e: any) => {
@@ -78,15 +161,15 @@ export class OrderController {
   /**
    * Cancel a order, must be authenticated as vendor
    * @param {string} id - The id of the Order Object
-   * @param {CancelReason} reason - input type OrderCancellationReason enum indicating reason
-   * @param {String} description - Additional details on order cancellation
-   * @returns {Promise<any>}
+   * @param {OrderCancellationReason} reason - input type OrderCancellationReason enum indicating reason
+   * @param {string} description - Additional details on order cancellation
+   * @returns {Promise<Order>}
    */
   cancel(
     id: string,
-    reason: CancelReason,
-    description: string | null = null
-  ): Promise<any> {
+    reason: OrderCancellationReason,
+    description: string | null
+  ): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation cancelOrderMutation ($id: String!, $reason: OrderCancellationReason!, $description: String){
@@ -102,7 +185,7 @@ export class OrderController {
           reason,
           description
         })
-        .then((result: any) => {
+        .then((result: Order) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -115,9 +198,9 @@ export class OrderController {
    * Set a order as preparing with estimated time
    * @param {string} id - The id of the Order Object
    * @param {number} estimated_preparing_sec - The amount of time the Order will take before it will be prepared
-   * @returns {Promise<any>}
+   * @returns {Promise<Order>}
    */
-  beginPreparing(id: string, estimated_preparing_sec: number): Promise<any> {
+  beginPreparing(id: string, estimated_preparing_sec: number): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation beginPreparingOrder($id: String!, $estimated_preparing_sec: Int!){
@@ -132,7 +215,7 @@ export class OrderController {
           id,
           estimated_preparing_sec
         })
-        .then((result: any) => {
+        .then((result: Order) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -144,9 +227,9 @@ export class OrderController {
   /**
    * Set order as prepared
    * @param {string} id - The id of the Order Object
-   * @returns {Promise<any>}
+   * @returns {Promise<Order>}
    */
-  prepared(id: string): Promise<any> {
+  prepared(id: string): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation preparedOrderMutation ($id: String!){
@@ -160,7 +243,7 @@ export class OrderController {
         .mutate(mutationString, {
           id
         })
-        .then((result: any) => {
+        .then((result: Order) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -172,9 +255,9 @@ export class OrderController {
   /**
    * Complete an order
    * @param {string} id - The id of the Order Object
-   * @returns {Promise<any>}
+   * @returns {Promise<Order>}
    */
-  complete(id: any): Promise<any> {
+  complete(id: string): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation completeOrderMutation ($id: String!){
@@ -188,7 +271,7 @@ export class OrderController {
         .mutate(mutationString, {
           id
         })
-        .then((result: any) => {
+        .then((result: Order) => {
           resolve(result);
         })
         .catch((e: any) => {
