@@ -6,6 +6,7 @@ export interface AddRedeemableItem {
 export interface UpdateRedeemableItem {
   points_required?: number;
 }
+export interface RedeemableItem {}
 /**
  * Controller for redeemable items.
  */
