@@ -67,7 +67,7 @@ export interface SurveyQuestionResponseInput {
 }
 export interface CreateSurveyResponseInput {
   customer_id: string;
-  responses: Array<CreateSurveyResponseInput>;
+  responses: Array<SurveyQuestionResponseInput>;
   order_id?: string;
 }
 import { App } from "../App";

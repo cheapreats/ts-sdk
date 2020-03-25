@@ -11,8 +11,8 @@ export interface CartItemModifier {
   choices?: Array<string>;
 }
 export interface CartItem {
+  _id?: string;
   menu_item?: MenuItem;
-  item_id?: string;
   modifiers?: Array<CartItemModifier>;
 }
 export interface CartCoupon {

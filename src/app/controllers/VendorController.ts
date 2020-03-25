@@ -60,6 +60,11 @@ export interface Vendor extends VendorCommonProperties, DefaultController {
   employees?: Array<Employee>;
   categories?: Array<Category>;
   head_office?: HeadOffice;
+  tags?: Array<Tag>;
+  location?: Location;
+  open_hours?: OpenHours;
+  payment_methods?: PaymentMethods;
+  direct_deposit_info?: DirectDepositInfoInput;
   timezone?: string;
   payout_plan?: PayoutPlan;
   loyalty_programs?: Array<LoyaltyProgram>;
@@ -73,10 +78,15 @@ export interface Vendor extends VendorCommonProperties, DefaultController {
   approval_status?: VendorApprovalStatus;
   testers?: Array<VendorTester>;
   daily_deals_menu: VendorDailyDealsMenu;
+  order_types?: VendorOrderTypes;
 }
 export interface TimeSpanInput {
   from: string;
   to: string;
+}
+export interface TimeSpan {
+  from?: string;
+  to?: string;
 }
 export interface OpenHoursInput {
   monday: Array<TimeSpanInput>;
@@ -87,15 +97,34 @@ export interface OpenHoursInput {
   saturday: Array<TimeSpanInput>;
   sunday: Array<TimeSpanInput>;
 }
+export interface OpenHours {
+  monday?: Array<TimeSpanInput>;
+  tuesday?: Array<TimeSpanInput>;
+  wednesday?: Array<TimeSpanInput>;
+  thursday?: Array<TimeSpanInput>;
+  friday?: Array<TimeSpanInput>;
+  saturday?: Array<TimeSpanInput>;
+  sunday?: Array<TimeSpanInput>;
+}
 export interface LocationInput {
   longitude: number;
   latitude: number;
+}
+export interface Location {
+  longitude?: number;
+  latitude?: number;
 }
 export interface DirectDepositInfoInput {
   transit_no: string;
   institution_no: string;
   account_no: string;
   cheque_image: string;
+}
+export interface DirectDepositInfo {
+  transit_no?: string;
+  institution_no?: string;
+  account_no?: string;
+  cheque_image?: string;
 }
 export interface VendorCommonProperties {
   name?: string;
@@ -112,7 +141,6 @@ export interface VendorCommonProperties {
   payout_auto_request_schedule?: PayoutAutoRequestSchedule;
   global_tax_rate?: number;
   postal_code?: string;
-  order_types?: OrderTypesInput;
   store_logo?: string;
 }
 export interface UpdateVendorInput extends VendorCommonProperties {
@@ -121,6 +149,7 @@ export interface UpdateVendorInput extends VendorCommonProperties {
   location?: LocationInput;
   direct_deposit_info?: DirectDepositInfoInput;
   payment_methods?: PaymentMethodsInput;
+  order_types?: OrderTypesInput;
 }
 export interface OrderTypesInput {
   eat_in?: boolean;
@@ -133,12 +162,16 @@ export interface VendorTester {
   vendor?: Vendor;
 }
 
-import { PaymentMethodsInput, Coupon } from "./CouponController";
 /**
  * Controller for vendors.
  */
+import {
+  PaymentMethodsInput,
+  PaymentMethods,
+  Coupon
+} from "./CouponController";
 import { App } from "../App";
-import { TagInput, MenuItem } from "./MenuItemController";
+import { TagInput, MenuItem, Tag } from "./MenuItemController";
 import { DefaultController } from "./Controller";
 import { Employee } from "./EmployeeController";
 import { Category } from "./CategoryController";

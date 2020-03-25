@@ -7,24 +7,27 @@ export interface CreateEmployeeInput {
   vendor_id: string;
   email_preferences: EmailPreferencesInput;
 }
-export interface UpdateEmployeeInput {
+export interface EmployeeCommonProperties {
   email_address?: string;
   password?: string;
   phone_number?: string;
   role?: string;
+}
+export interface UpdateEmployeeInput extends EmployeeCommonProperties {
   email_preferences?: EmailPreferencesInput;
 }
 export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
   SMS = "SMS"
 }
-export interface Employee extends DefaultController, UpdateEmployeeInput {
+export interface Employee extends DefaultController, EmployeeCommonProperties {
   username?: string;
-  vendor: Vendor;
-  terminal_fcm_tokens: Array<string>;
+  email_preferences?: EmailPreferences;
+  vendor?: Vendor;
+  terminal_fcm_tokens?: Array<string>;
 }
 
-import { EmailPreferencesInput } from "./CustomerController";
+import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Vendor } from "./VendorController";
@@ -197,8 +200,8 @@ export class EmployeeController {
    */
   //QUESTION id and email_address are optional??
   resetEmployeePassword(
-    id: string | null = null,
-    email_address: string | null = null,
+    id: string | null,
+    email_address: string | null,
     code: string,
     password: string
   ): Promise<string> {
@@ -235,7 +238,7 @@ export class EmployeeController {
    */
   sendPasswordResetCode(
     email_address: string,
-    method: ResetCodeSendMethod = ResetCodeSendMethod.EMAIL
+    method: ResetCodeSendMethod | null
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `

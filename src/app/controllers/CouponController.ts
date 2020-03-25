@@ -34,7 +34,7 @@ export interface CreateCouponInput {
   expire_at: string;
   paid_by_vendor: boolean;
   min_purchase: number;
-  payment_methods?: PaymentMethods;
+  payment_methods?: PaymentMethodsInput;
 }
 export interface Coupon extends DefaultController {
   code?: string;
@@ -51,7 +51,6 @@ export interface Coupon extends DefaultController {
   expire_at?: string;
   paid_by_vendor?: boolean;
   min_purchase?: number;
-  payment_methods?: PaymentMethods;
   transactions(select: SelectInput): Array<CouponTransaction>;
 }
 /**
@@ -62,7 +61,7 @@ import { Vendor } from "./VendorController";
 import { Customer } from "./CustomerController";
 import { DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
-import { SelectInput } from "./CategoryController";
+import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
 export class CouponController {
   app: App;

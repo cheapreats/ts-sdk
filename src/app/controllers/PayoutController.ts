@@ -20,10 +20,34 @@ export interface UpdatePayoutInput {
   method?: PayoutMethod; // default MANUAL
   status?: PayoutStatus; // default PENDING
 }
-export interface Payout extends DefaultController, UpdatePayoutInput {
+export enum ServiceChargeType {
+  CREDIT = "CREDIT",
+  DEBIT = "DEBIT"
+}
+export enum ServiceChargeReason {
+  ORDER_TRANSACTION_FEE = "ORDER_TRANSACTION_FEE",
+  PAYOUT_REQUEST_FEE = "PAYOUT_REQUEST_FEE",
+  OTHER = "OTHER",
+  OTHER_TAXABLE = "OTHER_TAXABLE",
+  TAX = "TAX"
+}
+export interface ServiceCharge extends DefaultController {
+  vendor_id?: string;
+  amount: number;
+  type: ServiceChargeType;
+  reason: ServiceChargeReason;
+  description?: string;
+  settled_at?: string;
+}
+export interface Payout extends DefaultController {
   vendor_id: string;
   vendor?: Vendor;
   total?: number;
+  orders?: Array<Order>;
+  service_charges?: Array<ServiceCharge>;
+  note?: string;
+  method?: string;
+  status?: string;
 }
 /**
  * Controller related to payouts
@@ -31,6 +55,7 @@ export interface Payout extends DefaultController, UpdatePayoutInput {
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Vendor } from "./VendorController";
+import { Order } from "./OrderController";
 export class PayoutController {
   app: App;
   constructor(app: App) {
@@ -47,12 +72,12 @@ export class PayoutController {
    * Create a new payout request
    * @param {String} vendor_id - Vendor ID
    * @param {Boolean} dry - Dry run or not
-   * @returns {Promise<{_id: string, total: number}>}
+   * @returns {Promise<Payout>}
    */
   request(
     vendor_id: string,
     dry: boolean | null // default False
-  ): Promise<{ _id: string; total: number }> {
+  ): Promise<Payout> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($vendor_id: String!, $dry: Boolean) {
@@ -69,7 +94,7 @@ export class PayoutController {
           dry
         })
         //QUESTION only _id and total will be accessible is this the expected behaviour
-        .then((result: { requestPayout: { _id: string; total: number } }) => {
+        .then((result: { requestPayout: Payout }) => {
           resolve(result.requestPayout);
         })
         .catch((e: any) => {

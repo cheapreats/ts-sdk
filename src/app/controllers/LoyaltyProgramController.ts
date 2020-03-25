@@ -15,7 +15,7 @@ export interface CreateLoyaltyProgramInput {
   points: number;
   shareable_points: number;
   min_purchase?: number; // default 0
-  program_type?: LoyaltyProgramType;
+  program_type?: LoyaltyProgramType; // default DOLLAR
   program_loyalty_card_attributes: LoyaltyCardAttributesInput;
 }
 export interface LoyaltyProgramCommonProperties {

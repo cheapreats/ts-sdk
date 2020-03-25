@@ -1,26 +1,29 @@
 export interface CreditCard {
-  id: string;
-  brand: string;
-  last4: string;
+  id?: string;
+  brand?: string;
+  last4?: string;
 }
 export interface Group {
   _id?: string;
   name?: string;
   customers?: Array<Customer>;
 }
-export interface Customer extends DefaultController {
+export interface Customer extends DefaultController, CustomerOptions {
+  email_address?: string;
+  name?: string;
+  password?: string;
+  phone_number?: string;
   apns_tokens?: Array<string>;
   fcm_tokens?: Array<string>;
   credit_card?: CreditCard;
+  email_preferences?: EmailPreferences;
   mobile_notifications?: boolean;
   loyalty_cards(select: SelectInput): Array<LoyaltyCard>;
   is_test?: boolean;
   wallet?: Coupon;
-  profile_picture?: string;
   cart?: Cart;
   favourite_vendors?: Array<Vendor>;
   favourite_items?: Array<MenuItem>;
-  birthday?: string;
   test_vendors?: Array<Vendor>;
   groups?: Array<Group>;
 }
@@ -32,6 +35,11 @@ export interface EmailPreferencesInput {
   promotional: boolean;
   transactional: boolean;
   system: boolean;
+}
+export interface EmailPreferences {
+  promotional?: boolean;
+  transactional?: boolean;
+  system?: boolean;
 }
 export interface CreateCustomerInput extends CustomerOptions {
   email_address: string;
@@ -53,7 +61,7 @@ import { Cart } from "./CartController";
 import { ResetCodeSendMethod } from "./EmployeeController";
 import { App } from "../App";
 import { DefaultController } from "./Controller";
-import { SelectInput } from "./CategoryController";
+import { SelectInput } from "./CommonInterface";
 import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";
@@ -394,13 +402,13 @@ export class CustomerController {
    * @param  {string} email_address - The email address of the customer
    * @param  {string} code - Temporary Code for Password Resets
    * @param  {string} password - The new password
-   * @returns {Promise<Customer>}
+   * @returns {Promise<string>}
    */
   resetPassword(
     email_address: string,
     code: string,
     password: string
-  ): Promise<Customer> {
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation resetCustomerPassword ($email_address: String!, $code: String!, $password: String!) {
@@ -416,7 +424,7 @@ export class CustomerController {
           code,
           password
         })
-        .then((result: { resetCustomerPassword: { _id: Customer } }) => {
+        .then((result: { resetCustomerPassword: { _id: string } }) => {
           resolve(result.resetCustomerPassword._id);
         })
         .catch((e: any) => {
@@ -430,15 +438,15 @@ export class CustomerController {
    * @param {string} id - The id of the Customer
    * @param  {string} vendor_id - ID of the Vendor issuing the refund
    * @param  {number} amount - The amount to refund the wallet (in cents)
-   * @param  {String} order_id - Optional orderId selected payment method
-   * @returns {Promise<any>} - The id of the wallet that was reloaded
+   * @param  {string} order_id - Optional orderId selected payment method
+   * @returns {Promise<string>} - The id of the wallet that was reloaded
    */
   //QUESTION: Why does this return coupon??
   refundWallet(
     id: string,
     vendor_id: string,
     amount: number,
-    order_id: string | null = null
+    order_id: string | null
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
@@ -478,7 +486,7 @@ export class CustomerController {
     id: string,
     transaction_type: string,
     amount: number,
-    description: string | null = null
+    description: string | null
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `

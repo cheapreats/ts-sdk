@@ -32,7 +32,7 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Customer } from "./CustomerController";
-import { SelectInput } from "./CategoryController";
+import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
 export class LoyaltyCardController {
   app: App;
@@ -151,10 +151,10 @@ export class LoyaltyCardController {
 
   /**
    * Enable sharing of loyalty points from one loyalty card to another
-   * @param {String} sender_customer_id - ID of the customer transferring loyalty points
-   * @param {String} receiver_phone_number - Phone number of the receiver receiving the points
-   * @param {String} loyalty_program_id - ID of the loyalty program in context of which points are shared
-   * @param {Number} no_of_points_to_share - Number of points to share
+   * @param {string} sender_customer_id - ID of the customer transferring loyalty points
+   * @param {string} receiver_phone_number - Phone number of the receiver receiving the points
+   * @param {string} loyalty_program_id - ID of the loyalty program in context of which points are shared
+   * @param {number} no_of_points_to_share - Number of points to share
    * @returns {Promise<string>} - The id of the LoyaltyTransaction
    */
   shareLoyaltyPoints(

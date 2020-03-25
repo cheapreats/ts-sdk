@@ -1,4 +1,4 @@
-export interface AddMenuItem {
+export interface CreateMenuItemInput {
   name: string;
   identifier: string;
   images: Array<string>;
@@ -90,10 +90,10 @@ export class MenuItemController {
 
   /**
    * Create a new MenuItem, returns MenuItem _id if successful
-   * @param {AddMenuItem} menu_item - The MenuItem object
+   * @param {CreateMenuItemInput} menu_item - The MenuItem object
    * @returns {Promise<string>} - The id of the MenuItem object
    */
-  create(menu_item: AddMenuItem): Promise<string> {
+  create(menu_item: CreateMenuItemInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createMenuItemMutation ($menu_item: CreateMenuItemInput!) {
