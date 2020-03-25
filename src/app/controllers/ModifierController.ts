@@ -1,33 +1,43 @@
+export interface ModifierChoiceInput {
+  name: string;
+  identifier: string;
+  available: boolean;
+  price: number;
+}
 export interface ModifierChoice {
   name?: string;
   identifier?: string;
   available?: boolean;
   price?: number;
 }
-export interface AddModifier {
-  name: string;
-  identifier: string;
-  description: string;
-  required: boolean;
-  choices: Array<Choices>;
-  default: string;
-  default_choices: Array<string>;
-  menu_item_id: string;
-  is_topping: boolean;
-  max_choice?: number;
-}
-export interface UpdateModifier {
+export interface ModifierCommonProperties {
   name?: string;
   identifier?: string;
   description?: string;
   required?: boolean;
-  choices?: Array<ModifierChoice>;
   default?: string;
   default_choices?: Array<string>;
   is_topping?: boolean;
   max_choice?: number;
 }
-export interface Modifier extends UpdateModifier, DefaultController {}
+export interface CreateModifierInput {
+  name: string;
+  identifier: string;
+  description: string;
+  required: boolean;
+  choices: Array<ModifierChoiceInput>;
+  default?: string;
+  default_choices: Array<string>;
+  menu_item_id: string;
+  is_topping: boolean;
+  max_choice?: number;
+}
+export interface UpdateModifierInput extends ModifierCommonProperties {
+  choices?: Array<ModifierChoiceInput>;
+}
+export interface Modifier extends ModifierCommonProperties, DefaultController {
+  choices?: Array<ModifierChoice>;
+}
 /**
  * Controller for modifiers.
  */
@@ -47,10 +57,10 @@ export class ModifierController {
 
   /**
    * Create a new Modifier
-   * @param {AddModifier} modifier - The Modifier Object
-   * @returns {Promise<any>} - The id of the Modifier Object
+   * @param {CreateModifierInput} modifier - The Modifier Object
+   * @returns {Promise<string>} - The id of the Modifier Object
    */
-  create(modifier: AddModifier): Promise<any> {
+  create(modifier: CreateModifierInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createModifier ($modifier: CreateModifierInput!) {
@@ -64,7 +74,7 @@ export class ModifierController {
         .mutate(mutationString, {
           modifier
         })
-        .then((result: { createModifier: { _id: any } }) => {
+        .then((result: { createModifier: { _id: string } }) => {
           resolve(result.createModifier._id);
         })
         .catch((e: any) => {
@@ -76,10 +86,10 @@ export class ModifierController {
   /**
    * Update an existing Modifier
    * @param {string} id - The id of the Modifier Object
-   * @param {UpdateModifier} modifier - The Modifier Object
-   * @returns {Promise<any>} - The id of the Modifier Object
+   * @param {UpdateModifierInput} modifier - The Modifier Object
+   * @returns {Promise<string>} - The id of the Modifier Object
    */
-  update(id: string, modifier: UpdateModifier): Promise<any> {
+  update(id: string, modifier: UpdateModifierInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation updateModifier ($id: String!, $modifier: UpdateModifierInput!) {
@@ -94,7 +104,7 @@ export class ModifierController {
           id,
           modifier
         })
-        .then((result: { updateModifier: { _id: any } }) => {
+        .then((result: { updateModifier: { _id: string } }) => {
           resolve(result.updateModifier._id);
         })
         .catch((e: any) => {
@@ -106,9 +116,10 @@ export class ModifierController {
   /**
    * Delete an existing Modifier
    * @param {string} id - The id of the Modifier Object
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
-  delete(id: string): Promise<any> {
+  //QUESTION correct usage of void?
+  delete(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation deleteModifier ($id: String!) {
