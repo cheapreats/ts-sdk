@@ -1,45 +1,73 @@
-export enum QuestionType {
+export enum SurveyQuestionType {
   CHECKBOX = "CHECKBOX",
   MULTI_CHECKBOX = "MULTI_CHECKBOX",
   SHORT_ANSWER = "SHORT_ANSWER",
   RATING = "RATING"
 }
-export enum DeliveryRule {
+export enum SurveyDeliveryRule {
   AFTER_ORDER = "AFTER_ORDER"
+}
+export interface SurveyQuestionResponse {
+  _id: string;
+  question_id: string;
+  answer: Array<string>;
 }
 export interface SurveyResponse extends DefaultControllerRequired {
   customer: Customer;
   responses: Array<SurveyQuestionResponse>;
-  order: Order;
+  order?: Order;
 }
-export interface Survey {}
-
-export interface Question {
+export interface SurveyQuestion extends DefaultControllerRequired {
   question: string;
   description?: string;
-  question_type: QuestionType;
+  question_type: string;
   choices?: Array<string>;
   max_rating?: number;
-  required?: boolean;
+  required: boolean;
 }
-export interface AddSurvey {
+export interface Survey extends DefaultControllerRequired {
+  vendor_id: string;
+  title: string;
+  description: string;
+  questions: Array<SurveyQuestion>;
+  delivery_rule: string;
+  loyalty_reward?: number;
+  wallet_reward?: number;
+  responses?: Array<SurveyResponse>;
+  released_at?: string;
+  archived_at?: string;
+}
+
+export interface SurveyQuestionInput {
+  question: string;
+  description?: string;
+  question_type: SurveyQuestionType;
+  choices?: Array<string>;
+  max_rating?: number;
+  required?: boolean; // default False
+}
+export interface CreateSurveyInput {
   title: string;
   vendor_id: string;
-  questions: Array<Question>;
-  delivery_rule?: DeliveryRule;
+  questions: Array<SurveyQuestionInput>;
+  delivery_rule?: SurveyDeliveryRule; // default AFTER_ORDER
   loyalty_reward?: number;
   wallet_reward?: number;
 }
-export interface UpdateSurvey {
+export interface UpdateSurveyInput {
   title?: string;
-  questions?: Array<Question>;
-  delivery_rule?: DeliveryRule;
+  questions?: Array<SurveyQuestionInput>;
+  delivery_rule?: SurveyDeliveryRule;
   loyalty_reward?: number;
   wallet_reward?: number;
 }
-export interface AddSurveyResponse {
+export interface SurveyQuestionResponseInput {
+  question_id: string;
+  answer: Array<string>;
+}
+export interface CreateSurveyResponseInput {
   customer_id: string;
-  responses: Array<{ question_id: string; answer: Array<string> }>;
+  responses: Array<CreateSurveyResponseInput>;
   order_id?: string;
 }
 import { App } from "../App";
@@ -63,10 +91,10 @@ export class SurveyController {
 
   /**
    * Create a new Survey and return the ID of the created object if successful
-   * @param {AddSurvey} survey - The Survey Object
-   * @returns {Promise<any>}
+   * @param {CreateSurveyInput} survey - The Survey Object
+   * @returns {Promise<string>}
    */
-  create(survey: AddSurvey): Promise<any> {
+  create(survey: CreateSurveyInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($survey: CreateSurveyInput!) {
@@ -80,7 +108,7 @@ export class SurveyController {
         .mutate(mutationString, {
           survey
         })
-        .then((result: { createSurvey: { _id: any } }) => {
+        .then((result: { createSurvey: { _id: string } }) => {
           resolve(result.createSurvey._id);
         })
         .catch((e: any) => {
@@ -92,10 +120,10 @@ export class SurveyController {
   /**
    * Update a Survey and return the ID of the updated object if successful
    * @param {string} id - The id of the survey to be modified
-   * @param {UpdateSurvey} survey - The Modified Survey Object
-   * @returns {Promise<any>}
+   * @param {UpdateSurveyInput} survey - The Modified Survey Object
+   * @returns {Promise<string>}
    */
-  update(id: string, survey: UpdateSurvey): Promise<any> {
+  update(id: string, survey: UpdateSurveyInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $survey: UpdateSurveyInput!) {
@@ -110,7 +138,7 @@ export class SurveyController {
           id,
           survey
         })
-        .then((result: { updateSurvey: { _id: any } }) => {
+        .then((result: { updateSurvey: { _id: string } }) => {
           resolve(result.updateSurvey._id);
         })
         .catch((e: any) => {
@@ -122,7 +150,7 @@ export class SurveyController {
   /**
    * Archive a Survey
    * @param {string} id - The id of the Survey Object
-   * @returns {Promise<String>} - Confirmation String
+   * @returns {Promise<string>} - Confirmation String
    */
   archive(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -136,7 +164,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { archiveSurvey: string | PromiseLike<string> }) => {
+        .then((result: { archiveSurvey: string }) => {
           resolve(result.archiveSurvey);
         })
         .catch((e: any) => {
@@ -148,7 +176,7 @@ export class SurveyController {
   /**
    * Delete a Survey
    * @param {string} id - The id of the Survey Object
-   * @returns {Promise<String>} - Confirmation String
+   * @returns {Promise<string>} - Confirmation String
    */
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -162,7 +190,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteSurvey: string | PromiseLike<string> }) => {
+        .then((result: { deleteSurvey: string }) => {
           resolve(result.deleteSurvey);
         })
         .catch((e: any) => {
@@ -174,9 +202,9 @@ export class SurveyController {
   /**
    * Release a Survey
    * @param {string} id - The id of the Survey Object
-   * @returns {Promise<any>} - The id of the Survey object
+   * @returns {Promise<string>} - The id of the Survey object
    */
-  release(id: string): Promise<any> {
+  release(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!) {
@@ -190,7 +218,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { releaseSurvey: { _id: any } }) => {
+        .then((result: { releaseSurvey: { _id: string } }) => {
           resolve(result.releaseSurvey._id);
         })
         .catch((e: any) => {
@@ -202,13 +230,13 @@ export class SurveyController {
   /**
    * Create a SurveyResponse object for a Survey object and returns the SurveyResponse ID if successful
    * @param {string} survey_id - The Survey Object ID
-   * @param {AddSurveyResponse} survey_response - The survey response object; the CreateSurveyResponseInput object
-   * @returns {Promise<any>}
+   * @param {CreateSurveyResponseInput} survey_response - The survey response object; the CreateSurveyResponseInput object
+   * @returns {Promise<string>}
    */
   createSurveyResponse(
     survey_id: string,
-    survey_response: AddSurveyResponse
-  ): Promise<any> {
+    survey_response: CreateSurveyResponseInput
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($survey_id: String!, $survey_response: CreateSurveyResponseInput!) {
@@ -223,7 +251,7 @@ export class SurveyController {
           survey_id,
           survey_response
         })
-        .then((result: { createSurveyResponse: { _id: any } }) => {
+        .then((result: { createSurveyResponse: { _id: string } }) => {
           resolve(result.createSurveyResponse._id);
         })
         .catch((e: any) => {
