@@ -1,17 +1,21 @@
-export interface UpdateRaw {
+export interface UpdateRawConfigurationInput {
   name?: string;
   version_mask?: string;
   data?: string;
 }
-export interface AddRaw {
+export interface CreateRawConfigurationInput {
   name: string;
   version_mask: string;
   data: string;
 }
+export interface RawConfiguration
+  extends DefaultControllerRequired,
+    CreateRawConfigurationInput {}
 /**
  * Controller for remote configuration.
  */
 import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
 export class RemoteConfigurationController {
   app: App;
   constructor(app: App) {
@@ -25,7 +29,8 @@ export class RemoteConfigurationController {
 
   // ADD MUTATION METHODS BELOW
 
-  fetch(name: string, version: string) {
+  //QUESTION is it correct to use JSON type here
+  fetch(name: string, version: string): Promise<JSON> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 query ($name: String!, $version: String!) {
@@ -37,6 +42,7 @@ export class RemoteConfigurationController {
             `;
       this.app
         .getAdaptor()
+        //QUESTION this is a mutate call but the mutation string above is a query
         .mutate(mutationString, {
           name,
           version
@@ -50,7 +56,7 @@ export class RemoteConfigurationController {
     });
   }
 
-  deleteRawConfiguration(id: string) {
+  deleteRawConfiguration(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!) {
@@ -62,7 +68,7 @@ export class RemoteConfigurationController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteRawConfiguration: any }) => {
+        .then((result: { deleteRawConfiguration: string }) => {
           resolve(result.deleteRawConfiguration);
         })
         .catch((e: any) => {
@@ -71,7 +77,10 @@ export class RemoteConfigurationController {
     });
   }
 
-  updateRawConfiguration(id: string, rawConfiguration: UpdateRaw) {
+  updateRawConfiguration(
+    id: string,
+    rawConfiguration: UpdateRawConfigurationInput
+  ): Promise<RawConfiguration> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $rawConfiguration: UpdateRawConfigurationInput!) {
@@ -86,7 +95,7 @@ export class RemoteConfigurationController {
           id,
           rawConfiguration
         })
-        .then((result: { updateRawConfiguration: any }) => {
+        .then((result: { updateRawConfiguration: RawConfiguration }) => {
           resolve(result.updateRawConfiguration);
         })
         .catch((e: any) => {
@@ -95,7 +104,9 @@ export class RemoteConfigurationController {
     });
   }
 
-  createRawConfiguration(rawConfiguration: AddRaw) {
+  createRawConfiguration(
+    rawConfiguration: CreateRawConfigurationInput
+  ): Promise<RawConfiguration> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($rawConfiguration: CreateRawConfigurationInput!) {
@@ -109,7 +120,7 @@ export class RemoteConfigurationController {
         .mutate(mutationString, {
           rawConfiguration
         })
-        .then((result: { createRawConfiguration: any }) => {
+        .then((result: { createRawConfiguration: RawConfiguration }) => {
           resolve(result.createRawConfiguration);
         })
         .catch((e: any) => {
