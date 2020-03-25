@@ -1,16 +1,23 @@
-export interface AddRedeemableItem {
+export interface CreateRedeemableItemInput {
   loyalty_program_id: string;
   menu_item_id: string;
   points_required: number;
 }
-export interface UpdateRedeemableItem {
+export interface UpdateRedeemableItemInput {
   points_required?: number;
 }
-export interface RedeemableItem {}
+export interface RedeemableItem extends DefaultController {
+  menu_item?: MenuItem;
+  points_required?: number;
+  loyaly_program?: LoyaltyProgram;
+}
 /**
  * Controller for redeemable items.
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { MenuItem } from "./MenuItemController";
+import { LoyaltyProgram } from "./LoyaltyProgramController";
 export class RedeemableItemController {
   app: App;
   constructor(app: App) {
@@ -25,10 +32,10 @@ export class RedeemableItemController {
 
   /**
    * Create a new Redeemable Item, returns RedeemableItem _id if successful
-   * @param {AddRedeemableItem} redeemable_item - The RedeemableItem object input
-   * @returns {Promise<any>} - The id of the RedeemableItem object
+   * @param {CreateRedeemableItemInput} redeemable_item - The RedeemableItem object input
+   * @returns {Promise<string>} - The id of the RedeemableItem object
    */
-  create(redeemable_item: AddRedeemableItem): Promise<any> {
+  create(redeemable_item: CreateRedeemableItemInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createRedeemableItem ($redeemable_item: CreateRedeemableItemInput!) {
@@ -42,7 +49,7 @@ export class RedeemableItemController {
         .mutate(mutationString, {
           redeemable_item
         })
-        .then((result: { createRedeemableItem: { _id: any } }) => {
+        .then((result: { createRedeemableItem: { _id: string } }) => {
           resolve(result.createRedeemableItem._id);
         })
         .catch((e: any) => {
@@ -54,10 +61,13 @@ export class RedeemableItemController {
   /**
    * Update an existing RedeemableItem, returns RedeemableItem _id if successful
    * @param {string} id - ID of the RedeemableItem object to update
-   * @param {UpdateRedeemableItem} redeemable_item - The RedeemableItem update object input
-   * @returns {Promise<any>} - The id of the RedeemableItem object
+   * @param {UpdateRedeemableItemInput} redeemable_item - The RedeemableItem update object input
+   * @returns {Promise<string>} - The id of the RedeemableItem object
    */
-  update(id: string, redeemable_item: UpdateRedeemableItem): Promise<any> {
+  update(
+    id: string,
+    redeemable_item: UpdateRedeemableItemInput
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id:String!, $redeemable_item: UpdateRedeemableItemInput!) {
@@ -72,7 +82,7 @@ export class RedeemableItemController {
           id,
           redeemable_item
         })
-        .then((result: { updateRedeemableItem: { _id: any } }) => {
+        .then((result: { updateRedeemableItem: { _id: string } }) => {
           resolve(result.updateRedeemableItem._id);
         })
         .catch((e: any) => {
@@ -84,9 +94,9 @@ export class RedeemableItemController {
   /**
    * Delete a RedeemableItem
    * @param {string} id - The id of the RedeemableItem
-   * @returns {Promise<any>} - Return string
+   * @returns {Promise<string>} - Return string
    */
-  delete(id: string): Promise<any> {
+  delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!) {
@@ -98,7 +108,7 @@ export class RedeemableItemController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteRedeemableItem: any }) => {
+        .then((result: { deleteRedeemableItem: string }) => {
           resolve(result.deleteRedeemableItem);
         })
         .catch((e: any) => {
