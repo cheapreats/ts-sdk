@@ -6,6 +6,10 @@ export enum FlashSaleType {
   DOLLAR = "DOLLAR",
   PERCENTAGE = "PERCENTAGE"
 }
+export interface FlashSaleItem {
+  _id?: string;
+  price?: number;
+}
 /**
  * Controller related to flash sales
  */
