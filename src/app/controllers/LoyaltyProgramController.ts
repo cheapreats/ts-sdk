@@ -22,6 +22,7 @@ export interface UpdateLoyaltyProg {
   min_purchase?: number;
   program_type?: ProgramType;
 }
+export interface LoyaltyProgram {}
 /**
  * Controller for loyalty programs.
  */
