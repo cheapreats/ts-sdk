@@ -1,6 +1,13 @@
 /**
  * Controller for verification.
  */
+export interface VerificationSession {
+  uuid: string;
+  phone_number: string;
+  verified_status: boolean;
+  created_at: string;
+  updated_at: string;
+}
 import { App } from "../App";
 export class VerificationController {
   app: App;
@@ -16,9 +23,9 @@ export class VerificationController {
   /**
    * Start a new SMS verification Session
    * @param {string} phone_number - The phone to be verified
-   * @returns {Promise<any>} - The uuid required to verify the verification code
+   * @returns {Promise<VerificationSession>} - The uuid required to verify the verification code
    */
-  startVerificationSession(phone_number: string): Promise<any> {
+  startVerificationSession(phone_number: string): Promise<VerificationSession> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createSmsVerificationSessionMutation ($phone_number:String!) {
@@ -32,7 +39,7 @@ export class VerificationController {
         .mutate(mutationString, {
           phone_number
         })
-        .then((result: any) => {
+        .then((result: VerificationSession) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -45,12 +52,12 @@ export class VerificationController {
    * Verify an Phone number via code received
    * @param {string} uuid - UUID of the verification request
    * @param {string} verification_code - Verification code received on the device
-   * @returns {Promise<any>} - verification status along with the number corresponding to the UUID
+   * @returns {Promise<VerificationSession>} - verification status along with the number corresponding to the UUID
    */
   checkVerificationSession(
     uuid: string,
     verification_code: string
-  ): Promise<any> {
+  ): Promise<VerificationSession> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation verifySmsVerificationSessionMutation ($uuid:String!, $verification_code:String!) {
@@ -66,7 +73,7 @@ export class VerificationController {
           uuid,
           verification_code
         })
-        .then((result: any) => {
+        .then((result: VerificationSession) => {
           resolve(result);
         })
         .catch((e: any) => {
