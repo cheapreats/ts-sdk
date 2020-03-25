@@ -1,5 +1,11 @@
-export interface Tip {}
+export interface Tip extends DefaultController {
+  amount?: number;
+  order?: Order;
+  description?: string;
+}
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Order } from "./OrderController";
 export class TipController {
   app: App;
   constructor(app: App) {
@@ -14,8 +20,9 @@ export class TipController {
    * Create a tip
    * @param  {string} order_id - ID of the order tip is issued for
    * @param  {number} amount - Tip amount in cents
-   * @returns {Promise<String>} - Returns the id of the tip created
+   * @returns {Promise<string>} - Returns the id of the tip created
    */
+  //QUESTION Description is not in mutation but it is an optional field in GRAPH QL
   create(order_id: string, amount: number): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
@@ -31,11 +38,9 @@ export class TipController {
           order_id,
           amount
         })
-        .then(
-          (result: { createTip: { _id: string | PromiseLike<string> } }) => {
-            resolve(result.createTip._id);
-          }
-        )
+        .then((result: { createTip: { _id: string } }) => {
+          resolve(result.createTip._id);
+        })
         .catch((e: any) => {
           reject(e);
         });
