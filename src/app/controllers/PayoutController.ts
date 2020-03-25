@@ -1,23 +1,30 @@
-enum PayoutMethod {
+export enum PayoutMethod {
   MANUAL = "MANUAL"
 }
-enum PayoutStatus {
+export enum PayoutStatus {
   PENDING = "PENDING",
   IN_TRANSIT = "IN_TRANSIT",
   PAID = "PAID",
   CANCELLED = "CANCELLED"
 }
-interface UpdatePayout {
+export interface UpdatePayoutInput {
   orders?: Array<string>;
   service_charges?: Array<string>;
   note?: string;
-  method?: PayoutMethod;
-  status?: PayoutStatus;
+  method?: PayoutMethod; // default MANUAL
+  status?: PayoutStatus; // default PENDING
+}
+export interface Payout extends DefaultController, UpdatePayoutInput {
+  vendor_id: string;
+  vendor?: Vendor;
+  total?: number;
 }
 /**
  * Controller related to payouts
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Vendor } from "./VendorController";
 export class PayoutController {
   app: App;
   constructor(app: App) {
@@ -38,7 +45,7 @@ export class PayoutController {
    */
   request(
     vendor_id: string,
-    dry: boolean = false
+    dry: boolean | null // default False
   ): Promise<{ _id: string; total: number }> {
     return new Promise((resolve, reject) => {
       let mutationString = `
@@ -55,15 +62,10 @@ export class PayoutController {
           vendor_id,
           dry
         })
-        .then(
-          (result: {
-            requestPayout:
-              | { _id: string; total: number }
-              | PromiseLike<{ _id: string; total: number }>;
-          }) => {
-            resolve(result.requestPayout);
-          }
-        )
+        //QUESTION only _id and total will be accessible is this the expected behaviour
+        .then((result: { requestPayout: { _id: string; total: number } }) => {
+          resolve(result.requestPayout);
+        })
         .catch((e: any) => {
           reject(e);
         });
@@ -72,11 +74,11 @@ export class PayoutController {
 
   /**
    * Update an existing pending payout
-   * @param {String} id - Payout ID
-   * @param {String} payout - Updated payout object
+   * @param {string} id - Payout ID
+   * @param {UpdatePayoutInput} payout - Updated payout object
    * @returns {Promise<any>}
    */
-  update(id: string, payout: string): Promise<any> {
+  update(id: string, payout: UpdatePayoutInput): Promise<any> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $payout:UpdatePayoutInput!) {
@@ -91,7 +93,7 @@ export class PayoutController {
           id,
           payout
         })
-        .then((result: { updatePayout: { _id: any } }) => {
+        .then((result: { updatePayout: { _id: string } }) => {
           resolve(result.updatePayout._id);
         })
         .catch((e: any) => {
@@ -103,9 +105,9 @@ export class PayoutController {
   /**
    * Cancel a Payout
    * @param {string} id - Payout ID
-   * @returns {Promise<any>}
+   * @returns {Promise<Payout>}
    */
-  cancel(id: string): Promise<any> {
+  cancel(id: string): Promise<Payout> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!) {
@@ -117,7 +119,7 @@ export class PayoutController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { cancelPayout: any }) => {
+        .then((result: { cancelPayout: Payout }) => {
           resolve(result.cancelPayout);
         })
         .catch((e: any) => {
