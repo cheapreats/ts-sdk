@@ -1,7 +1,13 @@
 /**
  * Controller for head offices.
  */
+export interface HeadOffice extends DefaultController {
+  vendors: Array<Vendor>;
+  identifier: string;
+}
 import { App } from "../App";
+import { Vendor } from "./VendorController";
+import { DefaultController } from "./Controller";
 export class HeadOfficeController {
   app: App;
   constructor(app: App) {

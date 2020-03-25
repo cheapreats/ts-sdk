@@ -1,4 +1,11 @@
 export interface PaymentMethods {
+  apple_pay?: boolean;
+  android_pay?: boolean;
+  credit_card?: boolean;
+  in_person?: boolean;
+  wallet?: boolean;
+}
+export interface PaymentMethodsInput {
   apple_pay?: boolean; // default TRUE
   android_pay?: boolean; // default TRUE
   credit_card?: boolean; // default TRUE

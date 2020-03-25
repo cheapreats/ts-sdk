@@ -10,10 +10,19 @@ export interface FlashSaleItem {
   _id?: string;
   price?: number;
 }
+export interface FlashSale extends DefaultController {
+  type?: FlashSaleType;
+  amount?: number;
+  vendor_id?: string;
+  items?: Array<FlashSaleItem>;
+  start_at?: string;
+  end_at?: string;
+}
 /**
  * Controller related to flash sales
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
 export class FlashSaleController {
   app: App;
   constructor(app: App) {
