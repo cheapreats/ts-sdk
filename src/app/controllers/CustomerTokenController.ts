@@ -1,7 +1,11 @@
 /**
  * Controller for customer tokens.
  */
+export interface CustomerToken extends DefaultController {
+  body?: string;
+}
 import { App } from "../App";
+import { DefaultController } from "./Controller";
 export class CustomerTokenController {
   app: App;
   constructor(app: App) {
@@ -16,9 +20,9 @@ export class CustomerTokenController {
    * Create a new CustomerToken, return CustomerToken ID if successful
    * @param {string} email_address - The email address of the Customer
    * @param {string} password - The password of the Customer
-   * @returns {Promise<any>}
+   * @returns {Promise<CustomerToken>}
    */
-  create(email_address: string, password: string): Promise<any> {
+  create(email_address: string, password: string): Promise<CustomerToken> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createCustomerTokenMutation ($email_address: String!, $password: String!) {
@@ -36,7 +40,7 @@ export class CustomerTokenController {
           email_address,
           password
         })
-        .then((result: { createCustomerToken: any }) => {
+        .then((result: { createCustomerToken: CustomerToken }) => {
           resolve(result.createCustomerToken);
         })
         .catch((e: any) => {

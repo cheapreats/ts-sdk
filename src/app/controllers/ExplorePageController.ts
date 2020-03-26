@@ -1,25 +1,35 @@
-export interface Advertisements {
+export interface Advertisement {
   title?: string;
   link?: string;
   image?: string;
   description?: string;
 }
-export interface DailyDeals {
+export interface DailyDeal {
   link?: string;
   menu_item_id: string;
 }
-export interface SpecialDeals extends DailyDeals {}
-export interface TimelyDeals {
+export interface SpecialDeal extends DailyDeal {}
+export interface TimelyDeal {
   menu_item_id: string;
   title?: string;
   link?: string;
   from?: string;
   to?: string;
 }
+export interface ExplorePage extends DefaultController {
+  advertisements?: Array<Advertisement>;
+  daily_deals?: Array<DailyDeal>;
+  special_deals?: Array<SpecialDeal>;
+  timely_deals?: Array<TimelyDeal>;
+  coupons?: Array<Coupon>;
+  is_current?: boolean;
+}
 /**
  * Controller related to explore page
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Coupon } from "./CouponController";
 export class ExplorePageController {
   app: App;
   constructor(app: App) {
@@ -39,11 +49,12 @@ export class ExplorePageController {
    * @returns {Promise<String>} - Updated at
    */
   replace(
-    advertisements: Array<Advertisements>,
-    daily_deals: Array<DailyDeals>,
-    special_deals: Array<SpecialDeals>,
-    timely_deals: Array<TimelyDeals>
+    advertisements: Array<Advertisement>,
+    daily_deals: Array<DailyDeal>,
+    special_deals: Array<SpecialDeal>,
+    timely_deals: Array<TimelyDeal>
   ): Promise<string> {
+    //QUESTION PR coupons is not included as option in mutation but exists as an option in the schema??
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($advertisements: [AdvertisementInput], $daily_deals: [DailyDealsInput], $special_deals: [SpecialDealsInput], $timely_deals: [TimelyDealsInput]) { 
@@ -51,7 +62,7 @@ export class ExplorePageController {
                         updated_at
                     }
                 }
-            `; //PR coupons is not included as option in mutation but exists as an option in the schema
+            `;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
@@ -60,14 +71,9 @@ export class ExplorePageController {
           special_deals,
           timely_deals
         })
-        .then(
-          (result: {
-            replaceExplorePage: { updated_at: string | PromiseLike<string> };
-            //PR Is promiseLike okay?
-          }) => {
-            resolve(result.replaceExplorePage.updated_at);
-          }
-        )
+        .then((result: { replaceExplorePage: { updated_at: string } }) => {
+          resolve(result.replaceExplorePage.updated_at);
+        })
         .catch((e: any) => {
           reject(e);
         });

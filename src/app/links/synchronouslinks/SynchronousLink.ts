@@ -16,5 +16,3 @@ export class SynchronousLink extends Link {
     this._type = "sync";
   }
 }
-
-module.exports = SynchronousLink;

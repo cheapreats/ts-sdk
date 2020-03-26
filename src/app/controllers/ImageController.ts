@@ -17,7 +17,7 @@ export class ImageController {
    * @param  {string} append=""
    * @returns {HttpLink}
    */
-  getHttpLink(append: string = "") {
+  getHttpLink(append: string = ""): HttpLink {
     return new HttpLink(
       this.app.getConfiguration().endpoints.imageEndpoint.production + append
     );

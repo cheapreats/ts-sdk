@@ -23,7 +23,7 @@ export class NotificationController {
    * @returns {HttpLink} //PR it returns a type HttpLink or a HttpLink object?
    */
   // Get Adaptor Mode does not exist in App
-  getHttpLink(append: string = "") {
+  getHttpLink(append: string = ""): HttpLink {
     if (this.app.getAdaptorMode() === "production") {
       return new HttpLink(
         this.app.getConfiguration().endpoints.notificationEndpoint.production +
@@ -41,9 +41,10 @@ export class NotificationController {
   /**
    * Enroll a customer iOS device, authentication required
    * @param apnsToken
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
-  apnsEnrollCustomer(apnsToken: any): Promise<any> {
+  //QUESTION correct usage of void?
+  apnsEnrollCustomer(apnsToken: any): Promise<void> {
     const link = this.getHttpLink("/api/APNSEnrollCustomer");
     return new Promise((resolve, reject) => {
       link
@@ -68,9 +69,10 @@ export class NotificationController {
   /**
    * Revoke an iOS device
    * @param apnsToken
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
-  apnsRevokeCustomer(apnsToken: any): Promise<any> {
+  //QUESTION correct usage of void?
+  apnsRevokeCustomer(apnsToken: any): Promise<void> {
     const link = this.getHttpLink("/api/APNSRevokeCustomer");
     return new Promise((resolve, reject) => {
       link

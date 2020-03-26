@@ -25,7 +25,7 @@ export class TwilioController {
    * @returns {HttpLink}
    */
   // Get Adaptor Mode does not exist in App
-  getHttpLink(append: string = "") {
+  getHttpLink(append: string = ""): HttpLink {
     if (this.app.getAdaptorMode() === "production") {
       return new HttpLink(
         this.app.getConfiguration().endpoints.restEndpoint.production + append
@@ -43,9 +43,9 @@ export class TwilioController {
    * Get verification code sent to a phone
    * @param phoneNumber - The phone number to send the code to (Without Country Code & no spaces/special characters)
    * @param countryCode - The country code of the phone number (Ex: +1)
-   * @returns {Promise<any>}
+   * @returns {Promise<boolean>}
    */
-  getCode(phoneNumber: string, countryCode: string): Promise<any> {
+  getCode(phoneNumber: string, countryCode: string): Promise<boolean> {
     const link = this.getHttpLink("/get_code");
     return new Promise((resolve, reject) => {
       link
@@ -69,7 +69,7 @@ export class TwilioController {
    * @param phoneNumber - The phone number to send the code to (Without Country Code & no spaces/special characters)
    * @returns {Promise<any>}
    */
-  canVerify(phoneNumber: string): Promise<any> {
+  canVerify(phoneNumber: string): Promise<boolean | void> {
     const link = this.getHttpLink("/can_verify");
     return new Promise((resolve, reject) => {
       link

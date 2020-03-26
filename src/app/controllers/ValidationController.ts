@@ -12,7 +12,7 @@ export class ValidationController {
     this.customerSignupPhone = this.customerSignupPhone.bind(this);
   }
 
-  getHttpLink(append = "") {
+  getHttpLink(append = ""): HttpLink {
     return new HttpLink(
       this.app.getConfiguration().endpoints.validationEndpoint.production +
         append

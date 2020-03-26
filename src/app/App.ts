@@ -1,4 +1,4 @@
-const strToIdentifier = require("./util/strToIdentifier");
+import { strToIdentifier } from "./util/strToIdentifier";
 import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
 import packageDotJson from "../version.js";
 

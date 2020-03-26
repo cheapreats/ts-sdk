@@ -1,26 +1,36 @@
-export interface AddEmployee {
+export interface CreateEmployeeInput {
   username: string;
   password: string;
   role: string;
   email_address: string;
   phone_number: string;
   vendor_id: string;
-  email_preferences: EmailPref;
+  email_preferences: EmailPreferencesInput;
 }
-export interface UpdateEmployee {
+export interface EmployeeCommonProperties {
   email_address?: string;
   password?: string;
   phone_number?: string;
   role?: string;
-  email_preferences?: EmailPref;
 }
-export enum Method {
+export interface UpdateEmployeeInput extends EmployeeCommonProperties {
+  email_preferences?: EmailPreferencesInput;
+}
+export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
   SMS = "SMS"
 }
+export interface Employee extends DefaultController, EmployeeCommonProperties {
+  username?: string;
+  email_preferences?: EmailPreferences;
+  vendor?: Vendor;
+  terminal_fcm_tokens?: Array<string>;
+}
 
-import { EmailPref } from "./CustomerController";
+import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Vendor } from "./VendorController";
 /**
  * Controller for employees.
  */
@@ -42,10 +52,10 @@ export class EmployeeController {
 
   /**
    * Create a new employee, return employee ID if successful
-   * @param {AddEmployee} employee - The Employee Object
-   * @returns {Promise<any>} - The id of the Employee Object
+   * @param {CreateEmployeeInput} employee - The Employee Object
+   * @returns {Promise<string>} - The id of the Employee Object
    */
-  create(employee: AddEmployee): Promise<any> {
+  create(employee: CreateEmployeeInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createEmployeeMutation ($employee: CreateEmployeeInput!) {
@@ -59,7 +69,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           employee
         })
-        .then((result: { createEmployee: { _id: any } }) => {
+        .then((result: { createEmployee: { _id: string } }) => {
           resolve(result.createEmployee._id);
         })
         .catch((e: any) => {
@@ -71,10 +81,10 @@ export class EmployeeController {
   /**
    * Update a employee
    * @param {string} id - The id of the Employee Object
-   * @param {UpdateEmployee} employee - The Employee Object
-   * @returns {Promise<any>} - The id of the Employee Object
+   * @param {UpdateEmployeeInput} employee - The Employee Object
+   * @returns {Promise<string>} - The id of the Employee Object
    */
-  update(id: string, employee: UpdateEmployee): Promise<any> {
+  update(id: string, employee: UpdateEmployeeInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation updateEmployeeMutation ($id: String!, $employee: UpdateEmployeeInput!) {
@@ -89,7 +99,7 @@ export class EmployeeController {
           id,
           employee
         })
-        .then((result: { updateEmployee: { _id: any } }) => {
+        .then((result: { updateEmployee: { _id: string } }) => {
           resolve(result.updateEmployee._id);
         })
         .catch((e: any) => {
@@ -101,9 +111,9 @@ export class EmployeeController {
   /**
    * Delete a Employee instance
    * @param {string} id - The id of the Employee Object
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
-  delete(id: string): Promise<any> {
+  delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation deleteEmployee ($id: String!) {
@@ -115,7 +125,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteEmployee: any }) => {
+        .then((result: { deleteEmployee: string }) => {
           resolve(result.deleteEmployee);
         })
         .catch((e: any) => {
@@ -128,9 +138,9 @@ export class EmployeeController {
    * Enroll a new FCM token for terminal app
    * @param {string} id - The id of the Employee Object
    * @param {string} token - The FCM token for the Terminal Mobile App
-   * @returns {Promise<any>}
+   * @returns {Promise<Employee>}
    */
-  enrollTerminalFcm(id: string, token: string): Promise<any> {
+  enrollTerminalFcm(id: string, token: string): Promise<Employee> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollEmployeeTerminalFcmToken ($id: String!, $token: String!) {
@@ -145,7 +155,7 @@ export class EmployeeController {
           id,
           token
         })
-        .then((result: { enrollEmployeeTerminalFcmToken: any }) => {
+        .then((result: { enrollEmployeeTerminalFcmToken: Employee }) => {
           resolve(result.enrollEmployeeTerminalFcmToken);
         })
         .catch((e: any) => {
@@ -157,9 +167,9 @@ export class EmployeeController {
   /**
    * Revoke a FCM token for terminal app
    * @param {string} token - The FCM token for the Terminal Mobile App
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
-  revokeTerminalFcm(token: string): Promise<any> {
+  revokeTerminalFcm(token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation revokeEmployeeTerminalFcmToken ($token: String!) {
@@ -171,7 +181,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           token
         })
-        .then((result: { revokeEmployeeTerminalFcmToken: any }) => {
+        .then((result: { revokeEmployeeTerminalFcmToken: string }) => {
           resolve(result.revokeEmployeeTerminalFcmToken);
         })
         .catch((e: any) => {
@@ -186,14 +196,15 @@ export class EmployeeController {
    * @param {string} email_address - Email address of the employee
    * @param {string} code - Reset code
    * @param {string} password - The new password to set
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
+  //QUESTION id and email_address are optional??
   resetEmployeePassword(
-    id: string,
-    email_address: string,
+    id: string | null,
+    email_address: string | null,
     code: string,
     password: string
-  ): Promise<any> {
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation resetEmployeePassword ($id: String, $email_address:String, $code:String!, $password:String!) {
@@ -210,7 +221,7 @@ export class EmployeeController {
           code,
           password
         })
-        .then((result: { resetEmployeePassword: { _id: any } }) => {
+        .then((result: { resetEmployeePassword: { _id: string } }) => {
           resolve(result.resetEmployeePassword._id);
         })
         .catch((e: any) => {
@@ -223,12 +234,12 @@ export class EmployeeController {
    * Sends a password reset code to employee
    * @param {string} email_address - Id of the employee
    * @param {Method} method - The new password to set
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
   sendPasswordResetCode(
     email_address: string,
-    method: Method = Method.EMAIL
-  ): Promise<any> {
+    method: ResetCodeSendMethod | null
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation sendEmployeePasswordResetCode ($email_address: String!, $method:ResetCodeSendMethod) {
@@ -241,7 +252,7 @@ export class EmployeeController {
           email_address,
           method
         })
-        .then((result: { sendEmployeePasswordResetCode: any }) => {
+        .then((result: { sendEmployeePasswordResetCode: string }) => {
           resolve(result.sendEmployeePasswordResetCode);
         })
         .catch((e: any) => {
