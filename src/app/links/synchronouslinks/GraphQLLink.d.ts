@@ -49,7 +49,7 @@ export declare class GraphQLLink extends SynchronousLink {
     /**
      * Run a new graphql request
      * @param config
-     * @returns {Promise<object>}
+     * @returns {Promise<Object>}
      */
     run(config: {
         query: string;

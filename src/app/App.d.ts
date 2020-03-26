@@ -1,3 +1,4 @@
+import { strToIdentifier } from "./util/strToIdentifier";
 import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
 import { AuthorizationController } from "./controllers/AuthorizationController";
 import { CartController } from "./controllers/CartController";
@@ -66,80 +67,80 @@ export declare class App {
         getTokenScope: (token: string) => Promise<any>;
     };
     get Cart(): {
-        updateNote: (cartId: string, note: string) => Promise<unknown>;
-        removeCoupon: (cartId: string, cartCouponId: string) => Promise<unknown>;
-        applyCoupon: (cartId: string, couponCode: string) => Promise<unknown>;
-        delete: (cartId: string) => Promise<any>;
-        removeItem: (cartId: string, cartItemId: string) => Promise<any>;
-        addItem: (cartId: string, item: import("./controllers/CartController").CartItem) => Promise<any>;
-        create: (customerId: string, vendorId: string) => Promise<any>;
+        updateNote: (cartId: string, note: string) => Promise<import("./controllers/CartController").Cart>;
+        removeCoupon: (cartId: string, cartCouponId: string) => Promise<import("./controllers/CartController").Cart>;
+        applyCoupon: (cartId: string, couponCode: string) => Promise<import("./controllers/CartController").Cart>;
+        delete: (cartId: string) => Promise<string>;
+        removeItem: (cartId: string, cartItemId: string) => Promise<import("./controllers/CartController").Cart>;
+        addItem: (cartId: string, item: import("./controllers/CartController").AddItemToCartInput) => Promise<import("./controllers/CartController").Cart>;
+        create: (customerId: string, vendorId: string) => Promise<import("./controllers/CartController").Cart>;
     };
     /**
      * Get category related methods.
      * @returns {{create: CategoryController.create, delete: CategoryController.delete, update: CategoryController.update, batchUpdate: CategoryController.batchUpdate}}
      */
     get Category(): {
-        create: (category: import("./controllers/CategoryController").Category) => Promise<any>;
-        delete: (id: string) => Promise<any>;
-        update: (id: string, category: import("./controllers/CategoryController").UpdateCategory) => Promise<any>;
-        batchUpdate: (categories: import("./controllers/CategoryController").BatchCategories[]) => Promise<any>;
+        create: (category: import("./controllers/CategoryController").CreateCategoryInput) => Promise<string>;
+        delete: (id: string) => Promise<string>;
+        update: (id: string, category: import("./controllers/CategoryController").UpdateCategoryInput) => Promise<string>;
+        batchUpdate: (categories: import("./controllers/CategoryController").BatchUpdateCategoriesInput[]) => Promise<import("./controllers/CategoryController").Category[]>;
     };
     /**
      * Get customer related methods.
      * @returns {{create: CustomerController.create, enrollApnsToken: CustomerController.enrollApnsToken, revokeApnsToken: CustomerController.revokeApnsToken, enrollFcmToken: CustomerController.enrollFcmToken, revokeFcmToken: CustomerController.revokeFcmToken, update: CustomerController.update, updateCreditCard: CustomerController.updateCreditCard, createWallet: CustomerController.createWallet, reloadWallet: CustomerController.reloadWallet, resetPassword: CustomerController.resetPassword, sendPasswordResetCode: CustomerController.sendPasswordResetCode, refundWallet: CustomerController.refundWallet, createWalletTransaction:CustomerController.createWalletTransaction, addFavouriteVendor:CustomerController.addFavouriteVendor, removeFavouriteVendor:CustomerController.removeFavouriteVendor, addFavouriteItem:CustomerController.addFavouriteItem, removeFavouriteItem:CustomerController.removeFavouriteItem}}
      */
     get Customer(): {
-        create: (customer: import("./controllers/CustomerController").AddCustomer) => Promise<any>;
-        enrollApnsToken: (id: string, token: string) => Promise<any>;
-        revokeApnsToken: (id: string, token: string) => Promise<any>;
-        enrollFcmToken: (id: string, token: string) => Promise<any>;
-        revokeFcmToken: (id: string, token: string) => Promise<any>;
-        update: (id: string, customer: import("./controllers/CustomerController").UpdateCustomer) => Promise<any>;
-        updateCreditCard: (id: string, token: string) => Promise<any>;
-        createWallet: (id: string) => Promise<any>;
-        reloadWallet: (id: string, amount: number, payment_method: string) => Promise<any>;
-        resetPassword: (email_address: string, code: string, password: string) => Promise<unknown>;
-        sendPasswordResetCode: (email_address: string, method?: import("./controllers/EmployeeController").Method) => Promise<unknown>;
-        refundWallet: (id: string, vendor_id: string, amount: number, order_id?: string) => Promise<any>;
-        createWalletTransaction: (id: string, transaction_type: string, amount: number, description?: string) => Promise<any>;
-        addFavouriteVendor: (id: string, vendor_id: string) => Promise<any>;
-        removeFavouriteVendor: (id: string, vendor_id: string) => Promise<any>;
-        addFavouriteItem: (id: string, item_id: string) => Promise<any>;
-        removeFavouriteItem: (id: string, item_id: string) => Promise<any>;
+        create: (customer: import("./controllers/CustomerController").CreateCustomerInput) => Promise<string>;
+        enrollApnsToken: (id: string, token: string) => Promise<import("./controllers/CustomerController").Customer>;
+        revokeApnsToken: (id: string, token: string) => Promise<import("./controllers/CustomerController").Customer>;
+        enrollFcmToken: (id: string, token: string) => Promise<import("./controllers/CustomerController").Customer>;
+        revokeFcmToken: (id: string, token: string) => Promise<import("./controllers/CustomerController").Customer>;
+        update: (id: string, customer: import("./controllers/CustomerController").UpdateCustomerInput) => Promise<string>;
+        updateCreditCard: (id: string, token: string) => Promise<import("./controllers/CustomerController").Customer>;
+        createWallet: (id: string) => Promise<string>;
+        reloadWallet: (id: string, amount: number, payment_method: string) => Promise<string>;
+        resetPassword: (email_address: string, code: string, password: string) => Promise<string>;
+        sendPasswordResetCode: (email_address: string, method?: import("./controllers/EmployeeController").ResetCodeSendMethod) => Promise<string>;
+        refundWallet: (id: string, vendor_id: string, amount: number, order_id: string) => Promise<string>;
+        createWalletTransaction: (id: string, transaction_type: string, amount: number, description: string) => Promise<string>;
+        addFavouriteVendor: (id: string, vendor_id: string) => Promise<string>;
+        removeFavouriteVendor: (id: string, vendor_id: string) => Promise<string>;
+        addFavouriteItem: (id: string, item_id: string) => Promise<string>;
+        removeFavouriteItem: (id: string, item_id: string) => Promise<string>;
     };
     /**
      * Get customer token related methods.
      * @returns {{create: CustomerTokenController.create}}
      */
     get CustomerToken(): {
-        create: (email_address: string, password: string) => Promise<any>;
+        create: (email_address: string, password: string) => Promise<import("./controllers/CustomerTokenController").CustomerToken>;
     };
     /**
      * Get coupon related methods.
      * @returns {{create: CouponController.create}}
      */
     get Coupon(): {
-        create: (coupon: import("./controllers/CouponController").AddCoupon) => Promise<any>;
+        create: (coupon: import("./controllers/CouponController").CreateCouponInput) => Promise<string>;
     };
     /**
      * Get employee related methods.
      * @returns {{create: EmployeeController.create, update: EmployeeController.update, delete: EmployeeController.delete, enrollTerminalFcm: EmployeeController.enrollTerminalFcm, revokeTerminalFcm: EmployeeController.revokeTerminalFcm, sendPasswordResetCode: EmployeeController.sendPasswordResetCode}}
      */
     get Employee(): {
-        create: (employee: import("./controllers/EmployeeController").AddEmployee) => Promise<any>;
-        update: (id: string, employee: import("./controllers/EmployeeController").UpdateEmployee) => Promise<any>;
-        delete: (id: string) => Promise<any>;
-        enrollTerminalFcm: (id: string, token: string) => Promise<any>;
-        revokeTerminalFcm: (token: string) => Promise<any>;
-        resetEmployeePassword: (id: string, email_address: string, code: string, password: string) => Promise<any>;
-        sendPasswordResetCode: (email_address: string, method?: import("./controllers/EmployeeController").Method) => Promise<any>;
+        create: (employee: import("./controllers/EmployeeController").CreateEmployeeInput) => Promise<string>;
+        update: (id: string, employee: import("./controllers/EmployeeController").UpdateEmployeeInput) => Promise<string>;
+        delete: (id: string) => Promise<string>;
+        enrollTerminalFcm: (id: string, token: string) => Promise<import("./controllers/EmployeeController").Employee>;
+        revokeTerminalFcm: (token: string) => Promise<string>;
+        resetEmployeePassword: (id: string, email_address: string, code: string, password: string) => Promise<string>;
+        sendPasswordResetCode: (email_address: string, method: import("./controllers/EmployeeController").ResetCodeSendMethod) => Promise<string>;
     };
     /**
      * Get employee token related methods.
      * @returns {{create: EmployeeTokenController.create}}
      */
     get EmployeeToken(): {
-        create: (vendor_id: string, username: string, password: string) => Promise<any>;
+        create: (vendor_id: string, username: string, password: string) => Promise<string>;
     };
     /**
      * Get graph related methods.
@@ -153,47 +154,47 @@ export declare class App {
      * @returns {{create: MenuItemController.create, update: MenuItemController.update, delete: MenuItemController.delete}}
      */
     get MenuItem(): {
-        create: (menu_item: import("./controllers/MenuItemController").AddMenuItem) => Promise<any>;
-        update: (id: string, menu_item: import("./controllers/MenuItemController").UpdateMenuItem) => Promise<any>;
-        batchUpdate: (menu_items: import("./controllers/MenuItemController").BatchUpdate[]) => Promise<any>;
-        delete: (id: string) => Promise<any>;
+        create: (menu_item: import("./controllers/MenuItemController").CreateMenuItemInput) => Promise<string>;
+        update: (id: string, menu_item: import("./controllers/MenuItemController").UpdateMenuItemInput) => Promise<string>;
+        batchUpdate: (menu_items: import("./controllers/MenuItemController").BatchUpdateMenuItemsInput[]) => Promise<import("./controllers/MenuItemController").MenuItem[]>;
+        delete: (id: string) => Promise<void>;
     };
     /**
      * Get modifier related methods.
      * @returns {{create: ModifierController.create, update: ModifierController.update, delete: ModifierController.delete}}
      */
     get Modifier(): {
-        create: (modifier: import("./controllers/ModifierController").AddModifier) => Promise<any>;
-        update: (id: string, modifier: import("./controllers/ModifierController").UpdateModifier) => Promise<any>;
-        delete: (id: string) => Promise<any>;
+        create: (modifier: import("./controllers/ModifierController").CreateModifierInput) => Promise<string>;
+        update: (id: string, modifier: import("./controllers/ModifierController").UpdateModifierInput) => Promise<string>;
+        delete: (id: string) => Promise<void>;
     };
     /**
      * Get order related methods.
      * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete}}
      */
     get Order(): {
-        create: (order: import("./controllers/OrderController").AddOrder, dry: boolean, clear_cart: boolean) => Promise<any>;
-        cancel: (id: string, reason: import("./controllers/OrderController").CancelReason, description?: string) => Promise<any>;
-        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<any>;
-        prepared: (id: string) => Promise<any>;
-        complete: (id: any) => Promise<any>;
+        create: (order: import("./controllers/OrderController").CreateOrderInput, dry: boolean, clear_cart: boolean) => Promise<string>;
+        cancel: (id: string, reason: import("./controllers/OrderController").OrderCancellationReason, description: string) => Promise<import("./controllers/OrderController").Order>;
+        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<import("./controllers/OrderController").Order>;
+        prepared: (id: string) => Promise<import("./controllers/OrderController").Order>;
+        complete: (id: string) => Promise<import("./controllers/OrderController").Order>;
     };
     /**
      * Get head office related methods.
      * @returns {{create: HeadOfficeController.create, update: HeadOfficeController.update, delete: HeadOfficeController.delete}}
      */
     get HeadOffice(): {
-        create: (identifier: string) => Promise<any>;
-        update: (id: string, identifier: string) => Promise<any>;
-        delete: (id: string) => Promise<any>;
+        create: (identifier: string) => Promise<string>;
+        update: (id: string, identifier: string) => Promise<string>;
+        delete: (id: string) => Promise<string>;
     };
     /**
      * Get verification services methods.
      * @returns {{startVerificationSession: VerificationController.startVerificationSession, checkVerificationSession: VerificationController.checkVerificationSession}}
      */
     get Verification(): {
-        startVerificationSession: (phone_number: string) => Promise<any>;
-        checkVerificationSession: (uuid: string, verification_code: string) => Promise<any>;
+        startVerificationSession: (phone_number: string) => Promise<import("./controllers/VerificationController").VerificationSession>;
+        checkVerificationSession: (uuid: string, verification_code: string) => Promise<import("./controllers/VerificationController").VerificationSession>;
     };
     /**
      * Get vendor related methods.
@@ -201,13 +202,13 @@ export declare class App {
      */
     get Vendor(): {
         create: (vendor: any) => Promise<any>;
-        createWithEmployee: (vendor: import("./controllers/VendorController").AddVendorWithEmployee) => Promise<any>;
-        update: (id: string, vendor: import("./controllers/VendorController").UpdateVendor) => Promise<any>;
-        updateAllMenuItemsStatus: (vendor_id: string, status: string) => Promise<any>;
+        createWithEmployee: (vendor: import("./controllers/VendorController").CreateVendorWithEmployeeInput) => Promise<string>;
+        update: (id: string, vendor: import("./controllers/VendorController").UpdateVendorInput) => Promise<string>;
+        updateAllMenuItemsStatus: (vendor_id: string, status: string) => Promise<string>;
         deleteVendorTester: (id: string) => Promise<string>;
-        addVendorTesterByEmailAddress: (id: string, email_address: string) => Promise<any>;
-        updateVendorApprovalStatus: (id: string, approval_status: import("./controllers/VendorController").ApprovalStatus) => Promise<string>;
-        requestVendorApproval: (id: string) => Promise<any>;
+        addVendorTesterByEmailAddress: (id: string, email_address: string) => Promise<import("./controllers/VendorController").VendorTester>;
+        updateVendorApprovalStatus: (id: string, approval_status: import("./controllers/VendorController").VendorApprovalStatus) => Promise<string>;
+        requestVendorApproval: (id: string) => Promise<string>;
     };
     /**
      * Get validation services methods.
@@ -224,12 +225,12 @@ export declare class App {
      * @returns {{create: SurveyController.create, update: SurveyController.update, archive: SurveyController.archive, delete: SurveyController.delete, release: SurveyController.release, createSurveyResponse: SurveyController.createSurveyResponse}}
      */
     get Survey(): {
-        create: (survey: import("./controllers/SurveyController").AddSurvey) => Promise<any>;
-        update: (id: string, survey: import("./controllers/SurveyController").UpdateSurvey) => Promise<any>;
+        create: (survey: import("./controllers/SurveyController").CreateSurveyInput) => Promise<string>;
+        update: (id: string, survey: import("./controllers/SurveyController").UpdateSurveyInput) => Promise<string>;
         archive: (id: string) => Promise<string>;
         delete: (id: string) => Promise<string>;
-        release: (id: string) => Promise<any>;
-        createSurveyResponse: (survey_id: string, survey_response: import("./controllers/SurveyController").AddSurveyResponse) => Promise<any>;
+        release: (id: string) => Promise<string>;
+        createSurveyResponse: (survey_id: string, survey_response: import("./controllers/SurveyController").CreateSurveyResponseInput) => Promise<string>;
     };
     /**
      * Get image services methods.
@@ -245,12 +246,9 @@ export declare class App {
      * @constructor
      */
     get Payout(): {
-        request: (vendor_id: string, dry?: boolean) => Promise<{
-            _id: string;
-            total: number;
-        }>;
-        update: (id: string, payout: string) => Promise<any>;
-        cancel: (id: string) => Promise<any>;
+        request: (vendor_id: string, dry: boolean) => Promise<import("./controllers/PayoutController").Payout>;
+        update: (id: string, payout: import("./controllers/PayoutController").UpdatePayoutInput) => Promise<any>;
+        cancel: (id: string) => Promise<import("./controllers/PayoutController").Payout>;
     };
     /**
      * Get explore page methods.
@@ -258,7 +256,7 @@ export declare class App {
      * @constructor
      */
     get ExplorePage(): {
-        replace: (advertisements: import("./controllers/ExplorePageController").Advertisements[], daily_deals: import("./controllers/ExplorePageController").DailyDeals[], special_deals: import("./controllers/ExplorePageController").SpecialDeals[], timely_deals: import("./controllers/ExplorePageController").TimelyDeals[]) => Promise<string>;
+        replace: (advertisements: import("./controllers/ExplorePageController").Advertisement[], daily_deals: import("./controllers/ExplorePageController").DailyDeal[], special_deals: import("./controllers/ExplorePageController").SpecialDeal[], timely_deals: import("./controllers/ExplorePageController").TimelyDeal[]) => Promise<string>;
     };
     /**
      * Get flash sale methods.
@@ -266,8 +264,8 @@ export declare class App {
      * @constructor
      */
     get FlashSale(): {
-        create: (vendor_id: string, type: import("./controllers/FlashSaleController").FlashSaleType, amount: number, items: import("./controllers/FlashSaleController").FlashSaleItems[], start_at: string, end_at: string) => Promise<any>;
-        update: (id: string, items: import("./controllers/FlashSaleController").FlashSaleItems[], end_at: string) => Promise<any>;
+        create: (vendor_id: string, type: import("./controllers/FlashSaleController").FlashSaleType, amount: number, items: import("./controllers/FlashSaleController").FlashSaleItemInput[], start_at: string, end_at: string) => Promise<string>;
+        update: (id: string, items: import("./controllers/FlashSaleController").FlashSaleItemInput[], end_at: string) => Promise<string>;
     };
     /**
      * Get tip methods.
@@ -283,9 +281,9 @@ export declare class App {
      * @constructor
      */
     get LoyaltyProgram(): {
-        create: (loyalty_program: import("./controllers/LoyaltyProgramController").LoyaltyProg) => Promise<any>;
-        update: (id: string, loyalty_program: import("./controllers/LoyaltyProgramController").UpdateLoyaltyProg) => Promise<any>;
-        delete: (id: string) => Promise<any>;
+        create: (loyalty_program: import("./controllers/LoyaltyProgramController").CreateLoyaltyProgramInput) => Promise<string>;
+        update: (id: string, loyalty_program: import("./controllers/LoyaltyProgramController").UpdateLoyaltyProgramInput) => Promise<string>;
+        delete: (id: string) => Promise<string>;
     };
     /**
      * Get loyalty card methods.
@@ -293,11 +291,11 @@ export declare class App {
      * @constructor
      */
     get LoyaltyCard(): {
-        createLoyaltyCardAndEnroll: (loyalty_card: import("./controllers/LoyaltyCardController").CreateLoyalty) => Promise<any>;
-        awardPointsToLoyaltyCard: (id: string, amount: number) => Promise<any>;
-        awardShareablePointsToLoyaltyCard: (id: string, amount: number) => Promise<any>;
-        shareLoyaltyPoints: (sender_customer_id: string, receiver_phone_number: string, loyalty_program_id: string, no_of_points_to_share: number) => Promise<any>;
-        redeemLoyaltyPointsForCoupon: (loyalty_card_id: string, menu_item_id: string) => Promise<any>;
+        createLoyaltyCardAndEnroll: (loyalty_card: import("./controllers/LoyaltyCardController").CreateLoyaltyCardInput) => Promise<string>;
+        awardPointsToLoyaltyCard: (id: string, amount: number) => Promise<string>;
+        awardShareablePointsToLoyaltyCard: (id: string, amount: number) => Promise<string>;
+        shareLoyaltyPoints: (sender_customer_id: string, receiver_phone_number: string, loyalty_program_id: string, no_of_points_to_share: number) => Promise<string>;
+        redeemLoyaltyPointsForCoupon: (loyalty_card_id: string, menu_item_id: string) => Promise<string>;
     };
     /**
      * Get redeemable item methods.
@@ -305,22 +303,22 @@ export declare class App {
      * @constructor
      */
     get RedeemableItem(): {
-        create: (redeemable_item: import("./controllers/RedeemableItemController").AddRedeemableItem) => Promise<any>;
-        update: (id: string, redeemable_item: import("./controllers/RedeemableItemController").UpdateRedeemableItem) => Promise<any>;
-        delete: (id: string) => Promise<any>;
+        create: (redeemable_item: import("./controllers/RedeemableItemController").CreateRedeemableItemInput) => Promise<string>;
+        update: (id: string, redeemable_item: import("./controllers/RedeemableItemController").UpdateRedeemableItemInput) => Promise<string>;
+        delete: (id: string) => Promise<string>;
     };
     get RemoteConfiguration(): {
-        fetch: (name: string, version: string) => Promise<unknown>;
-        deleteRawConfiguration: (id: string) => Promise<unknown>;
-        updateRawConfiguration: (id: string, rawConfiguration: import("./controllers/RemoteConfigurationController").UpdateRaw) => Promise<unknown>;
-        createRawConfiguration: (rawConfiguration: import("./controllers/RemoteConfigurationController").AddRaw) => Promise<unknown>;
+        fetch: (name: string, version: string) => Promise<JSON>;
+        deleteRawConfiguration: (id: string) => Promise<string>;
+        updateRawConfiguration: (id: string, rawConfiguration: import("./controllers/RemoteConfigurationController").UpdateRawConfigurationInput) => Promise<import("./controllers/RemoteConfigurationController").RawConfiguration>;
+        createRawConfiguration: (rawConfiguration: import("./controllers/RemoteConfigurationController").CreateRawConfigurationInput) => Promise<import("./controllers/RemoteConfigurationController").RawConfiguration>;
     };
     /**
      * Get utility methods.
      * @returns {{strToIdentifier: (*|(function(): result))}}
      */
     get Util(): {
-        strToIdentifier: any;
+        strToIdentifier: typeof strToIdentifier;
     };
     /**
      * Get current network adaptor instance
@@ -362,7 +360,7 @@ export declare class App {
      * Determine if current SDK Version in compatible
      * @returns {null|boolean}
      */
-    isCompatible(): Promise<unknown>;
+    isCompatible(): Promise<boolean>;
     /**
      * Set Apollo endpoint.
      * WARNING: END OF LIFE
@@ -380,21 +378,21 @@ export declare class App {
      * Set verificationEndpoint.production
      * @param endpoint
      */
-    setVerificationEndpoint(endpoint: any): void;
+    setVerificationEndpoint(endpoint: string): void;
     /**
      * Set validationEndpoint.production
      * @param endpoint
      */
-    setValidationEndpoint(endpoint: any): void;
+    setValidationEndpoint(endpoint: string): void;
     /**
      * Set imageEndpoint.production
      * @param endpoint
      */
-    setImageEndpoint(endpoint: any): void;
+    setImageEndpoint(endpoint: string): void;
     /**
      * Set imageEndpoint.distribution
      * @param endpoint
      */
-    setImageDistributionEndpoint(endpoint: any): void;
+    setImageDistributionEndpoint(endpoint: string): void;
 }
 //# sourceMappingURL=App.d.ts.map

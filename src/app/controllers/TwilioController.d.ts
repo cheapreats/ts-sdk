@@ -20,14 +20,14 @@ export declare class TwilioController {
      * Get verification code sent to a phone
      * @param phoneNumber - The phone number to send the code to (Without Country Code & no spaces/special characters)
      * @param countryCode - The country code of the phone number (Ex: +1)
-     * @returns {Promise<any>}
+     * @returns {Promise<boolean>}
      */
-    getCode(phoneNumber: string, countryCode: string): Promise<any>;
+    getCode(phoneNumber: string, countryCode: string): Promise<boolean>;
     /**
      * Check if a phone number can be used to verify
      * @param phoneNumber - The phone number to send the code to (Without Country Code & no spaces/special characters)
      * @returns {Promise<any>}
      */
-    canVerify(phoneNumber: string): Promise<any>;
+    canVerify(phoneNumber: string): Promise<boolean | void>;
 }
 //# sourceMappingURL=TwilioController.d.ts.map

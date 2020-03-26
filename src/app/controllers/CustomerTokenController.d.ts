@@ -1,7 +1,11 @@
 /**
  * Controller for customer tokens.
  */
+export interface CustomerToken extends DefaultController {
+    body?: string;
+}
 import { App } from "../App";
+import { DefaultController } from "./Controller";
 export declare class CustomerTokenController {
     app: App;
     constructor(app: App);
@@ -9,8 +13,8 @@ export declare class CustomerTokenController {
      * Create a new CustomerToken, return CustomerToken ID if successful
      * @param {string} email_address - The email address of the Customer
      * @param {string} password - The password of the Customer
-     * @returns {Promise<any>}
+     * @returns {Promise<CustomerToken>}
      */
-    create(email_address: string, password: string): Promise<any>;
+    create(email_address: string, password: string): Promise<CustomerToken>;
 }
 //# sourceMappingURL=CustomerTokenController.d.ts.map

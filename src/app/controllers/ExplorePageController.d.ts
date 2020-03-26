@@ -1,26 +1,36 @@
-export interface Advertisements {
+export interface Advertisement {
     title?: string;
     link?: string;
     image?: string;
     description?: string;
 }
-export interface DailyDeals {
+export interface DailyDeal {
     link?: string;
     menu_item_id: string;
 }
-export interface SpecialDeals extends DailyDeals {
+export interface SpecialDeal extends DailyDeal {
 }
-export interface TimelyDeals {
+export interface TimelyDeal {
     menu_item_id: string;
     title?: string;
     link?: string;
     from?: string;
     to?: string;
 }
+export interface ExplorePage extends DefaultController {
+    advertisements?: Array<Advertisement>;
+    daily_deals?: Array<DailyDeal>;
+    special_deals?: Array<SpecialDeal>;
+    timely_deals?: Array<TimelyDeal>;
+    coupons?: Array<Coupon>;
+    is_current?: boolean;
+}
 /**
  * Controller related to explore page
  */
 import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Coupon } from "./CouponController";
 export declare class ExplorePageController {
     app: App;
     constructor(app: App);
@@ -32,6 +42,6 @@ export declare class ExplorePageController {
      * @param {Array<TimelyDeals>} timely_deals - List of Explore page Timely Deals
      * @returns {Promise<String>} - Updated at
      */
-    replace(advertisements: Array<Advertisements>, daily_deals: Array<DailyDeals>, special_deals: Array<SpecialDeals>, timely_deals: Array<TimelyDeals>): Promise<string>;
+    replace(advertisements: Array<Advertisement>, daily_deals: Array<DailyDeal>, special_deals: Array<SpecialDeal>, timely_deals: Array<TimelyDeal>): Promise<string>;
 }
 //# sourceMappingURL=ExplorePageController.d.ts.map

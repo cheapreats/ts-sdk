@@ -15,14 +15,14 @@ export declare class NotificationController {
     /**
      * Enroll a customer iOS device, authentication required
      * @param apnsToken
-     * @returns {Promise<any>}
+     * @returns {Promise<void>}
      */
-    apnsEnrollCustomer(apnsToken: any): Promise<any>;
+    apnsEnrollCustomer(apnsToken: any): Promise<void>;
     /**
      * Revoke an iOS device
      * @param apnsToken
-     * @returns {Promise<any>}
+     * @returns {Promise<void>}
      */
-    apnsRevokeCustomer(apnsToken: any): Promise<any>;
+    apnsRevokeCustomer(apnsToken: any): Promise<void>;
 }
 //# sourceMappingURL=NotificationController.d.ts.map
