@@ -1,23 +1,26 @@
-export interface UpdateRaw {
+export interface UpdateRawConfigurationInput {
     name?: string;
     version_mask?: string;
     data?: string;
 }
-export interface AddRaw {
+export interface CreateRawConfigurationInput {
     name: string;
     version_mask: string;
     data: string;
+}
+export interface RawConfiguration extends DefaultControllerRequired, CreateRawConfigurationInput {
 }
 /**
  * Controller for remote configuration.
  */
 import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
 export declare class RemoteConfigurationController {
     app: App;
     constructor(app: App);
-    fetch(name: string, version: string): Promise<unknown>;
-    deleteRawConfiguration(id: string): Promise<unknown>;
-    updateRawConfiguration(id: string, rawConfiguration: UpdateRaw): Promise<unknown>;
-    createRawConfiguration(rawConfiguration: AddRaw): Promise<unknown>;
+    fetch(name: string, version: string): Promise<JSON>;
+    deleteRawConfiguration(id: string): Promise<string>;
+    updateRawConfiguration(id: string, rawConfiguration: UpdateRawConfigurationInput): Promise<RawConfiguration>;
+    createRawConfiguration(rawConfiguration: CreateRawConfigurationInput): Promise<RawConfiguration>;
 }
 //# sourceMappingURL=RemoteConfigurationController.d.ts.map

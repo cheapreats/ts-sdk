@@ -497,7 +497,7 @@ export class App {
    * Determine if current SDK Version in compatible
    * @returns {null|boolean}
    */
-  isCompatible() {
+  isCompatible(): Promise<boolean> {
     const sdkVersion = packageDotJson.version;
     let queryString = `
             query {
@@ -506,7 +506,7 @@ export class App {
         `;
     return new Promise((resolve, reject) => {
       this.Graph.query(queryString)
-        .then((data: { is_sdk_version_supported: any }) => {
+        .then((data: { is_sdk_version_supported: boolean }) => {
           resolve(data.is_sdk_version_supported);
         })
         .catch(e => {
@@ -542,7 +542,7 @@ export class App {
    * Set verificationEndpoint.production
    * @param endpoint
    */
-  setVerificationEndpoint(endpoint) {
+  setVerificationEndpoint(endpoint: string) {
     config.endpoints.verificationEndpoint.production = endpoint;
   }
 
@@ -550,7 +550,7 @@ export class App {
    * Set validationEndpoint.production
    * @param endpoint
    */
-  setValidationEndpoint(endpoint) {
+  setValidationEndpoint(endpoint: string) {
     config.endpoints.validationEndpoint.production = endpoint;
   }
 
@@ -558,7 +558,7 @@ export class App {
    * Set imageEndpoint.production
    * @param endpoint
    */
-  setImageEndpoint(endpoint) {
+  setImageEndpoint(endpoint: string) {
     config.endpoints.imageEndpoint.production = endpoint;
   }
 
@@ -566,9 +566,7 @@ export class App {
    * Set imageEndpoint.distribution
    * @param endpoint
    */
-  setImageDistributionEndpoint(endpoint) {
+  setImageDistributionEndpoint(endpoint: string) {
     config.endpoints.imageEndpoint.distribution = endpoint;
   }
 }
-
-module.exports = App;

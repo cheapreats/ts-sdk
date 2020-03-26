@@ -1,9 +1,13 @@
-export declare enum ProgramType {
+export declare enum LoyaltyProgramType {
     DOLLAR = "DOLLAR",
     ORDER = "ORDER",
     ITEM = "ITEM"
 }
-export interface LoyaltyProg {
+export interface LoyaltyCardAttributesInput {
+    color: string;
+    emoji: string;
+}
+export interface CreateLoyaltyProgramInput {
     name: string;
     description?: string;
     vendor_id: string;
@@ -11,42 +15,56 @@ export interface LoyaltyProg {
     points: number;
     shareable_points: number;
     min_purchase?: number;
-    program_type?: ProgramType;
+    program_type?: LoyaltyProgramType;
+    program_loyalty_card_attributes: LoyaltyCardAttributesInput;
 }
-export interface UpdateLoyaltyProg {
+export interface LoyaltyProgramCommonProperties {
     name?: string;
     description?: string;
-    items_required?: Array<string>;
     points?: number;
     shareable_points?: number;
     min_purchase?: number;
-    program_type?: ProgramType;
+    program_loyalty_card_attributes?: LoyaltyCardAttributesInput;
+}
+export interface UpdateLoyaltyProgramInput extends LoyaltyProgramCommonProperties {
+    items_required?: Array<string>;
+    program_type?: LoyaltyProgramType;
+}
+export interface LoyaltyProgram extends LoyaltyProgramCommonProperties {
+    _id?: string;
+    vendor?: Vendor;
+    items_required?: Array<MenuItem>;
+    redeemanble_items?: Array<RedeemableItem>;
+    program_type?: string;
 }
 /**
  * Controller for loyalty programs.
  */
 import { App } from "../App";
+import { Vendor } from "./VendorController";
+import { MenuItem } from "./MenuItemController";
+import { RedeemableItem } from "./RedeemableItemController";
 export declare class LoyaltyProgramController {
     app: App;
     constructor(app: App);
     /**
      * Create a new Loyalty Program, returns LoyaltyProgram _id if successful
-     * @param {LoyaltyProg} loyalty_program - The LoyaltyProgram object input
-     * @returns {Promise<any>} - The id of the LoyaltyProgram object
+     * @param {CreateLoyaltyProgramInput} loyalty_program - The LoyaltyProgram object input
+     * @returns {Promise<string>} - The id of the LoyaltyProgram object
      */
-    create(loyalty_program: LoyaltyProg): Promise<any>;
+    create(loyalty_program: CreateLoyaltyProgramInput): Promise<string>;
     /**
      * Update an existing Loyalty Program, returns LoyaltyProgram _id if successful
      * @param {String} id - ID of the LoyaltyProgram object to update
-     * @param {UpdateLoyaltyProg} loyalty_program - The LoyaltyProgram update object input
-     * @returns {Promise<any>} - The id of the LoyaltyProgram object
+     * @param {UpdateLoyaltyProgramInput} loyalty_program - The LoyaltyProgram update object input
+     * @returns {Promise<string>} - The id of the LoyaltyProgram object
      */
-    update(id: string, loyalty_program: UpdateLoyaltyProg): Promise<any>;
+    update(id: string, loyalty_program: UpdateLoyaltyProgramInput): Promise<string>;
     /**
      * Delete a Loyalty Program
      * @param {string} id - The id of the Loyalty Program
-     * @returns {Promise<any>} - Return string
+     * @returns {Promise<string>} - Return string
      */
-    delete(id: string): Promise<any>;
+    delete(id: string): Promise<string>;
 }
 //# sourceMappingURL=LoyaltyProgramController.d.ts.map
