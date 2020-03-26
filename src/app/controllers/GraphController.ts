@@ -1,3 +1,9 @@
+export interface The_Customer {
+  the_customer: Customer;
+}
+export interface The_Employee {
+  the_employee: Employee;
+}
 /**
  * Controller for the graph.
  */
@@ -60,6 +66,8 @@ export class GraphController {
     | Tip
     | Vendor
     | VerificationSession
+    | The_Customer
+    | The_Employee
   > {
     return this.app.getAdaptor().query(query, variables);
   }
