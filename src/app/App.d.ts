@@ -350,7 +350,7 @@ export declare class App {
      * Set current authentication token
      * @param token
      */
-    setAuthenticationToken(token: any): void;
+    setAuthenticationToken(token: string): void;
     /**
      * Get current authentication token
      * @returns {null|string}
