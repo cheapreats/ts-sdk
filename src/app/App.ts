@@ -1,6 +1,6 @@
 import { strToIdentifier } from "./util/strToIdentifier";
 import { CheaprEatsGraphQLAdaptor } from "./adaptors/CheaprEatsGraphQLAdaptor";
-import packageDotJson from "../version.js";
+import packageDotJson from "../version";
 
 // ADD CONTROLLER IMPORTS BELOW
 import { AuthorizationController } from "./controllers/AuthorizationController";
