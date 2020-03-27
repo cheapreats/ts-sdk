@@ -25,7 +25,7 @@ export class CheaprEatsGraphQLAdaptor extends Adaptor {
   setAuthenticationToken(token: string) {
     this._graphQLLink = new GraphQLLink(this._config.graphQLEndpoint, {
       headers: {
-        version: packageDotJson.version || null,
+        version: packageDotJson.version,
         authorization: token
       }
     });
