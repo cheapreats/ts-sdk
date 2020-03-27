@@ -1,3 +1,19 @@
+import {
+  PaymentMethodsInput,
+  PaymentMethods,
+  Coupon
+} from "./CouponController";
+import { App } from "../App";
+import { TagInput, MenuItem, Tag } from "./MenuItemController";
+import { DefaultController } from "./Controller";
+import { Employee } from "./EmployeeController";
+import { Category } from "./CategoryController";
+import { HeadOffice } from "./HeadOfficeController";
+import { PayoutPlan, Payout } from "./PayoutController";
+import { LoyaltyProgram } from "./LoyaltyProgramController";
+import { Survey } from "./SurveyController";
+import { FlashSale } from "./FlashSaleController";
+
 export interface CreateVendorWithEmployeeInput {
   name: string;
   email_address: string;
@@ -165,21 +181,7 @@ export interface VendorTester {
 /**
  * Controller for vendors.
  */
-import {
-  PaymentMethodsInput,
-  PaymentMethods,
-  Coupon
-} from "./CouponController";
-import { App } from "../App";
-import { TagInput, MenuItem, Tag } from "./MenuItemController";
-import { DefaultController } from "./Controller";
-import { Employee } from "./EmployeeController";
-import { Category } from "./CategoryController";
-import { HeadOffice } from "./HeadOfficeController";
-import { PayoutPlan, Payout } from "./PayoutController";
-import { LoyaltyProgram } from "./LoyaltyProgramController";
-import { Survey } from "./SurveyController";
-import { FlashSale } from "./FlashSaleController";
+
 export class VendorController {
   app: App;
   constructor(app: App) {

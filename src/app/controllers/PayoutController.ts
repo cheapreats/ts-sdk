@@ -1,3 +1,8 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Vendor } from "./VendorController";
+import { Order } from "./OrderController";
+
 export enum PayoutMethod {
   MANUAL = "MANUAL"
 }
@@ -52,10 +57,7 @@ export interface Payout extends DefaultController {
 /**
  * Controller related to payouts
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { Vendor } from "./VendorController";
-import { Order } from "./OrderController";
+
 export class PayoutController {
   app: App;
   constructor(app: App) {

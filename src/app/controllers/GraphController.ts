@@ -1,3 +1,19 @@
+import { App } from "../App";
+import { Category } from "./CategoryController";
+import { Coupon } from "./CouponController";
+import { Customer, Group } from "./CustomerController";
+import { Employee } from "./EmployeeController";
+import { ExplorePage } from "./ExplorePageController";
+import { FlashSale } from "./FlashSaleController";
+import { HeadOffice } from "./HeadOfficeController";
+import { LoyaltyCard } from "./LoyaltyCardController";
+import { MenuItem } from "./MenuItemController";
+import { Order } from "./OrderController";
+import { Payout, ServiceCharge } from "./PayoutController";
+import { RawConfiguration } from "./RemoteConfigurationController";
+import { Survey } from "./SurveyController";
+import { Vendor } from "./VendorController";
+import { VerificationSession } from "./VerificationController";
 export interface QueryResult {
   the_customer?: Customer;
   the_employee?: Employee;
@@ -48,22 +64,7 @@ export interface MergedConfiguration {
 /**
  * Controller for the graph.
  */
-import { App } from "../App";
-import { Category } from "./CategoryController";
-import { Coupon } from "./CouponController";
-import { Customer, Group } from "./CustomerController";
-import { Employee } from "./EmployeeController";
-import { ExplorePage } from "./ExplorePageController";
-import { FlashSale } from "./FlashSaleController";
-import { HeadOffice } from "./HeadOfficeController";
-import { LoyaltyCard } from "./LoyaltyCardController";
-import { MenuItem } from "./MenuItemController";
-import { Order } from "./OrderController";
-import { Payout, ServiceCharge } from "./PayoutController";
-import { RawConfiguration } from "./RemoteConfigurationController";
-import { Survey } from "./SurveyController";
-import { Vendor } from "./VendorController";
-import { VerificationSession } from "./VerificationController";
+
 export class GraphController {
   app: App;
   constructor(app: App) {

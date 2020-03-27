@@ -1,11 +1,13 @@
 /**
  * Controller for employee tokens.
  */
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+
 export interface EmployeeToken extends DefaultController {
   body?: string;
 }
-import { App } from "../App";
-import { DefaultController } from "./Controller";
+
 export class EmployeeTokenController {
   app: App;
   constructor(app: App) {

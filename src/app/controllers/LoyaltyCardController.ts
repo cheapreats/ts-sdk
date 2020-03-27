@@ -1,3 +1,9 @@
+import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
+import { LoyaltyProgram } from "./LoyaltyProgramController";
+import { Customer } from "./CustomerController";
+import { SelectInput } from "./CommonInterface";
+import { Order } from "./OrderController";
 export interface CreateLoyaltyCardInput {
   loyalty_program_id: string;
   customer_id?: string;
@@ -28,12 +34,7 @@ export interface LoyaltyCard extends DefaultControllerRequired {
 /**
  * Controller for loyalty cards.
  */
-import { App } from "../App";
-import { DefaultControllerRequired } from "./Controller";
-import { LoyaltyProgram } from "./LoyaltyProgramController";
-import { Customer } from "./CustomerController";
-import { SelectInput } from "./CommonInterface";
-import { Order } from "./OrderController";
+
 export class LoyaltyCardController {
   app: App;
   constructor(app: App) {

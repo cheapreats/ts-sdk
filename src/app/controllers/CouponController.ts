@@ -1,3 +1,10 @@
+import { App } from "../App";
+import { Vendor } from "./VendorController";
+import { Customer } from "./CustomerController";
+import { DefaultController } from "./Controller";
+import { MenuItem } from "./MenuItemController";
+import { SelectInput } from "./CommonInterface";
+import { Order } from "./OrderController";
 export interface PaymentMethods {
   apple_pay?: boolean;
   android_pay?: boolean;
@@ -56,13 +63,7 @@ export interface Coupon extends DefaultController {
 /**
  * Controller for coupons.
  */
-import { App } from "../App";
-import { Vendor } from "./VendorController";
-import { Customer } from "./CustomerController";
-import { DefaultController } from "./Controller";
-import { MenuItem } from "./MenuItemController";
-import { SelectInput } from "./CommonInterface";
-import { Order } from "./OrderController";
+
 export class CouponController {
   app: App;
   constructor(app: App) {

@@ -1,3 +1,8 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { MenuItem } from "./MenuItemController";
+import { LoyaltyProgram } from "./LoyaltyProgramController";
+
 export interface CreateRedeemableItemInput {
   loyalty_program_id: string;
   menu_item_id: string;
@@ -14,10 +19,7 @@ export interface RedeemableItem extends DefaultController {
 /**
  * Controller for redeemable items.
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { MenuItem } from "./MenuItemController";
-import { LoyaltyProgram } from "./LoyaltyProgramController";
+
 export class RedeemableItemController {
   app: App;
   constructor(app: App) {

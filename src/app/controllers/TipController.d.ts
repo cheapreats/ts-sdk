@@ -1,11 +1,11 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Order } from "./OrderController";
 export interface Tip extends DefaultController {
     amount?: number;
     order?: Order;
     description?: string;
 }
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { Order } from "./OrderController";
 export declare class TipController {
     app: App;
     constructor(app: App);

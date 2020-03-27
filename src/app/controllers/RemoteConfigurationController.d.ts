@@ -1,3 +1,5 @@
+import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
 export interface UpdateRawConfigurationInput {
     name?: string;
     version_mask?: string;
@@ -13,8 +15,6 @@ export interface RawConfiguration extends DefaultControllerRequired, CreateRawCo
 /**
  * Controller for remote configuration.
  */
-import { App } from "../App";
-import { DefaultControllerRequired } from "./Controller";
 export declare class RemoteConfigurationController {
     app: App;
     constructor(app: App);

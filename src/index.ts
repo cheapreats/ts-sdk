@@ -3,12 +3,14 @@
  * Author: Jun Zheng
  * License: UNLICENSED
  */
+
+import { App } from "./app/App";
+
 declare global {
   interface Window {
     CE: App;
   }
 }
-import { App } from "./app/App";
 
 const app: App = new App();
 export default app;

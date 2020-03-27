@@ -1,3 +1,7 @@
+import { App } from "../App";
+import { Vendor } from "./VendorController";
+import { MenuItem } from "./MenuItemController";
+import { RedeemableItem } from "./RedeemableItemController";
 export declare enum LoyaltyProgramType {
     DOLLAR = "DOLLAR",
     ORDER = "ORDER",
@@ -40,10 +44,6 @@ export interface LoyaltyProgram extends LoyaltyProgramCommonProperties {
 /**
  * Controller for loyalty programs.
  */
-import { App } from "../App";
-import { Vendor } from "./VendorController";
-import { MenuItem } from "./MenuItemController";
-import { RedeemableItem } from "./RedeemableItemController";
 export declare class LoyaltyProgramController {
     app: App;
     constructor(app: App);

@@ -1,3 +1,7 @@
+import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Vendor } from "./VendorController";
 export interface CreateEmployeeInput {
     username: string;
     password: string;
@@ -26,10 +30,6 @@ export interface Employee extends DefaultController, EmployeeCommonProperties {
     vendor?: Vendor;
     terminal_fcm_tokens?: Array<string>;
 }
-import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { Vendor } from "./VendorController";
 /**
  * Controller for employees.
  */

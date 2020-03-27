@@ -1,11 +1,12 @@
 /**
  * Controller for customer tokens.
  */
+import { App } from "../App";
+import { DefaultController } from "./Controller";
 export interface CustomerToken extends DefaultController {
   body?: string;
 }
-import { App } from "../App";
-import { DefaultController } from "./Controller";
+
 export class CustomerTokenController {
   app: App;
   constructor(app: App) {

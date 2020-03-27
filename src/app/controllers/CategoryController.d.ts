@@ -1,3 +1,8 @@
+import { App } from "../App";
+import { MenuItem } from "./MenuItemController";
+import { Vendor } from "./VendorController";
+import { DefaultController } from "./Controller";
+import { SelectInput } from "./CommonInterface";
 export interface Category extends UpdateCategoryInput, DefaultController {
     menu_items(select: SelectInput): Array<MenuItem>;
     menu_item_count?: number;
@@ -20,11 +25,6 @@ export interface BatchUpdateCategoriesInput {
     id: string;
     category: UpdateCategoryInput;
 }
-import { App } from "../App";
-import { MenuItem } from "./MenuItemController";
-import { Vendor } from "./VendorController";
-import { DefaultController } from "./Controller";
-import { SelectInput } from "./CommonInterface";
 /**
  * Controller for categories.
  */
