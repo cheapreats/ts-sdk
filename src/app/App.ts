@@ -480,7 +480,7 @@ export class App {
    * Set current authentication token
    * @param token
    */
-  setAuthenticationToken(token) {
+  setAuthenticationToken(token: string) {
     this._token = token;
     this._adaptor.setAuthenticationToken(token);
   }
