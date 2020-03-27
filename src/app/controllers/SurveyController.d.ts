@@ -1,3 +1,7 @@
+import { App } from "../App";
+import { DefaultControllerRequired } from "./Controller";
+import { Customer } from "./CustomerController";
+import { Order } from "./OrderController";
 export declare enum SurveyQuestionType {
     CHECKBOX = "CHECKBOX",
     MULTI_CHECKBOX = "MULTI_CHECKBOX",
@@ -69,10 +73,6 @@ export interface CreateSurveyResponseInput {
     responses: Array<SurveyQuestionResponseInput>;
     order_id?: string;
 }
-import { App } from "../App";
-import { DefaultControllerRequired } from "./Controller";
-import { Customer } from "./CustomerController";
-import { Order } from "./OrderController";
 export declare class SurveyController {
     app: App;
     constructor(app: App);

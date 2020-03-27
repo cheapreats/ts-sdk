@@ -1,3 +1,12 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Customer } from "./CustomerController";
+import { Vendor } from "./VendorController";
+import { Survey, SurveyResponse } from "./SurveyController";
+import { Tip } from "./TipController";
+import { Category } from "./CategoryController";
+import { Tag, Fee } from "./MenuItemController";
+import { ModifierChoice } from "./ModifierController";
 export declare enum OrderType {
     EAT_IN = "EAT_IN",
     TAKE_OUT = "TAKE_OUT",
@@ -99,15 +108,6 @@ export interface Order extends DefaultController {
 /**
  * Controller for orders.
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { Customer } from "./CustomerController";
-import { Vendor } from "./VendorController";
-import { Survey, SurveyResponse } from "./SurveyController";
-import { Tip } from "./TipController";
-import { Category } from "./CategoryController";
-import { Tag, Fee } from "./MenuItemController";
-import { ModifierChoice } from "./ModifierController";
 export declare class OrderController {
     app: App;
     constructor(app: App);

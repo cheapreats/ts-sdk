@@ -1,3 +1,5 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
 export interface ModifierChoiceInput {
     name: string;
     identifier: string;
@@ -41,8 +43,6 @@ export interface Modifier extends ModifierCommonProperties, DefaultController {
 /**
  * Controller for modifiers.
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
 export declare class ModifierController {
     app: App;
     constructor(app: App);

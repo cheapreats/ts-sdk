@@ -1,3 +1,5 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
 export interface FlashSaleItemInput {
     _id: string;
     price: number;
@@ -21,8 +23,6 @@ export interface FlashSale extends DefaultController {
 /**
  * Controller related to flash sales
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
 export declare class FlashSaleController {
     app: App;
     constructor(app: App);
