@@ -6,9 +6,6 @@
 import { Adaptor } from "./Adaptor";
 import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
 export declare class CheaprEatsGraphQLAdaptor extends Adaptor {
-    _config: {
-        graphQLEndpoint: string;
-    };
     _graphQLLink: GraphQLLink;
     constructor(config: {
         graphQLEndpoint: string;

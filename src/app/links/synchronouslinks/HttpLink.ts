@@ -8,7 +8,7 @@ import { SynchronousLink } from "./SynchronousLink";
 import axios from "axios";
 
 export class HttpLink extends SynchronousLink {
-  _url: string;
+  // _url: string;
   /**
    * Construct the link with URL
    * @param url

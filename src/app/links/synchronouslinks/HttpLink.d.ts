@@ -5,7 +5,6 @@
  */
 import { SynchronousLink } from "./SynchronousLink";
 export declare class HttpLink extends SynchronousLink {
-    _url: string;
     /**
      * Construct the link with URL
      * @param url
