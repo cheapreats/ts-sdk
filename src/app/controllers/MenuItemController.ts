@@ -1,3 +1,9 @@
+import { App } from "../App";
+import { Modifier } from "./ModifierController";
+import { Category } from "./CategoryController";
+import { FlashSaleItem } from "./FlashSaleController";
+import { DefaultController } from "./Controller";
+
 export interface CreateMenuItemInput {
   name: string;
   identifier: string;
@@ -70,11 +76,7 @@ export interface MenuItem extends MenuItemCommonProperties, DefaultController {
 /**
  * Controller for menu items.
  */
-import { App } from "../App";
-import { Modifier } from "./ModifierController";
-import { Category } from "./CategoryController";
-import { FlashSaleItem } from "./FlashSaleController";
-import { DefaultController } from "./Controller";
+
 export class MenuItemController {
   app: App;
   constructor(app: App) {

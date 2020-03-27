@@ -1,3 +1,12 @@
+import { Cart } from "./CartController";
+import { ResetCodeSendMethod } from "./EmployeeController";
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { SelectInput } from "./CommonInterface";
+import { LoyaltyCard } from "./LoyaltyCardController";
+import { Coupon } from "./CouponController";
+import { Vendor } from "./VendorController";
+import { MenuItem } from "./MenuItemController";
 export interface CreditCard {
   id?: string;
   brand?: string;
@@ -57,15 +66,7 @@ export interface UpdateCustomerInput extends CustomerOptions {
 /**
  * Controller for customers.
  */
-import { Cart } from "./CartController";
-import { ResetCodeSendMethod } from "./EmployeeController";
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { SelectInput } from "./CommonInterface";
-import { LoyaltyCard } from "./LoyaltyCardController";
-import { Coupon } from "./CouponController";
-import { Vendor } from "./VendorController";
-import { MenuItem } from "./MenuItemController";
+
 export class CustomerController {
   app: App;
   constructor(app: App) {

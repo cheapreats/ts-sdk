@@ -1,3 +1,6 @@
+import { App } from "../App";
+import { DefaultController } from "./Controller";
+import { Coupon } from "./CouponController";
 export interface Advertisement {
   title?: string;
   link?: string;
@@ -27,9 +30,7 @@ export interface ExplorePage extends DefaultController {
 /**
  * Controller related to explore page
  */
-import { App } from "../App";
-import { DefaultController } from "./Controller";
-import { Coupon } from "./CouponController";
+
 export class ExplorePageController {
   app: App;
   constructor(app: App) {
