@@ -18,8 +18,8 @@ export class GraphQLLink extends SynchronousLink {
   constructor(
     url: string,
     config: {
-      headers?: { version: string; authorization: string };
       version?: string | null;
+      headers?: { version: string; authorization: string };
     } = {}
   ) {
     super(url);
