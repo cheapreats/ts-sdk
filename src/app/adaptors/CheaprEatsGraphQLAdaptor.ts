@@ -6,7 +6,7 @@
 
 import { Adaptor } from "./Adaptor";
 import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
-import packageDotJson from "../../version.js";
+import packageDotJson from "../../version";
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {
   _config: { graphQLEndpoint: string };
