@@ -31,7 +31,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  post(config: object = {}): Promise<object> {
+  post(config: object = {}): Promise<any> {
     return this.run(Object.assign(config, { method: "post" }));
   }
 
@@ -40,7 +40,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  put(config: object = {}): Promise<object> {
+  put(config: object = {}): Promise<any> {
     return this.run(Object.assign(config, { method: "put" }));
   }
 
@@ -49,7 +49,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  delete(config: object = {}): Promise<object> {
+  delete(config: object = {}): Promise<any> {
     return this.run(Object.assign(config, { method: "delete" }));
   }
 
@@ -58,7 +58,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<object>}
    */
-  run(config: { method: any; data?: any; headers?: any }): Promise<object> {
+  run(config: { method: any; data?: any; headers?: any }): Promise<any> {
     return new Promise((resolve, reject) => {
       axios
         .request({
