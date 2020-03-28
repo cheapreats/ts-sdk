@@ -8,7 +8,7 @@ import { GraphQLClient } from "graphql-request";
 import { Category } from "../../controllers/CategoryController";
 import { Cart } from "../../controllers/CartController";
 import { Coupon } from "../../controllers/CouponController";
-import { Customer } from "app/controllers/CustomerController";
+import { Customer } from "../../controllers/CustomerController";
 import { Employee } from "../../controllers/EmployeeController";
 import { ExplorePage } from "../../controllers/ExplorePageController";
 import { FlashSale } from "../../controllers/FlashSaleController";
