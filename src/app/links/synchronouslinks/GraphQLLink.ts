@@ -34,6 +34,7 @@ import { LoyaltyProgram } from "../../controllers/LoyaltyProgramController";
 import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
+import { type } from "os";
 export interface UpdateNoteForCart {
   updateNoteForCart: Cart;
 }
@@ -406,7 +407,7 @@ export interface MutateResult
 
 export class GraphQLLink extends SynchronousLink {
   _headers: { version: string; authorization: string } | {};
-  _client: GraphQLClient;
+  _client!: GraphQLClient;
   /**
    * Construct a new GraphQLLink
    * @param {string} url

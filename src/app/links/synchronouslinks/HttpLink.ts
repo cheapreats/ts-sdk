@@ -31,7 +31,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  post(config: object = {}): Promise<any> {
+  post(config: object = {}): Promise<{ data: { id: string } }> {
     return this.run(Object.assign(config, { method: "post" }));
   }
 
@@ -40,7 +40,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  put(config: object = {}): Promise<any> {
+  put(config: object = {}): Promise<object> {
     return this.run(Object.assign(config, { method: "put" }));
   }
 
@@ -49,7 +49,7 @@ export class HttpLink extends SynchronousLink {
    * @param config
    * @returns {Promise<Object>}
    */
-  delete(config: object = {}): Promise<any> {
+  delete(config: object = {}): Promise<object> {
     return this.run(Object.assign(config, { method: "delete" }));
   }
 
