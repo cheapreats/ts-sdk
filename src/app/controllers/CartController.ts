@@ -5,6 +5,7 @@ import { Coupon } from "./CouponController";
 import { MenuItem } from "./MenuItemController";
 import { Modifier } from "./ModifierController";
 import { DefaultController } from "./Controller";
+import { QueryResult } from "./GraphController";
 export interface AddItemToCartModifierInput {
   modifier_id: string;
   choices: Array<string>;
@@ -67,7 +68,7 @@ export class CartController {
           cartId,
           note
         })
-        .then((result: { updateNoteForCart: Cart }) => {
+        .then((result: { updateNoteForCart: QueryResult }) => {
           resolve(result.updateNoteForCart);
         })
         .catch((e: any) => {
@@ -91,7 +92,7 @@ export class CartController {
           cartId,
           cartCouponId
         })
-        .then((result: { removeCouponFromCart: Cart }) => {
+        .then((result: { removeCouponFromCart: QueryResult }) => {
           resolve(result.removeCouponFromCart);
         })
         .catch((e: any) => {
@@ -115,7 +116,7 @@ export class CartController {
           cartId,
           couponCode
         })
-        .then((result: { applyCouponToCart: Cart }) => {
+        .then((result: { applyCouponToCart: QueryResult }) => {
           resolve(result.applyCouponToCart);
         })
         .catch((e: any) => {
@@ -174,7 +175,7 @@ export class CartController {
           cartId,
           cartItemId
         })
-        .then((result: { removeItemFromCart: Cart }) => {
+        .then((result: { removeItemFromCart: QueryResult }) => {
           resolve(result.removeItemFromCart);
         })
         .catch((e: any) => {
@@ -207,7 +208,7 @@ export class CartController {
           cartId,
           item
         })
-        .then((result: { addItemCart: Cart }) => {
+        .then((result: { addItemCart: QueryResult }) => {
           resolve(result.addItemCart);
         })
         .catch((e: any) => {
@@ -240,7 +241,7 @@ export class CartController {
           customerId,
           vendorId
         })
-        .then((result: { createCart: Cart }) => {
+        .then((result: { createCart: QueryResult }) => {
           resolve(result.createCart);
         })
         .catch((e: any) => {
