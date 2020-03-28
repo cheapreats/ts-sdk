@@ -3,7 +3,7 @@ import { Modifier } from "./ModifierController";
 import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultController } from "./Controller";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface CreateMenuItemInput {
   name: string;

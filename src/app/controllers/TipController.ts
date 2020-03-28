@@ -1,7 +1,7 @@
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Order } from "./OrderController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface Tip extends DefaultController {
   amount?: number;

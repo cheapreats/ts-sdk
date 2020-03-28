@@ -9,7 +9,7 @@ export interface VerificationSession {
     updated_at: string;
 }
 import { App } from "../App";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export declare class VerificationController {
     app: App;
     constructor(app: App);

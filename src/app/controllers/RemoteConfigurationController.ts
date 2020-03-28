@@ -1,6 +1,6 @@
 import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface UpdateRawConfigurationInput {
   name?: string;

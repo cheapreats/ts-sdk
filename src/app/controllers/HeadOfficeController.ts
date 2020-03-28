@@ -1,7 +1,7 @@
 import { App } from "../App";
 import { Vendor } from "./VendorController";
 import { DefaultController } from "./Controller";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 /**
  * Controller for head offices.
  */

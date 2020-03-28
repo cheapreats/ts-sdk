@@ -4,7 +4,7 @@ import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Customer } from "./CustomerController";
 import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreateLoyaltyCardInput {
   loyalty_program_id: string;
   customer_id?: string;

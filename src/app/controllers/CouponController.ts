@@ -5,7 +5,8 @@ import { DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+// import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface PaymentMethods {
   apple_pay?: boolean;
   android_pay?: boolean;

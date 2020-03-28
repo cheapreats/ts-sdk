@@ -2,7 +2,7 @@ import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Vendor } from "./VendorController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreateEmployeeInput {
   username: string;
   password: string;
