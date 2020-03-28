@@ -7,7 +7,7 @@ import { Tip } from "./TipController";
 import { Category } from "./CategoryController";
 import { Tag, Fee } from "./MenuItemController";
 import { ModifierChoice } from "./ModifierController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export declare enum OrderType {
     EAT_IN = "EAT_IN",
     TAKE_OUT = "TAKE_OUT",

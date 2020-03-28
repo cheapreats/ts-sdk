@@ -3,11 +3,12 @@ import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
 import { DefaultController } from "./Controller";
 import { SelectInput } from "./CommonInterface";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+// import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface Category extends UpdateCategoryInput, DefaultController {
   menu_items(select: SelectInput): Array<MenuItem>;
   menu_item_count?: number;
-  vendor: Vendor;
+  vendor?: Vendor;
 }
 export interface CreateCategoryInput {
   name: string;
@@ -63,7 +64,7 @@ export class CategoryController {
           category
         })
         .then((result: MutateResult) => {
-          resolve(result?.createCategory?._id);
+          resolve(result.createCategory._id);
         })
         .catch((e: any) => {
           reject(e);

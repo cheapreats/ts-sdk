@@ -13,7 +13,7 @@ import { PayoutPlan, Payout } from "./PayoutController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Survey } from "./SurveyController";
 import { FlashSale } from "./FlashSaleController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface CreateVendorWithEmployeeInput {
   name: string;

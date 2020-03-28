@@ -7,7 +7,7 @@ import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreditCard {
   id?: string;
   brand?: string;

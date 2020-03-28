@@ -6,7 +6,7 @@ import { SelectInput } from "./CommonInterface";
 export interface Category extends UpdateCategoryInput, DefaultController {
     menu_items(select: SelectInput): Array<MenuItem>;
     menu_item_count?: number;
-    vendor: Vendor;
+    vendor?: Vendor;
 }
 export interface CreateCategoryInput {
     name: string;

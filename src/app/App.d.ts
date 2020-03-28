@@ -174,10 +174,10 @@ export declare class App {
      */
     get Order(): {
         create: (order: import("./controllers/OrderController").CreateOrderInput, dry: boolean, clear_cart: boolean) => Promise<string>;
-        cancel: (id: string, reason: import("./controllers/OrderController").OrderCancellationReason, description: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
-        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
-        prepared: (id: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
-        complete: (id: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        cancel: (id: string, reason: import("./controllers/OrderController").OrderCancellationReason, description: string) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
+        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
+        prepared: (id: string) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
+        complete: (id: string) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
     };
     /**
      * Get head office related methods.
@@ -193,8 +193,8 @@ export declare class App {
      * @returns {{startVerificationSession: VerificationController.startVerificationSession, checkVerificationSession: VerificationController.checkVerificationSession}}
      */
     get Verification(): {
-        startVerificationSession: (phone_number: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
-        checkVerificationSession: (uuid: string, verification_code: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        startVerificationSession: (phone_number: string) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
+        checkVerificationSession: (uuid: string, verification_code: string) => Promise<import("./links/synchronouslinks/GraphQLLink").MutateResult>;
     };
     /**
      * Get vendor related methods.

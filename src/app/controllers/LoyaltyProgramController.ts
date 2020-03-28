@@ -2,7 +2,7 @@ import { App } from "../App";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { RedeemableItem } from "./RedeemableItemController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export enum LoyaltyProgramType {
   DOLLAR = "DOLLAR",

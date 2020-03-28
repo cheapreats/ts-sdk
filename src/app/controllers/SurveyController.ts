@@ -2,7 +2,7 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export enum SurveyQuestionType {
   CHECKBOX = "CHECKBOX",

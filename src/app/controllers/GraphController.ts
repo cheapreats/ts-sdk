@@ -75,7 +75,7 @@ export class GraphController {
 
   // ADD MUTATION METHODS BELOW
 
-  query(query: string, variables: object = {}): Promise<QueryResult> {
+  query(query: string, variables: object = {}) {
     return this.app.getAdaptor().query(query, variables);
   }
 }

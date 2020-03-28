@@ -2,7 +2,7 @@ import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
-import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface CreateRedeemableItemInput {
   loyalty_program_id: string;
