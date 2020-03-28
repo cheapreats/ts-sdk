@@ -5,7 +5,7 @@ import { Coupon } from "./CouponController";
 import { MenuItem } from "./MenuItemController";
 import { Modifier } from "./ModifierController";
 import { DefaultController } from "./Controller";
-import { QueryResult } from "./GraphController";
+import { MutateResult } from "app/adaptors/CheaprEatsGraphQLAdaptor";
 export interface AddItemToCartModifierInput {
   modifier_id: string;
   choices: Array<string>;
@@ -68,7 +68,7 @@ export class CartController {
           cartId,
           note
         })
-        .then((result: { updateNoteForCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateNoteForCart);
         })
         .catch((e: any) => {
@@ -92,7 +92,7 @@ export class CartController {
           cartId,
           cartCouponId
         })
-        .then((result: { removeCouponFromCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.removeCouponFromCart);
         })
         .catch((e: any) => {
@@ -116,7 +116,7 @@ export class CartController {
           cartId,
           couponCode
         })
-        .then((result: { applyCouponToCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.applyCouponToCart);
         })
         .catch((e: any) => {
@@ -142,7 +142,7 @@ export class CartController {
         .mutate(mutationString, {
           cartId
         })
-        .then((result: { deleteCart: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteCart);
         })
         .catch((e: any) => {
@@ -175,7 +175,7 @@ export class CartController {
           cartId,
           cartItemId
         })
-        .then((result: { removeItemFromCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.removeItemFromCart);
         })
         .catch((e: any) => {
@@ -208,7 +208,7 @@ export class CartController {
           cartId,
           item
         })
-        .then((result: { addItemCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.addItemCart);
         })
         .catch((e: any) => {
@@ -241,7 +241,7 @@ export class CartController {
           customerId,
           vendorId
         })
-        .then((result: { createCart: QueryResult }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCart);
         })
         .catch((e: any) => {

@@ -5,6 +5,16 @@
  */
 import { Adaptor } from "./Adaptor";
 import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
+import { Cart } from "app/controllers/CartController";
+export interface MutateResult {
+    updateNoteForCart?: Cart;
+    removeCouponFromCart?: Cart;
+    applyCouponToCart?: Cart;
+    deleteCart?: string;
+    removeItemFromCart?: Cart;
+    addItemCart?: Cart;
+    createCart?: Cart;
+}
 export declare class CheaprEatsGraphQLAdaptor extends Adaptor {
     _graphQLLink: GraphQLLink;
     constructor(config: {
