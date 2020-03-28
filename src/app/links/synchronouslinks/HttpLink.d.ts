@@ -21,19 +21,19 @@ export declare class HttpLink extends SynchronousLink {
      * @param config
      * @returns {Promise<Object>}
      */
-    post(config?: object): Promise<object>;
+    post(config?: object): Promise<any>;
     /**
      * Run a put request
      * @param config
      * @returns {Promise<Object>}
      */
-    put(config?: object): Promise<object>;
+    put(config?: object): Promise<any>;
     /**
      * Run a delete request
      * @param config
      * @returns {Promise<Object>}
      */
-    delete(config?: object): Promise<object>;
+    delete(config?: object): Promise<any>;
     /**
      * Runs a new http request
      * @param config
@@ -43,6 +43,6 @@ export declare class HttpLink extends SynchronousLink {
         method: any;
         data?: any;
         headers?: any;
-    }): Promise<object>;
+    }): Promise<any>;
 }
 //# sourceMappingURL=HttpLink.d.ts.map

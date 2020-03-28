@@ -31,7 +31,7 @@ export class ImageController {
    * @returns {Promise<any>}
    */
 
-  upload(image: string): Promise<{ id?: string }> {
+  upload(image: string): Promise<any> {
     const link = this.getHttpLink("/upload");
     return new Promise((resolve, reject) => {
       link
@@ -40,7 +40,7 @@ export class ImageController {
             image
           }
         })
-        .then((result: { data: { id?: string } }) => {
+        .then((result: { data: any }) => {
           resolve(result.data);
         })
         .catch((e: any) => {
