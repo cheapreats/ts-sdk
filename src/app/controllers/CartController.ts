@@ -5,7 +5,8 @@ import { Coupon } from "./CouponController";
 import { MenuItem } from "./MenuItemController";
 import { Modifier } from "./ModifierController";
 import { DefaultController } from "./Controller";
-import { MutateResult } from "app/adaptors/CheaprEatsGraphQLAdaptor";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
+
 export interface AddItemToCartModifierInput {
   modifier_id: string;
   choices: Array<string>;
