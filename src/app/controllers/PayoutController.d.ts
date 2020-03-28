@@ -70,9 +70,9 @@ export declare class PayoutController {
      * Update an existing pending payout
      * @param {string} id - Payout ID
      * @param {UpdatePayoutInput} payout - Updated payout object
-     * @returns {Promise<any>}
+     * @returns {Promise<string>}
      */
-    update(id: string, payout: UpdatePayoutInput): Promise<any>;
+    update(id: string, payout: UpdatePayoutInput): Promise<string>;
     /**
      * Cancel a Payout
      * @param {string} id - Payout ID

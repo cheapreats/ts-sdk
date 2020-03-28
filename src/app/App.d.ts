@@ -174,10 +174,10 @@ export declare class App {
      */
     get Order(): {
         create: (order: import("./controllers/OrderController").CreateOrderInput, dry: boolean, clear_cart: boolean) => Promise<string>;
-        cancel: (id: string, reason: import("./controllers/OrderController").OrderCancellationReason, description: string) => Promise<import("./controllers/OrderController").Order>;
-        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<import("./controllers/OrderController").Order>;
-        prepared: (id: string) => Promise<import("./controllers/OrderController").Order>;
-        complete: (id: string) => Promise<import("./controllers/OrderController").Order>;
+        cancel: (id: string, reason: import("./controllers/OrderController").OrderCancellationReason, description: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        beginPreparing: (id: string, estimated_preparing_sec: number) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        prepared: (id: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        complete: (id: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
     };
     /**
      * Get head office related methods.
@@ -193,8 +193,8 @@ export declare class App {
      * @returns {{startVerificationSession: VerificationController.startVerificationSession, checkVerificationSession: VerificationController.checkVerificationSession}}
      */
     get Verification(): {
-        startVerificationSession: (phone_number: string) => Promise<import("./controllers/VerificationController").VerificationSession>;
-        checkVerificationSession: (uuid: string, verification_code: string) => Promise<import("./controllers/VerificationController").VerificationSession>;
+        startVerificationSession: (phone_number: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
+        checkVerificationSession: (uuid: string, verification_code: string) => Promise<import("./adaptors/CheaprEatsGraphQLAdaptor").MutateResult>;
     };
     /**
      * Get vendor related methods.
@@ -227,7 +227,7 @@ export declare class App {
     get Survey(): {
         create: (survey: import("./controllers/SurveyController").CreateSurveyInput) => Promise<string>;
         update: (id: string, survey: import("./controllers/SurveyController").UpdateSurveyInput) => Promise<string>;
-        archive: (id: string) => Promise<string>;
+        archive: (id: string) => Promise<import("./controllers/SurveyController").Survey>;
         delete: (id: string) => Promise<string>;
         release: (id: string) => Promise<string>;
         createSurveyResponse: (survey_id: string, survey_response: import("./controllers/SurveyController").CreateSurveyResponseInput) => Promise<string>;
@@ -237,7 +237,9 @@ export declare class App {
      * @returns {{upload: ImageController.upload, getLink: ImageController.getLink}}
      */
     get Image(): {
-        upload: (image: string) => Promise<any>;
+        upload: (image: string) => Promise<{
+            id?: string;
+        }>;
         getLink: (id: string, size: string) => string;
     };
     /**
@@ -247,7 +249,7 @@ export declare class App {
      */
     get Payout(): {
         request: (vendor_id: string, dry: boolean) => Promise<import("./controllers/PayoutController").Payout>;
-        update: (id: string, payout: import("./controllers/PayoutController").UpdatePayoutInput) => Promise<any>;
+        update: (id: string, payout: import("./controllers/PayoutController").UpdatePayoutInput) => Promise<string>;
         cancel: (id: string) => Promise<import("./controllers/PayoutController").Payout>;
     };
     /**
