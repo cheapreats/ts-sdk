@@ -64,7 +64,7 @@ export declare class App {
      */
     constructor();
     get Authorization(): {
-        getTokenScope: (token: string) => Promise<any>;
+        getTokenScope: (token: string) => Promise<string>;
     };
     get Cart(): {
         updateNote: (cartId: string, note: string) => Promise<import("./controllers/CartController").Cart>;
