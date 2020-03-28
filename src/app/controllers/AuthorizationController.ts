@@ -1,4 +1,5 @@
 import { App } from "../App";
+import { QueryResult } from "./GraphController";
 export class AuthorizationController {
   app: App;
   constructor(app: App) {
@@ -12,11 +13,11 @@ export class AuthorizationController {
                 auth_token_scope(token: "${token}")
             }
         `;
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       return this.app
         .getAdaptor()
         .query(queryString)
-        .then((data: { auth_token_scope: string }) => {
+        .then((data: QueryResult) => {
           resolve(data.auth_token_scope);
         })
         .catch((e: any) => {

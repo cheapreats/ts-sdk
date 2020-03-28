@@ -1,1 +1,1 @@
-{"version":3,"file":"AuthorizationController.d.ts","sourceRoot":"","sources":["AuthorizationController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,GAAG,EAAE,MAAM,QAAQ,CAAC;AAC7B,qBAAa,uBAAuB;IAClC,GAAG,EAAE,GAAG,CAAC;gBACG,GAAG,EAAE,GAAG;IAKpB,aAAa,CAAC,KAAK,EAAE,MAAM;CAkB5B"}
+{"version":3,"file":"AuthorizationController.d.ts","sourceRoot":"","sources":["AuthorizationController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,GAAG,EAAE,MAAM,QAAQ,CAAC;AAE7B,qBAAa,uBAAuB;IAClC,GAAG,EAAE,GAAG,CAAC;gBACG,GAAG,EAAE,GAAG;IAKpB,aAAa,CAAC,KAAK,EAAE,MAAM;CAkB5B"}
