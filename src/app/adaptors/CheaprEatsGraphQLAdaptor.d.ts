@@ -5,7 +5,7 @@
  */
 import { Adaptor } from "./Adaptor";
 import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
-import { Cart } from "app/controllers/CartController";
+import { Cart } from "../controllers/CartController";
 export interface MutateResult {
     updateNoteForCart?: Cart;
     removeCouponFromCart?: Cart;
