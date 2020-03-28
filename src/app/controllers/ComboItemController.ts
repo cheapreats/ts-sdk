@@ -54,6 +54,7 @@ export class ComboItemController {
           recurringType,
           dayOfWeek
         })
+        //@ts-ignore deprecated
         .then((result: { addComboItem: { id: any } }) => {
           resolve(result.addComboItem.id);
         })

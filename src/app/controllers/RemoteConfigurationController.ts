@@ -1,5 +1,6 @@
 import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface UpdateRawConfigurationInput {
   name?: string;
@@ -44,12 +45,14 @@ export class RemoteConfigurationController {
             `;
       this.app
         .getAdaptor()
-        //QUESTION this is a mutate call but the mutation string above is a query
+        //QUESTION this is a mutate call but the mutation string above is a query, should be a query call
+        // I can not change it right now because I do not know what using it, so I have added a note in the
+        // MutateResult interface
         .mutate(mutationString, {
           name,
           version
         })
-        .then((result: { merged_configuration: { data: string } }) => {
+        .then((result: MutateResult) => {
           resolve(JSON.parse(result.merged_configuration.data));
         })
         .catch((e: any) => {
@@ -70,7 +73,7 @@ export class RemoteConfigurationController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteRawConfiguration: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteRawConfiguration);
         })
         .catch((e: any) => {
@@ -97,7 +100,7 @@ export class RemoteConfigurationController {
           id,
           rawConfiguration
         })
-        .then((result: { updateRawConfiguration: RawConfiguration }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateRawConfiguration);
         })
         .catch((e: any) => {
@@ -122,7 +125,7 @@ export class RemoteConfigurationController {
         .mutate(mutationString, {
           rawConfiguration
         })
-        .then((result: { createRawConfiguration: RawConfiguration }) => {
+        .then((result: MutateResult) => {
           resolve(result.createRawConfiguration);
         })
         .catch((e: any) => {

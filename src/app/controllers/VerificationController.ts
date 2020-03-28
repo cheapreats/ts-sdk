@@ -9,6 +9,7 @@ export interface VerificationSession {
   updated_at: string;
 }
 import { App } from "../App";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export class VerificationController {
   app: App;
   constructor(app: App) {
@@ -19,13 +20,13 @@ export class VerificationController {
   }
 
   // ADD MUTATION METHODS BELOW
-
+  // QUESTION only result is returned so I cannot specify which key within result is actually present
   /**
    * Start a new SMS verification Session
    * @param {string} phone_number - The phone to be verified
-   * @returns {Promise<VerificationSession>} - The uuid required to verify the verification code
+   * @returns {Promise<MutateResult>} - The uuid required to verify the verification code
    */
-  startVerificationSession(phone_number: string): Promise<VerificationSession> {
+  startVerificationSession(phone_number: string): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation createSmsVerificationSessionMutation ($phone_number:String!) {
@@ -39,7 +40,7 @@ export class VerificationController {
         .mutate(mutationString, {
           phone_number
         })
-        .then((result: VerificationSession) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -52,12 +53,12 @@ export class VerificationController {
    * Verify an Phone number via code received
    * @param {string} uuid - UUID of the verification request
    * @param {string} verification_code - Verification code received on the device
-   * @returns {Promise<VerificationSession>} - verification status along with the number corresponding to the UUID
+   * @returns {Promise<MutateResult>} - verification status along with the number corresponding to the UUID
    */
   checkVerificationSession(
     uuid: string,
     verification_code: string
-  ): Promise<VerificationSession> {
+  ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation verifySmsVerificationSessionMutation ($uuid:String!, $verification_code:String!) {
@@ -73,7 +74,7 @@ export class VerificationController {
           uuid,
           verification_code
         })
-        .then((result: VerificationSession) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {

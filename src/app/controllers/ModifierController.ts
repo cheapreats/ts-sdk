@@ -1,5 +1,6 @@
 import { App } from "../App";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface ModifierChoiceInput {
   name: string;
@@ -76,7 +77,7 @@ export class ModifierController {
         .mutate(mutationString, {
           modifier
         })
-        .then((result: { createModifier: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createModifier._id);
         })
         .catch((e: any) => {
@@ -106,7 +107,7 @@ export class ModifierController {
           id,
           modifier
         })
-        .then((result: { updateModifier: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateModifier._id);
         })
         .catch((e: any) => {

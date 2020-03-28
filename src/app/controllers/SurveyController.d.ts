@@ -92,9 +92,9 @@ export declare class SurveyController {
     /**
      * Archive a Survey
      * @param {string} id - The id of the Survey Object
-     * @returns {Promise<string>} - Confirmation String
+     * @returns {Promise<Survey>} - Confirmation String
      */
-    archive(id: string): Promise<string>;
+    archive(id: string): Promise<Survey>;
     /**
      * Delete a Survey
      * @param {string} id - The id of the Survey Object

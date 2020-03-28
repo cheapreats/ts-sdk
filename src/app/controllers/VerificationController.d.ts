@@ -9,21 +9,22 @@ export interface VerificationSession {
     updated_at: string;
 }
 import { App } from "../App";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export declare class VerificationController {
     app: App;
     constructor(app: App);
     /**
      * Start a new SMS verification Session
      * @param {string} phone_number - The phone to be verified
-     * @returns {Promise<VerificationSession>} - The uuid required to verify the verification code
+     * @returns {Promise<MutateResult>} - The uuid required to verify the verification code
      */
-    startVerificationSession(phone_number: string): Promise<VerificationSession>;
+    startVerificationSession(phone_number: string): Promise<MutateResult>;
     /**
      * Verify an Phone number via code received
      * @param {string} uuid - UUID of the verification request
      * @param {string} verification_code - Verification code received on the device
-     * @returns {Promise<VerificationSession>} - verification status along with the number corresponding to the UUID
+     * @returns {Promise<MutateResult>} - verification status along with the number corresponding to the UUID
      */
-    checkVerificationSession(uuid: string, verification_code: string): Promise<VerificationSession>;
+    checkVerificationSession(uuid: string, verification_code: string): Promise<MutateResult>;
 }
 //# sourceMappingURL=VerificationController.d.ts.map

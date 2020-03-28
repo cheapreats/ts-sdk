@@ -1,6 +1,7 @@
 import { App } from "../App";
 import { Vendor } from "./VendorController";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 /**
  * Controller for head offices.
  */
@@ -40,7 +41,7 @@ export class HeadOfficeController {
         .mutate(mutationString, {
           identifier
         })
-        .then((result: { createHeadOffice: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createHeadOffice._id);
         })
         .catch((e: any) => {
@@ -70,7 +71,7 @@ export class HeadOfficeController {
           id,
           identifier
         })
-        .then((result: { updateHeadOffice: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateHeadOffice._id);
         })
         .catch((e: any) => {
@@ -96,7 +97,7 @@ export class HeadOfficeController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteHeadOffice: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteHeadOffice);
         })
         .catch((e: any) => {

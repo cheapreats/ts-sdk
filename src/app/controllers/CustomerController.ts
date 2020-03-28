@@ -7,6 +7,7 @@ import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface CreditCard {
   id?: string;
   brand?: string;
@@ -112,7 +113,7 @@ export class CustomerController {
         .mutate(mutationString, {
           customer
         })
-        .then((result: { createCustomer: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCustomer._id);
         })
         .catch((e: any) => {
@@ -142,7 +143,7 @@ export class CustomerController {
           id,
           customer
         })
-        .then((result: { updateCustomer: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateCustomer._id);
         })
         .catch((e: any) => {
@@ -172,7 +173,7 @@ export class CustomerController {
           id,
           token
         })
-        .then((result: { enrollCustomerApnsToken: Customer }) => {
+        .then((result: MutateResult) => {
           resolve(result.enrollCustomerApnsToken);
         })
         .catch((e: any) => {
@@ -202,7 +203,7 @@ export class CustomerController {
           id,
           token
         })
-        .then((result: { revokeCustomerApnsToken: Customer }) => {
+        .then((result: MutateResult) => {
           resolve(result.revokeCustomerApnsToken);
         })
         .catch((e: any) => {
@@ -232,7 +233,7 @@ export class CustomerController {
           id,
           token
         })
-        .then((result: { enrollCustomerFcmToken: Customer }) => {
+        .then((result: MutateResult) => {
           resolve(result.enrollCustomerFcmToken);
         })
         .catch((e: any) => {
@@ -262,7 +263,7 @@ export class CustomerController {
           id,
           token
         })
-        .then((result: { revokeCustomerFcmToken: Customer }) => {
+        .then((result: MutateResult) => {
           resolve(result.revokeCustomerFcmToken);
         })
         .catch((e: any) => {
@@ -292,7 +293,7 @@ export class CustomerController {
           id,
           token
         })
-        .then((result: { updateCustomerCreditCard: Customer }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateCustomerCreditCard);
         })
         .catch((e: any) => {
@@ -321,7 +322,7 @@ export class CustomerController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { createCustomerWallet: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCustomerWallet._id);
         })
         .catch((e: any) => {
@@ -358,7 +359,7 @@ export class CustomerController {
           amount,
           payment_method
         })
-        .then((result: { reloadCustomerWallet: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.reloadCustomerWallet._id);
         })
         .catch((e: any) => {
@@ -389,7 +390,7 @@ export class CustomerController {
           email_address,
           method
         })
-        .then((result: { sendCustomerPasswordResetCode: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.sendCustomerPasswordResetCode);
         })
         .catch((e: any) => {
@@ -425,7 +426,7 @@ export class CustomerController {
           code,
           password
         })
-        .then((result: { resetCustomerPassword: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.resetCustomerPassword._id);
         })
         .catch((e: any) => {
@@ -465,7 +466,7 @@ export class CustomerController {
           amount,
           order_id
         })
-        .then((result: { refundCustomerWallet: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.refundCustomerWallet._id);
         })
         .catch((e: any) => {
@@ -505,11 +506,9 @@ export class CustomerController {
           amount,
           description
         })
-        .then(
-          (result: { createCustomerWalletTransaction: { _id: string } }) => {
-            resolve(result.createCustomerWalletTransaction._id);
-          }
-        )
+        .then((result: MutateResult) => {
+          resolve(result.createCustomerWalletTransaction._id);
+        })
         .catch((e: any) => {
           reject(e);
         });
@@ -537,7 +536,7 @@ export class CustomerController {
           id,
           vendor_id
         })
-        .then((result: { addFavouriteVendorForCustomer: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.addFavouriteVendorForCustomer._id);
         })
         .catch((e: any) => {
@@ -567,11 +566,9 @@ export class CustomerController {
           id,
           vendor_id
         })
-        .then(
-          (result: { removeFavouriteVendorForCustomer: { _id: string } }) => {
-            resolve(result.removeFavouriteVendorForCustomer._id);
-          }
-        )
+        .then((result: MutateResult) => {
+          resolve(result.removeFavouriteVendorForCustomer._id);
+        })
         .catch((e: any) => {
           reject(e);
         });
@@ -599,7 +596,7 @@ export class CustomerController {
           id,
           item_id
         })
-        .then((result: { addFavouriteItemForCustomer: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.addFavouriteItemForCustomer._id);
         })
         .catch((e: any) => {
@@ -629,7 +626,7 @@ export class CustomerController {
           id,
           item_id
         })
-        .then((result: { removeFavouriteItemForCustomer: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.removeFavouriteItemForCustomer._id);
         })
         .catch((e: any) => {

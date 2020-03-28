@@ -17,7 +17,9 @@ export declare class ImageController {
      * @param {string} image - Image in base64 format
      * @returns {Promise<any>}
      */
-    upload(image: string): Promise<any>;
+    upload(image: string): Promise<{
+        id?: string;
+    }>;
     /**
      * Get an image link with size
      * @param {string} id

@@ -2,6 +2,7 @@ import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Vendor } from "./VendorController";
 import { Order } from "./OrderController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export enum PayoutMethod {
   MANUAL = "MANUAL"
@@ -96,7 +97,7 @@ export class PayoutController {
           dry
         })
         //QUESTION only _id and total will be accessible is this the expected behaviour
-        .then((result: { requestPayout: Payout }) => {
+        .then((result: MutateResult) => {
           resolve(result.requestPayout);
         })
         .catch((e: any) => {
@@ -109,9 +110,9 @@ export class PayoutController {
    * Update an existing pending payout
    * @param {string} id - Payout ID
    * @param {UpdatePayoutInput} payout - Updated payout object
-   * @returns {Promise<any>}
+   * @returns {Promise<string>}
    */
-  update(id: string, payout: UpdatePayoutInput): Promise<any> {
+  update(id: string, payout: UpdatePayoutInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $payout:UpdatePayoutInput!) {
@@ -126,7 +127,7 @@ export class PayoutController {
           id,
           payout
         })
-        .then((result: { updatePayout: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updatePayout._id);
         })
         .catch((e: any) => {
@@ -152,7 +153,7 @@ export class PayoutController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { cancelPayout: Payout }) => {
+        .then((result: MutateResult) => {
           resolve(result.cancelPayout);
         })
         .catch((e: any) => {

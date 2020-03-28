@@ -7,6 +7,7 @@ import { Tip } from "./TipController";
 import { Category } from "./CategoryController";
 import { Tag, Fee } from "./MenuItemController";
 import { ModifierChoice } from "./ModifierController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export declare enum OrderType {
     EAT_IN = "EAT_IN",
     TAKE_OUT = "TAKE_OUT",
@@ -125,27 +126,27 @@ export declare class OrderController {
      * @param {string} id - The id of the Order Object
      * @param {OrderCancellationReason} reason - input type OrderCancellationReason enum indicating reason
      * @param {string} description - Additional details on order cancellation
-     * @returns {Promise<Order>}
+     * @returns {Promise<MutateResult>}
      */
-    cancel(id: string, reason: OrderCancellationReason, description: string | null): Promise<Order>;
+    cancel(id: string, reason: OrderCancellationReason, description: string | null): Promise<MutateResult>;
     /**
      * Set a order as preparing with estimated time
      * @param {string} id - The id of the Order Object
      * @param {number} estimated_preparing_sec - The amount of time the Order will take before it will be prepared
-     * @returns {Promise<Order>}
+     * @returns {Promise<MutateResult>}
      */
-    beginPreparing(id: string, estimated_preparing_sec: number): Promise<Order>;
+    beginPreparing(id: string, estimated_preparing_sec: number): Promise<MutateResult>;
     /**
      * Set order as prepared
      * @param {string} id - The id of the Order Object
-     * @returns {Promise<Order>}
+     * @returns {Promise<MutateResult>}
      */
-    prepared(id: string): Promise<Order>;
+    prepared(id: string): Promise<MutateResult>;
     /**
      * Complete an order
      * @param {string} id - The id of the Order Object
-     * @returns {Promise<Order>}
+     * @returns {Promise<MutateResult>}
      */
-    complete(id: string): Promise<Order>;
+    complete(id: string): Promise<MutateResult>;
 }
 //# sourceMappingURL=OrderController.d.ts.map

@@ -4,6 +4,7 @@ import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Customer } from "./CustomerController";
 import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface CreateLoyaltyCardInput {
   loyalty_program_id: string;
   customer_id?: string;
@@ -76,7 +77,7 @@ export class LoyaltyCardController {
         .mutate(mutationString, {
           loyalty_card
         })
-        .then((result: { createLoyaltyCardAndEnroll: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createLoyaltyCardAndEnroll._id);
         })
         .catch((e: any) => {
@@ -106,7 +107,7 @@ export class LoyaltyCardController {
           id,
           amount
         })
-        .then((result: { awardPointsToLoyaltyCard: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.awardPointsToLoyaltyCard._id);
         })
         .catch((e: any) => {
@@ -139,11 +140,9 @@ export class LoyaltyCardController {
           id,
           amount
         })
-        .then(
-          (result: { awardShareablePointsToLoyaltyCard: { _id: string } }) => {
-            resolve(result.awardShareablePointsToLoyaltyCard._id);
-          }
-        )
+        .then((result: MutateResult) => {
+          resolve(result.awardShareablePointsToLoyaltyCard._id);
+        })
         .catch((e: any) => {
           reject(e);
         });
@@ -180,7 +179,7 @@ export class LoyaltyCardController {
           loyalty_program_id,
           no_of_points_to_share
         })
-        .then((result: { shareLoyaltyPoints: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.shareLoyaltyPoints._id);
         })
         .catch((e: any) => {
@@ -213,7 +212,7 @@ export class LoyaltyCardController {
           loyalty_card_id,
           menu_item_id
         })
-        .then((result: { redeemLoyaltyPointsForCoupon: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.redeemLoyaltyPointsForCoupon._id);
         })
         .catch((e: any) => {

@@ -2,6 +2,7 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export enum SurveyQuestionType {
   CHECKBOX = "CHECKBOX",
@@ -110,7 +111,7 @@ export class SurveyController {
         .mutate(mutationString, {
           survey
         })
-        .then((result: { createSurvey: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createSurvey._id);
         })
         .catch((e: any) => {
@@ -140,7 +141,7 @@ export class SurveyController {
           id,
           survey
         })
-        .then((result: { updateSurvey: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateSurvey._id);
         })
         .catch((e: any) => {
@@ -152,9 +153,9 @@ export class SurveyController {
   /**
    * Archive a Survey
    * @param {string} id - The id of the Survey Object
-   * @returns {Promise<string>} - Confirmation String
+   * @returns {Promise<Survey>} - Confirmation String
    */
-  archive(id: string): Promise<string> {
+  archive(id: string): Promise<Survey> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!) {
@@ -166,7 +167,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { archiveSurvey: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.archiveSurvey);
         })
         .catch((e: any) => {
@@ -192,7 +193,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteSurvey: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteSurvey);
         })
         .catch((e: any) => {
@@ -220,7 +221,7 @@ export class SurveyController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { releaseSurvey: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.releaseSurvey._id);
         })
         .catch((e: any) => {
@@ -253,7 +254,7 @@ export class SurveyController {
           survey_id,
           survey_response
         })
-        .then((result: { createSurveyResponse: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createSurveyResponse._id);
         })
         .catch((e: any) => {

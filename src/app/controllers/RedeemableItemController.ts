@@ -2,6 +2,7 @@ import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface CreateRedeemableItemInput {
   loyalty_program_id: string;
@@ -51,7 +52,7 @@ export class RedeemableItemController {
         .mutate(mutationString, {
           redeemable_item
         })
-        .then((result: { createRedeemableItem: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createRedeemableItem._id);
         })
         .catch((e: any) => {
@@ -84,7 +85,7 @@ export class RedeemableItemController {
           id,
           redeemable_item
         })
-        .then((result: { updateRedeemableItem: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateRedeemableItem._id);
         })
         .catch((e: any) => {
@@ -110,7 +111,7 @@ export class RedeemableItemController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteRedeemableItem: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteRedeemableItem);
         })
         .catch((e: any) => {

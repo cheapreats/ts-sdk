@@ -1,5 +1,6 @@
 import { App } from "../App";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface FlashSaleItemInput {
   _id: string;
   price: number;
@@ -71,7 +72,7 @@ export class FlashSaleController {
           start_at,
           end_at
         })
-        .then((result: { createFlashSale: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createFlashSale._id);
         })
         .catch((e: any) => {
@@ -107,7 +108,7 @@ export class FlashSaleController {
           items,
           end_at
         })
-        .then((result: { updateFlashSale: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateFlashSale._id);
         })
         .catch((e: any) => {
