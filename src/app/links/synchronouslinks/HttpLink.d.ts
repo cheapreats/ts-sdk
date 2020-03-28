@@ -21,19 +21,23 @@ export declare class HttpLink extends SynchronousLink {
      * @param config
      * @returns {Promise<Object>}
      */
-    post(config?: object): Promise<any>;
+    post(config?: object): Promise<{
+        data: {
+            id: string;
+        };
+    }>;
     /**
      * Run a put request
      * @param config
      * @returns {Promise<Object>}
      */
-    put(config?: object): Promise<any>;
+    put(config?: object): Promise<object>;
     /**
      * Run a delete request
      * @param config
      * @returns {Promise<Object>}
      */
-    delete(config?: object): Promise<any>;
+    delete(config?: object): Promise<object>;
     /**
      * Runs a new http request
      * @param config

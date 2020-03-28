@@ -237,7 +237,9 @@ export declare class App {
      * @returns {{upload: ImageController.upload, getLink: ImageController.getLink}}
      */
     get Image(): {
-        upload: (image: string) => Promise<any>;
+        upload: (image: string) => Promise<{
+            id: string;
+        }>;
         getLink: (id: string, size: string) => string;
     };
     /**

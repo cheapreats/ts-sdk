@@ -78,7 +78,7 @@ export class TwilioController {
             phone_number: phoneNumber
           }
         })
-        .then((data: { data: string }) => {
+        .then((data: { data: any }) => {
           if (data.data === "yes") {
             resolve(true);
           } else {
