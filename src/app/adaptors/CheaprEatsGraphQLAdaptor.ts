@@ -29,6 +29,9 @@ import { RedeemableItem } from "../controllers/RedeemableItemController";
 import { MergedConfiguration } from "../controllers/GraphController";
 import { RawConfiguration } from "../controllers/RemoteConfigurationController";
 import { Survey, SurveyResponse } from "../controllers/SurveyController";
+import { Tip } from "../controllers/TipController";
+import { VendorTester, Vendor } from "../controllers/VendorController";
+import { VerificationSession } from "../controllers/VerificationController";
 
 export interface MutateResult {
   updateNoteForCart?: Cart;
@@ -111,6 +114,16 @@ export interface MutateResult {
   archiveSurvey?: Survey;
   deleteSurvey?: string;
   createSurveyResponse?: SurveyResponse;
+  createTip?: Tip;
+  deleteVendorTester?: string;
+  addVendorTesterByEmailAddress?: VendorTester;
+  updateVendorApprovalStatus?: Vendor;
+  requestVendorApproval?: string;
+  createVendorWithEmployee?: Vendor;
+  updateVendor?: Vendor;
+  updateAllMenuItemsStatusForVendor?: string;
+  createSmsVerificationSession?: VerificationSession;
+  verifySmsVerificationSession?: VerificationSession;
 }
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {

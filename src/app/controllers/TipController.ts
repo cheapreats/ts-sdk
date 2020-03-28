@@ -1,6 +1,7 @@
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Order } from "./OrderController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface Tip extends DefaultController {
   amount?: number;
@@ -40,7 +41,7 @@ export class TipController {
           order_id,
           amount
         })
-        .then((result: { createTip: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createTip._id);
         })
         .catch((e: any) => {

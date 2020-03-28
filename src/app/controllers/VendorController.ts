@@ -13,6 +13,7 @@ import { PayoutPlan, Payout } from "./PayoutController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Survey } from "./SurveyController";
 import { FlashSale } from "./FlashSaleController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface CreateVendorWithEmployeeInput {
   name: string;
@@ -220,7 +221,7 @@ export class VendorController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteVendorTester: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteVendorTester);
         })
         .catch((e: any) => {
@@ -253,7 +254,7 @@ export class VendorController {
           id,
           email_address
         })
-        .then((result: { addVendorTesterByEmailAddress: VendorTester }) => {
+        .then((result: MutateResult) => {
           resolve(result.addVendorTesterByEmailAddress);
         })
         .catch((e: any) => {
@@ -287,7 +288,7 @@ export class VendorController {
           id,
           approval_status
         })
-        .then((result: { updateVendorApprovalStatus: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateVendorApprovalStatus._id);
         })
         .catch((e: any) => {
@@ -313,7 +314,7 @@ export class VendorController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { requestVendorApproval: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.requestVendorApproval);
         })
         .catch((e: any) => {
@@ -346,7 +347,8 @@ export class VendorController {
         .mutate(mutationString, {
           vendor
         })
-        .then((result: { createVendor: { _id: any } }) => {
+        .then((result: MutateResult) => {
+          //@ts-ignore deprecated
           resolve(result.createVendor._id);
         })
         .catch((e: any) => {
@@ -374,7 +376,7 @@ export class VendorController {
         .mutate(mutationString, {
           vendor
         })
-        .then((result: { createVendorWithEmployee: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createVendorWithEmployee._id);
         })
         .catch((e: any) => {
@@ -404,7 +406,7 @@ export class VendorController {
           id,
           vendor
         })
-        .then((result: { updateVendor: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateVendor._id);
         })
         .catch((e: any) => {
@@ -432,7 +434,7 @@ export class VendorController {
           vendor_id,
           status
         })
-        .then((result: { updateAllMenuItemsStatusForVendor: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateAllMenuItemsStatusForVendor);
         })
         .catch((e: any) => {

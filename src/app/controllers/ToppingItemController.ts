@@ -46,6 +46,7 @@ export class ToppingItemController {
           price,
           availableUntil
         })
+        //@ts-ignore ** Pretty sure this is deprecated as there is no mutation in Playground
         .then((result: { addToppingItem: { id: any } }) => {
           resolve(result.addToppingItem.id);
         })
@@ -89,6 +90,7 @@ export class ToppingItemController {
           availableUntil,
           toppingItems
         })
+        //@ts-ignore ** Pretty sure this is deprecated as there is no mutation in Playground
         .then((result: { updateToppingItem: { id: any } }) => {
           resolve(result.updateToppingItem.id);
         })
