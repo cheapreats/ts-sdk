@@ -368,7 +368,7 @@ export declare class App {
      * @deprecated
      * @param endpoint
      */
-    setApolloEndpoint(endpoint: any): void;
+    setApolloEndpoint(endpoint: string): void;
     /**
      * Set GraphQL endpoint.
      * @param endpoint
