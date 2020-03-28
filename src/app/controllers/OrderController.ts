@@ -7,6 +7,7 @@ import { Tip } from "./TipController";
 import { Category } from "./CategoryController";
 import { Tag, Fee } from "./MenuItemController";
 import { ModifierChoice } from "./ModifierController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export enum OrderType {
   EAT_IN = "EAT_IN",
@@ -151,7 +152,7 @@ export class OrderController {
           dry,
           clear_cart
         })
-        .then((result: { createOrder: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createOrder._id);
         })
         .catch((e: any) => {
@@ -159,19 +160,20 @@ export class OrderController {
         });
     });
   }
-
+  //QUESTION because only result is returned I can't be more specific than MutateResult
+  // Usually it is result.[mutation name] and then it is more specific what is within the result
   /**
    * Cancel a order, must be authenticated as vendor
    * @param {string} id - The id of the Order Object
    * @param {OrderCancellationReason} reason - input type OrderCancellationReason enum indicating reason
    * @param {string} description - Additional details on order cancellation
-   * @returns {Promise<Order>}
+   * @returns {Promise<MutateResult>}
    */
   cancel(
     id: string,
     reason: OrderCancellationReason,
     description: string | null
-  ): Promise<Order> {
+  ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation cancelOrderMutation ($id: String!, $reason: OrderCancellationReason!, $description: String){
@@ -187,7 +189,7 @@ export class OrderController {
           reason,
           description
         })
-        .then((result: Order) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -200,9 +202,12 @@ export class OrderController {
    * Set a order as preparing with estimated time
    * @param {string} id - The id of the Order Object
    * @param {number} estimated_preparing_sec - The amount of time the Order will take before it will be prepared
-   * @returns {Promise<Order>}
+   * @returns {Promise<MutateResult>}
    */
-  beginPreparing(id: string, estimated_preparing_sec: number): Promise<Order> {
+  beginPreparing(
+    id: string,
+    estimated_preparing_sec: number
+  ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation beginPreparingOrder($id: String!, $estimated_preparing_sec: Int!){
@@ -217,7 +222,7 @@ export class OrderController {
           id,
           estimated_preparing_sec
         })
-        .then((result: Order) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -229,9 +234,9 @@ export class OrderController {
   /**
    * Set order as prepared
    * @param {string} id - The id of the Order Object
-   * @returns {Promise<Order>}
+   * @returns {Promise<MutateResult>}
    */
-  prepared(id: string): Promise<Order> {
+  prepared(id: string): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation preparedOrderMutation ($id: String!){
@@ -245,7 +250,7 @@ export class OrderController {
         .mutate(mutationString, {
           id
         })
-        .then((result: Order) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {
@@ -257,9 +262,9 @@ export class OrderController {
   /**
    * Complete an order
    * @param {string} id - The id of the Order Object
-   * @returns {Promise<Order>}
+   * @returns {Promise<MutateResult>}
    */
-  complete(id: string): Promise<Order> {
+  complete(id: string): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation completeOrderMutation ($id: String!){
@@ -273,7 +278,7 @@ export class OrderController {
         .mutate(mutationString, {
           id
         })
-        .then((result: Order) => {
+        .then((result: MutateResult) => {
           resolve(result);
         })
         .catch((e: any) => {

@@ -20,6 +20,15 @@ import {
   LoyaltyCard,
   LoyaltyTransaction
 } from "../controllers/LoyaltyCardController";
+import { LoyaltyProgram } from "../controllers/LoyaltyProgramController";
+import { MenuItem } from "../controllers/MenuItemController";
+import { Modifier } from "../controllers/ModifierController";
+import { Order } from "../controllers/OrderController";
+import { Payout } from "../controllers/PayoutController";
+import { RedeemableItem } from "../controllers/RedeemableItemController";
+import { MergedConfiguration } from "../controllers/GraphController";
+import { RawConfiguration } from "../controllers/RemoteConfigurationController";
+import { Survey, SurveyResponse } from "../controllers/SurveyController";
 
 export interface MutateResult {
   updateNoteForCart?: Cart;
@@ -71,6 +80,37 @@ export interface MutateResult {
   awardShareablePointsToLoyaltyCard?: LoyaltyTransaction;
   shareLoyaltyPoints?: LoyaltyTransaction;
   redeemLoyaltyPointsForCoupon?: Coupon;
+  createLoyaltyProgram?: LoyaltyProgram;
+  updateLoyaltyProgram?: LoyaltyCard;
+  deleteLoyaltyProgram?: string;
+  createMenuItem?: MenuItem;
+  updateMenuItem?: MenuItem;
+  deleteMenuItem?: string;
+  batchUpdateMenuItems?: Array<MenuItem>;
+  createModifier?: Modifier;
+  updateModifier?: Modifier;
+  deleteModifier?: Modifier;
+  createOrder?: Order;
+  cancelOrder?: Order;
+  beginPreparingOrder?: Order;
+  preparedOrder?: Order;
+  completeOrder?: Order;
+  requestPayout?: Payout;
+  updatePayout?: Payout;
+  cancelPayout?: Payout;
+  createRedeemableItem?: RedeemableItem;
+  updateRedeemableItem?: RedeemableItem;
+  deleteRedeemableItem?: string;
+  merged_configuration?: MergedConfiguration; //should be only in query see RemoteConfigurationController
+  createRawConfiguration?: RawConfiguration;
+  updateRawConfiguration?: RawConfiguration;
+  deleteRawConfiguration?: string;
+  createSurvey?: Survey;
+  updateSurvey?: Survey;
+  releaseSurvey?: Survey;
+  archiveSurvey?: Survey;
+  deleteSurvey?: string;
+  createSurveyResponse?: SurveyResponse;
 }
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {

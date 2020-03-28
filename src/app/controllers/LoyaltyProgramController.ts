@@ -2,6 +2,7 @@ import { App } from "../App";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { RedeemableItem } from "./RedeemableItemController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export enum LoyaltyProgramType {
   DOLLAR = "DOLLAR",
@@ -78,7 +79,7 @@ export class LoyaltyProgramController {
         .mutate(mutationString, {
           loyalty_program
         })
-        .then((result: { createLoyaltyProgram: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createLoyaltyProgram._id);
         })
         .catch((e: any) => {
@@ -111,7 +112,7 @@ export class LoyaltyProgramController {
           id,
           loyalty_program
         })
-        .then((result: { updateLoyaltyProgram: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateLoyaltyProgram._id);
         })
         .catch((e: any) => {
@@ -137,7 +138,7 @@ export class LoyaltyProgramController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteLoyaltyProgram: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteLoyaltyProgram);
         })
         .catch((e: any) => {

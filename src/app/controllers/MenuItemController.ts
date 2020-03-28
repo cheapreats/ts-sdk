@@ -3,6 +3,7 @@ import { Modifier } from "./ModifierController";
 import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface CreateMenuItemInput {
   name: string;
@@ -109,7 +110,7 @@ export class MenuItemController {
         .mutate(mutationString, {
           menu_item
         })
-        .then((result: { createMenuItem: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createMenuItem._id);
         })
         .catch((e: any) => {
@@ -139,7 +140,7 @@ export class MenuItemController {
           id,
           menu_item
         })
-        .then((result: { updateMenuItem: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateMenuItem._id);
         })
         .catch((e: any) => {
@@ -169,7 +170,7 @@ export class MenuItemController {
         .mutate(mutationString, {
           menu_items
         })
-        .then((result: { batchUpdateMenuItems: Array<MenuItem> }) => {
+        .then((result: MutateResult) => {
           resolve(result.batchUpdateMenuItems);
         })
         .catch((e: any) => {
