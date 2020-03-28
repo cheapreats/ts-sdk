@@ -3,6 +3,7 @@ import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
 import { DefaultController } from "./Controller";
 import { SelectInput } from "./CommonInterface";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface Category extends UpdateCategoryInput, DefaultController {
   menu_items(select: SelectInput): Array<MenuItem>;
   menu_item_count?: number;
@@ -61,7 +62,7 @@ export class CategoryController {
         .mutate(mutationString, {
           category
         })
-        .then((result: { createCategory: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCategory._id);
         })
         .catch((e: any) => {
@@ -87,7 +88,7 @@ export class CategoryController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteCategory: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteCategory);
         })
         .catch((e: any) => {
@@ -117,7 +118,7 @@ export class CategoryController {
           id,
           category
         })
-        .then((result: { updateCategory: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateCategory._id);
         })
         .catch((e: any) => {
@@ -147,7 +148,7 @@ export class CategoryController {
         .mutate(mutationString, {
           categories
         })
-        .then((result: { batchUpdateCategories: Array<Category> }) => {
+        .then((result: MutateResult) => {
           resolve(result.batchUpdateCategories);
         })
         .catch((e: any) => {

@@ -1,6 +1,7 @@
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Coupon } from "./CouponController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface Advertisement {
   title?: string;
   link?: string;
@@ -72,7 +73,7 @@ export class ExplorePageController {
           special_deals,
           timely_deals
         })
-        .then((result: { replaceExplorePage: { updated_at: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.replaceExplorePage.updated_at);
         })
         .catch((e: any) => {

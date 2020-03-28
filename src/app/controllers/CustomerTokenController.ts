@@ -3,6 +3,7 @@
  */
 import { App } from "../App";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface CustomerToken extends DefaultController {
   body?: string;
 }
@@ -41,7 +42,7 @@ export class CustomerTokenController {
           email_address,
           password
         })
-        .then((result: { createCustomerToken: CustomerToken }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCustomerToken);
         })
         .catch((e: any) => {

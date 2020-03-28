@@ -3,11 +3,23 @@
  * Author: Jun Zheng
  * License: UNLICENSED
  */
-
 import { Adaptor } from "./Adaptor";
 import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
 import packageDotJson from "../../version";
 import { Cart } from "../controllers/CartController";
+import { Category } from "../controllers/CategoryController";
+import { Coupon } from "../controllers/CouponController";
+import { Customer } from "../controllers/CustomerController";
+import { CustomerToken } from "../controllers/CustomerTokenController";
+import { Employee } from "../controllers/EmployeeController";
+import { EmployeeToken } from "../controllers/EmployeeTokenController";
+import { ExplorePage } from "../controllers/ExplorePageController";
+import { FlashSale } from "../controllers/FlashSaleController";
+import { HeadOffice } from "../controllers/HeadOfficeController";
+import {
+  LoyaltyCard,
+  LoyaltyTransaction
+} from "../controllers/LoyaltyCardController";
 
 export interface MutateResult {
   updateNoteForCart?: Cart;
@@ -17,6 +29,48 @@ export interface MutateResult {
   removeItemFromCart?: Cart;
   addItemCart?: Cart;
   createCart?: Cart;
+  createCategory?: Category;
+  updateCategory?: Category;
+  batchUpdateCategories?: Array<Category>;
+  deleteCategory?: string;
+  createCoupon?: Coupon;
+  createCustomer?: Customer;
+  updateCustomer?: Customer;
+  sendCustomerPasswordResetCode?: string;
+  resetCustomerPassword?: Customer;
+  enrollCustomerApnsToken?: Customer;
+  revokeCustomerApnsToken?: Customer;
+  enrollCustomerFcmToken?: Customer;
+  revokeCustomerFcmToken?: Customer;
+  updateCustomerCreditCard?: Customer;
+  createCustomerWallet?: Coupon;
+  reloadCustomerWallet?: Coupon;
+  refundCustomerWallet?: Coupon;
+  createCustomerWalletTransaction?: Coupon;
+  addFavouriteVendorForCustomer?: Customer;
+  removeFavouriteVendorForCustomer?: Customer;
+  addFavouriteItemForCustomer?: Customer;
+  removeFavouriteItemForCustomer?: Customer;
+  createCustomerToken?: CustomerToken;
+  createEmployee?: Employee;
+  updateEmployee?: Employee;
+  deleteEmployee?: string;
+  enrollEmployeeTerminalFcmToken?: Employee;
+  revokeEmployeeTerminalFcmToken?: string;
+  sendEmployeePasswordResetCode?: string;
+  resetEmployeePassword?: Employee;
+  createEmployeeToken?: EmployeeToken;
+  replaceExplorePage?: ExplorePage;
+  createFlashSale?: FlashSale;
+  updateFlashSale?: FlashSale;
+  createHeadOffice?: HeadOffice;
+  updateHeadOffice?: HeadOffice;
+  deleteHeadOffice?: string;
+  createLoyaltyCardAndEnroll?: LoyaltyCard;
+  awardPointsToLoyaltyCard?: LoyaltyTransaction;
+  awardShareablePointsToLoyaltyCard?: LoyaltyTransaction;
+  shareLoyaltyPoints?: LoyaltyTransaction;
+  redeemLoyaltyPointsForCoupon?: Coupon;
 }
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {
@@ -62,7 +116,7 @@ export class CheaprEatsGraphQLAdaptor extends Adaptor {
    * @param  {string} query
    * @param  {object} variables = {}
    */
-  mutate(query: string, variables: object = {}) {
+  mutate(query: string, variables: object = {}): Promise<MutateResult> {
     return this._graphQLLink.mutate({ query, variables });
   }
 }

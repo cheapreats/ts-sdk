@@ -3,6 +3,7 @@
  */
 import { App } from "../App";
 import { DefaultController } from "./Controller";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 
 export interface EmployeeToken extends DefaultController {
   body?: string;
@@ -45,7 +46,7 @@ export class EmployeeTokenController {
           username,
           password
         })
-        .then((result: { createEmployeeToken: { body: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createEmployeeToken.body);
         })
         .catch((e: any) => {

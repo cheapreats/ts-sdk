@@ -5,6 +5,7 @@ import { DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface PaymentMethods {
   apple_pay?: boolean;
   android_pay?: boolean;
@@ -93,7 +94,7 @@ export class CouponController {
         .mutate(mutationString, {
           coupon
         })
-        .then((result: { createCoupon: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createCoupon._id);
         })
         .catch((e: any) => {

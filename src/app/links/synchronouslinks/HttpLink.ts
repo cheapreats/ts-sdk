@@ -13,7 +13,7 @@ export class HttpLink extends SynchronousLink {
    * Construct the link with URL
    * @param url
    */
-  constructor(url: any) {
+  constructor(url: string) {
     super(url);
   }
 

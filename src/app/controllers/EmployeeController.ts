@@ -2,6 +2,7 @@ import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
 import { App } from "../App";
 import { DefaultController } from "./Controller";
 import { Vendor } from "./VendorController";
+import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
 export interface CreateEmployeeInput {
   username: string;
   password: string;
@@ -69,7 +70,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           employee
         })
-        .then((result: { createEmployee: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.createEmployee._id);
         })
         .catch((e: any) => {
@@ -99,7 +100,7 @@ export class EmployeeController {
           id,
           employee
         })
-        .then((result: { updateEmployee: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.updateEmployee._id);
         })
         .catch((e: any) => {
@@ -125,7 +126,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           id
         })
-        .then((result: { deleteEmployee: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.deleteEmployee);
         })
         .catch((e: any) => {
@@ -155,7 +156,7 @@ export class EmployeeController {
           id,
           token
         })
-        .then((result: { enrollEmployeeTerminalFcmToken: Employee }) => {
+        .then((result: MutateResult) => {
           resolve(result.enrollEmployeeTerminalFcmToken);
         })
         .catch((e: any) => {
@@ -181,7 +182,7 @@ export class EmployeeController {
         .mutate(mutationString, {
           token
         })
-        .then((result: { revokeEmployeeTerminalFcmToken: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.revokeEmployeeTerminalFcmToken);
         })
         .catch((e: any) => {
@@ -221,7 +222,7 @@ export class EmployeeController {
           code,
           password
         })
-        .then((result: { resetEmployeePassword: { _id: string } }) => {
+        .then((result: MutateResult) => {
           resolve(result.resetEmployeePassword._id);
         })
         .catch((e: any) => {
@@ -252,7 +253,7 @@ export class EmployeeController {
           email_address,
           method
         })
-        .then((result: { sendEmployeePasswordResetCode: string }) => {
+        .then((result: MutateResult) => {
           resolve(result.sendEmployeePasswordResetCode);
         })
         .catch((e: any) => {
