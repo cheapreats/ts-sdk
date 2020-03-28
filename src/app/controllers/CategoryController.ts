@@ -63,7 +63,7 @@ export class CategoryController {
           category
         })
         .then((result: MutateResult) => {
-          resolve(result.createCategory._id);
+          resolve(result?.createCategory?._id);
         })
         .catch((e: any) => {
           reject(e);
