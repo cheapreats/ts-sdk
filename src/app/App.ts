@@ -522,7 +522,7 @@ export class App {
    * @deprecated
    * @param endpoint
    */
-  setApolloEndpoint(endpoint) {
+  setApolloEndpoint(endpoint: string) {
     this.setGraphQLEndpoint(endpoint);
   }
 
