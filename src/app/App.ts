@@ -11,7 +11,7 @@ import { CustomerTokenController } from "./controllers/CustomerTokenController";
 import { CouponController } from "./controllers/CouponController";
 import { EmployeeController } from "./controllers/EmployeeController";
 import { EmployeeTokenController } from "./controllers/EmployeeTokenController";
-import { GraphController } from "./controllers/GraphController";
+import { GraphController, QueryResult } from "./controllers/GraphController";
 import { HeadOfficeController } from "./controllers/HeadOfficeController";
 import { MenuItemController } from "./controllers/MenuItemController";
 import { ModifierController } from "./controllers/ModifierController";
@@ -506,7 +506,7 @@ export class App {
         `;
     return new Promise((resolve, reject) => {
       this.Graph.query(queryString)
-        .then((data: { is_sdk_version_supported: boolean }) => {
+        .then((data: QueryResult) => {
           resolve(data.is_sdk_version_supported);
         })
         .catch(e => {
