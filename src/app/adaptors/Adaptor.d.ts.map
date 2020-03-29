@@ -1,1 +1,0 @@
-{"version":3,"file":"Adaptor.d.ts","sourceRoot":"","sources":["Adaptor.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,qBAAa,OAAO;IAClB,OAAO,EAAE;QAAE,eAAe,EAAE,MAAM,CAAA;KAAE,CAAC;gBACzB,MAAM,EAAE;QAAE,eAAe,EAAE,MAAM,CAAA;KAAE;IAQ/C;;;OAGG;IACH,GAAG,CAAC,MAAM,EAAE,GAAG;CAGhB"}
