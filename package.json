@@ -1,6 +1,6 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.10.46",
+  "version": "1.10.47",
   "description": "CheaprEats Typescript SDK",
   "main": "src/index.ts",
   "scripts": {
@@ -55,6 +55,8 @@
     "moment": "2.22.2",
     "node-fetch": "2.1.2",
     "readline-sync": "^1.4.9",
+    "rollup": "^2.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
     "stripe": "5.8.0",
     "ts-node": "^8.6.2"
   }
