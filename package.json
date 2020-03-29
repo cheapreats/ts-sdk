@@ -1,8 +1,8 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.10.48",
+  "version": "1.10.49",
   "description": "CheaprEats Typescript SDK",
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register",
