@@ -1,6 +1,6 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.10.44",
+  "version": "1.10.45",
   "description": "CheaprEats Typescript SDK",
   "main": "src/index.ts",
   "scripts": {
@@ -36,7 +36,7 @@
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0",
     "watchify": "^3.11.1",
-    "webpack": "^4.42.1",
+    "webpack": "^5.0.0-beta.14",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
