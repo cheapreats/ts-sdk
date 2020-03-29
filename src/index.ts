@@ -6,15 +6,15 @@
 
 import { App } from "./app/App";
 
-declare global {
-  interface Window {
-    CE: App;
-  }
-}
+// declare global {
+//   interface Window {
+//     CE: App;
+//   }
+// }
 
 const app: App = new App();
 export default app;
 
 if (typeof window !== "undefined") {
-  window.CE = app;
+  (<any>window).CE = app;
 }
