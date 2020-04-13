@@ -43,7 +43,7 @@ export interface employee {
   employee: Employee;
 }
 export interface Explore_Page {
-  explore_page?: ExplorePage;
+  explore_page: ExplorePage;
 }
 export interface Explore_Page_Archives {
   explore_page_archives: Array<ExplorePage>;
