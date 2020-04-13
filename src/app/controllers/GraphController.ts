@@ -14,37 +14,126 @@ import { RawConfiguration } from "./RemoteConfigurationController";
 import { Survey } from "./SurveyController";
 import { Vendor } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
-export interface QueryResult {
-  the_customer?: Customer;
-  the_employee?: Employee;
-  categories?: Array<Category>;
-  coupons?: Array<Coupon>;
-  valid_coupon?: Coupon;
-  customer_email_address_available?: boolean;
-  customer_phone_number_available?: boolean;
-  customers?: Array<Customer>;
-  employee?: Employee;
-  explore_page?: ExplorePage;
-  explore_page_archives?: Array<ExplorePage>;
-  version_details?: VersionDetails;
-  is_sdk_version_supported?: boolean;
-  auth_token_scope?: UserTypes;
-  menu_items?: Array<MenuItem>;
-  menu_item?: MenuItem;
-  loyalty_cards?: Array<LoyaltyCard>;
-  orders?: Array<Order>;
-  payouts?: Array<Payout>;
-  vendors?: Array<Vendor>;
-  head_offices?: Array<HeadOffice>;
-  service_charges?: Array<ServiceCharge>;
-  service_charge?: ServiceCharge;
-  surveys?: Array<Survey>;
-  flash_sales?: Array<FlashSale>;
-  verfication_session?: VerificationSession;
-  groups?: Array<Group>;
-  merged_configuration?: MergedConfiguration;
-  raw_configurations?: Array<RawConfiguration>;
+
+export interface The_Customer {
+  the_customer: Customer;
 }
+export interface The_Employee {
+  the_employee: Employee;
+}
+export interface Categories {
+  categories: Array<Category>;
+}
+export interface Coupons {
+  coupons: Array<Coupon>;
+}
+export interface Valid_Coupon {
+  valid_coupon: Coupon;
+}
+export interface Customer_Email_Address_Available {
+  customer_email_address_available: boolean;
+}
+export interface Customer_Phone_Number_Available {
+  customer_phone_number_available: boolean;
+}
+export interface Customers {
+  customers: Array<Customer>;
+}
+export interface employee {
+  employee: Employee;
+}
+export interface Explore_Page {
+  explore_page?: ExplorePage;
+}
+export interface Explore_Page_Archives {
+  explore_page_archives: Array<ExplorePage>;
+}
+export interface Version_Details {
+  version_details: VersionDetails;
+}
+export interface Is_SDK_Version_Supported {
+  is_sdk_version_supported: boolean;
+}
+export interface Auth_Token_Scope {
+  auth_token_scope: UserTypes;
+}
+export interface Menu_Items {
+  menu_items: Array<MenuItem>;
+}
+export interface Menu_Item {
+  menu_item: MenuItem;
+}
+export interface Loyalty_Cards {
+  loyalty_cards: Array<LoyaltyCard>;
+}
+export interface Orders {
+  orders: Array<Order>;
+}
+export interface Payouts {
+  payouts: Array<Payout>;
+}
+export interface Vendors {
+  vendors: Array<Vendor>;
+}
+export interface Head_Offices {
+  head_offices: Array<HeadOffice>;
+}
+export interface Service_Charges {
+  service_charges: Array<ServiceCharge>;
+}
+export interface Service_Charge {
+  service_charge: ServiceCharge;
+}
+export interface Surveys {
+  surveys: Array<Survey>;
+}
+export interface Flash_Sales {
+  flash_sales: Array<FlashSale>;
+}
+export interface Verification_Session {
+  verfication_session: VerificationSession;
+}
+export interface Groups {
+  groups: Array<Group>;
+}
+export interface Merged_Configuration {
+  merged_configuration: MergedConfiguration;
+}
+export interface Raw_Configurations {
+  raw_configurations: Array<RawConfiguration>;
+}
+
+export interface QueryResult
+  extends The_Customer,
+    The_Employee,
+    Categories,
+    Coupons,
+    Valid_Coupon,
+    Customer_Email_Address_Available,
+    Customer_Phone_Number_Available,
+    Customers,
+    employee,
+    Explore_Page,
+    Explore_Page_Archives,
+    Version_Details,
+    Is_SDK_Version_Supported,
+    Auth_Token_Scope,
+    Menu_Items,
+    Menu_Item,
+    Loyalty_Cards,
+    Orders,
+    Payouts,
+    Vendors,
+    Head_Offices,
+    Service_Charges,
+    Service_Charge,
+    Surveys,
+    Flash_Sales,
+    Verification_Session,
+    Groups,
+    Merged_Configuration,
+    Raw_Configurations {}
+
 export interface VersionDetails {
   version?: string;
   build?: string;
@@ -55,7 +144,7 @@ export enum UserTypes {
   VENDOR_EMPLOYEE = "VENDOR_EMPLOYEE",
   CUSTOMER = "CUSTOMER",
   MASTER = "MASTER",
-  INVALID = "INVALID"
+  INVALID = "INVALID",
 }
 export interface MergedConfiguration {
   name: string;
