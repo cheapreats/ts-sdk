@@ -2,10 +2,10 @@
  * Controller for customer tokens.
  */
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-export interface CustomerToken extends DefaultController {
-  body?: string;
+export interface CustomerToken extends DefaultControllerRequired {
+  body: string;
 }
 
 export class CustomerTokenController {
@@ -40,7 +40,7 @@ export class CustomerTokenController {
         .getAdaptor()
         .mutate(mutationString, {
           email_address,
-          password
+          password,
         })
         .then((result: MutateResult) => {
           resolve(result.createCustomerToken);

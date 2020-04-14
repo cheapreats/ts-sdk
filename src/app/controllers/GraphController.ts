@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { Category } from "./CategoryController";
+import { CategoryResult } from "./CategoryController";
 import { Coupon } from "./CouponController";
 import { CustomerResult, Group } from "./CustomerController";
 import { Employee } from "./EmployeeController";
@@ -12,7 +12,7 @@ import { Order } from "./OrderController";
 import { Payout, ServiceCharge } from "./PayoutController";
 import { RawConfiguration } from "./RemoteConfigurationController";
 import { Survey } from "./SurveyController";
-import { Vendor } from "./VendorController";
+import { VendorResult } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
 
 export interface The_Customer {
@@ -22,7 +22,7 @@ export interface The_Employee {
   the_employee: Employee;
 }
 export interface Categories {
-  categories: Array<Category>;
+  categories: Array<CategoryResult>;
 }
 export interface Coupons {
   coupons: Array<Coupon>;
@@ -73,7 +73,7 @@ export interface Payouts {
   payouts: Array<Payout>;
 }
 export interface Vendors {
-  vendors: Array<Vendor>;
+  vendors: Array<VendorResult>;
 }
 export interface Head_Offices {
   head_offices: Array<HeadOffice>;

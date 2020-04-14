@@ -5,7 +5,7 @@
  */
 import { SynchronousLink } from "./SynchronousLink";
 import { GraphQLClient } from "graphql-request";
-import { Category } from "../../controllers/CategoryController";
+import { CategoryResult } from "../../controllers/CategoryController";
 import { Cart } from "../../controllers/CartController";
 import { Coupon } from "../../controllers/CouponController";
 import { CustomerResult } from "../../controllers/CustomerController";
@@ -22,7 +22,7 @@ import { Order } from "../../controllers/OrderController";
 import { Payout } from "../../controllers/PayoutController";
 import { RawConfiguration } from "../../controllers/RemoteConfigurationController";
 import { Survey, SurveyResponse } from "../../controllers/SurveyController";
-import { Vendor, VendorTester } from "../../controllers/VendorController";
+import { VendorResult, VendorTester } from "../../controllers/VendorController";
 import { VerificationSession } from "../../controllers/VerificationController";
 import {
   MergedConfiguration,
@@ -39,10 +39,10 @@ export interface UpdateNoteForCart {
   updateNoteForCart: Cart;
 }
 export interface UpdateCategory {
-  updateCategory: Category;
+  updateCategory: CategoryResult;
 }
 export interface BatchUpdateCategories {
-  batchUpdateCategories: Array<Category>;
+  batchUpdateCategories: Array<CategoryResult>;
 }
 export interface RemoveCouponFromCart {
   removeCouponFromCart: Cart;
@@ -54,7 +54,7 @@ export interface DeleteCart {
   deleteCart: string;
 }
 export interface CreateCategory {
-  createCategory: Category;
+  createCategory: CategoryResult;
 }
 export interface CreateCoupon {
   createCoupon: Coupon;
@@ -286,16 +286,16 @@ export interface AddVendorTesterByEmailAddress {
   addVendorTesterByEmailAddress: VendorTester;
 }
 export interface UpdateVendorApprovalStatus {
-  updateVendorApprovalStatus: Vendor;
+  updateVendorApprovalStatus: VendorResult;
 }
 export interface RequestVendorApproval {
   requestVendorApproval: string;
 }
 export interface CreateVendorWithEmployee {
-  createVendorWithEmployee: Vendor;
+  createVendorWithEmployee: VendorResult;
 }
 export interface UpdateVendor {
-  updateVendor: Vendor;
+  updateVendor: VendorResult;
 }
 export interface CreateSmsVerificationSession {
   createSmsVerificationSession: VerificationSession;

@@ -4,7 +4,7 @@ import { Vendor } from "./VendorController";
 import { Coupon } from "./CouponController";
 import { MenuItem } from "./MenuItemController";
 import { Modifier } from "./ModifierController";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface AddItemToCartModifierInput {
@@ -16,26 +16,26 @@ export interface AddItemToCartInput {
   modifiers: Array<AddItemToCartModifierInput>;
 }
 export interface CartItemModifier {
-  modifier?: Modifier;
-  choices?: Array<string>;
+  modifier: Modifier;
+  choices: Array<string>;
 }
 export interface CartItem {
-  _id?: string;
-  menu_item?: MenuItem;
-  modifiers?: Array<CartItemModifier>;
+  _id: string;
+  menu_item: MenuItem;
+  modifiers: Array<CartItemModifier>;
 }
 export interface CartCoupon {
-  _id?: string;
-  coupon?: Coupon;
+  _id: string;
+  coupon: Coupon;
 }
-export interface Cart extends DefaultController {
-  customer?: Customer;
-  vendor?: Vendor;
-  items?: Array<CartItem>;
-  subtotal?: number;
-  total?: number;
-  coupons?: Array<CartCoupon>;
-  note?: string;
+export interface Cart extends DefaultControllerRequired {
+  customer: Customer;
+  vendor: Vendor;
+  items: Array<CartItem>;
+  subtotal: number;
+  total: number;
+  coupons: Array<CartCoupon>;
+  note: string;
 }
 
 export class CartController {
@@ -67,7 +67,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          note
+          note,
         })
         .then((result: MutateResult) => {
           resolve(result.updateNoteForCart);
@@ -91,7 +91,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          cartCouponId
+          cartCouponId,
         })
         .then((result: MutateResult) => {
           resolve(result.removeCouponFromCart);
@@ -115,7 +115,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          couponCode
+          couponCode,
         })
         .then((result: MutateResult) => {
           resolve(result.applyCouponToCart);
@@ -141,7 +141,7 @@ export class CartController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          cartId
+          cartId,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteCart);
@@ -174,7 +174,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          cartItemId
+          cartItemId,
         })
         .then((result: MutateResult) => {
           resolve(result.removeItemFromCart);
@@ -207,7 +207,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          item
+          item,
         })
         .then((result: MutateResult) => {
           resolve(result.addItemCart);
@@ -240,7 +240,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           customerId,
-          vendorId
+          vendorId,
         })
         .then((result: MutateResult) => {
           resolve(result.createCart);

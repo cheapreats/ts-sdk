@@ -1,7 +1,7 @@
 import { Cart } from "./CartController";
 import { ResetCodeSendMethod } from "./EmployeeController";
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { SelectInput } from "./CommonInterface";
 import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
@@ -22,33 +22,33 @@ interface LoyaltyFunction {
   loyalty_cards(select: SelectInput): Array<LoyaltyCard>;
 }
 interface CommonCustomerProperties {
-  email_address?: string;
-  name?: string;
-  password?: string;
-  phone_number?: string;
-  apns_tokens?: Array<string>;
-  fcm_tokens?: Array<string>;
-  credit_card?: CreditCard;
-  email_preferences?: EmailPreferences;
-  mobile_notifications?: boolean;
-  is_test?: boolean;
-  wallet?: Coupon;
-  cart?: Cart;
-  favourite_vendors?: Array<Vendor>;
-  favourite_items?: Array<MenuItem>;
-  test_vendors?: Array<Vendor>;
-  groups?: Array<Group>;
+  email_address: string;
+  name: string;
+  password: string;
+  phone_number: string;
+  apns_tokens: Array<string>;
+  fcm_tokens: Array<string>;
+  credit_card: CreditCard;
+  email_preferences: EmailPreferences;
+  mobile_notifications: boolean;
+  is_test: boolean;
+  wallet: Coupon;
+  cart: Cart;
+  favourite_vendors: Array<Vendor>;
+  favourite_items: Array<MenuItem>;
+  test_vendors: Array<Vendor>;
+  groups: Array<Group>;
 }
 export interface Customer
-  extends DefaultController,
+  extends DefaultControllerRequired,
     CustomerOptions,
     LoyaltyFunction,
     CommonCustomerProperties {}
 export interface CustomerResult
-  extends DefaultController,
+  extends DefaultControllerRequired,
     CustomerOptions,
     CommonCustomerProperties {
-  loyalty_cards?: Array<LoyaltyCard>;
+  loyalty_cards: Array<LoyaltyCard>;
 }
 export interface CustomerOptions {
   profile_picture?: string;
@@ -169,9 +169,9 @@ export class CustomerController {
    * Enroll a new APNs token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The APNS Token
-   * @returns {Promise<CustomerResult>}
+   * @returns {Promise<Customer>}
    */
-  enrollApnsToken(id: string, token: string): Promise<CustomerResult> {
+  enrollApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollCustomerApnsTokenMutation ($id: String!, $token: String!) {
@@ -187,7 +187,7 @@ export class CustomerController {
           token,
         })
         .then((result: MutateResult) => {
-          resolve(result.enrollCustomerApnsToken);
+          resolve(result.enrollCustomerApnsToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -199,9 +199,9 @@ export class CustomerController {
    * Revoke an APNs token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The APNS Token
-   * @returns {Promise<CustomerResult>}
+   * @returns {Promise<string>}
    */
-  revokeApnsToken(id: string, token: string): Promise<CustomerResult> {
+  revokeApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation revokeCustomerApnsTokenMutation ($id: String!, $token: String!) {
@@ -217,7 +217,7 @@ export class CustomerController {
           token,
         })
         .then((result: MutateResult) => {
-          resolve(result.revokeCustomerApnsToken);
+          resolve(result.revokeCustomerApnsToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -229,9 +229,9 @@ export class CustomerController {
    * Enroll a new FCM token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The FCM Token
-   * @returns {Promise<CustomerResult>}
+   * @returns {Promise<string>}
    */
-  enrollFcmToken(id: string, token: string): Promise<CustomerResult> {
+  enrollFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollCustomerFcmTokenMutation ($id: String!, $token: String!) {
@@ -247,7 +247,7 @@ export class CustomerController {
           token,
         })
         .then((result: MutateResult) => {
-          resolve(result.enrollCustomerFcmToken);
+          resolve(result.enrollCustomerFcmToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -259,9 +259,9 @@ export class CustomerController {
    * Revoke an FCM token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The FCM Token
-   * @returns {Promise<CustomerResult>}
+   * @returns {Promise<string>}
    */
-  revokeFcmToken(id: string, token: string): Promise<CustomerResult> {
+  revokeFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation revokeCustomerFcmTokenMutation ($id: String!, $token: String!) {
@@ -277,7 +277,7 @@ export class CustomerController {
           token,
         })
         .then((result: MutateResult) => {
-          resolve(result.revokeCustomerFcmToken);
+          resolve(result.revokeCustomerFcmToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -289,9 +289,9 @@ export class CustomerController {
    * Update a customer's credit card
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The Stripe Token
-   * @returns {Promise<CustomerResult>}
+   * @returns {Promise<string>}
    */
-  updateCreditCard(id: string, token: string): Promise<CustomerResult> {
+  updateCreditCard(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation updateCustomerCreditCardMutation ($id: String!, $token: String!) {
@@ -307,7 +307,7 @@ export class CustomerController {
           token,
         })
         .then((result: MutateResult) => {
-          resolve(result.updateCustomerCreditCard);
+          resolve(result.updateCustomerCreditCard._id);
         })
         .catch((e: any) => {
           reject(e);
