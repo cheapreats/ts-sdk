@@ -1,12 +1,12 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
-export interface Tip extends DefaultController {
-  amount?: number;
-  order?: Order;
-  description?: string;
+export interface Tip extends DefaultControllerRequired {
+  amount: number;
+  order: Order;
+  description: string;
 }
 
 export class TipController {
@@ -39,7 +39,7 @@ export class TipController {
         .getAdaptor()
         .mutate(mutationString, {
           order_id,
-          amount
+          amount,
         })
         .then((result: MutateResult) => {
           resolve(result.createTip._id);
