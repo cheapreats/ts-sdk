@@ -32,7 +32,7 @@ import { RemoteConfigurationController } from "./controllers/RemoteConfiguration
 import endpoints from "../config/endpoints";
 
 let config = {
-  endpoints: endpoints
+  endpoints: endpoints,
 };
 
 /**
@@ -76,7 +76,7 @@ export class App {
 
     this._adaptor = new CheaprEatsGraphQLAdaptor({
       graphQLEndpoint: this.getConfiguration().endpoints.graphQLEndpoint
-        .production
+        .production,
     });
     // ADD CONTROLLERS BELOW
     this._authorizationController = new AuthorizationController(this);
@@ -113,7 +113,7 @@ export class App {
 
   get Authorization() {
     return {
-      getTokenScope: this._authorizationController.getTokenScope
+      getTokenScope: this._authorizationController.getTokenScope,
     };
   }
 
@@ -125,7 +125,7 @@ export class App {
       delete: this._cartController.delete,
       removeItem: this._cartController.removeItem,
       addItem: this._cartController.addItem,
-      create: this._cartController.create
+      create: this._cartController.create,
     };
   }
 
@@ -138,7 +138,7 @@ export class App {
       create: this._categoryController.create,
       delete: this._categoryController.delete,
       update: this._categoryController.update,
-      batchUpdate: this._categoryController.batchUpdate
+      batchUpdate: this._categoryController.batchUpdate,
     };
   }
 
@@ -164,7 +164,7 @@ export class App {
       addFavouriteVendor: this._customerController.addFavouriteVendor,
       removeFavouriteVendor: this._customerController.removeFavouriteVendor,
       addFavouriteItem: this._customerController.addFavouriteItem,
-      removeFavouriteItem: this._customerController.removeFavouriteItem
+      removeFavouriteItem: this._customerController.removeFavouriteItem,
     };
   }
 
@@ -174,7 +174,7 @@ export class App {
    */
   get CustomerToken() {
     return {
-      create: this._customerTokenController.create
+      create: this._customerTokenController.create,
     };
   }
 
@@ -184,7 +184,7 @@ export class App {
    */
   get Coupon() {
     return {
-      create: this._couponController.create
+      create: this._couponController.create,
     };
   }
 
@@ -200,7 +200,7 @@ export class App {
       enrollTerminalFcm: this._employeeController.enrollTerminalFcm,
       revokeTerminalFcm: this._employeeController.revokeTerminalFcm,
       resetEmployeePassword: this._employeeController.resetEmployeePassword,
-      sendPasswordResetCode: this._employeeController.sendPasswordResetCode
+      sendPasswordResetCode: this._employeeController.sendPasswordResetCode,
     };
   }
 
@@ -210,7 +210,7 @@ export class App {
    */
   get EmployeeToken() {
     return {
-      create: this._employeeTokenController.create
+      create: this._employeeTokenController.create,
     };
   }
 
@@ -220,7 +220,7 @@ export class App {
    */
   get Graph(): { query: GraphController["query"] } {
     return {
-      query: this._graphController.query
+      query: this._graphController.query,
     };
   }
 
@@ -233,7 +233,7 @@ export class App {
       create: this._menuItemController.create,
       update: this._menuItemController.update,
       batchUpdate: this._menuItemController.batchUpdate,
-      delete: this._menuItemController.delete
+      delete: this._menuItemController.delete,
     };
   }
 
@@ -245,7 +245,7 @@ export class App {
     return {
       create: this._modifierController.create,
       update: this._modifierController.update,
-      delete: this._modifierController.delete
+      delete: this._modifierController.delete,
     };
   }
 
@@ -259,7 +259,7 @@ export class App {
       cancel: this._orderController.cancel,
       beginPreparing: this._orderController.beginPreparing,
       prepared: this._orderController.prepared,
-      complete: this._orderController.complete
+      complete: this._orderController.complete,
     };
   }
 
@@ -271,7 +271,7 @@ export class App {
     return {
       create: this._headOfficeController.create,
       update: this._headOfficeController.update,
-      delete: this._headOfficeController.delete
+      delete: this._headOfficeController.delete,
     };
   }
 
@@ -284,7 +284,7 @@ export class App {
       startVerificationSession: this._verificationController
         .startVerificationSession,
       checkVerificationSession: this._verificationController
-        .checkVerificationSession
+        .checkVerificationSession,
     };
   }
 
@@ -303,7 +303,7 @@ export class App {
         .addVendorTesterByEmailAddress,
       updateVendorApprovalStatus: this._vendorController
         .updateVendorApprovalStatus,
-      requestVendorApproval: this._vendorController.requestVendorApproval
+      requestVendorApproval: this._vendorController.requestVendorApproval,
     };
   }
 
@@ -315,8 +315,8 @@ export class App {
     return {
       Customer: {
         signupEmail: this._validationController.customerSignupEmail,
-        signupPhone: this._validationController.customerSignupPhone
-      }
+        signupPhone: this._validationController.customerSignupPhone,
+      },
     };
   }
 
@@ -331,7 +331,7 @@ export class App {
       archive: this._surveyController.archive,
       delete: this._surveyController.delete,
       release: this._surveyController.release,
-      createSurveyResponse: this._surveyController.createSurveyResponse
+      createSurveyResponse: this._surveyController.createSurveyResponse,
     };
   }
 
@@ -342,7 +342,7 @@ export class App {
   get Image() {
     return {
       upload: this._imageController.upload,
-      getLink: this._imageController.getLink
+      getLink: this._imageController.getLink,
     };
   }
 
@@ -355,7 +355,7 @@ export class App {
     return {
       request: this._payoutController.request,
       update: this._payoutController.update,
-      cancel: this._payoutController.cancel
+      cancel: this._payoutController.cancel,
     };
   }
 
@@ -366,7 +366,7 @@ export class App {
    */
   get ExplorePage() {
     return {
-      replace: this._explorePageController.replace
+      replace: this._explorePageController.replace,
     };
   }
 
@@ -378,7 +378,7 @@ export class App {
   get FlashSale() {
     return {
       create: this._flashSaleController.create,
-      update: this._flashSaleController.update
+      update: this._flashSaleController.update,
     };
   }
 
@@ -389,7 +389,7 @@ export class App {
    */
   get Tip() {
     return {
-      create: this._tipController.create
+      create: this._tipController.create,
     };
   }
 
@@ -402,7 +402,7 @@ export class App {
     return {
       create: this._loyaltyProgramController.create,
       update: this._loyaltyProgramController.update,
-      delete: this._loyaltyProgramController.delete
+      delete: this._loyaltyProgramController.delete,
     };
   }
 
@@ -421,7 +421,7 @@ export class App {
         .awardShareablePointsToLoyaltyCard,
       shareLoyaltyPoints: this._loyaltyCardController.shareLoyaltyPoints,
       redeemLoyaltyPointsForCoupon: this._loyaltyCardController
-        .redeemLoyaltyPointsForCoupon
+        .redeemLoyaltyPointsForCoupon,
     };
   }
 
@@ -434,7 +434,7 @@ export class App {
     return {
       create: this._redeemableItemController.create,
       update: this._redeemableItemController.update,
-      delete: this._redeemableItemController.delete
+      delete: this._redeemableItemController.delete,
     };
   }
 
@@ -446,7 +446,7 @@ export class App {
       updateRawConfiguration: this._remoteConfigurationController
         .updateRawConfiguration,
       createRawConfiguration: this._remoteConfigurationController
-        .createRawConfiguration
+        .createRawConfiguration,
     };
   }
 
@@ -456,7 +456,7 @@ export class App {
    */
   get Util() {
     return {
-      strToIdentifier
+      strToIdentifier,
     };
   }
 
@@ -480,7 +480,7 @@ export class App {
    * Set current authentication token
    * @param token
    */
-  setAuthenticationToken(token: string) {
+  setAuthenticationToken(token: string | null) {
     this._token = token;
     this._adaptor.setAuthenticationToken(token);
   }
@@ -509,7 +509,7 @@ export class App {
         .then((data: QueryResult) => {
           resolve(data.is_sdk_version_supported);
         })
-        .catch(e => {
+        .catch((e) => {
           reject(e);
         });
     });
@@ -534,7 +534,7 @@ export class App {
     config.endpoints.graphQLEndpoint.production = endpoint;
     this._adaptor = new CheaprEatsGraphQLAdaptor({
       graphQLEndpoint: this.getConfiguration().endpoints.graphQLEndpoint
-        .production
+        .production,
     });
   }
 
