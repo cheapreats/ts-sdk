@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface FlashSaleItemInput {
   _id: string;
@@ -7,19 +7,19 @@ export interface FlashSaleItemInput {
 }
 export enum FlashSaleType {
   DOLLAR = "DOLLAR",
-  PERCENTAGE = "PERCENTAGE"
+  PERCENTAGE = "PERCENTAGE",
 }
 export interface FlashSaleItem {
-  _id?: string;
-  price?: number;
+  _id: string;
+  price: number;
 }
-export interface FlashSale extends DefaultController {
-  type?: FlashSaleType;
-  amount?: number;
-  vendor_id?: string;
-  items?: Array<FlashSaleItem>;
-  start_at?: string;
-  end_at?: string;
+export interface FlashSale extends DefaultControllerRequired {
+  type: FlashSaleType;
+  amount: number;
+  vendor_id: string;
+  items: Array<FlashSaleItem>;
+  start_at: string;
+  end_at: string;
 }
 /**
  * Controller related to flash sales
@@ -70,7 +70,7 @@ export class FlashSaleController {
           amount,
           items,
           start_at,
-          end_at
+          end_at,
         })
         .then((result: MutateResult) => {
           resolve(result.createFlashSale._id);
@@ -106,7 +106,7 @@ export class FlashSaleController {
         .mutate(mutationString, {
           id,
           items,
-          end_at
+          end_at,
         })
         .then((result: MutateResult) => {
           resolve(result.updateFlashSale._id);
