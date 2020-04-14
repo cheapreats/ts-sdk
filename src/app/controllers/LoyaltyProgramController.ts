@@ -39,7 +39,7 @@ export interface LoyaltyProgram {
   _id: string;
   vendor: Vendor;
   items_required: Array<MenuItem>;
-  redeemanble_items: Array<RedeemableItem>;
+  redeemable_items: Array<RedeemableItem>;
   program_type: string;
   name: string;
   description: string;
