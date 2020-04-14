@@ -6,7 +6,7 @@ import { Employee } from "./EmployeeController";
 import { ExplorePage } from "./ExplorePageController";
 import { FlashSale } from "./FlashSaleController";
 import { HeadOffice } from "./HeadOfficeController";
-import { LoyaltyCard } from "./LoyaltyCardController";
+import { LoyaltyCardResult } from "./LoyaltyCardController";
 import { MenuItem } from "./MenuItemController";
 import { Order } from "./OrderController";
 import { Payout, ServiceCharge } from "./PayoutController";
@@ -64,7 +64,7 @@ export interface Menu_Item {
   menu_item: MenuItem;
 }
 export interface Loyalty_Cards {
-  loyalty_cards: Array<LoyaltyCard>;
+  loyalty_cards: Array<LoyaltyCardResult>;
 }
 export interface Orders {
   orders: Array<Order>;

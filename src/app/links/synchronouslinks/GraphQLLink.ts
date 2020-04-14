@@ -14,7 +14,7 @@ import { ExplorePage } from "../../controllers/ExplorePageController";
 import { FlashSale } from "../../controllers/FlashSaleController";
 import { HeadOffice } from "../../controllers/HeadOfficeController";
 import {
-  LoyaltyCard,
+  LoyaltyCardResult,
   LoyaltyTransaction,
 } from "../../controllers/LoyaltyCardController";
 import { MenuItem } from "../../controllers/MenuItemController";
@@ -168,7 +168,7 @@ export interface DeleteHeadOffice {
   deleteHeadOffice: string;
 }
 export interface CreateLoyaltyCardAndEnroll {
-  createLoyaltyCardAndEnroll: LoyaltyCard;
+  createLoyaltyCardAndEnroll: LoyaltyCardResult;
 }
 export interface AwardPointsToLoyaltyCard {
   awardPointsToLoyaltyCard: LoyaltyTransaction;
@@ -186,7 +186,7 @@ export interface CreateLoyaltyProgram {
   createLoyaltyProgram: LoyaltyProgram;
 }
 export interface UpdateLoyaltyProgram {
-  updateLoyaltyProgram: LoyaltyCard;
+  updateLoyaltyProgram: LoyaltyCardResult;
 }
 export interface DeleteLoyaltyProgram {
   deleteLoyaltyProgram: string;
