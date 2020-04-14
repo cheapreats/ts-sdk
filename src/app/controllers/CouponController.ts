@@ -1,19 +1,12 @@
 import { App } from "../App";
 import { Vendor } from "./VendorController";
 import { Customer } from "./CustomerController";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired, DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-// import { MutateResult } from "../adaptors/CheaprEatsGraphQLAdaptor";
-export interface PaymentMethods {
-  apple_pay?: boolean;
-  android_pay?: boolean;
-  credit_card?: boolean;
-  in_person?: boolean;
-  wallet?: boolean;
-}
+
 export interface PaymentMethodsInput {
   apple_pay?: boolean; // default TRUE
   android_pay?: boolean; // default TRUE
@@ -45,23 +38,33 @@ export interface CreateCouponInput {
   min_purchase: number;
   payment_methods?: PaymentMethodsInput;
 }
-export interface Coupon extends DefaultController {
-  code?: string;
-  coupon_type?: string;
-  value?: number;
-  real_value?: number;
-  item_scope?: MenuItem;
-  vendor_scope?: Vendor;
-  customer_scope?: Customer;
-  uses?: number;
-  uses_per_customer?: number;
-  can_combine?: boolean;
-  carry_over?: boolean;
-  expire_at?: string;
-  paid_by_vendor?: boolean;
-  min_purchase?: number;
+export interface TransactionFunction {
   transactions(select: SelectInput): Array<CouponTransaction>;
 }
+export interface CouponResult extends DefaultControllerRequired {
+  transactions: Array<CouponTransaction>;
+}
+export interface Coupon
+  extends DefaultControllerRequired,
+    TransactionFunction,
+    CouponCommonProperties {}
+export interface CouponCommonProperties {
+  code: string;
+  coupon_type: string;
+  value: number;
+  real_value: number;
+  item_scope: MenuItem;
+  vendor_scope: Vendor;
+  customer_scope: Customer;
+  uses: number;
+  uses_per_customer: number;
+  can_combine: boolean;
+  carry_over: boolean;
+  expire_at: string;
+  paid_by_vendor: boolean;
+  min_purchase: number;
+}
+
 /**
  * Controller for coupons.
  */
@@ -93,7 +96,7 @@ export class CouponController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          coupon
+          coupon,
         })
         .then((result: MutateResult) => {
           resolve(result.createCoupon._id);

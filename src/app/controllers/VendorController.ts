@@ -1,8 +1,4 @@
-import {
-  PaymentMethodsInput,
-  PaymentMethods,
-  Coupon,
-} from "./CouponController";
+import { PaymentMethodsInput, Coupon } from "./CouponController";
 import { App } from "../App";
 import { TagInput, MenuItem, Tag } from "./MenuItemController";
 import { DefaultControllerRequired } from "./Controller";

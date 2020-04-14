@@ -1,6 +1,6 @@
 import { App } from "../App";
 import { CategoryResult } from "./CategoryController";
-import { Coupon } from "./CouponController";
+import { CouponResult } from "./CouponController";
 import { CustomerResult, Group } from "./CustomerController";
 import { Employee } from "./EmployeeController";
 import { ExplorePage } from "./ExplorePageController";
@@ -25,10 +25,10 @@ export interface Categories {
   categories: Array<CategoryResult>;
 }
 export interface Coupons {
-  coupons: Array<Coupon>;
+  coupons: Array<CouponResult>;
 }
 export interface Valid_Coupon {
-  valid_coupon: Coupon;
+  valid_coupon: CouponResult;
 }
 export interface Customer_Email_Address_Available {
   customer_email_address_available: boolean;
