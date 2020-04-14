@@ -1,6 +1,6 @@
-import { EmailPreferencesInput, EmailPreferences } from "./CustomerController";
+import { EmailPreferencesInput } from "./CustomerController";
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreateEmployeeInput {
@@ -12,24 +12,26 @@ export interface CreateEmployeeInput {
   vendor_id: string;
   email_preferences: EmailPreferencesInput;
 }
-export interface EmployeeCommonProperties {
+export interface UpdateEmployeeInput {
+  email_preferences?: EmailPreferencesInput;
   email_address?: string;
   password?: string;
   phone_number?: string;
   role?: string;
 }
-export interface UpdateEmployeeInput extends EmployeeCommonProperties {
-  email_preferences?: EmailPreferencesInput;
-}
 export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
-  SMS = "SMS"
+  SMS = "SMS",
 }
-export interface Employee extends DefaultController, EmployeeCommonProperties {
-  username?: string;
-  email_preferences?: EmailPreferences;
-  vendor?: Vendor;
-  terminal_fcm_tokens?: Array<string>;
+export interface Employee extends DefaultControllerRequired {
+  username: string;
+  email_preferences: EmailPreferencesInput;
+  vendor: Vendor;
+  terminal_fcm_tokens: Array<string>;
+  email_address: string;
+  password: string;
+  phone_number: string;
+  role: string;
 }
 
 /**
@@ -68,7 +70,7 @@ export class EmployeeController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          employee
+          employee,
         })
         .then((result: MutateResult) => {
           resolve(result.createEmployee._id);
@@ -98,7 +100,7 @@ export class EmployeeController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          employee
+          employee,
         })
         .then((result: MutateResult) => {
           resolve(result.updateEmployee._id);
@@ -124,7 +126,7 @@ export class EmployeeController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteEmployee);
@@ -139,9 +141,9 @@ export class EmployeeController {
    * Enroll a new FCM token for terminal app
    * @param {string} id - The id of the Employee Object
    * @param {string} token - The FCM token for the Terminal Mobile App
-   * @returns {Promise<Employee>}
+   * @returns {Promise<string>}
    */
-  enrollTerminalFcm(id: string, token: string): Promise<Employee> {
+  enrollTerminalFcm(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollEmployeeTerminalFcmToken ($id: String!, $token: String!) {
@@ -154,10 +156,10 @@ export class EmployeeController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.enrollEmployeeTerminalFcmToken);
+          resolve(result.enrollEmployeeTerminalFcmToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -180,7 +182,7 @@ export class EmployeeController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          token
+          token,
         })
         .then((result: MutateResult) => {
           resolve(result.revokeEmployeeTerminalFcmToken);
@@ -220,7 +222,7 @@ export class EmployeeController {
           id,
           email_address,
           code,
-          password
+          password,
         })
         .then((result: MutateResult) => {
           resolve(result.resetEmployeePassword._id);
@@ -251,7 +253,7 @@ export class EmployeeController {
         .getAdaptor()
         .mutate(mutationString, {
           email_address,
-          method
+          method,
         })
         .then((result: MutateResult) => {
           resolve(result.sendEmployeePasswordResetCode);
