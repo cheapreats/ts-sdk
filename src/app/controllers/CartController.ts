@@ -156,9 +156,9 @@ export class CartController {
    * Remove an item from currently active cart.
    * @param {string} cartId
    * @param {string} cartItemId
-   * @returns {Promise<Cart>}
+   * @returns {Promise<string>}
    */
-  removeItem(cartId: string, cartItemId: string): Promise<Cart> {
+  removeItem(cartId: string, cartItemId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $cartItemId: String!) {
@@ -177,7 +177,7 @@ export class CartController {
           cartItemId,
         })
         .then((result: MutateResult) => {
-          resolve(result.removeItemFromCart);
+          resolve(result.removeItemFromCart._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -189,9 +189,9 @@ export class CartController {
    * Add an new item to currently active cart.
    * @param {string} cartId
    * @param {AddItemToCartInput} item
-   * @returns {Promise<Cart>}
+   * @returns {Promise<string>}
    */
-  addItem(cartId: string, item: AddItemToCartInput): Promise<Cart> {
+  addItem(cartId: string, item: AddItemToCartInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $item: AddItemToCartInput!) {
@@ -210,7 +210,7 @@ export class CartController {
           item,
         })
         .then((result: MutateResult) => {
-          resolve(result.addItemCart);
+          resolve(result.addItemCart._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -222,9 +222,9 @@ export class CartController {
    * Create a new cart, remove all old carts.
    * @param {string} customerId
    * @param {string} vendorId
-   * @returns {Promise<Cart>}
+   * @returns {Promise<string>}
    */
-  create(customerId: string, vendorId: string): Promise<Cart> {
+  create(customerId: string, vendorId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($customerId: String!, $vendorId: String!) {
@@ -243,7 +243,7 @@ export class CartController {
           vendorId,
         })
         .then((result: MutateResult) => {
-          resolve(result.createCart);
+          resolve(result.createCart._id);
         })
         .catch((e: any) => {
           reject(e);

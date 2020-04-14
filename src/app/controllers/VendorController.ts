@@ -84,9 +84,8 @@ interface AnalyticsFunction {
 
 export interface VendorResult
   extends DefaultControllerRequired,
-    VendorCommonProperties {
-  analytics: VendorAnalytics;
-}
+    VendorCommonProperties,
+    AnalyticsFunction {}
 export interface Vendor
   extends VendorCommonProperties,
     DefaultControllerRequired,
