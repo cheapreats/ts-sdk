@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface ModifierChoiceInput {
@@ -7,22 +7,6 @@ export interface ModifierChoiceInput {
   identifier: string;
   available: boolean;
   price: number;
-}
-export interface ModifierChoice {
-  name?: string;
-  identifier?: string;
-  available?: boolean;
-  price?: number;
-}
-export interface ModifierCommonProperties {
-  name?: string;
-  identifier?: string;
-  description?: string;
-  required?: boolean;
-  default?: string;
-  default_choices?: Array<string>;
-  is_topping?: boolean;
-  max_choice?: number;
 }
 export interface CreateModifierInput {
   name: string;
@@ -36,11 +20,27 @@ export interface CreateModifierInput {
   is_topping: boolean;
   max_choice?: number;
 }
-export interface UpdateModifierInput extends ModifierCommonProperties {
+export interface UpdateModifierInput {
   choices?: Array<ModifierChoiceInput>;
+  name?: string;
+  identifier?: string;
+  description?: string;
+  required?: boolean;
+  default?: string;
+  default_choices?: Array<string>;
+  is_topping?: boolean;
+  max_choice?: number;
 }
-export interface Modifier extends ModifierCommonProperties, DefaultController {
-  choices?: Array<ModifierChoice>;
+export interface Modifier extends DefaultControllerRequired {
+  choices: Array<ModifierChoiceInput>;
+  name: string;
+  identifier: string;
+  description: string;
+  required: boolean;
+  default: string;
+  default_choices: Array<string>;
+  is_topping: boolean;
+  max_choice: number;
 }
 /**
  * Controller for modifiers.
@@ -75,7 +75,7 @@ export class ModifierController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          modifier
+          modifier,
         })
         .then((result: MutateResult) => {
           resolve(result.createModifier._id);
@@ -105,7 +105,7 @@ export class ModifierController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          modifier
+          modifier,
         })
         .then((result: MutateResult) => {
           resolve(result.updateModifier._id);
@@ -132,12 +132,12 @@ export class ModifierController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then(() => {
           resolve();
         })
-        .catch(e => {
+        .catch((e) => {
           reject(e);
         });
     });
