@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { DefaultController, DefaultControllerRequired } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
@@ -80,7 +80,7 @@ export class PayoutController {
   request(
     vendor_id: string,
     dry: boolean | null // default False
-  ): Promise<Payout> {
+  ): Promise<{ _id: string; total: number }> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($vendor_id: String!, $dry: Boolean) {
@@ -98,7 +98,10 @@ export class PayoutController {
         })
         //QUESTION only _id and total will be accessible is this the expected behaviour
         .then((result: MutateResult) => {
-          resolve(result.requestPayout);
+          resolve({
+            _id: result.requestPayout._id,
+            total: result.requestPayout.total,
+          });
         })
         .catch((e: any) => {
           reject(e);
