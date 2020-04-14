@@ -1,7 +1,7 @@
 import { App } from "../App";
 import { Category } from "./CategoryController";
 import { Coupon } from "./CouponController";
-import { Customer, Group } from "./CustomerController";
+import { CustomerResult, Group } from "./CustomerController";
 import { Employee } from "./EmployeeController";
 import { ExplorePage } from "./ExplorePageController";
 import { FlashSale } from "./FlashSaleController";
@@ -16,7 +16,7 @@ import { Vendor } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
 
 export interface The_Customer {
-  the_customer: Customer;
+  the_customer: CustomerResult;
 }
 export interface The_Employee {
   the_employee: Employee;
@@ -37,7 +37,7 @@ export interface Customer_Phone_Number_Available {
   customer_phone_number_available: boolean;
 }
 export interface Customers {
-  customers: Array<Customer>;
+  customers: Array<CustomerResult>;
 }
 export interface employee {
   employee: Employee;

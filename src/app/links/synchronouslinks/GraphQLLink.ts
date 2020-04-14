@@ -8,14 +8,14 @@ import { GraphQLClient } from "graphql-request";
 import { Category } from "../../controllers/CategoryController";
 import { Cart } from "../../controllers/CartController";
 import { Coupon } from "../../controllers/CouponController";
-import { Customer } from "../../controllers/CustomerController";
+import { CustomerResult } from "../../controllers/CustomerController";
 import { Employee } from "../../controllers/EmployeeController";
 import { ExplorePage } from "../../controllers/ExplorePageController";
 import { FlashSale } from "../../controllers/FlashSaleController";
 import { HeadOffice } from "../../controllers/HeadOfficeController";
 import {
   LoyaltyCard,
-  LoyaltyTransaction
+  LoyaltyTransaction,
 } from "../../controllers/LoyaltyCardController";
 import { MenuItem } from "../../controllers/MenuItemController";
 import { Order } from "../../controllers/OrderController";
@@ -26,7 +26,7 @@ import { Vendor, VendorTester } from "../../controllers/VendorController";
 import { VerificationSession } from "../../controllers/VerificationController";
 import {
   MergedConfiguration,
-  QueryResult
+  QueryResult,
 } from "../../controllers/GraphController";
 import { CustomerToken } from "../../controllers/CustomerTokenController";
 import { EmployeeToken } from "../../controllers/EmployeeTokenController";
@@ -72,31 +72,31 @@ export interface DeleteCategory {
   deleteCategory: string;
 }
 export interface CreateCustomer {
-  createCustomer: Customer;
+  createCustomer: CustomerResult;
 }
 export interface UpdateCustomer {
-  updateCustomer: Customer;
+  updateCustomer: CustomerResult;
 }
 export interface SendCustomerPasswordResetCode {
   sendCustomerPasswordResetCode: string;
 }
 export interface ResetCustomerPassword {
-  resetCustomerPassword: Customer;
+  resetCustomerPassword: CustomerResult;
 }
 export interface EnrollCustomerApnsToken {
-  enrollCustomerApnsToken: Customer;
+  enrollCustomerApnsToken: CustomerResult;
 }
 export interface RevokeCustomerApnsToken {
-  revokeCustomerApnsToken: Customer;
+  revokeCustomerApnsToken: CustomerResult;
 }
 export interface EnrollCustomerFcmToken {
-  enrollCustomerFcmToken: Customer;
+  enrollCustomerFcmToken: CustomerResult;
 }
 export interface RevokeCustomerFcmToken {
-  revokeCustomerFcmToken: Customer;
+  revokeCustomerFcmToken: CustomerResult;
 }
 export interface UpdateCustomerCreditCard {
-  updateCustomerCreditCard: Customer;
+  updateCustomerCreditCard: CustomerResult;
 }
 export interface CreateCustomerWallet {
   createCustomerWallet: Coupon;
@@ -111,16 +111,16 @@ export interface CreateCustomerWalletTransaction {
   createCustomerWalletTransaction: Coupon;
 }
 export interface AddFavouriteVendorForCustomer {
-  addFavouriteVendorForCustomer: Customer;
+  addFavouriteVendorForCustomer: CustomerResult;
 }
 export interface RemoveFavouriteVendorForCustomer {
-  removeFavouriteVendorForCustomer: Customer;
+  removeFavouriteVendorForCustomer: CustomerResult;
 }
 export interface AddFavouriteItemForCustomer {
-  addFavouriteItemForCustomer: Customer;
+  addFavouriteItemForCustomer: CustomerResult;
 }
 export interface RemoveFavouriteItemForCustomer {
-  removeFavouriteItemForCustomer: Customer;
+  removeFavouriteItemForCustomer: CustomerResult;
 }
 export interface CreateCustomerToken {
   createCustomerToken: CustomerToken;
@@ -431,7 +431,7 @@ export class GraphQLLink extends SynchronousLink {
    */
   _constructClient() {
     this._client = new GraphQLClient(this._url, {
-      headers: this._headers
+      headers: this._headers,
     });
   }
 
