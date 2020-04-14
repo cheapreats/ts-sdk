@@ -9,14 +9,14 @@ import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreditCard {
-  id?: string;
-  brand?: string;
-  last4?: string;
+  id: string;
+  brand: string;
+  last4: string;
 }
 export interface Group {
-  _id?: string;
-  name?: string;
-  customers?: Array<Customer>;
+  _id: string;
+  name: string;
+  customers: Array<Customer>;
 }
 interface LoyaltyFunction {
   loyalty_cards(select: SelectInput): Array<LoyaltyCard>;
@@ -29,7 +29,7 @@ interface CommonCustomerProperties {
   apns_tokens: Array<string>;
   fcm_tokens: Array<string>;
   credit_card: CreditCard;
-  email_preferences: EmailPreferences;
+  email_preferences: EmailPreferencesInput;
   mobile_notifications: boolean;
   is_test: boolean;
   wallet: Coupon;
@@ -38,15 +38,15 @@ interface CommonCustomerProperties {
   favourite_items: Array<MenuItem>;
   test_vendors: Array<Vendor>;
   groups: Array<Group>;
+  profile_picture: string;
+  birthday: string;
 }
 export interface Customer
   extends DefaultControllerRequired,
-    CustomerOptions,
     LoyaltyFunction,
     CommonCustomerProperties {}
 export interface CustomerResult
   extends DefaultControllerRequired,
-    CustomerOptions,
     CommonCustomerProperties {
   loyalty_cards: Array<LoyaltyCard>;
 }
