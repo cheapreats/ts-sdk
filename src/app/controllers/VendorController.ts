@@ -1,6 +1,6 @@
 import { PaymentMethodsInput, Coupon } from "./CouponController";
 import { App } from "../App";
-import { TagInput, MenuItem, Tag } from "./MenuItemController";
+import { TagInput, MenuItem } from "./MenuItemController";
 import { DefaultControllerRequired } from "./Controller";
 import { Employee } from "./EmployeeController";
 import { Category } from "./CategoryController";
@@ -96,7 +96,7 @@ export interface VendorCommonProperties {
   employees: Array<Employee>;
   categories: Array<Category>;
   head_office: HeadOffice;
-  tags: Array<Tag>;
+  tags: Array<TagInput>;
   location: LocationInput;
   open_hours: OpenHoursInput;
   payment_methods: PaymentMethodsInput;
@@ -299,7 +299,7 @@ export class VendorController {
   addVendorTesterByEmailAddress(
     id: string,
     email_address: string
-  ): Promise<VendorTester> {
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $email_address: String!) {
@@ -315,7 +315,7 @@ export class VendorController {
           email_address,
         })
         .then((result: MutateResult) => {
-          resolve(result.addVendorTesterByEmailAddress);
+          resolve(result.addVendorTesterByEmailAddress._id);
         })
         .catch((e: any) => {
           reject(e);

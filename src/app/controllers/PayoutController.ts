@@ -14,10 +14,10 @@ export enum PayoutStatus {
   CANCELLED = "CANCELLED",
 }
 export interface PayoutPlan {
-  fixed_per_transaction?: number;
-  perecentage_per_transaction?: number;
-  fixed_per_payout?: number;
-  percentage_per_payout?: number;
+  fixed_per_transaction: number;
+  perecentage_per_transaction: number;
+  fixed_per_payout: number;
+  percentage_per_payout: number;
 }
 export interface UpdatePayoutInput {
   orders?: Array<string>;
