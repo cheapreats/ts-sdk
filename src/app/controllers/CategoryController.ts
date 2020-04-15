@@ -18,8 +18,9 @@ export interface CommonCategoryProperties {
 }
 export interface CategoryResult
   extends DefaultControllerRequired,
-    CommonCategoryProperties,
-    MenuItemsFunction {}
+    CommonCategoryProperties {
+  menu_items: Array<MenuItem>;
+}
 export interface Category
   extends DefaultControllerRequired,
     CommonCategoryProperties,
