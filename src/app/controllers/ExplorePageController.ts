@@ -36,7 +36,7 @@ export interface AddTimelyDealInput {
 }
 export interface TimelyDeal {
   _id: string;
-  menu_item_id: string;
+  menu_item: MenuItem;
   title: string;
   link: string;
   from: string;
