@@ -23,7 +23,7 @@ export interface AddDailyDealInput {
 export interface DailyDeal {
   _id: string;
   link: string;
-  menu_item_id: MenuItem;
+  menu_item: MenuItem;
 }
 export interface AddSpecialDealInput extends AddDailyDealInput {}
 export interface SpecialDeal extends DailyDeal {}
