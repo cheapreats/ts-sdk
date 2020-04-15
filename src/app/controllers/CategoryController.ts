@@ -18,12 +18,12 @@ export interface CommonCategoryProperties {
 }
 export interface CategoryResult
   extends DefaultControllerRequired,
-    CommonCategoryProperties {
-  menu_items: Array<MenuItem>;
-}
+    CommonCategoryProperties,
+    MenuItemsFunction {}
 export interface Category
   extends DefaultControllerRequired,
-    CommonCategoryProperties {}
+    CommonCategoryProperties,
+    MenuItemsFunction {}
 export interface CreateCategoryInput {
   name: string;
   identifier: string;
