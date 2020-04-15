@@ -6,7 +6,7 @@ import { SelectInput } from "./CommonInterface";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 // import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface MenuItemsFunction {
-  menu_items(select: SelectInput): Array<MenuItem>;
+  menu_items: Array<MenuItem>;
 }
 export interface CommonCategoryProperties {
   menu_item_count: number;
