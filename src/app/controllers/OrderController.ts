@@ -172,7 +172,7 @@ export class OrderController {
   cancel(
     id: string,
     reason: OrderCancellationReason,
-    description: string | null
+    description?: string
   ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `

@@ -9,6 +9,7 @@ export interface AddAdvertisementInput {
   description?: string;
 }
 export interface Advertisement {
+  _id: string;
   title: string;
   link: string;
   image: string;
@@ -19,6 +20,7 @@ export interface AddDailyDealInput {
   menu_item_id: string;
 }
 export interface DailyDeal {
+  _id: string;
   link: string;
   menu_item_id: string;
 }
@@ -32,6 +34,7 @@ export interface AddTimelyDealInput {
   to?: string;
 }
 export interface TimelyDeal {
+  _id: string;
   menu_item_id: string;
   title: string;
   link: string;
