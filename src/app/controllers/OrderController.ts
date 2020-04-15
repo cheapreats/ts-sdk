@@ -57,7 +57,7 @@ export interface OrderItem {
   price: number;
   fees: FeeInput;
   estimated_time: number;
-  modifiers: OrderModifier;
+  modifiers: Array<OrderModifier>;
 }
 export interface TransactionData {
   id: string;
