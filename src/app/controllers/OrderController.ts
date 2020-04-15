@@ -45,7 +45,7 @@ export interface OrderModifier {
   name: string;
   identifier: string;
   description: string;
-  choices: ModifierChoiceInput;
+  choices: Array<ModifierChoiceInput>;
 }
 export interface OrderItem {
   _id: string;
