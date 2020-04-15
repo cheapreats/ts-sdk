@@ -2,6 +2,7 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Coupon } from "./CouponController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { MenuItem } from "./MenuItemController";
 export interface AddAdvertisementInput {
   title?: string;
   link?: string;
@@ -22,7 +23,7 @@ export interface AddDailyDealInput {
 export interface DailyDeal {
   _id: string;
   link: string;
-  menu_item_id: string;
+  menu_item_id: MenuItem;
 }
 export interface AddSpecialDealInput extends AddDailyDealInput {}
 export interface SpecialDeal extends DailyDeal {}
