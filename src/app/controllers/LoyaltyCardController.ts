@@ -25,11 +25,6 @@ export interface LoyaltyTransaction {
   order: Order;
 }
 interface TransactionsFunction {
-  transactions(select: SelectInput): Array<LoyaltyTransaction>;
-}
-export interface LoyaltyCardResult
-  extends LoyaltyCardCommonProperties,
-    DefaultControllerRequired {
   transactions: Array<LoyaltyTransaction>;
 }
 export interface LoyaltyCard

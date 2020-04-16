@@ -1,22 +1,22 @@
 import { App } from "../App";
 import { CategoryResult } from "./CategoryController";
-import { CouponResult } from "./CouponController";
-import { CustomerResult, Group } from "./CustomerController";
+import { Coupon } from "./CouponController";
+import { Customer, Group } from "./CustomerController";
 import { Employee } from "./EmployeeController";
 import { ExplorePage } from "./ExplorePageController";
 import { FlashSale } from "./FlashSaleController";
 import { HeadOffice } from "./HeadOfficeController";
-import { LoyaltyCardResult } from "./LoyaltyCardController";
+import { LoyaltyCard } from "./LoyaltyCardController";
 import { MenuItem } from "./MenuItemController";
 import { Order } from "./OrderController";
 import { Payout, ServiceCharge } from "./PayoutController";
 import { RawConfiguration } from "./RemoteConfigurationController";
 import { Survey } from "./SurveyController";
-import { VendorResult } from "./VendorController";
+import { Vendor } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
 
 export interface The_Customer {
-  the_customer: CustomerResult;
+  the_customer: Customer;
 }
 export interface The_Employee {
   the_employee: Employee;
@@ -25,10 +25,10 @@ export interface Categories {
   categories: Array<CategoryResult>;
 }
 export interface Coupons {
-  coupons: Array<CouponResult>;
+  coupons: Array<Coupon>;
 }
 export interface Valid_Coupon {
-  valid_coupon: CouponResult;
+  valid_coupon: Coupon;
 }
 export interface Customer_Email_Address_Available {
   customer_email_address_available: boolean;
@@ -37,7 +37,7 @@ export interface Customer_Phone_Number_Available {
   customer_phone_number_available: boolean;
 }
 export interface Customers {
-  customers: Array<CustomerResult>;
+  customers: Array<Customer>;
 }
 export interface employee {
   employee: Employee;
@@ -64,7 +64,7 @@ export interface Menu_Item {
   menu_item: MenuItem;
 }
 export interface Loyalty_Cards {
-  loyalty_cards: Array<LoyaltyCardResult>;
+  loyalty_cards: Array<LoyaltyCard>;
 }
 export interface Orders {
   orders: Array<Order>;
@@ -73,7 +73,7 @@ export interface Payouts {
   payouts: Array<Payout>;
 }
 export interface Vendors {
-  vendors: Array<VendorResult>;
+  vendors: Array<Vendor>;
 }
 export interface Head_Offices {
   head_offices: Array<HeadOffice>;

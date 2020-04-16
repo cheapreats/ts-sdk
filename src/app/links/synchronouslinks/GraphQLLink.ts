@@ -8,13 +8,13 @@ import { GraphQLClient } from "graphql-request";
 import { CategoryResult } from "../../controllers/CategoryController";
 import { Cart } from "../../controllers/CartController";
 import { Coupon } from "../../controllers/CouponController";
-import { CustomerResult } from "../../controllers/CustomerController";
+import { Customer } from "../../controllers/CustomerController";
 import { Employee } from "../../controllers/EmployeeController";
 import { ExplorePage } from "../../controllers/ExplorePageController";
 import { FlashSale } from "../../controllers/FlashSaleController";
 import { HeadOffice } from "../../controllers/HeadOfficeController";
 import {
-  LoyaltyCardResult,
+  LoyaltyCard,
   LoyaltyTransaction,
 } from "../../controllers/LoyaltyCardController";
 import { MenuItem } from "../../controllers/MenuItemController";
@@ -22,7 +22,7 @@ import { Order } from "../../controllers/OrderController";
 import { Payout } from "../../controllers/PayoutController";
 import { RawConfiguration } from "../../controllers/RemoteConfigurationController";
 import { Survey, SurveyResponse } from "../../controllers/SurveyController";
-import { VendorResult, VendorTester } from "../../controllers/VendorController";
+import { Vendor, VendorTester } from "../../controllers/VendorController";
 import { VerificationSession } from "../../controllers/VerificationController";
 import {
   MergedConfiguration,
@@ -34,7 +34,7 @@ import { LoyaltyProgram } from "../../controllers/LoyaltyProgramController";
 import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
-import { type } from "os";
+
 export interface UpdateNoteForCart {
   updateNoteForCart: Cart;
 }
@@ -72,31 +72,31 @@ export interface DeleteCategory {
   deleteCategory: string;
 }
 export interface CreateCustomer {
-  createCustomer: CustomerResult;
+  createCustomer: Customer;
 }
 export interface UpdateCustomer {
-  updateCustomer: CustomerResult;
+  updateCustomer: Customer;
 }
 export interface SendCustomerPasswordResetCode {
   sendCustomerPasswordResetCode: string;
 }
 export interface ResetCustomerPassword {
-  resetCustomerPassword: CustomerResult;
+  resetCustomerPassword: Customer;
 }
 export interface EnrollCustomerApnsToken {
-  enrollCustomerApnsToken: CustomerResult;
+  enrollCustomerApnsToken: Customer;
 }
 export interface RevokeCustomerApnsToken {
-  revokeCustomerApnsToken: CustomerResult;
+  revokeCustomerApnsToken: Customer;
 }
 export interface EnrollCustomerFcmToken {
-  enrollCustomerFcmToken: CustomerResult;
+  enrollCustomerFcmToken: Customer;
 }
 export interface RevokeCustomerFcmToken {
-  revokeCustomerFcmToken: CustomerResult;
+  revokeCustomerFcmToken: Customer;
 }
 export interface UpdateCustomerCreditCard {
-  updateCustomerCreditCard: CustomerResult;
+  updateCustomerCreditCard: Customer;
 }
 export interface CreateCustomerWallet {
   createCustomerWallet: Coupon;
@@ -111,16 +111,16 @@ export interface CreateCustomerWalletTransaction {
   createCustomerWalletTransaction: Coupon;
 }
 export interface AddFavouriteVendorForCustomer {
-  addFavouriteVendorForCustomer: CustomerResult;
+  addFavouriteVendorForCustomer: Customer;
 }
 export interface RemoveFavouriteVendorForCustomer {
-  removeFavouriteVendorForCustomer: CustomerResult;
+  removeFavouriteVendorForCustomer: Customer;
 }
 export interface AddFavouriteItemForCustomer {
-  addFavouriteItemForCustomer: CustomerResult;
+  addFavouriteItemForCustomer: Customer;
 }
 export interface RemoveFavouriteItemForCustomer {
-  removeFavouriteItemForCustomer: CustomerResult;
+  removeFavouriteItemForCustomer: Customer;
 }
 export interface CreateCustomerToken {
   createCustomerToken: CustomerToken;
@@ -168,7 +168,7 @@ export interface DeleteHeadOffice {
   deleteHeadOffice: string;
 }
 export interface CreateLoyaltyCardAndEnroll {
-  createLoyaltyCardAndEnroll: LoyaltyCardResult;
+  createLoyaltyCardAndEnroll: LoyaltyCard;
 }
 export interface AwardPointsToLoyaltyCard {
   awardPointsToLoyaltyCard: LoyaltyTransaction;
@@ -186,7 +186,7 @@ export interface CreateLoyaltyProgram {
   createLoyaltyProgram: LoyaltyProgram;
 }
 export interface UpdateLoyaltyProgram {
-  updateLoyaltyProgram: LoyaltyCardResult;
+  updateLoyaltyProgram: LoyaltyCard;
 }
 export interface DeleteLoyaltyProgram {
   deleteLoyaltyProgram: string;
@@ -286,16 +286,16 @@ export interface AddVendorTesterByEmailAddress {
   addVendorTesterByEmailAddress: VendorTester;
 }
 export interface UpdateVendorApprovalStatus {
-  updateVendorApprovalStatus: VendorResult;
+  updateVendorApprovalStatus: Vendor;
 }
 export interface RequestVendorApproval {
   requestVendorApproval: string;
 }
 export interface CreateVendorWithEmployee {
-  createVendorWithEmployee: VendorResult;
+  createVendorWithEmployee: Vendor;
 }
 export interface UpdateVendor {
-  updateVendor: VendorResult;
+  updateVendor: Vendor;
 }
 export interface CreateSmsVerificationSession {
   createSmsVerificationSession: VerificationSession;

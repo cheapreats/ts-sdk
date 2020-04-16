@@ -39,9 +39,6 @@ export interface CreateCouponInput {
   payment_methods?: PaymentMethodsInput;
 }
 export interface TransactionFunction {
-  transactions(select: SelectInput): Array<CouponTransaction>;
-}
-export interface CouponResult extends DefaultControllerRequired {
   transactions: Array<CouponTransaction>;
 }
 export interface Coupon

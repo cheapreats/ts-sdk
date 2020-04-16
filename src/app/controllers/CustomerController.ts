@@ -19,7 +19,7 @@ export interface Group {
   customers: Array<Customer>;
 }
 interface LoyaltyFunction {
-  loyalty_cards(select: SelectInput): Array<LoyaltyCard>;
+  loyalty_cards: Array<LoyaltyCard>;
 }
 interface CommonCustomerProperties {
   email_address: string;
@@ -45,11 +45,7 @@ export interface Customer
   extends DefaultControllerRequired,
     LoyaltyFunction,
     CommonCustomerProperties {}
-export interface CustomerResult
-  extends DefaultControllerRequired,
-    CommonCustomerProperties {
-  loyalty_cards: Array<LoyaltyCard>;
-}
+
 export interface CustomerOptions {
   profile_picture?: string;
   birthday?: string;
