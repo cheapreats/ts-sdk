@@ -7,7 +7,7 @@ import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export enum LoyaltyProgramType {
   DOLLAR = "DOLLAR",
   ORDER = "ORDER",
-  ITEM = "ITEM"
+  ITEM = "ITEM",
 }
 export interface LoyaltyCardAttributesInput {
   color: string;
@@ -24,7 +24,10 @@ export interface CreateLoyaltyProgramInput {
   program_type?: LoyaltyProgramType; // default DOLLAR
   program_loyalty_card_attributes: LoyaltyCardAttributesInput;
 }
-export interface LoyaltyProgramCommonProperties {
+
+export interface UpdateLoyaltyProgramInput {
+  items_required?: Array<string>;
+  program_type?: LoyaltyProgramType;
   name?: string;
   description?: string;
   points?: number;
@@ -32,17 +35,18 @@ export interface LoyaltyProgramCommonProperties {
   min_purchase?: number;
   program_loyalty_card_attributes?: LoyaltyCardAttributesInput;
 }
-export interface UpdateLoyaltyProgramInput
-  extends LoyaltyProgramCommonProperties {
-  items_required?: Array<string>;
-  program_type?: LoyaltyProgramType;
-}
-export interface LoyaltyProgram extends LoyaltyProgramCommonProperties {
-  _id?: string;
-  vendor?: Vendor;
-  items_required?: Array<MenuItem>;
-  redeemanble_items?: Array<RedeemableItem>;
-  program_type?: string;
+export interface LoyaltyProgram {
+  _id: string;
+  vendor: Vendor;
+  items_required: Array<MenuItem>;
+  redeemable_items: Array<RedeemableItem>;
+  program_type: string;
+  name: string;
+  description: string;
+  points: number;
+  shareable_points: number;
+  min_purchase: number;
+  program_loyalty_card_attributes: LoyaltyCardAttributesInput;
 }
 /**
  * Controller for loyalty programs.
@@ -77,7 +81,7 @@ export class LoyaltyProgramController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          loyalty_program
+          loyalty_program,
         })
         .then((result: MutateResult) => {
           resolve(result.createLoyaltyProgram._id);
@@ -110,7 +114,7 @@ export class LoyaltyProgramController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          loyalty_program
+          loyalty_program,
         })
         .then((result: MutateResult) => {
           resolve(result.updateLoyaltyProgram._id);
@@ -136,7 +140,7 @@ export class LoyaltyProgramController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteLoyaltyProgram);

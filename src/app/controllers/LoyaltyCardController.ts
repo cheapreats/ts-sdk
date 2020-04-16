@@ -14,7 +14,7 @@ export enum LoyaltyTransactionType {
   EARNING = "EARNING",
   EARNING_FRIEND = "EARNING_FRIEND",
   SHARING = "SHARING",
-  REDEEMING = "REDEEMING"
+  REDEEMING = "REDEEMING",
 }
 export interface LoyaltyTransaction {
   _id: string;
@@ -24,11 +24,17 @@ export interface LoyaltyTransaction {
   message?: string;
   order: Order;
 }
-export interface LoyaltyCard extends DefaultControllerRequired {
+interface TransactionsFunction {
+  transactions: Array<LoyaltyTransaction>;
+}
+export interface LoyaltyCard
+  extends LoyaltyCardCommonProperties,
+    DefaultControllerRequired,
+    TransactionsFunction {}
+export interface LoyaltyCardCommonProperties {
   loyalty_program: LoyaltyProgram;
-  customer?: Customer;
-  phone_number?: string;
-  transactions(select: SelectInput): Array<LoyaltyTransaction>;
+  customer: Customer;
+  phone_number: string;
   points: number;
   shareable_points: number;
 }
@@ -75,7 +81,7 @@ export class LoyaltyCardController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          loyalty_card
+          loyalty_card,
         })
         .then((result: MutateResult) => {
           resolve(result.createLoyaltyCardAndEnroll._id);
@@ -105,7 +111,7 @@ export class LoyaltyCardController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          amount
+          amount,
         })
         .then((result: MutateResult) => {
           resolve(result.awardPointsToLoyaltyCard._id);
@@ -138,7 +144,7 @@ export class LoyaltyCardController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          amount
+          amount,
         })
         .then((result: MutateResult) => {
           resolve(result.awardShareablePointsToLoyaltyCard._id);
@@ -177,7 +183,7 @@ export class LoyaltyCardController {
           sender_customer_id,
           receiver_phone_number,
           loyalty_program_id,
-          no_of_points_to_share
+          no_of_points_to_share,
         })
         .then((result: MutateResult) => {
           resolve(result.shareLoyaltyPoints._id);
@@ -210,7 +216,7 @@ export class LoyaltyCardController {
         .getAdaptor()
         .mutate(mutationString, {
           loyalty_card_id,
-          menu_item_id
+          menu_item_id,
         })
         .then((result: MutateResult) => {
           resolve(result.redeemLoyaltyPointsForCoupon._id);

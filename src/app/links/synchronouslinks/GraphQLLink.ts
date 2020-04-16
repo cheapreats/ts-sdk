@@ -5,7 +5,7 @@
  */
 import { SynchronousLink } from "./SynchronousLink";
 import { GraphQLClient } from "graphql-request";
-import { Category } from "../../controllers/CategoryController";
+import { CategoryResult } from "../../controllers/CategoryController";
 import { Cart } from "../../controllers/CartController";
 import { Coupon } from "../../controllers/CouponController";
 import { Customer } from "../../controllers/CustomerController";
@@ -15,7 +15,7 @@ import { FlashSale } from "../../controllers/FlashSaleController";
 import { HeadOffice } from "../../controllers/HeadOfficeController";
 import {
   LoyaltyCard,
-  LoyaltyTransaction
+  LoyaltyTransaction,
 } from "../../controllers/LoyaltyCardController";
 import { MenuItem } from "../../controllers/MenuItemController";
 import { Order } from "../../controllers/OrderController";
@@ -26,7 +26,7 @@ import { Vendor, VendorTester } from "../../controllers/VendorController";
 import { VerificationSession } from "../../controllers/VerificationController";
 import {
   MergedConfiguration,
-  QueryResult
+  QueryResult,
 } from "../../controllers/GraphController";
 import { CustomerToken } from "../../controllers/CustomerTokenController";
 import { EmployeeToken } from "../../controllers/EmployeeTokenController";
@@ -34,15 +34,15 @@ import { LoyaltyProgram } from "../../controllers/LoyaltyProgramController";
 import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
-import { type } from "os";
+
 export interface UpdateNoteForCart {
   updateNoteForCart: Cart;
 }
 export interface UpdateCategory {
-  updateCategory: Category;
+  updateCategory: CategoryResult;
 }
 export interface BatchUpdateCategories {
-  batchUpdateCategories: Array<Category>;
+  batchUpdateCategories: Array<CategoryResult>;
 }
 export interface RemoveCouponFromCart {
   removeCouponFromCart: Cart;
@@ -54,7 +54,7 @@ export interface DeleteCart {
   deleteCart: string;
 }
 export interface CreateCategory {
-  createCategory: Category;
+  createCategory: CategoryResult;
 }
 export interface CreateCoupon {
   createCoupon: Coupon;
@@ -431,7 +431,7 @@ export class GraphQLLink extends SynchronousLink {
    */
   _constructClient() {
     this._client = new GraphQLClient(this._url, {
-      headers: this._headers
+      headers: this._headers,
     });
   }
 

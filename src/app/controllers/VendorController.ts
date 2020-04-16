@@ -1,11 +1,7 @@
-import {
-  PaymentMethodsInput,
-  PaymentMethods,
-  Coupon
-} from "./CouponController";
+import { PaymentMethodsInput, Coupon } from "./CouponController";
 import { App } from "../App";
-import { TagInput, MenuItem, Tag } from "./MenuItemController";
-import { DefaultController } from "./Controller";
+import { TagInput, MenuItem } from "./MenuItemController";
+import { DefaultControllerRequired } from "./Controller";
 import { Employee } from "./EmployeeController";
 import { Category } from "./CategoryController";
 import { HeadOffice } from "./HeadOfficeController";
@@ -22,40 +18,47 @@ export interface CreateVendorWithEmployeeInput {
   password: string;
   plan: string;
 }
+
 export enum VendorApprovalStatus {
   NOT_APPROVED = "NOT_APPROVED",
   PENDING = "PENDING",
-  APPROVED = "APPROVED"
+  APPROVED = "APPROVED",
 }
+
 export enum PayoutAutoRequestSchedule {
   OFF = "OFF",
   WEEKLY = "WEEKLY",
   BI_WEEKLY = "BI_WEEKLY",
-  MONTHLY = "MONTHLY"
+  MONTHLY = "MONTHLY",
 }
+
 export interface VendorDailyDealsMenu {
-  monday?: Array<MenuItem>;
-  tuesday?: Array<MenuItem>;
-  wednesday?: Array<MenuItem>;
-  thursday?: Array<MenuItem>;
-  friday?: Array<MenuItem>;
-  saturday?: Array<MenuItem>;
-  sunday?: Array<MenuItem>;
+  monday: Array<MenuItem>;
+  tuesday: Array<MenuItem>;
+  wednesday: Array<MenuItem>;
+  thursday: Array<MenuItem>;
+  friday: Array<MenuItem>;
+  saturday: Array<MenuItem>;
+  sunday: Array<MenuItem>;
 }
+
 export interface VendorOrderTypes {
   eat_in: boolean;
   take_out: boolean;
   delivery: boolean;
 }
+
 export interface VendorAnalyticsCouponUsage {
   coupon?: Coupon;
   use_count?: number;
 }
+
 export enum VendorAnalyticsCustomerType {
   FIRST_TIME = "FIRST_TIME",
   CASUAL = "CASUAL",
-  REGULAR = "REGULAR"
+  REGULAR = "REGULAR",
 }
+
 export interface VendorAnalyticsCustomerAnalysis {
   customer_id?: string;
   customer_name?: string;
@@ -66,6 +69,7 @@ export interface VendorAnalyticsCustomerAnalysis {
   is_store_favourited?: boolean;
   favourited_items?: Array<MenuItem>;
 }
+
 export interface VendorAnalytics {
   order_count?: number;
   total_sales?: number;
@@ -73,38 +77,64 @@ export interface VendorAnalytics {
   coupon_usage?: Array<VendorAnalyticsCouponUsage>;
   customer_analysis?: Array<VendorAnalyticsCustomerAnalysis>;
 }
-export interface Vendor extends VendorCommonProperties, DefaultController {
-  employees?: Array<Employee>;
-  categories?: Array<Category>;
-  head_office?: HeadOffice;
-  tags?: Array<Tag>;
-  location?: Location;
-  open_hours?: OpenHours;
-  payment_methods?: PaymentMethods;
-  direct_deposit_info?: DirectDepositInfoInput;
-  timezone?: string;
-  payout_plan?: PayoutPlan;
-  loyalty_programs?: Array<LoyaltyProgram>;
-  payouts?: Array<Payout>;
-  surveys?: Array<Survey>;
-  coupons?: Array<Coupon>;
-  requested_payout?: boolean;
-  analytics(from: string, to: string): VendorAnalytics;
-  active_flash_sale?: FlashSale;
-  is_test?: boolean;
-  approval_status?: VendorApprovalStatus;
-  testers?: Array<VendorTester>;
-  daily_deals_menu: VendorDailyDealsMenu;
-  order_types?: VendorOrderTypes;
+
+interface AnalyticsFunction {
+  analytics: VendorAnalytics;
 }
+export interface Vendor
+  extends VendorCommonProperties,
+    DefaultControllerRequired,
+    AnalyticsFunction {}
+
+export interface VendorCommonProperties {
+  employees: Array<Employee>;
+  categories: Array<Category>;
+  head_office: HeadOffice;
+  tags: Array<TagInput>;
+  location: LocationInput;
+  open_hours: OpenHoursInput;
+  payment_methods: PaymentMethodsInput;
+  direct_deposit_info: DirectDepositInfoInput;
+  timezone: string;
+  payout_plan: PayoutPlan;
+  loyalty_programs: Array<LoyaltyProgram>;
+  payouts: Array<Payout>;
+  surveys: Array<Survey>;
+  coupons: Array<Coupon>;
+  requested_payout: boolean;
+  active_flash_sale: FlashSale;
+  is_test: boolean;
+  approval_status: VendorApprovalStatus;
+  testers: Array<VendorTester>;
+  daily_deals_menu: VendorDailyDealsMenu;
+  order_types: VendorOrderTypes;
+  name: string;
+  description: string;
+  images: Array<string>;
+  address: string;
+  phone_number: string;
+  status: string;
+  payout_email_address: string;
+  directions: string;
+  receive_sms_notifications: boolean;
+  auto_open: boolean;
+  auto_close: boolean;
+  payout_auto_request_schedule: PayoutAutoRequestSchedule;
+  global_tax_rate: number;
+  postal_code: string;
+  store_logo: string;
+}
+
 export interface TimeSpanInput {
   from: string;
   to: string;
 }
+
 export interface TimeSpan {
   from?: string;
   to?: string;
 }
+
 export interface OpenHoursInput {
   monday: Array<TimeSpanInput>;
   tuesday: Array<TimeSpanInput>;
@@ -114,6 +144,7 @@ export interface OpenHoursInput {
   saturday: Array<TimeSpanInput>;
   sunday: Array<TimeSpanInput>;
 }
+
 export interface OpenHours {
   monday?: Array<TimeSpanInput>;
   tuesday?: Array<TimeSpanInput>;
@@ -123,27 +154,56 @@ export interface OpenHours {
   saturday?: Array<TimeSpanInput>;
   sunday?: Array<TimeSpanInput>;
 }
+
 export interface LocationInput {
   longitude: number;
   latitude: number;
 }
+
 export interface Location {
   longitude?: number;
   latitude?: number;
 }
+
 export interface DirectDepositInfoInput {
   transit_no: string;
   institution_no: string;
   account_no: string;
   cheque_image: string;
 }
+
 export interface DirectDepositInfo {
   transit_no?: string;
   institution_no?: string;
   account_no?: string;
   cheque_image?: string;
 }
+
 export interface VendorCommonProperties {
+  name: string;
+  description: string;
+  images: Array<string>;
+  address: string;
+  phone_number: string;
+  status: string;
+  payout_email_address: string;
+  directions: string;
+  receive_sms_notifications: boolean;
+  auto_open: boolean;
+  auto_close: boolean;
+  payout_auto_request_schedule: PayoutAutoRequestSchedule;
+  global_tax_rate: number;
+  postal_code: string;
+  store_logo: string;
+}
+
+export interface UpdateVendorInput {
+  tags?: Array<TagInput>;
+  open_hours?: OpenHoursInput;
+  location?: LocationInput;
+  direct_deposit_info?: DirectDepositInfoInput;
+  payment_methods?: PaymentMethodsInput;
+  order_types?: OrderTypesInput;
   name?: string;
   description?: string;
   images?: Array<string>;
@@ -151,7 +211,7 @@ export interface VendorCommonProperties {
   phone_number?: string;
   status?: string;
   payout_email_address?: string;
-  directions: string;
+  directions?: string;
   receive_sms_notifications?: boolean;
   auto_open?: boolean;
   auto_close?: boolean;
@@ -160,23 +220,17 @@ export interface VendorCommonProperties {
   postal_code?: string;
   store_logo?: string;
 }
-export interface UpdateVendorInput extends VendorCommonProperties {
-  tags?: Array<TagInput>;
-  open_hours?: OpenHoursInput;
-  location?: LocationInput;
-  direct_deposit_info?: DirectDepositInfoInput;
-  payment_methods?: PaymentMethodsInput;
-  order_types?: OrderTypesInput;
-}
+
 export interface OrderTypesInput {
   eat_in?: boolean;
   take_out?: boolean;
   delivery?: boolean;
 }
+
 export interface VendorTester {
-  _id?: string;
-  email_address?: string;
-  vendor?: Vendor;
+  _id: string;
+  email_address: string;
+  vendor: Vendor;
 }
 
 /**
@@ -219,7 +273,7 @@ export class VendorController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteVendorTester);
@@ -239,7 +293,7 @@ export class VendorController {
   addVendorTesterByEmailAddress(
     id: string,
     email_address: string
-  ): Promise<VendorTester> {
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $email_address: String!) {
@@ -252,10 +306,10 @@ export class VendorController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          email_address
+          email_address,
         })
         .then((result: MutateResult) => {
-          resolve(result.addVendorTesterByEmailAddress);
+          resolve(result.addVendorTesterByEmailAddress._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -286,7 +340,7 @@ export class VendorController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          approval_status
+          approval_status,
         })
         .then((result: MutateResult) => {
           resolve(result.updateVendorApprovalStatus._id);
@@ -312,7 +366,7 @@ export class VendorController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.requestVendorApproval);
@@ -345,7 +399,7 @@ export class VendorController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          vendor
+          vendor,
         })
         .then((result: MutateResult) => {
           //@ts-ignore deprecated
@@ -374,7 +428,7 @@ export class VendorController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          vendor
+          vendor,
         })
         .then((result: MutateResult) => {
           resolve(result.createVendorWithEmployee._id);
@@ -404,7 +458,7 @@ export class VendorController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          vendor
+          vendor,
         })
         .then((result: MutateResult) => {
           resolve(result.updateVendor._id);
@@ -432,7 +486,7 @@ export class VendorController {
         .getAdaptor()
         .mutate(mutationString, {
           vendor_id,
-          status
+          status,
         })
         .then((result: MutateResult) => {
           resolve(result.updateAllMenuItemsStatusForVendor);

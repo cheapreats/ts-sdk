@@ -1,7 +1,7 @@
 import { Cart } from "./CartController";
 import { ResetCodeSendMethod } from "./EmployeeController";
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { SelectInput } from "./CommonInterface";
 import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
@@ -9,34 +9,43 @@ import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreditCard {
-  id?: string;
-  brand?: string;
-  last4?: string;
+  id: string;
+  brand: string;
+  last4: string;
 }
 export interface Group {
-  _id?: string;
-  name?: string;
-  customers?: Array<Customer>;
+  _id: string;
+  name: string;
+  customers: Array<Customer>;
 }
-export interface Customer extends DefaultController, CustomerOptions {
-  email_address?: string;
-  name?: string;
-  password?: string;
-  phone_number?: string;
-  apns_tokens?: Array<string>;
-  fcm_tokens?: Array<string>;
-  credit_card?: CreditCard;
-  email_preferences?: EmailPreferences;
-  mobile_notifications?: boolean;
-  loyalty_cards(select: SelectInput): Array<LoyaltyCard>;
-  is_test?: boolean;
-  wallet?: Coupon;
-  cart?: Cart;
-  favourite_vendors?: Array<Vendor>;
-  favourite_items?: Array<MenuItem>;
-  test_vendors?: Array<Vendor>;
-  groups?: Array<Group>;
+interface LoyaltyFunction {
+  loyalty_cards: Array<LoyaltyCard>;
 }
+interface CommonCustomerProperties {
+  email_address: string;
+  name: string;
+  password: string;
+  phone_number: string;
+  apns_tokens: Array<string>;
+  fcm_tokens: Array<string>;
+  credit_card: CreditCard;
+  email_preferences: EmailPreferencesInput;
+  mobile_notifications: boolean;
+  is_test: boolean;
+  wallet: Coupon;
+  cart: Cart;
+  favourite_vendors: Array<Vendor>;
+  favourite_items: Array<MenuItem>;
+  test_vendors: Array<Vendor>;
+  groups: Array<Group>;
+  profile_picture: string;
+  birthday: string;
+}
+export interface Customer
+  extends DefaultControllerRequired,
+    LoyaltyFunction,
+    CommonCustomerProperties {}
+
 export interface CustomerOptions {
   profile_picture?: string;
   birthday?: string;
@@ -111,7 +120,7 @@ export class CustomerController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          customer
+          customer,
         })
         .then((result: MutateResult) => {
           resolve(result.createCustomer._id);
@@ -141,7 +150,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          customer
+          customer,
         })
         .then((result: MutateResult) => {
           resolve(result.updateCustomer._id);
@@ -158,7 +167,7 @@ export class CustomerController {
    * @param {string} token - The APNS Token
    * @returns {Promise<Customer>}
    */
-  enrollApnsToken(id: string, token: string): Promise<Customer> {
+  enrollApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollCustomerApnsTokenMutation ($id: String!, $token: String!) {
@@ -171,10 +180,10 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.enrollCustomerApnsToken);
+          resolve(result.enrollCustomerApnsToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -186,9 +195,9 @@ export class CustomerController {
    * Revoke an APNs token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The APNS Token
-   * @returns {Promise<Customer>}
+   * @returns {Promise<string>}
    */
-  revokeApnsToken(id: string, token: string): Promise<Customer> {
+  revokeApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation revokeCustomerApnsTokenMutation ($id: String!, $token: String!) {
@@ -201,10 +210,10 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.revokeCustomerApnsToken);
+          resolve(result.revokeCustomerApnsToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -216,9 +225,9 @@ export class CustomerController {
    * Enroll a new FCM token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The FCM Token
-   * @returns {Promise<Customer>}
+   * @returns {Promise<string>}
    */
-  enrollFcmToken(id: string, token: string): Promise<Customer> {
+  enrollFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation enrollCustomerFcmTokenMutation ($id: String!, $token: String!) {
@@ -231,10 +240,10 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.enrollCustomerFcmToken);
+          resolve(result.enrollCustomerFcmToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -246,9 +255,9 @@ export class CustomerController {
    * Revoke an FCM token
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The FCM Token
-   * @returns {Promise<Customer>}
+   * @returns {Promise<string>}
    */
-  revokeFcmToken(id: string, token: string): Promise<Customer> {
+  revokeFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation revokeCustomerFcmTokenMutation ($id: String!, $token: String!) {
@@ -261,10 +270,10 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.revokeCustomerFcmToken);
+          resolve(result.revokeCustomerFcmToken._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -276,9 +285,9 @@ export class CustomerController {
    * Update a customer's credit card
    * @param {string} id - The id of the Customer Object
    * @param {string} token - The Stripe Token
-   * @returns {Promise<Customer>}
+   * @returns {Promise<string>}
    */
-  updateCreditCard(id: string, token: string): Promise<Customer> {
+  updateCreditCard(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation updateCustomerCreditCardMutation ($id: String!, $token: String!) {
@@ -291,10 +300,10 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          token
+          token,
         })
         .then((result: MutateResult) => {
-          resolve(result.updateCustomerCreditCard);
+          resolve(result.updateCustomerCreditCard._id);
         })
         .catch((e: any) => {
           reject(e);
@@ -320,7 +329,7 @@ export class CustomerController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.createCustomerWallet._id);
@@ -357,7 +366,7 @@ export class CustomerController {
         .mutate(mutationString, {
           id,
           amount,
-          payment_method
+          payment_method,
         })
         .then((result: MutateResult) => {
           resolve(result.reloadCustomerWallet._id);
@@ -388,7 +397,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           email_address,
-          method
+          method,
         })
         .then((result: MutateResult) => {
           resolve(result.sendCustomerPasswordResetCode);
@@ -424,7 +433,7 @@ export class CustomerController {
         .mutate(mutationString, {
           email_address,
           code,
-          password
+          password,
         })
         .then((result: MutateResult) => {
           resolve(result.resetCustomerPassword._id);
@@ -464,7 +473,7 @@ export class CustomerController {
           id,
           vendor_id,
           amount,
-          order_id
+          order_id,
         })
         .then((result: MutateResult) => {
           resolve(result.refundCustomerWallet._id);
@@ -504,7 +513,7 @@ export class CustomerController {
           id,
           transaction_type,
           amount,
-          description
+          description,
         })
         .then((result: MutateResult) => {
           resolve(result.createCustomerWalletTransaction._id);
@@ -534,7 +543,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          vendor_id
+          vendor_id,
         })
         .then((result: MutateResult) => {
           resolve(result.addFavouriteVendorForCustomer._id);
@@ -564,7 +573,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          vendor_id
+          vendor_id,
         })
         .then((result: MutateResult) => {
           resolve(result.removeFavouriteVendorForCustomer._id);
@@ -594,7 +603,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          item_id
+          item_id,
         })
         .then((result: MutateResult) => {
           resolve(result.addFavouriteItemForCustomer._id);
@@ -624,7 +633,7 @@ export class CustomerController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          item_id
+          item_id,
         })
         .then((result: MutateResult) => {
           resolve(result.removeFavouriteItemForCustomer._id);

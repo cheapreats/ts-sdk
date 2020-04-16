@@ -13,7 +13,7 @@ export class CheaprEatsGraphQLAdaptor extends Adaptor {
   constructor(config: { graphQLEndpoint: string }) {
     super(config);
     this._graphQLLink = new GraphQLLink(config.graphQLEndpoint, {
-      version: packageDotJson.version || null
+      version: packageDotJson.version || null,
     });
   }
 
@@ -21,12 +21,12 @@ export class CheaprEatsGraphQLAdaptor extends Adaptor {
    * This function sets the authentication for an application to be authorized to make calls to CheaprEats API
    * @param  {string} token - The Authentication Token
    */
-  setAuthenticationToken(token: string) {
+  setAuthenticationToken(token: string | null) {
     this._graphQLLink = new GraphQLLink(this._config.graphQLEndpoint, {
       headers: {
         version: packageDotJson.version,
-        authorization: token
-      }
+        authorization: token,
+      },
     });
   }
 

@@ -1,23 +1,23 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export enum PayoutMethod {
-  MANUAL = "MANUAL"
+  MANUAL = "MANUAL",
 }
 export enum PayoutStatus {
   PENDING = "PENDING",
   IN_TRANSIT = "IN_TRANSIT",
   PAID = "PAID",
-  CANCELLED = "CANCELLED"
+  CANCELLED = "CANCELLED",
 }
 export interface PayoutPlan {
-  fixed_per_transaction?: number;
-  perecentage_per_transaction?: number;
-  fixed_per_payout?: number;
-  percentage_per_payout?: number;
+  fixed_per_transaction: number;
+  perecentage_per_transaction: number;
+  fixed_per_payout: number;
+  percentage_per_payout: number;
 }
 export interface UpdatePayoutInput {
   orders?: Array<string>;
@@ -28,32 +28,32 @@ export interface UpdatePayoutInput {
 }
 export enum ServiceChargeType {
   CREDIT = "CREDIT",
-  DEBIT = "DEBIT"
+  DEBIT = "DEBIT",
 }
 export enum ServiceChargeReason {
   ORDER_TRANSACTION_FEE = "ORDER_TRANSACTION_FEE",
   PAYOUT_REQUEST_FEE = "PAYOUT_REQUEST_FEE",
   OTHER = "OTHER",
   OTHER_TAXABLE = "OTHER_TAXABLE",
-  TAX = "TAX"
+  TAX = "TAX",
 }
-export interface ServiceCharge extends DefaultController {
-  vendor_id?: string;
+export interface ServiceCharge extends DefaultControllerRequired {
+  vendor_id: string;
   amount: number;
   type: ServiceChargeType;
   reason: ServiceChargeReason;
-  description?: string;
-  settled_at?: string;
+  description: string;
+  settled_at: string;
 }
-export interface Payout extends DefaultController {
+export interface Payout extends DefaultControllerRequired {
   vendor_id: string;
-  vendor?: Vendor;
-  total?: number;
-  orders?: Array<Order>;
-  service_charges?: Array<ServiceCharge>;
-  note?: string;
-  method?: string;
-  status?: string;
+  vendor: Vendor;
+  total: number;
+  orders: Array<Order>;
+  service_charges: Array<ServiceCharge>;
+  note: string;
+  method: string;
+  status: string;
 }
 /**
  * Controller related to payouts
@@ -80,7 +80,7 @@ export class PayoutController {
   request(
     vendor_id: string,
     dry: boolean | null // default False
-  ): Promise<Payout> {
+  ): Promise<{ _id: string; total: number }> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($vendor_id: String!, $dry: Boolean) {
@@ -94,11 +94,14 @@ export class PayoutController {
         .getAdaptor()
         .mutate(mutationString, {
           vendor_id,
-          dry
+          dry,
         })
         //QUESTION only _id and total will be accessible is this the expected behaviour
         .then((result: MutateResult) => {
-          resolve(result.requestPayout);
+          resolve({
+            _id: result.requestPayout._id,
+            total: result.requestPayout.total,
+          });
         })
         .catch((e: any) => {
           reject(e);
@@ -125,7 +128,7 @@ export class PayoutController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          payout
+          payout,
         })
         .then((result: MutateResult) => {
           resolve(result.updatePayout._id);
@@ -151,7 +154,7 @@ export class PayoutController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.cancelPayout);

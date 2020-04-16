@@ -8,10 +8,10 @@ export enum SurveyQuestionType {
   CHECKBOX = "CHECKBOX",
   MULTI_CHECKBOX = "MULTI_CHECKBOX",
   SHORT_ANSWER = "SHORT_ANSWER",
-  RATING = "RATING"
+  RATING = "RATING",
 }
 export enum SurveyDeliveryRule {
-  AFTER_ORDER = "AFTER_ORDER"
+  AFTER_ORDER = "AFTER_ORDER",
 }
 export interface SurveyQuestionResponse {
   _id: string;
@@ -21,14 +21,14 @@ export interface SurveyQuestionResponse {
 export interface SurveyResponse extends DefaultControllerRequired {
   customer: Customer;
   responses: Array<SurveyQuestionResponse>;
-  order?: Order;
+  order: Order;
 }
 export interface SurveyQuestion extends DefaultControllerRequired {
   question: string;
-  description?: string;
+  description: string;
   question_type: string;
-  choices?: Array<string>;
-  max_rating?: number;
+  choices: Array<string>;
+  max_rating: number;
   required: boolean;
 }
 export interface Survey extends DefaultControllerRequired {
@@ -37,11 +37,11 @@ export interface Survey extends DefaultControllerRequired {
   description: string;
   questions: Array<SurveyQuestion>;
   delivery_rule: string;
-  loyalty_reward?: number;
-  wallet_reward?: number;
-  responses?: Array<SurveyResponse>;
-  released_at?: string;
-  archived_at?: string;
+  loyalty_reward: number;
+  wallet_reward: number;
+  responses: Array<SurveyResponse>;
+  released_at: string;
+  archived_at: string;
 }
 
 export interface SurveyQuestionInput {
@@ -109,7 +109,7 @@ export class SurveyController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          survey
+          survey,
         })
         .then((result: MutateResult) => {
           resolve(result.createSurvey._id);
@@ -139,7 +139,7 @@ export class SurveyController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          survey
+          survey,
         })
         .then((result: MutateResult) => {
           resolve(result.updateSurvey._id);
@@ -165,7 +165,7 @@ export class SurveyController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.archiveSurvey);
@@ -191,7 +191,7 @@ export class SurveyController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteSurvey);
@@ -219,7 +219,7 @@ export class SurveyController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.releaseSurvey._id);
@@ -252,7 +252,7 @@ export class SurveyController {
         .getAdaptor()
         .mutate(mutationString, {
           survey_id,
-          survey_response
+          survey_response,
         })
         .then((result: MutateResult) => {
           resolve(result.createSurveyResponse._id);

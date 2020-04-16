@@ -2,7 +2,7 @@ import { App } from "../App";
 import { Modifier } from "./ModifierController";
 import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export interface CreateMenuItemInput {
@@ -28,21 +28,17 @@ export interface TagInput {
   name: string;
   identifier: string;
 }
-export interface Tag {
-  name?: string;
-  identifier?: string;
-}
+
 export interface FeeInput {
   name: string;
   fee_type: string;
   amount: number;
 }
-export interface Fee {
-  name?: string;
-  fee_type?: string;
-  amount?: number;
-}
-export interface MenuItemCommonProperties {
+
+export interface UpdateMenuItemInput {
+  tags?: Array<TagInput>;
+  ingredients?: Array<TagInput>;
+  fees?: Array<FeeInput>;
   name?: string;
   identifier?: string;
   images?: Array<string>;
@@ -57,22 +53,30 @@ export interface MenuItemCommonProperties {
   sort_order?: number;
   estimated_time?: number;
 }
-export interface UpdateMenuItemInput extends MenuItemCommonProperties {
-  tags?: Array<TagInput>;
-  ingredients?: Array<TagInput>;
-  fees?: Array<FeeInput>;
-}
 export interface BatchUpdateMenuItemsInput {
   id: string;
   menu_item: UpdateMenuItemInput;
 }
-export interface MenuItem extends MenuItemCommonProperties, DefaultController {
-  modifiers?: Array<Modifier>;
-  tags?: Array<Tag>;
-  ingredients?: Array<Tag>;
-  fees?: Array<Fee>;
-  category?: Category;
-  flash_sale_info?: FlashSaleItem;
+export interface MenuItem extends DefaultControllerRequired {
+  modifiers: Array<Modifier>;
+  tags: Array<TagInput>;
+  ingredients: Array<TagInput>;
+  fees: Array<FeeInput>;
+  category: Category;
+  flash_sale_info: FlashSaleItem;
+  name: string;
+  identifier: string;
+  images: Array<string>;
+  calories: number;
+  recycle_info: string;
+  description: string;
+  daily_special_day: string;
+  price: number;
+  original_price: number;
+  status: string;
+  warning_label: string;
+  sort_order: number;
+  estimated_time: number;
 }
 /**
  * Controller for menu items.
@@ -108,7 +112,7 @@ export class MenuItemController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          menu_item
+          menu_item,
         })
         .then((result: MutateResult) => {
           resolve(result.createMenuItem._id);
@@ -138,7 +142,7 @@ export class MenuItemController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          menu_item
+          menu_item,
         })
         .then((result: MutateResult) => {
           resolve(result.updateMenuItem._id);
@@ -152,11 +156,11 @@ export class MenuItemController {
   /**
    * Batch update a list of menu items.
    * @param {Array<BatchUpdateMenuItemsInput>} menu_items List of BatchUpdateMenuItemsInput
-   * @returns {Promise<Array<MenuItem>>} List of menu items with _id field
+   * @returns {Promise<Array<string>>} List of menu items with _id field
    */
   batchUpdate(
     menu_items: Array<BatchUpdateMenuItemsInput>
-  ): Promise<Array<MenuItem>> {
+  ): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation batchUpdateMenuItems ($menu_items: [BatchUpdateMenuItemsInput]!) {
@@ -168,10 +172,10 @@ export class MenuItemController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          menu_items
+          menu_items,
         })
         .then((result: MutateResult) => {
-          resolve(result.batchUpdateMenuItems);
+          resolve(result.batchUpdateMenuItems.map((menuItem) => menuItem._id));
         })
         .catch((e: any) => {
           reject(e);
@@ -195,7 +199,7 @@ export class MenuItemController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then(() => {
           resolve();

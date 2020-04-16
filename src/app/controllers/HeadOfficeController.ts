@@ -1,11 +1,11 @@
 import { App } from "../App";
 import { Vendor } from "./VendorController";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 /**
  * Controller for head offices.
  */
-export interface HeadOffice extends DefaultController {
+export interface HeadOffice extends DefaultControllerRequired {
   vendors: Array<Vendor>;
   identifier: string;
 }
@@ -39,7 +39,7 @@ export class HeadOfficeController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          identifier
+          identifier,
         })
         .then((result: MutateResult) => {
           resolve(result.createHeadOffice._id);
@@ -69,7 +69,7 @@ export class HeadOfficeController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          identifier
+          identifier,
         })
         .then((result: MutateResult) => {
           resolve(result.updateHeadOffice._id);
@@ -95,7 +95,7 @@ export class HeadOfficeController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteHeadOffice);

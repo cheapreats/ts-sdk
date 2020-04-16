@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { Category } from "./CategoryController";
+import { CategoryResult } from "./CategoryController";
 import { Coupon } from "./CouponController";
 import { Customer, Group } from "./CustomerController";
 import { Employee } from "./EmployeeController";
@@ -22,7 +22,7 @@ export interface The_Employee {
   the_employee: Employee;
 }
 export interface Categories {
-  categories: Array<Category>;
+  categories: Array<CategoryResult>;
 }
 export interface Coupons {
   coupons: Array<Coupon>;

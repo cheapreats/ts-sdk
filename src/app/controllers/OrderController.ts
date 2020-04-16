@@ -1,18 +1,18 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Vendor } from "./VendorController";
 import { Survey, SurveyResponse } from "./SurveyController";
 import { Tip } from "./TipController";
 import { Category } from "./CategoryController";
-import { Tag, Fee } from "./MenuItemController";
-import { ModifierChoice } from "./ModifierController";
+import { TagInput, FeeInput } from "./MenuItemController";
+import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
 export enum OrderType {
   EAT_IN = "EAT_IN",
   TAKE_OUT = "TAKE_OUT",
-  DELIVERY = "DELIVERY"
+  DELIVERY = "DELIVERY",
 }
 export enum OrderCancellationReason {
   VENDOR_CANCELLED = "VENDOR_CANCELLED",
@@ -21,7 +21,7 @@ export enum OrderCancellationReason {
   VENDOR_STORE_CLOSING_SOON = "VENDOR_STORE_CLOSING_SOON",
   CUSTOMER_NOT_PICKED_UP = "CUSTOMER_NOT_PICKED_UP",
   CUSTOMER_CANCELLED = "CUSTOMER_CANCELLED",
-  OTHER = "OTHER"
+  OTHER = "OTHER",
 }
 export interface CreateOrderModifierInput {
   modifier_id: string;
@@ -41,71 +41,71 @@ export interface CreateOrderInput {
   order_type?: OrderType; // default TAKE_OUT
 }
 export interface OrderModifier {
-  _id?: string;
-  name?: string;
-  identifier?: string;
-  description?: string;
-  choices?: ModifierChoice;
+  _id: string;
+  name: string;
+  identifier: string;
+  description: string;
+  choices: Array<ModifierChoiceInput>;
 }
 export interface OrderItem {
-  _id?: string;
-  name?: string;
-  identifier?: string;
-  category?: Category;
-  tags?: Tag;
-  recycle_info?: string;
-  price?: number;
-  fees?: Fee;
-  estimated_time?: number;
-  modifiers?: OrderModifier;
+  _id: string;
+  name: string;
+  identifier: string;
+  category: Category;
+  tags: TagInput;
+  recycle_info: string;
+  price: number;
+  fees: FeeInput;
+  estimated_time: number;
+  modifiers: Array<OrderModifier>;
 }
 export interface TransactionData {
-  id?: string;
-  amount?: number;
-  captured?: boolean;
-  created?: string;
+  id: string;
+  amount: number;
+  captured: boolean;
+  created: string;
 }
 export interface Transaction {
-  _id?: string;
-  data?: TransactionData;
-  status?: string;
-  refund?: Refund;
-  charge_type?: string;
+  _id: string;
+  data: TransactionData;
+  status: string;
+  refund: Refund;
+  charge_type: string;
 }
 export interface Refund {
-  id?: string;
-  amount?: number;
-  status?: string;
-  created?: string;
+  id: string;
+  amount: number;
+  status: string;
+  created: string;
 }
 export interface OrderStatus {
-  name?: string;
-  identifier?: string;
-  data?: string;
-  created_at?: string;
+  name: string;
+  identifier: string;
+  data: string;
+  created_at: string;
 }
-export interface Order extends DefaultController {
-  items?: Array<OrderItem>;
-  transactions?: Array<Transaction>;
-  customer?: Customer;
-  vendor?: Vendor;
-  subtotal?: number;
-  total?: number;
-  note?: string;
-  payment_method?: string;
-  status_history?: Array<OrderStatus>;
-  scheduled_pickup?: string;
-  status?: string;
-  cancel_reason?: OrderCancellationReason;
-  cancel_description?: string;
-  settled_at?: string;
-  preparing_at?: string;
-  estimated_preparing_sec?: number;
-  atached_survey?: Survey;
-  attached_survey_response?: SurveyResponse;
-  tip?: Tip;
-  order_type?: OrderType;
-  discount?: number;
+export interface Order extends DefaultControllerRequired {
+  items: Array<OrderItem>;
+  transactions: Array<Transaction>;
+  customer: Customer;
+  vendor: Vendor;
+  subtotal: number;
+  total: number;
+  note: string;
+  payment_method: string;
+  status_history: Array<OrderStatus>;
+  scheduled_pickup: string;
+  status: string;
+  cancel_reason: OrderCancellationReason;
+  cancel_description: string;
+  settled_at: string;
+  preparing_at: string;
+  estimated_preparing_sec: number;
+  atached_survey: Survey;
+  attached_survey_response: SurveyResponse;
+  tip: Tip;
+  order_type: OrderType;
+  discount: number;
 }
 /**
  * Controller for orders.
@@ -150,7 +150,7 @@ export class OrderController {
         .mutate(mutationString, {
           order,
           dry,
-          clear_cart
+          clear_cart,
         })
         .then((result: MutateResult) => {
           resolve(result.createOrder._id);
@@ -172,7 +172,7 @@ export class OrderController {
   cancel(
     id: string,
     reason: OrderCancellationReason,
-    description: string | null
+    description?: string
   ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
@@ -187,7 +187,7 @@ export class OrderController {
         .mutate(mutationString, {
           id,
           reason,
-          description
+          description,
         })
         .then((result: MutateResult) => {
           resolve(result);
@@ -220,7 +220,7 @@ export class OrderController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          estimated_preparing_sec
+          estimated_preparing_sec,
         })
         .then((result: MutateResult) => {
           resolve(result);
@@ -248,7 +248,7 @@ export class OrderController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result);
@@ -276,7 +276,7 @@ export class OrderController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result);

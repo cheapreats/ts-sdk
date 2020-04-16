@@ -1,15 +1,30 @@
 import { App } from "../App";
 import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { SelectInput } from "./CommonInterface";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 // import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-export interface Category extends UpdateCategoryInput, DefaultController {
-  menu_items(select: SelectInput): Array<MenuItem>;
-  menu_item_count?: number;
-  vendor?: Vendor;
+export interface MenuItemsFunction {
+  menu_items: Array<MenuItem>;
 }
+export interface CommonCategoryProperties {
+  menu_item_count: number;
+  vendor: Vendor;
+  name: string;
+  identifier: string;
+  description: string;
+  sort_order: number;
+}
+export interface CategoryResult
+  extends DefaultControllerRequired,
+    CommonCategoryProperties {
+  menu_items: Array<MenuItem>;
+}
+export interface Category
+  extends DefaultControllerRequired,
+    CommonCategoryProperties,
+    MenuItemsFunction {}
 export interface CreateCategoryInput {
   name: string;
   identifier: string;
@@ -61,7 +76,7 @@ export class CategoryController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          category
+          category,
         })
         .then((result: MutateResult) => {
           resolve(result.createCategory._id);
@@ -87,7 +102,7 @@ export class CategoryController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteCategory);
@@ -117,7 +132,7 @@ export class CategoryController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          category
+          category,
         })
         .then((result: MutateResult) => {
           resolve(result.updateCategory._id);
@@ -135,7 +150,7 @@ export class CategoryController {
    */
   batchUpdate(
     categories: Array<BatchUpdateCategoriesInput>
-  ): Promise<Array<Category>> {
+  ): Promise<Array<string>> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($categories: [BatchUpdateCategoriesInput]!){
@@ -147,10 +162,10 @@ export class CategoryController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          categories
+          categories,
         })
         .then((result: MutateResult) => {
-          resolve(result.batchUpdateCategories);
+          resolve(result.batchUpdateCategories.map((category) => category._id));
         })
         .catch((e: any) => {
           reject(e);

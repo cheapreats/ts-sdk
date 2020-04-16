@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { DefaultController } from "./Controller";
+import { DefaultControllerRequired } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
@@ -12,10 +12,10 @@ export interface CreateRedeemableItemInput {
 export interface UpdateRedeemableItemInput {
   points_required?: number;
 }
-export interface RedeemableItem extends DefaultController {
-  menu_item?: MenuItem;
-  points_required?: number;
-  loyaly_program?: LoyaltyProgram;
+export interface RedeemableItem extends DefaultControllerRequired {
+  menu_item: MenuItem;
+  points_required: number;
+  loyaly_program: LoyaltyProgram;
 }
 /**
  * Controller for redeemable items.
@@ -50,7 +50,7 @@ export class RedeemableItemController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          redeemable_item
+          redeemable_item,
         })
         .then((result: MutateResult) => {
           resolve(result.createRedeemableItem._id);
@@ -83,7 +83,7 @@ export class RedeemableItemController {
         .getAdaptor()
         .mutate(mutationString, {
           id,
-          redeemable_item
+          redeemable_item,
         })
         .then((result: MutateResult) => {
           resolve(result.updateRedeemableItem._id);
@@ -109,7 +109,7 @@ export class RedeemableItemController {
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-          id
+          id,
         })
         .then((result: MutateResult) => {
           resolve(result.deleteRedeemableItem);
