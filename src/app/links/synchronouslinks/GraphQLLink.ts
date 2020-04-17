@@ -62,8 +62,8 @@ export interface CreateCoupon {
 export interface RemoveItemFromCart {
   removeItemFromCart: Cart;
 }
-export interface AddItemCart {
-  addItemCart: Cart;
+export interface AddItemToCart {
+  addItemToCart: Cart;
 }
 export interface CreateCart {
   createCart: Cart;
@@ -394,7 +394,7 @@ export interface MutateResult
     CreateCustomer,
     DeleteCategory,
     CreateCart,
-    AddItemCart,
+    AddItemToCart,
     RemoveItemFromCart,
     CreateCoupon,
     CreateCategory,
