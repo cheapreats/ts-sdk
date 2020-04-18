@@ -210,7 +210,7 @@ export class CartController {
           item,
         })
         .then((result: MutateResult) => {
-          resolve(result.addItemCart._id);
+          resolve(result.addItemToCart._id);
         })
         .catch((e: any) => {
           reject(e);
