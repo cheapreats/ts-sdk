@@ -101,7 +101,7 @@ export interface Order extends DefaultControllerRequired {
   settled_at: string;
   preparing_at: string;
   estimated_preparing_sec: number;
-  atached_survey: Survey;
+  attached_survey: Survey;
   attached_survey_response: SurveyResponse;
   tip: Tip;
   order_type: OrderType;
