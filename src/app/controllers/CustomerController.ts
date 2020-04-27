@@ -2,7 +2,6 @@ import { Cart } from "./CartController";
 import { ResetCodeSendMethod } from "./EmployeeController";
 import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
-import { SelectInput } from "./CommonInterface";
 import { LoyaltyCard } from "./LoyaltyCardController";
 import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";

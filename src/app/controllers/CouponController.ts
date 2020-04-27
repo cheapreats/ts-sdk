@@ -3,7 +3,6 @@ import { Vendor } from "./VendorController";
 import { Customer } from "./CustomerController";
 import { DefaultControllerRequired, DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
-import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
