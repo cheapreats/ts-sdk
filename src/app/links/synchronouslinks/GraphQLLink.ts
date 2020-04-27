@@ -416,7 +416,7 @@ export class GraphQLLink extends SynchronousLink {
   constructor(
     url: string,
     config: {
-      headers?: { version: string; authorization: string };
+      headers?: { version: string; authorization: string | null };
       version?: string | null;
     } = {}
   ) {

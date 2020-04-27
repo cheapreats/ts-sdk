@@ -2,7 +2,6 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Customer } from "./CustomerController";
-import { SelectInput } from "./CommonInterface";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface CreateLoyaltyCardInput {

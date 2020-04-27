@@ -2,9 +2,7 @@ import { App } from "../App";
 import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
 import { DefaultControllerRequired } from "./Controller";
-import { SelectInput } from "./CommonInterface";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-// import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 export interface MenuItemsFunction {
   menu_items: Array<MenuItem>;
 }
