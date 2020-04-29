@@ -185,6 +185,7 @@ export class App {
   get Coupon() {
     return {
       create: this._couponController.create,
+      update: this._couponController.update,
     };
   }
 

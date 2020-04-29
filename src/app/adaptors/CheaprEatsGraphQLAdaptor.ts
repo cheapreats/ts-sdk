@@ -8,7 +8,6 @@ import { GraphQLLink } from "../links/synchronouslinks/GraphQLLink";
 import packageDotJson from "../../version";
 
 export class CheaprEatsGraphQLAdaptor extends Adaptor {
-  // _config: { graphQLEndpoint: string };
   _graphQLLink: GraphQLLink;
   constructor(config: { graphQLEndpoint: string }) {
     super(config);
