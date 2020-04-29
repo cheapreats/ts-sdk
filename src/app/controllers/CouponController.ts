@@ -37,6 +37,22 @@ export interface CreateCouponInput {
   min_purchase: number;
   payment_methods?: PaymentMethodsInput;
 }
+export interface UpdateCouponInput {
+  code?: string;
+  coupon_type?: string;
+  value?: number;
+  item_scope?: string;
+  vendor_scope?: string;
+  customer_scope?: string;
+  uses?: number;
+  uses_per_customer?: number;
+  can_combine?: boolean;
+  carry_over?: boolean;
+  expire_at?: string;
+  paid_by_vendor?: boolean;
+  min_purchase?: number;
+  payment_methods?: PaymentMethodsInput;
+}
 export interface TransactionFunction {
   transactions: Array<CouponTransaction>;
 }
@@ -71,6 +87,7 @@ export class CouponController {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
+    this.update = this.update.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -101,5 +118,32 @@ export class CouponController {
           reject(e);
         });
     });
+  }
+  /**
+   * Update a coupon
+   * @param {string} id - The id of the Coupon Object
+   * @param {UpdateCouponInput} updateFields - Coupon fields to update
+   * @returns {Promise<string>} - The id of the Coupon Object
+   */
+  async update(id: string, updateFields: UpdateCouponInput): Promise<string> {
+    const mutationString = `
+          mutation updateCouponMutation ($id: String!, $coupon: UpdateCouponInput!) {
+              updateCoupon(id: $id, coupon: $coupon) {
+                  _id
+              }
+          }
+      `;
+
+    try {
+      let result: MutateResult = await this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          id,
+          coupon: updateFields,
+        });
+      return result.updateCoupon._id;
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 }
