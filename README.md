@@ -1,8 +1,8 @@
-# CheaprEats Node.js SDK
+# CheaprEats TypeScript SDK
 
 [![npm version](https://badge.fury.io/js/ts-sdk.svg)](https://badge.fury.io/js/ts-sdk) [![Documentation](https://img.shields.io/badge/docs-js--sdk.cheapreats.com-blue.svg)](https://js-sdk.cheapreats.com/)
 
-CheaprEats Node.js SDK
+CheaprEats TypeScript SDK
 
 ```
 $ npm install @cheapreats/ts-sdk
