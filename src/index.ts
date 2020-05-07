@@ -15,6 +15,9 @@ import { App } from "./app/App";
 const app: App = new App();
 export default app;
 
+import * as Enums from './enums';
+export {Enums};
+
 if (typeof window !== "undefined") {
   (<any>window).CE = app;
 }
