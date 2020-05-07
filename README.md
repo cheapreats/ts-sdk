@@ -1,6 +1,6 @@
 # CheaprEats TypeScript SDK
 
-[![npm version](https://badge.fury.io/js/ts-sdk.svg)](https://badge.fury.io/js/ts-sdk) [![Documentation](https://img.shields.io/badge/docs-js--sdk.cheapreats.com-blue.svg)](https://js-sdk.cheapreats.com/)
+[![npm version](https://badge.fury.io/js/%40cheapreats%2Fts-sdk.svg)](https://badge.fury.io/js/%40cheapreats%2Fts-sdk) [![Documentation](https://img.shields.io/badge/docs-js--sdk.cheapreats.com-blue.svg)](https://js-sdk.cheapreats.com/)
 
 CheaprEats TypeScript SDK
 
