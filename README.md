@@ -5,34 +5,38 @@
 CheaprEats Node.js SDK
 
 ```
-$ npm install @cheapreats/sdk
+$ npm install @cheapreats/ts-sdk
 ```
 
 ## Using the Published SDK Version
 
 ```
-const CE = require('@cheapreats/sdk');
+const CE = require('@cheapreats/ts-sdk');
 ```
 
 ## Using the SDK Locally
 
 Locally importing is used typically while testing new SDK method implementations.
 
+First build the package `npm run build`
+
+Make sure `src/enums.ts` exists. If it does not, run `npm run transpile` **(must be logged in to Github package registry)**
 ```javascript
-const CE = require('./index');
+import CE, { Enums } from '@cheapreats/ts-sdk';
 ```
 
 ## Example Usage
 
 ```
-const CE = require('./index');
-// const CE = require("cheapreats-node-sdk")
+import CE, { Enums } from '@cheapreats/ts-sdk';
 
 CE.setAuthenticationToken('YOUR_TOKEN');
 
 CE.Verification.sendSms(12508574718)
 .then(verification_request_id => console.log("SMS Sent", verification_request_id))
 .catch(e => console.log(e));
+
+console.log(Enums.ResetCodeSendMethod.SMS);
 ```
 
 ## Auto-generating code for New Mutation 
