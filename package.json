@@ -17,9 +17,9 @@
     "rm-npmrc": "rm ./.npmrc",
     "comment2": "############################## GraphQL Clone ##############################",
     "clone-graphql": "git clone https://github.com/cheapreats/CheaprEats-GraphQL-API ./graphql-api/",
-    "transpile-gqp-enums": "npx transpile-file --file=./graphql-api/graphql/enums/index.js --output=./src/enums.ts --parse-types=TsEnum",
+    "transpile-gql-enums": "npx transpile-file --file=./graphql-api/graphql/enums/index.js --output=./src/enums.ts --parse-types=TsEnum",
     "del-graphql": "rm -rf ./graphql-api",
-    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gqp-enums && npm run del-graphql"
+    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gql-enums && npm run del-graphql"
   },
   "repository": {
     "type": "git",
