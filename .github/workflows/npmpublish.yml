@@ -20,12 +20,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GIT_PAT }}
       - name: Build
         run: npm run build
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GIT_PAT }}
+          GIT_AUTH_TOKEN: ${{ secrets.GIT_PAT }}
+          AUTO: TRUE
       - name: Publish
         run: npm publish
         env:

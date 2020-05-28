@@ -11,7 +11,7 @@
     "build": "rm -rf dist && npm run transpile && tsc",
     "generate-docs": "./deploy-doc.sh",
     "comment1": "############################## Cheapreats Package Install ##############################",
-    "mk-npmrc": "echo @cheapreats:registry=https://npm.pkg.github.com/cheapreats > ./.npmrc",
+    "mk-npmrc": "node ./scripts/mk-npmrc.js",
     "install-graphql-enum-transpiler": "npm run mk-npmrc && npm install @cheapreats/graphql-enum-transpiler@latest --no-save && npm run rm-npmrc",
     "rm-npmrc": "rm ./.npmrc",
     "comment2": "############################## GraphQL Clone ##############################",
