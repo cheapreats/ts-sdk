@@ -1,6 +1,6 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.11.1",
+  "version": "1.11.4",
   "description": "CheaprEats Typescript SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,18 +8,18 @@
     "test": "mocha -r ts-node/register",
     "gulp": "gulp",
     "add:mutation": "node ./src/scripts/addMutation.js",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && npm run transpile && tsc",
     "generate-docs": "./deploy-doc.sh",
-    "prepublish": "npm run transpile && npm run build",
+    "prepublish": "npm run build",
     "comment1": "############################## Cheapreats Package Install ##############################",
     "mk-npmrc": "echo @cheapreats:registry=https://npm.pkg.github.com/cheapreats > ./.npmrc",
     "install-graphql-enum-transpiler": "npm run mk-npmrc && npm install @cheapreats/graphql-enum-transpiler@latest --no-save && npm run rm-npmrc",
     "rm-npmrc": "rm ./.npmrc",
     "comment2": "############################## GraphQL Clone ##############################",
     "clone-graphql": "git clone https://github.com/cheapreats/CheaprEats-GraphQL-API ./graphql-api/",
-    "transpile-gqp-enums": "npx transpile-file --file=./graphql-api/graphql/enums/index.js --output=./src/enums.ts --parse-types=TsEnum",
+    "transpile-gql-enums": "npx transpile-file --file=./graphql-api/graphql/enums/index.js --output=./src/enums.ts --parse-types=TsEnum",
     "del-graphql": "rm -rf ./graphql-api",
-    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gqp-enums && npm run del-graphql"
+    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gql-enums && npm run del-graphql"
   },
   "repository": {
     "type": "git",
