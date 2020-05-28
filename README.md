@@ -58,5 +58,6 @@ By default package is automatically published anytime a change is made on master
 
 If package is to be published manually, execute following commands:
 
+* `npm install`
 * `npm run build`
 * `npm publish`

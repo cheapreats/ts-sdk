@@ -18,18 +18,14 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - name: Install npm-cli-login
-        run: npm install -g npm-cli-login
-      - name: Authenticate to GitHub Packages
-        run: npm-cli-login -u $GITHUB_USERNAME -p $GITHUB_TOKEN -e $GITHUB_EMAIL -r https://npm.pkg.github.com
-        env: 
-          GITHUB_USERNAME: ${{ secrets.PUBLISH_USERNAME }}
-          GITHUB_EMAIL: ${{ secrets.PUBLISH_EMAIL }}
-          GITHUB_TOKEN: ${{ secrets.LOGIN_TOKEN }}
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GIT_PAT }}
       - name: Build
         run: npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GIT_PAT }}
       - name: Publish
         run: npm publish
         env:
