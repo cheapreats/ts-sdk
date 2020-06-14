@@ -22,7 +22,7 @@ First build the package `npm run build`
 
 Make sure `src/enums.ts` exists. If it does not, run `npm run transpile` **(must be logged in to Github package registry)**
 ```
-import CE, { Enums } from path/to/ts-sdk/root';
+import CE, { Enums } from 'path/to/ts-sdk/root';
 ```
 Root folder is fine, it is not necessary to add `/dist`
 
