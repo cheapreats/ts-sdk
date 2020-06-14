@@ -50,6 +50,7 @@ export class CartController {
     this.removeItem = this.removeItem.bind(this);
     this.addItem = this.addItem.bind(this);
     this.create = this.create.bind(this);
+    this.enableSharingForCart = this.enableSharingForCart.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -156,15 +157,17 @@ export class CartController {
    * Remove an item from currently active cart.
    * @param {string} cartId
    * @param {string} cartItemId
+   * @param {string} sharedToken
    * @returns {Promise<string>}
    */
-  removeItem(cartId: string, cartItemId: string): Promise<string> {
+  removeItem(cartId: string, cartItemId: string, sharedToken?: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($cartId: String!, $cartItemId: String!) {
                     removeItemFromCart(
                         cart_id: $cartId,
-                        cart_item_id: $cartItemId
+                        cart_item_id: $cartItemId,
+                        shared_token: $sharedToken
                     ) {
                         _id
                     }
@@ -175,6 +178,7 @@ export class CartController {
         .mutate(mutationString, {
           cartId,
           cartItemId,
+          sharedToken
         })
         .then((result: MutateResult) => {
           resolve(result.removeItemFromCart._id);
@@ -189,15 +193,17 @@ export class CartController {
    * Add an new item to currently active cart.
    * @param {string} cartId
    * @param {AddItemToCartInput} item
+   * @param {string} sharedToken
    * @returns {Promise<string>}
    */
-  addItem(cartId: string, item: AddItemToCartInput): Promise<string> {
+  addItem(cartId: string, item: AddItemToCartInput, sharedToken?: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $item: AddItemToCartInput!) {
+                mutation ($cartId: String!, $item: AddItemToCartInput!, $sharedToken: String) {
                     addItemToCart(
                         cart_id: $cartId,
-                        item: $item
+                        item: $item,
+                        shared_token: $sharedToken
                     ) {
                         _id
                     }
@@ -208,6 +214,7 @@ export class CartController {
         .mutate(mutationString, {
           cartId,
           item,
+          sharedToken
         })
         .then((result: MutateResult) => {
           resolve(result.addItemToCart._id);
@@ -250,4 +257,36 @@ export class CartController {
         });
     });
   }
+
+  /**
+   * Enable sharing for a cart
+   * @param {string} cartId
+   * @returns {Promise<Cart>}
+   */
+  enableSharingForCart(cartId: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!) {
+                    enableSharingForCart(
+                        cart_id: $cartId,
+                    ) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId,
+          })
+          .then((result: MutateResult) => {
+            resolve(result.enableSharingForCart);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+
+
 }

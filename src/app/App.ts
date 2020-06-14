@@ -126,6 +126,7 @@ export class App {
       removeItem: this._cartController.removeItem,
       addItem: this._cartController.addItem,
       create: this._cartController.create,
+      enableSharingForCart: this._cartController.enableSharingForCart,
     };
   }
 

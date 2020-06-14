@@ -309,6 +309,9 @@ export interface VerifySmsVerificationSession {
 export interface UpdateAllMenuItemsStatusForVendor {
   updateAllMenuItemsStatusForVendor: string;
 }
+export interface EnableSharingForCart {
+  enableSharingForCart: Cart;
+}
 
 export interface MutateResult
   extends CreateCategory,
@@ -400,13 +403,9 @@ export interface MutateResult
     CreateCart,
     AddItemToCart,
     RemoveItemFromCart,
-    CreateCoupon,
-    CreateCategory,
     DeleteCart,
-    ApplyCouponToCart,
-    RemoveCouponFromCart,
-    UpdateNoteForCart,
     UpdateCategory,
+    EnableSharingForCart,
     BatchUpdateCategories {}
 
 export class GraphQLLink extends SynchronousLink {
@@ -415,7 +414,7 @@ export class GraphQLLink extends SynchronousLink {
   /**
    * Construct a new GraphQLLink
    * @param {string} url
-   * @param {obejct} config = {}
+   * @param {object} config = {}
    */
   constructor(
     url: string,
