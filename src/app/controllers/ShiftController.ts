@@ -122,7 +122,7 @@ export class ShiftController {
      * @param {ShiftTimePeriodInput} shiftTimePeriod - The ShiftTimePeriod Object
      * @returns {Promise<ShiftTimePeriod>} - The newly made ShiftTimePeriod
      */
-    updateShiftTimePeriod(shiftTimePeriod: ShiftTimePeriodInput) {
+    updateShiftTimePeriod(shiftTimePeriod: ShiftTimePeriodInput): Promise<ShiftTimePeriod> {
         return new Promise((resolve, reject) => {
             let mutationString = `
                 mutation($shift_time_period: ShiftTimePeriodInput!) {
