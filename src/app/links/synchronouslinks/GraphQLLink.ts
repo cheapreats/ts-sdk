@@ -34,6 +34,19 @@ import { LoyaltyProgram } from "../../controllers/LoyaltyProgramController";
 import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
+import { Shift, ShiftTimePeriod } from "../../controllers/ShiftController";
+
+export interface StartShift {
+    startShift: Shift;
+}
+
+export interface EndShift {
+    endShift: Shift;
+}
+
+export interface UpdateShiftTimePeriod {
+    updateShiftTimePeriod: ShiftTimePeriod;
+}
 
 export interface UpdateNoteForCart {
   updateNoteForCart: Cart;
@@ -406,6 +419,9 @@ export interface MutateResult
     DeleteCart,
     UpdateCategory,
     EnableSharingForCart,
+    StartShift,
+    EndShift,
+    UpdateShiftTimePeriod,
     BatchUpdateCategories {}
 
 export class GraphQLLink extends SynchronousLink {

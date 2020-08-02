@@ -29,6 +29,7 @@ import { LoyaltyProgramController } from "./controllers/LoyaltyProgramController
 import { LoyaltyCardController } from "./controllers/LoyaltyCardController";
 import { RedeemableItemController } from "./controllers/RedeemableItemController";
 import { RemoteConfigurationController } from "./controllers/RemoteConfigurationController";
+import { ShiftController } from "./controllers/ShiftController";
 import endpoints from "../config/endpoints";
 
 let config = {
@@ -67,6 +68,7 @@ export class App {
   _loyaltyCardController: LoyaltyCardController;
   _redeemableItemController: RedeemableItemController;
   _remoteConfigurationController: RemoteConfigurationController;
+  _shiftController: ShiftController;
   /**
    * Construct the App instance.
    * @hideconstructor
@@ -104,6 +106,7 @@ export class App {
     this._loyaltyProgramController = new LoyaltyProgramController(this);
     this._loyaltyCardController = new LoyaltyCardController(this);
     this._redeemableItemController = new RedeemableItemController(this);
+    this._shiftController = new ShiftController(this);
     this._remoteConfigurationController = new RemoteConfigurationController(
       this
     );
@@ -335,6 +338,18 @@ export class App {
       release: this._surveyController.release,
       createSurveyResponse: this._surveyController.createSurveyResponse,
     };
+  }
+
+  /**
+   * Get shift related methods.
+   * @returns {{startShift: ShiftController.startShift, endShift: ShiftController.endShift, updateShiftTimePeriod: ShiftController.updateShiftTimePeriod}}
+   */
+  get Shift() {
+      return {
+        startShift: this._shiftController.startShift,
+        endShift: this._shiftController.endShift,
+        updateShiftTimePeriod: this._shiftController.updateShiftTimePeriod
+      };
   }
 
   /**
