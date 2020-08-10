@@ -70,12 +70,18 @@ export interface VendorAnalyticsCustomerAnalysis {
   favourited_items?: Array<MenuItem>;
 }
 
+export interface VendorAnalyticsHourlySales {
+    hour?: string;
+    sales?: number;
+}
+
 export interface VendorAnalytics {
   order_count?: number;
   total_sales?: number;
   item_count?: number;
   coupon_usage?: Array<VendorAnalyticsCouponUsage>;
   customer_analysis?: Array<VendorAnalyticsCustomerAnalysis>;
+  hourly_sales?: Array<VendorAnalyticsHourlySales>;
 }
 
 interface AnalyticsFunction {
