@@ -163,7 +163,7 @@ export class CartController {
   removeItem(cartId: string, cartItemId: string, sharedToken?: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $cartItemId: String!) {
+                mutation ($cartId: String!, $cartItemId: String!, $sharedToken: String) {
                     removeItemFromCart(
                         cart_id: $cartId,
                         cart_item_id: $cartItemId,
