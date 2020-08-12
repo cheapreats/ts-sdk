@@ -30,6 +30,7 @@ export interface CreateOrderModifierInput {
 export interface CreateOrdersItemsInput {
   item_id: string;
   modifiers: Array<CreateOrderModifierInput>;
+  added_by_customer: string;
 }
 export interface CreateOrderInput {
   vendor_id: string;
