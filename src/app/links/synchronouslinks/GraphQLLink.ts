@@ -484,7 +484,7 @@ export class GraphQLLink extends SynchronousLink {
    * @returns {Promise<Object>}
    */
 
-  async run(config: { query: string; variables: object }) {
+  async run(config: { query: string; variables: object }): Promise<any> {
     return await this._client.request(config.query, config.variables || {});
   }
 }
