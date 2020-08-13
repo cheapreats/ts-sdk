@@ -33,7 +33,7 @@ export enum PayoutAutoRequestSchedule {
 }
 
 export interface VendorDailyDealsMenu {
-  [key: string]: string;
+  [key: string]: Array<MenuItem>;
   monday: Array<MenuItem>;
   tuesday: Array<MenuItem>;
   wednesday: Array<MenuItem>;
