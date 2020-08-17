@@ -14,6 +14,7 @@ import { RawConfiguration } from "./RemoteConfigurationController";
 import { Survey } from "./SurveyController";
 import { Vendor } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
+import { Shift } from "./ShiftController";
 
 export interface The_Customer {
   the_customer: Customer;
@@ -102,6 +103,9 @@ export interface Merged_Configuration {
 export interface Raw_Configurations {
   raw_configurations: Array<RawConfiguration>;
 }
+export interface Shifts {
+    shifts: Array<Shift>;
+}
 
 export interface QueryResult
   extends The_Customer,
@@ -132,6 +136,7 @@ export interface QueryResult
     Verification_Session,
     Groups,
     Merged_Configuration,
+    Shifts,
     Raw_Configurations {}
 
 export interface VersionDetails {

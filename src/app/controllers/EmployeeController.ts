@@ -1,4 +1,5 @@
 import { EmailPreferencesInput } from "./CustomerController";
+import { ShiftTimePeriod } from "./ShiftController";
 import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
@@ -32,6 +33,7 @@ export interface Employee extends DefaultControllerRequired {
   password: string;
   phone_number: string;
   role: string;
+  active_shift_time_period: ShiftTimePeriod;
 }
 
 /**
