@@ -1,5 +1,6 @@
 import { App } from "../App";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { DefaultControllerRequired } from "./Controller";
 
 export enum ShiftTimePeriodType {
     WORK = "WORK",
@@ -11,14 +12,14 @@ export interface ShiftTimePeriodInput {
     type: ShiftTimePeriodType;
 }
 
-export interface ShiftTimePeriod {
-    shift_id: string;
+export interface ShiftTimePeriod extends DefaultControllerRequired {
+    shift: Shift;
     start_time: string;
     end_time: string;
     type: ShiftTimePeriodType;
 }
 
-export interface Shift {
+export interface Shift extends DefaultControllerRequired {
     employee_id: string;
     start_time: string;
     end_time: string;
