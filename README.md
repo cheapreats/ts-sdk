@@ -26,6 +26,10 @@ import CE, { Enums } from 'path/to/ts-sdk/root';
 ```
 Root folder is fine, it is not necessary to add `/dist`
 
+**When updating type definitions, please use src/enums rather than handcrafting  your own enums when possible**
+
+**If enum is not in src/enums, consider adding it to graphql-api if it would benefit backend**
+
 ## Example Usage
 
 ```
