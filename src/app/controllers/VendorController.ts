@@ -10,6 +10,7 @@ import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Survey } from "./SurveyController";
 import { FlashSale } from "./FlashSaleController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { VendorStatus } from '../../enums';
 
 export interface CreateVendorWithEmployeeInput {
   name: string;
@@ -120,7 +121,7 @@ export interface VendorCommonProperties {
   images: Array<string>;
   address: string;
   phone_number: string;
-  status: string;
+  status: VendorStatus;
   payout_email_address: string;
   directions: string;
   receive_sms_notifications: boolean;
@@ -192,7 +193,7 @@ export interface VendorCommonProperties {
   images: Array<string>;
   address: string;
   phone_number: string;
-  status: string;
+  status: VendorStatus;
   payout_email_address: string;
   directions: string;
   receive_sms_notifications: boolean;
@@ -216,7 +217,7 @@ export interface UpdateVendorInput {
   images?: Array<string>;
   address?: string;
   phone_number?: string;
-  status?: string;
+  status?: VendorStatus;
   payout_email_address?: string;
   directions?: string;
   receive_sms_notifications?: boolean;
