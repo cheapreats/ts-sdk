@@ -106,6 +106,7 @@ export enum VendorStatus {
     CLOSED = 'CLOSED',
     HIDDEN = 'HIDDEN',
     NOT_ACCEPTING = 'NOT_ACCEPTING',
+    LEAVE = 'LEAVE',
 }
 
 export enum OrderCancellationReason {
