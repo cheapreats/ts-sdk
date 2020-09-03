@@ -12,6 +12,7 @@ export enum SurveyQuestionType {
 }
 export enum SurveyDeliveryRule {
   AFTER_ORDER = "AFTER_ORDER",
+  MANUAL = 'MANUAL' 
 }
 export interface SurveyQuestionResponse {
   _id: string;
@@ -36,7 +37,7 @@ export interface Survey extends DefaultControllerRequired {
   title: string;
   description: string;
   questions: Array<SurveyQuestion>;
-  delivery_rule: string;
+  delivery_rule: SurveyDeliveryRule;
   loyalty_reward: number;
   wallet_reward: number;
   responses: Array<SurveyResponse>;
