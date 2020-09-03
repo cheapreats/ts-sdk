@@ -52,7 +52,7 @@ export interface Payout extends DefaultControllerRequired {
   orders: Array<Order>;
   service_charges: Array<ServiceCharge>;
   note: string;
-  method: string;
+  method: PayoutMethod;
   status: string;
 }
 /**
