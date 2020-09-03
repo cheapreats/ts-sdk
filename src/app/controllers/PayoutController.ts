@@ -53,7 +53,7 @@ export interface Payout extends DefaultControllerRequired {
   service_charges: Array<ServiceCharge>;
   note: string;
   method: string;
-  status: string;
+  status: PayoutStatus;
 }
 /**
  * Controller related to payouts
