@@ -5,6 +5,10 @@ import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
+export enum FeeType {
+  PERCENTAGE = "PERCENTAGE",
+  FIXED = "FIXED"
+}
 export interface CreateMenuItemInput {
   name: string;
   identifier: string;
@@ -31,7 +35,7 @@ export interface TagInput {
 
 export interface FeeInput {
   name: string;
-  fee_type: string;
+  fee_type: FeeType;
   amount: number;
 }
 
