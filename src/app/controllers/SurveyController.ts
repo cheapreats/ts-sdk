@@ -26,7 +26,7 @@ export interface SurveyResponse extends DefaultControllerRequired {
 export interface SurveyQuestion extends DefaultControllerRequired {
   question: string;
   description: string;
-  question_type: string;
+  question_type: SurveyQuestionType;
   choices: Array<string>;
   max_rating: number;
   required: boolean;
