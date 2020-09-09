@@ -139,6 +139,7 @@ export enum FlashSaleType {
 
 export enum SurveyDeliveryRule {
     AFTER_ORDER = 'AFTER_ORDER',
+    MANUAL = 'MANUAL' 
 }
 
 export enum SurveyQuestionType {
