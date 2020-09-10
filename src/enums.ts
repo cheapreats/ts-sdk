@@ -47,6 +47,14 @@ export enum PayoutStatus {
     CANCELLED = 'CANCELLED',
 }
 
+export enum OrderStatusIdentifier {
+    PLACED = "PLACED",
+    PREPARING = "PREPARING",
+    PREPARED = "PREPARED",
+    COMPLETE = "COMPLETE",
+    CANCELLED = "CANCELLED"
+}
+
 export enum PayoutAutoRequestSchedule {
     OFF = 'OFF',
     WEEKLY = 'WEEKLY',
