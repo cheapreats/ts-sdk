@@ -9,7 +9,7 @@ import { TagInput, FeeInput } from "./MenuItemController";
 import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
-export enum OrderStatusIdentifier {
+export enum OrderStatus {
   PLACED = "PLACED",
   PREPARING = "PREPARING",
   PREPARED = "PREPARED",
@@ -85,9 +85,9 @@ export interface Refund {
   status: string;
   created: string;
 }
-export interface OrderStatus {
+export interface OrderStatusHistory {
   name: string;
-  identifier: OrderStatusIdentifier;
+  identifier: OrderStatus;
   data: string;
   created_at: string;
 }
@@ -100,9 +100,9 @@ export interface Order extends DefaultControllerRequired {
   total: number;
   note: string;
   payment_method: string;
-  status_history: Array<OrderStatus>;
+  status_history: Array<OrderStatusHistory>;
   scheduled_pickup: string;
-  status: OrderStatusIdentifier;
+  status: OrderStatus;
   cancel_reason: OrderCancellationReason;
   cancel_description: string;
   settled_at: string;

@@ -47,7 +47,7 @@ export enum PayoutStatus {
     CANCELLED = 'CANCELLED',
 }
 
-export enum OrderStatusIdentifier {
+export enum OrderStatus {
     PLACED = "PLACED",
     PREPARING = "PREPARING",
     PREPARED = "PREPARED",
