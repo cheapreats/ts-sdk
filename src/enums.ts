@@ -9,6 +9,10 @@ export enum ResetCodeSendMethod {
     EMAIL = 'EMAIL',
     SMS = 'SMS',
 }
+export enum FeeType {
+    PERCENTAGE = "PERCENTAGE",
+    FIXED = "FIXED"
+}
 
 export enum ComparisonOperator {
     LESS_THAN = 'LESS_THAN',
