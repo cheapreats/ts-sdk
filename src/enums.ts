@@ -36,6 +36,11 @@ export enum LoyaltyProgramType {
     ITEM = 'ITEM',
 }
 
+export enum MenuItemStatus {
+    AVAILABLE = "AVAILABLE",
+    UNAVAILABLE = "UNAVAILABLE"
+}
+
 export enum PayoutMethod {
     MANUAL = 'MANUAL',
 }
