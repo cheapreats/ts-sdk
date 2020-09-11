@@ -15,6 +15,12 @@ export enum ComparisonOperator {
     GREATER_THAN = 'GREATER_THAN',
 }
 
+export enum CouponTransactionType {
+    PURCHASE = 'PURCHASE',
+    RELOAD = 'RELOAD',
+    CREATE = 'CREATE',
+}
+
 export enum UserTypes {
     VENDOR_ADMIN = 'VENDOR_ADMIN',
     VENDOR_EMPLOYEE = 'VENDOR_EMPLOYEE',

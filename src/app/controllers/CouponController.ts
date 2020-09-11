@@ -5,6 +5,7 @@ import { DefaultControllerRequired, DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { CouponTransactionType } from "../../enums";
 
 export interface PaymentMethodsInput {
   apple_pay?: boolean; // default TRUE
@@ -15,7 +16,7 @@ export interface PaymentMethodsInput {
 }
 export interface CouponTransaction extends DefaultController {
   coupon?: Coupon;
-  transaction_type?: string;
+  transaction_type?: CouponTransactionType;
   value?: string;
   order?: Order;
   customer?: Customer;
