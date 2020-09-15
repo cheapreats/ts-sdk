@@ -4,11 +4,8 @@ import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { FeeType } from "../../enums";
 
-export enum FeeType {
-  PERCENTAGE = "PERCENTAGE",
-  FIXED = "FIXED"
-}
 export interface CreateMenuItemInput {
   name: string;
   identifier: string;
