@@ -3,13 +3,8 @@ import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { SurveyQuestionType } from "../../enums";
 
-export enum SurveyQuestionType {
-  CHECKBOX = "CHECKBOX",
-  MULTI_CHECKBOX = "MULTI_CHECKBOX",
-  SHORT_ANSWER = "SHORT_ANSWER",
-  RATING = "RATING",
-}
 export enum SurveyDeliveryRule {
   AFTER_ORDER = "AFTER_ORDER",
 }
@@ -26,7 +21,7 @@ export interface SurveyResponse extends DefaultControllerRequired {
 export interface SurveyQuestion extends DefaultControllerRequired {
   question: string;
   description: string;
-  question_type: string;
+  question_type: SurveyQuestionType;
   choices: Array<string>;
   max_rating: number;
   required: boolean;
