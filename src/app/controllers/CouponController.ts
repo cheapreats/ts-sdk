@@ -5,6 +5,7 @@ import { DefaultControllerRequired, DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { CouponType } from "../../enums";
 
 export interface PaymentMethodsInput {
   apple_pay?: boolean; // default TRUE
@@ -23,7 +24,7 @@ export interface CouponTransaction extends DefaultController {
 }
 export interface CreateCouponInput {
   code: string;
-  coupon_type: string;
+  coupon_type: CouponType;
   value: number;
   item_scope?: string;
   vendor_scope?: string;
@@ -39,7 +40,7 @@ export interface CreateCouponInput {
 }
 export interface UpdateCouponInput {
   code?: string;
-  coupon_type?: string;
+  coupon_type?: CouponType;
   value?: number;
   item_scope?: string;
   vendor_scope?: string;
@@ -62,7 +63,7 @@ export interface Coupon
     CouponCommonProperties {}
 export interface CouponCommonProperties {
   code: string;
-  coupon_type: string;
+  coupon_type: CouponType;
   value: number;
   real_value: number;
   item_scope: MenuItem;
