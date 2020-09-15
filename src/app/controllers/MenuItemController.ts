@@ -4,6 +4,7 @@ import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { FeeType, MenuItemStatus } from "../../enums";
 
 export interface CreateMenuItemInput {
   name: string;
@@ -18,7 +19,7 @@ export interface CreateMenuItemInput {
   daily_special_day?: string;
   price: number;
   original_price: number;
-  status: string;
+  status: MenuItemStatus;
   warning_label?: string;
   category_id: string;
   sort_order?: number;
@@ -31,7 +32,7 @@ export interface TagInput {
 
 export interface FeeInput {
   name: string;
-  fee_type: string;
+  fee_type: FeeType;
   amount: number;
 }
 
@@ -48,7 +49,7 @@ export interface UpdateMenuItemInput {
   daily_special_day?: string;
   price?: number;
   original_price?: number;
-  status?: string;
+  status?: MenuItemStatus;
   warning_label?: string;
   sort_order?: number;
   estimated_time?: number;
@@ -73,7 +74,7 @@ export interface MenuItem extends DefaultControllerRequired {
   daily_special_day: string;
   price: number;
   original_price: number;
-  status: string;
+  status: MenuItemStatus;
   warning_label: string;
   sort_order: number;
   estimated_time: number;
