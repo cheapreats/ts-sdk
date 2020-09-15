@@ -8,6 +8,7 @@ import { Category } from "./CategoryController";
 import { TagInput, FeeInput } from "./MenuItemController";
 import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { OrderStatusIdentifier } from "../../enums";
 
 export enum OrderType {
   EAT_IN = "EAT_IN",
@@ -79,9 +80,9 @@ export interface Refund {
   status: string;
   created: string;
 }
-export interface OrderStatus {
+export interface OrderStatusHistory {
   name: string;
-  identifier: string;
+  identifier: OrderStatusIdentifier;
   data: string;
   created_at: string;
 }
@@ -94,9 +95,9 @@ export interface Order extends DefaultControllerRequired {
   total: number;
   note: string;
   payment_method: string;
-  status_history: Array<OrderStatus>;
+  status_history: Array<OrderStatusHistory>;
   scheduled_pickup: string;
-  status: string;
+  status: OrderStatusIdentifier;
   cancel_reason: OrderCancellationReason;
   cancel_description: string;
   settled_at: string;
