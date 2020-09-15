@@ -4,11 +4,8 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { EmployeeRole } from "../../enums";
 
-export enum EmployeeRole {
-  ADMIN="ADMIN",
-  USER="USER"
-}
 export interface CreateEmployeeInput {
   username: string;
   password: string;

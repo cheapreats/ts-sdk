@@ -15,11 +15,6 @@ export enum ComparisonOperator {
     GREATER_THAN = 'GREATER_THAN',
 }
 
-export enum EmployeeRole {
-    ADMIN="ADMIN",
-    USER="USER"
-}
-
 export enum UserTypes {
     VENDOR_ADMIN = 'VENDOR_ADMIN',
     VENDOR_EMPLOYEE = 'VENDOR_EMPLOYEE',
@@ -137,6 +132,14 @@ export enum OrderPaymentMethod {
     IN_PERSON = 'IN_PERSON',
 }
 
+export enum OrderStatusIdentifier {
+    PLACED = 'PLACED',
+    PREPARING = 'PREPARING',
+    PREPARED = 'PREPARED',
+    COMPLETE = 'COMPLETE',
+    CANCELLED = 'CANCELLED',
+}
+
 export enum FlashSaleType {
     DOLLAR = 'DOLLAR',
     PERCENTAGE = 'PERCENTAGE',
@@ -192,5 +195,37 @@ export enum DeliveryStatus {
 export enum ShiftTimePeriodType {
     WORK = 'WORK',
     BREAK = 'BREAK',
+}
+
+export enum EmployeeLanguage {
+    EN = 'EN',
+    FR = 'FR',
+    ZH = 'ZH',
+}
+
+export enum EmployeeRole {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
+
+export enum MenuItemStatus {
+    AVAILABLE = 'AVAILABLE',
+    UNAVAILABLE = 'UNAVAILABLE',
+}
+
+export enum FeeType {
+    PERCENTAGE = 'PERCENTAGE',
+    FIXED = 'FIXED',
+}
+
+export enum CouponTransactionType {
+    PURCHASE = 'PURCHASE',
+    RELOAD = 'RELOAD',
+    CREATE = 'CREATE',
+}
+
+export enum CouponType {
+    VALUE = 'VALUE',
+    PERCENTAGE = 'PERCENTAGE',
 }
 
