@@ -131,6 +131,7 @@ export interface VendorCommonProperties {
   global_tax_rate: number;
   postal_code: string;
   store_logo: string;
+  max_group_seating_limit: number;
 }
 
 export interface TimeSpanInput {
@@ -203,6 +204,7 @@ export interface VendorCommonProperties {
   global_tax_rate: number;
   postal_code: string;
   store_logo: string;
+  max_group_seating_limit: number;
 }
 
 export interface UpdateVendorInput {
@@ -227,6 +229,7 @@ export interface UpdateVendorInput {
   global_tax_rate?: number;
   postal_code?: string;
   store_logo?: string;
+  max_group_seating_limit?: string;
 }
 
 export interface OrderTypesInput {

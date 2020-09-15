@@ -7,6 +7,8 @@ import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { CouponTransactionType } from "../../enums";
+
 export interface CreditCard {
   id: string;
   brand: string;
@@ -486,7 +488,7 @@ export class CustomerController {
   /**
    * Create a wallet transaction for customer
    * @param {string} id - The id of the Customer
-   * @param  {string} transaction_type - Transaction type, either 'reload' or 'purchase'
+   * @param  {CouponTransactionType} transaction_type - Transaction type, either 'reload' or 'purchase'
    * @param  {number} amount - The amount in cents
    * @param  {string} description - Optional description for transaction
    * @returns {Promise<string>} - The id of the wallet that was reloaded
@@ -494,13 +496,13 @@ export class CustomerController {
   //QUESTION: Why does this return coupon??
   createWalletTransaction(
     id: string,
-    transaction_type: string,
+    transaction_type: CouponTransactionType,
     amount: number,
     description: string | null
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $transaction_type: String!, $amount: Int!, $description: String) {
+                mutation ($id: String!, $transaction_type: CouponTransactionType!, $amount: Int!, $description: String) {
                     createCustomerWalletTransaction(id: $id, transaction_type: $transaction_type, amount: $amount, description: $description) {
                         _id
                     }
