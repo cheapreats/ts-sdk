@@ -5,6 +5,7 @@ import { DefaultControllerRequired, DefaultController } from "./Controller";
 import { MenuItem } from "./MenuItemController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { CouponType } from "../../enums";
 
 export interface PaymentMethodsInput {
   apple_pay?: boolean; // default TRUE
@@ -12,10 +13,6 @@ export interface PaymentMethodsInput {
   credit_card?: boolean; // default TRUE
   in_person?: boolean; // default TRUE
   wallet?: boolean; // default TRUE
-}
-export enum CouponType {
-  VALUE='VALUE',
-  PERCENTAGE='PERCENTAGE'
 }
 export interface CouponTransaction extends DefaultController {
   coupon?: Coupon;
