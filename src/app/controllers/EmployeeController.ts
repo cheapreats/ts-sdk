@@ -4,10 +4,12 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { EmployeeRole } from "../../enums";
+
 export interface CreateEmployeeInput {
   username: string;
   password: string;
-  role: string;
+  role: EmployeeRole;
   email_address: string;
   phone_number: string;
   vendor_id: string;
@@ -18,7 +20,7 @@ export interface UpdateEmployeeInput {
   email_address?: string;
   password?: string;
   phone_number?: string;
-  role?: string;
+  role?: EmployeeRole;
 }
 export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
@@ -32,7 +34,7 @@ export interface Employee extends DefaultControllerRequired {
   email_address: string;
   password: string;
   phone_number: string;
-  role: string;
+  role: EmployeeRole;
   active_shift_time_period: ShiftTimePeriod;
 }
 
