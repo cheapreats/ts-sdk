@@ -36,11 +36,6 @@ export enum LoyaltyProgramType {
     ITEM = 'ITEM',
 }
 
-export enum MenuItemStatus {
-    AVAILABLE = "AVAILABLE",
-    UNAVAILABLE = "UNAVAILABLE"
-}
-
 export enum PayoutMethod {
     MANUAL = 'MANUAL',
 }
@@ -137,6 +132,14 @@ export enum OrderPaymentMethod {
     IN_PERSON = 'IN_PERSON',
 }
 
+export enum OrderStatusIdentifier {
+    PLACED = 'PLACED',
+    PREPARING = 'PREPARING',
+    PREPARED = 'PREPARED',
+    COMPLETE = 'COMPLETE',
+    CANCELLED = 'CANCELLED',
+}
+
 export enum FlashSaleType {
     DOLLAR = 'DOLLAR',
     PERCENTAGE = 'PERCENTAGE',
@@ -192,5 +195,37 @@ export enum DeliveryStatus {
 export enum ShiftTimePeriodType {
     WORK = 'WORK',
     BREAK = 'BREAK',
+}
+
+export enum EmployeeLanguage {
+    EN = 'EN',
+    FR = 'FR',
+    ZH = 'ZH',
+}
+
+export enum EmployeeRole {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
+
+export enum MenuItemStatus {
+    AVAILABLE = 'AVAILABLE',
+    UNAVAILABLE = 'UNAVAILABLE',
+}
+
+export enum FeeType {
+    PERCENTAGE = 'PERCENTAGE',
+    FIXED = 'FIXED',
+}
+
+export enum CouponTransactionType {
+    PURCHASE = 'PURCHASE',
+    RELOAD = 'RELOAD',
+    CREATE = 'CREATE',
+}
+
+export enum CouponType {
+    VALUE = 'VALUE',
+    PERCENTAGE = 'PERCENTAGE',
 }
 
