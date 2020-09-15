@@ -3,16 +3,8 @@ import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { PayoutStatus, PayoutPaymentMethod } from "../../enums";
 
-export enum PayoutMethod {
-  MANUAL = "MANUAL",
-}
-export enum PayoutStatus {
-  PENDING = "PENDING",
-  IN_TRANSIT = "IN_TRANSIT",
-  PAID = "PAID",
-  CANCELLED = "CANCELLED",
-}
 export interface PayoutPlan {
   fixed_per_transaction: number;
   perecentage_per_transaction: number;
@@ -23,7 +15,7 @@ export interface UpdatePayoutInput {
   orders?: Array<string>;
   service_charges?: Array<string>;
   note?: string;
-  method?: PayoutMethod; // default MANUAL
+  method?: PayoutPaymentMethod; // default MANUAL
   status?: PayoutStatus; // default PENDING
 }
 export enum ServiceChargeType {
@@ -52,8 +44,8 @@ export interface Payout extends DefaultControllerRequired {
   orders: Array<Order>;
   service_charges: Array<ServiceCharge>;
   note: string;
-  method: string;
-  status: string;
+  method: PayoutPaymentMethod;
+  status: PayoutStatus;
 }
 /**
  * Controller related to payouts
