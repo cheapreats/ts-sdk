@@ -3,12 +3,8 @@ import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { SurveyQuestionType } from "../../enums";
+import { SurveyQuestionType, SurveyDeliveryRule } from "../../enums";
 
-export enum SurveyDeliveryRule {
-  AFTER_ORDER = "AFTER_ORDER",
-  MANUAL = 'MANUAL' 
-}
 export interface SurveyQuestionResponse {
   _id: string;
   question_id: string;
