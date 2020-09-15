@@ -3,13 +3,8 @@ import { DefaultControllerRequired } from "./Controller";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { SurveyQuestionType } from "../../enums";
 
-export enum SurveyQuestionType {
-  CHECKBOX = "CHECKBOX",
-  MULTI_CHECKBOX = "MULTI_CHECKBOX",
-  SHORT_ANSWER = "SHORT_ANSWER",
-  RATING = "RATING",
-}
 export enum SurveyDeliveryRule {
   AFTER_ORDER = "AFTER_ORDER",
 }
