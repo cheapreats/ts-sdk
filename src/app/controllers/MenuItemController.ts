@@ -4,7 +4,7 @@ import { Category } from "./CategoryController";
 import { FlashSaleItem } from "./FlashSaleController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { MenuItemStatus } from "../../enums"
+import { FeeType, MenuItemStatus } from "../../enums";
 
 export interface CreateMenuItemInput {
   name: string;
@@ -32,7 +32,7 @@ export interface TagInput {
 
 export interface FeeInput {
   name: string;
-  fee_type: string;
+  fee_type: FeeType;
   amount: number;
 }
 
