@@ -7,7 +7,7 @@ import { Coupon } from "./CouponController";
 import { Vendor } from "./VendorController";
 import { MenuItem } from "./MenuItemController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { CouponTransactionType } from "../../enums";
+import { CouponTransactionType, ReloadWalletPaymentMethod } from "../../enums";
 
 export interface CreditCard {
   id: string;
@@ -345,18 +345,18 @@ export class CustomerController {
    * Reload customer wallet
    * @param {string} id - The id of the Customer Object
    * @param  {number} amount - The amount to load the wallet (in cents)
-   * @param  {string} payment_method - The selected payment method
+   * @param  {ReloadWalletPaymentMethod} payment_method - The selected payment method
    * @returns {Promise<string>} - The id of the wallet that was reloaded
    */
   //QUESTION: Why does this return coupon??
   reloadWallet(
     id: string,
     amount: number,
-    payment_method: string
+    payment_method: ReloadWalletPaymentMethod
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation reloadCustomerWallet ($id: String!, $amount: Int!, $payment_method: String!) {
+                mutation reloadCustomerWallet ($id: String!, $amount: Int!, $payment_method: ReloadWalletPaymentMethod!) {
                     reloadCustomerWallet(id: $id, amount: $amount, payment_method: $payment_method) {
                         _id
                     }
