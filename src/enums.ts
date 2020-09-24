@@ -54,6 +54,12 @@ export enum PayoutAutoRequestSchedule {
     MONTHLY = 'MONTHLY',
 }
 
+export enum ReloadWalletPaymentMethod {
+    CREDIT_CARD = 'CREDIT_CARD',
+    APPLE_PAY = 'APPLE_PAY',
+    ANDROID_PAY = 'ANDROID_PAY',
+}
+
 export enum WhereFilterGroupOperator {
     AND = 'AND',
     OR = 'OR',
@@ -469,6 +475,11 @@ export enum MenuItemStatus {
 export enum FeeType {
     PERCENTAGE = 'PERCENTAGE',
     FIXED = 'FIXED',
+}
+
+export enum FeeReason {
+    OTHER = 'OTHER',
+    GLOBAL_TAX = 'GLOBAL_TAX',
 }
 
 export enum CouponTransactionType {
