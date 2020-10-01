@@ -138,6 +138,12 @@ export enum OrderPaymentMethod {
     IN_PERSON = 'IN_PERSON',
 }
 
+export enum OrderModifierChoiceType {
+    ADD = 'ADD',
+    NO = 'NO',
+    DEFAULT = 'DEFAULT',
+}
+
 export enum OrderStatusIdentifier {
     PLACED = 'PLACED',
     PREPARING = 'PREPARING',
