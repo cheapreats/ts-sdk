@@ -42,6 +42,15 @@ export interface CreateOrderInput {
   scheduled_pickup: string;
   order_type?: OrderType; // default TAKE_OUT
 }
+export interface CreateOrderFromCartInput {
+  payment_method: string;
+  cart_id: string;
+  scheduled_pickup: string;
+  order_type?: OrderType; // default TAKE_OUT
+}
+export interface ReOrderInput {
+  order_id: string;
+}
 export interface OrderModifier {
   _id: string;
   name: string;
@@ -162,8 +171,70 @@ export class OrderController {
         });
     });
   }
-  //QUESTION because only result is returned I can't be more specific than MutateResult
-  // Usually it is result.[mutation name] and then it is more specific what is within the result
+
+  /**
+   * Place a cart order, you must be authenticated as a customer to use this
+   * @param {CreateOrderFromCartInput} order - The Order Object
+   * @param {boolean} [clear_cart] - Indicator to clear all cart after order placement
+   * @returns {Promise<string>} - The id of the Order Object
+   */
+  createFromCart(
+    order: CreateOrderFromCartInput,
+    clear_cart: boolean | null // default False
+  ): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation createOrderFromCartMutation ($order: CreateOrderFromCartInput!, $clear_cart: Boolean) {
+                    createOrderFromCart(order: $order, clear_cart: $clear_cart) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          order,
+          clear_cart,
+        })
+        .then((result: MutateResult) => {
+          resolve(result.createOrderFromCart._id);
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+  /**
+   * Place a reOrder, you must be authenticated as a customer to use this
+   * @param {ReOrderInput} order - The Order Object
+   * @returns {Promise<string>} - The id of the Cart Object
+   */
+  reOrder(
+    order: ReOrderInput
+  ): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation reOrderMutation ($order: ReOrderInput!) {
+                    reOrder(order: $order) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          order
+        })
+        .then((result: MutateResult) => {
+          resolve(result.reOrder._id);
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
   /**
    * Cancel a order, must be authenticated as vendor
    * @param {string} id - The id of the Order Object
