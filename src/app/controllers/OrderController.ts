@@ -40,7 +40,7 @@ export interface CreateOrderInput {
 export interface CreateOrderFromCartInput {
   payment_method: OrderPaymentMethod;
   cart_id: string;
-  scheduled_pickup: string;
+  scheduled_pickup: Date;
   order_type?: OrderType; // default TAKE_OUT
 }
 export interface ReOrderInput {
