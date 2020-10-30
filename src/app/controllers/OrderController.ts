@@ -128,6 +128,8 @@ export class OrderController {
     this.app = app;
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
+    this.createFromCart = this.createFromCart.bind(this);
+    this.reOrder = this.reOrder.bind(this);
     this.cancel = this.cancel.bind(this);
     this.beginPreparing = this.beginPreparing.bind(this);
     this.prepared = this.prepared.bind(this);
