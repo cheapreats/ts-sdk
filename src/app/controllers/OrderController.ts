@@ -8,13 +8,8 @@ import { Category } from "./CategoryController";
 import { TagInput, FeeInput } from "./MenuItemController";
 import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { OrderStatusIdentifier } from "../../enums";
+import { OrderStatusIdentifier, OrderPaymentMethod, OrderType } from "../../enums";
 
-export enum OrderType {
-  EAT_IN = "EAT_IN",
-  TAKE_OUT = "TAKE_OUT",
-  DELIVERY = "DELIVERY",
-}
 export enum OrderCancellationReason {
   VENDOR_CANCELLED = "VENDOR_CANCELLED",
   VENDOR_PREP_CANCELLED = "VENDOR_PREP_CANCELLED",
@@ -43,7 +38,7 @@ export interface CreateOrderInput {
   order_type?: OrderType; // default TAKE_OUT
 }
 export interface CreateOrderFromCartInput {
-  payment_method: string;
+  payment_method: OrderPaymentMethod;
   cart_id: string;
   scheduled_pickup: string;
   order_type?: OrderType; // default TAKE_OUT
