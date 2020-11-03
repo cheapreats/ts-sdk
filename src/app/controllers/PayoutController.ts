@@ -7,7 +7,7 @@ import { PayoutStatus, PayoutPaymentMethod } from "../../enums";
 
 export interface PayoutPlan {
   fixed_per_transaction: number;
-  perecentage_per_transaction: number;
+  percentage_per_transaction: number;
   fixed_per_payout: number;
   percentage_per_payout: number;
 }
