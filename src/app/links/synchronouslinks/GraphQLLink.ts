@@ -231,6 +231,12 @@ export interface DeleteModifier {
 export interface CreateOrder {
   createOrder: Order;
 }
+export interface CreateOrderFromCart {
+  createOrderFromCart: Order;
+}
+export interface ReOrder {
+  reOrder: Cart;
+}
 export interface CancelOrder {
   cancelOrder: Order;
 }
@@ -365,6 +371,8 @@ export interface MutateResult
     BeginPreparingOrder,
     CancelOrder,
     CreateOrder,
+    CreateOrderFromCart,
+    ReOrder,
     DeleteModifier,
     UpdateModifier,
     CreateModifier,

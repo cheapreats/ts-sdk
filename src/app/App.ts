@@ -261,6 +261,8 @@ export class App {
   get Order() {
     return {
       create: this._orderController.create,
+      createFromCart: this._orderController.createFromCart,
+      reOrder: this._orderController.reOrder,
       cancel: this._orderController.cancel,
       beginPreparing: this._orderController.beginPreparing,
       prepared: this._orderController.prepared,
