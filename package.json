@@ -1,6 +1,6 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.12.15",
+  "version": "1.12.16",
   "description": "CheaprEats Typescript SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
