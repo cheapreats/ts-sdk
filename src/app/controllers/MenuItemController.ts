@@ -24,6 +24,7 @@ export interface CreateMenuItemInput {
   category_id: string;
   sort_order?: number;
   estimated_time?: number;
+  chef_recommendation: boolean;
 }
 export interface TagInput {
   name: string;
@@ -53,6 +54,7 @@ export interface UpdateMenuItemInput {
   warning_label?: string;
   sort_order?: number;
   estimated_time?: number;
+  chef_recommendation?: boolean;
 }
 export interface BatchUpdateMenuItemsInput {
   id: string;
@@ -78,6 +80,7 @@ export interface MenuItem extends DefaultControllerRequired {
   warning_label: string;
   sort_order: number;
   estimated_time: number;
+  chef_recommendation: boolean;
 }
 /**
  * Controller for menu items.
