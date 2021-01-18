@@ -221,6 +221,16 @@ export enum EmployeeRole {
     USER = 'USER',
 }
 
+export enum DominantHand {
+    RIGHT = 'RIGHT',
+    LEFT = 'LEFT',
+}
+
+export enum EmploymentStatus {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+}
+
 export enum CountryCode {
     US = 'US',
     AF = 'AF',

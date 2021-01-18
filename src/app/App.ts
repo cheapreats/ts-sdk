@@ -130,6 +130,10 @@ export class App {
       addItem: this._cartController.addItem,
       create: this._cartController.create,
       enableSharingForCart: this._cartController.enableSharingForCart,
+      getCartOrderTotal: this._cartController.getCartOrderTotal,
+      updatePaymentMethod: this._cartController.updatePaymentMethod,
+      updateApprovalStatus: this._cartController.updateApprovalStatus,
+      changeCartHost: this._cartController.changeCartHost,
     };
   }
 
@@ -256,7 +260,7 @@ export class App {
 
   /**
    * Get order related methods.
-   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete}}
+   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete, getOrderTotal: OrderController.getOrderTotal}}
    */
   get Order() {
     return {
@@ -267,6 +271,7 @@ export class App {
       beginPreparing: this._orderController.beginPreparing,
       prepared: this._orderController.prepared,
       complete: this._orderController.complete,
+      getOrderTotal: this._orderController.getOrderTotal,
     };
   }
 
