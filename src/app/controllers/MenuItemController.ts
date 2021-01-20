@@ -6,7 +6,6 @@ import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { FeeType, MenuItemStatus } from "../../enums";
 
-
 export interface MenuItem {
     name: string;
     identifier: string;
@@ -32,7 +31,7 @@ export interface UpdateMenuItemInput extends Partial<MenuItem> {
 
 }
 
-interface CreateMenuItemInput extends MenuItem {
+export interface CreateMenuItemInput extends MenuItem {
 
 }
 
@@ -47,50 +46,12 @@ export interface FeeInput {
   amount: number;
 }
 
-export interface UpdateMenuItemInput {
-  tags?: Array<TagInput>;
-  ingredients?: Array<TagInput>;
-  fees?: Array<FeeInput>;
-  name?: string;
-  identifier?: string;
-  images?: Array<string>;
-  calories?: number;
-  recycle_info?: string;
-  description?: string;
-  daily_special_day?: string;
-  price?: number;
-  original_price?: number;
-  status?: MenuItemStatus;
-  warning_label?: string;
-  sort_order?: number;
-  estimated_time?: number;
-  chef_recommendation?: boolean;
-}
 export interface BatchUpdateMenuItemsInput {
   id: string;
   menu_item: UpdateMenuItemInput;
 }
 export interface MenuItem extends DefaultControllerRequired {
-  modifiers: Array<Modifier>;
-  tags: Array<TagInput>;
-  ingredients: Array<TagInput>;
-  fees: Array<FeeInput>;
-  category: Category;
-  flash_sale_info: FlashSaleItem;
-  name: string;
-  identifier: string;
-  images: Array<string>;
-  calories: number;
-  recycle_info: string;
-  description: string;
-  daily_special_day: string;
-  price: number;
-  original_price: number;
-  status: MenuItemStatus;
-  warning_label: string;
-  sort_order: number;
-  estimated_time: number;
-  chef_recommendation: boolean;
+
 }
 /**
  * Controller for menu items.
