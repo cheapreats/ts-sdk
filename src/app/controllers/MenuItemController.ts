@@ -6,9 +6,12 @@ import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { FeeType, MenuItemStatus } from "../../enums";
 
-export interface MenuItem {
+export interface MenuItem extends DefaultControllerRequired {
     name: string;
     identifier: string;
+    modifiers?: Array<Modifier>;
+    category?: Category;
+    flash_sale_info?: FlashSaleItem;
     images: Array<string>;
     calories: number;
     tags: Array<TagInput>;
@@ -49,9 +52,6 @@ export interface FeeInput {
 export interface BatchUpdateMenuItemsInput {
   id: string;
   menu_item: UpdateMenuItemInput;
-}
-export interface MenuItem extends DefaultControllerRequired {
-
 }
 /**
  * Controller for menu items.
