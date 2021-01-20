@@ -7,6 +7,7 @@ import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { FeeType, MenuItemStatus } from "../../enums";
 
 export interface MenuItem {
+    modifiers: Array<Modifier>
     name: string;
     identifier: string;
     images: Array<string>;
@@ -21,7 +22,9 @@ export interface MenuItem {
     original_price: number;
     status: MenuItemStatus;
     warning_label?: string;
+    category: Category;
     category_id: string;
+    flash_sale_info: FlashSaleItem;
     sort_order?: number;
     estimated_time?: number;
     chef_recommendation: boolean;
