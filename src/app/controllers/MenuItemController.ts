@@ -6,26 +6,36 @@ import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { FeeType, MenuItemStatus } from "../../enums";
 
-export interface CreateMenuItemInput {
-  name: string;
-  identifier: string;
-  images: Array<string>;
-  calories: number;
-  tags: Array<TagInput>;
-  ingredients: Array<TagInput>;
-  fees: Array<FeeInput>;
-  recycle_info: string;
-  description: string;
-  daily_special_day?: string;
-  price: number;
-  original_price: number;
-  status: MenuItemStatus;
-  warning_label?: string;
-  category_id: string;
-  sort_order?: number;
-  estimated_time?: number;
-  chef_recommendation: boolean;
+
+export interface MenuItem {
+    name: string;
+    identifier: string;
+    images: Array<string>;
+    calories: number;
+    tags: Array<TagInput>;
+    ingredients: Array<TagInput>;
+    fees: Array<FeeInput>;
+    recycle_info: string;
+    description: string;
+    daily_special_day?: string;
+    price: number;
+    original_price: number;
+    status: MenuItemStatus;
+    warning_label?: string;
+    category_id: string;
+    sort_order?: number;
+    estimated_time?: number;
+    chef_recommendation: boolean;
 }
+
+export interface UpdateMenuItemInput extends Partial<MenuItem> {
+
+}
+
+interface CreateMenuItemInput extends MenuItem {
+
+}
+
 export interface TagInput {
   name: string;
   identifier: string;
