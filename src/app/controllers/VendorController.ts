@@ -132,6 +132,7 @@ export interface VendorCommonProperties {
   postal_code: string;
   store_logo: string;
   max_group_seating_limit: number;
+  website_link: string;
 }
 
 export interface TimeSpanInput {
@@ -230,6 +231,7 @@ export interface UpdateVendorInput {
   postal_code?: string;
   store_logo?: string;
   max_group_seating_limit?: string;
+  website_link?: string;
 }
 
 export interface OrderTypesInput {
