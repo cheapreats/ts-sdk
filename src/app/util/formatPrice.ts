@@ -4,7 +4,7 @@
  * @param {boolean} showZero
  * @returns {string}
  */
-export function formatPrice(price: number, showZero: boolean = true): string {
+export function formatPrice(price: number, showZero: boolean = true): string | undefined {
   if (price !== 0 || showZero) {
     return "$" + (price / 100).toFixed(2);
   }
