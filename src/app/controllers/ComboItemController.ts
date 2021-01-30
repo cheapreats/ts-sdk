@@ -78,6 +78,7 @@ export class ComboItemController {
           id
         })
         .then(() => {
+            //@ts-ignore deprecated
           resolve();
         })
         .catch((e: any) => {

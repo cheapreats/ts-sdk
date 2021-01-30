@@ -47,7 +47,7 @@ export class EmployeeTokenController {
           password
         })
         .then((result: MutateResult) => {
-          resolve(result.createEmployeeToken.body);
+          resolve(result.createEmployeeToken.body || 'undefined: No Body Found.');
         })
         .catch((e: any) => {
           reject(e);
