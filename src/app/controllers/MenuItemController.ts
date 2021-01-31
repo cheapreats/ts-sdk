@@ -29,7 +29,7 @@ export interface MenuItem extends DefaultControllerRequired {
     chef_recommendation: boolean;
 }
 
-export interface UpdateMenuItemInput extends Partial<Omit<MenuItem, '_id' | 'created_at' | 'updated_at'>> {
+export interface UpdateMenuItemInput extends Partial<Omit<MenuItem, '_id' | 'created_at' | 'updated_at' | 'category'>> {
 
 }
 
