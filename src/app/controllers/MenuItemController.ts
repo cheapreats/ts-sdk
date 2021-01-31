@@ -34,7 +34,7 @@ export interface UpdateMenuItemInput extends Partial<MenuItem> {
 
 }
 
-export interface CreateMenuItemInput extends MenuItem {
+export interface CreateMenuItemInput extends Omit<MenuItem, '_id'> {
 
 }
 
