@@ -9,9 +9,9 @@ import { FeeType, MenuItemStatus } from "../../enums";
 export interface MenuItem extends DefaultControllerRequired {
     name: string;
     identifier: string;
-    modifiers?: Array<Modifier>;
-    category?: Category;
-    flash_sale_info?: FlashSaleItem;
+    modifiers: Array<Modifier>;
+    category: Category;
+    flash_sale_info: FlashSaleItem;
     images: Array<string>;
     calories: number;
     tags: Array<TagInput>;
@@ -19,23 +19,22 @@ export interface MenuItem extends DefaultControllerRequired {
     fees: Array<FeeInput>;
     recycle_info: string;
     description: string;
-    daily_special_day?: string;
+    daily_special_day: string;
     price: number;
     original_price: number;
     status: MenuItemStatus;
-    warning_label?: string;
-    category_id: string;
-    sort_order?: number;
-    estimated_time?: number;
+    warning_label: string;
+    sort_order: number;
+    estimated_time: number;
     chef_recommendation: boolean;
 }
 
-export interface UpdateMenuItemInput extends Partial<MenuItem> {
+export interface UpdateMenuItemInput extends Partial<Omit<MenuItem, '_id' | 'created_at' | 'updated_at'>> {
 
 }
 
-export interface CreateMenuItemInput extends Omit<MenuItem, '_id'> {
-
+export interface CreateMenuItemInput extends Pick<MenuItem, 'name' | 'identifier' | 'images' | 'calories' | 'tags' | 'ingredients' | 'fees' | 'recycle_info' | 'description' | 'daily_special_day' | 'price' | 'original_price' | 'status' | 'warning_label' | 'sort_order' | 'estimated_time' | 'chef_recommendation'> {
+    category_id: string;
 }
 
 export interface TagInput {
