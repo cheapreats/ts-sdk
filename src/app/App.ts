@@ -130,6 +130,8 @@ export class App {
       addItem: this._cartController.addItem,
       create: this._cartController.create,
       enableSharingForCart: this._cartController.enableSharingForCart,
+      joinCart: this._cartController.joinCart,
+      leaveCart: this._cartController.leaveCart,
     };
   }
 
