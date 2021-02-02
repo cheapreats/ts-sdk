@@ -11,13 +11,10 @@ export interface PayoutPlan {
   fixed_per_payout: number;
   percentage_per_payout: number;
 }
-export interface UpdatePayoutInput {
-  orders?: Array<string>;
-  service_charges?: Array<string>;
-  note?: string;
-  method?: PayoutPaymentMethod; // default MANUAL
-  status?: PayoutStatus; // default PENDING
+export interface UpdatePayoutInput extends Partial<Omit<Payout, 'vendor_id' | 'vendor' | 'total'>> {
+
 }
+
 export enum ServiceChargeType {
   CREDIT = "CREDIT",
   DEBIT = "DEBIT",
