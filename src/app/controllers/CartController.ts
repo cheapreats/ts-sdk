@@ -51,6 +51,8 @@ export class CartController {
     this.addItem = this.addItem.bind(this);
     this.create = this.create.bind(this);
     this.enableSharingForCart = this.enableSharingForCart.bind(this);
+    this.joinCart = this.joinCart.bind(this);
+    this.leaveCart = this.leaveCart.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -288,5 +290,66 @@ export class CartController {
     });
   }
 
-
+  /**
+   * Join a cart
+   * @param {string} cartId
+   * @param {string} sharedToken
+   * @returns {Promise<Cart>}
+   */
+  joinCart(cartId: string, sharedToken: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!, $sharedToken: String!) {
+                    joinCart(
+                        cart_id: $cartId,
+                        shared_token: $sharedToken
+                    ) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId,
+            sharedToken
+          })
+          .then((result: MutateResult) => {
+            resolve(result.joinCart);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+  
+  /**
+   * Leave a cart
+   * @param {string} cartId
+   * @returns {Promise<Cart>}
+   */
+  leaveCart(cartId: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!) {
+                    leaveCart(
+                        cart_id: $cartId
+                    ) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId
+          })
+          .then((result: MutateResult) => {
+            resolve(result.leaveCart);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
 }

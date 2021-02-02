@@ -331,6 +331,13 @@ export interface UpdateAllMenuItemsStatusForVendor {
 export interface EnableSharingForCart {
   enableSharingForCart: Cart;
 }
+export interface JoinCart {
+  joinCart: Cart;
+}
+export interface LeaveCart {
+  leaveCart: Cart;
+}
+
 
 export interface MutateResult
   extends CreateCategory,
@@ -341,6 +348,8 @@ export interface MutateResult
     UpdateNoteForCart,
     RemoveCouponFromCart,
     ApplyCouponToCart,
+    JoinCart,
+    LeaveCart,
     VerifySmsVerificationSession,
     CreateSmsVerificationSession,
     UpdateVendor,

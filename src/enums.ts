@@ -36,6 +36,11 @@ export enum LoyaltyProgramType {
     ITEM = 'ITEM',
 }
 
+export enum ReferralTransactionType {
+    FIRST_REFERRAL = 'FIRST_REFERRAL',
+    REGULAR_REFERRAL = 'REGULAR_REFERRAL',
+}
+
 export enum PayoutPaymentMethod {
     MANUAL = 'MANUAL',
 }
@@ -219,6 +224,16 @@ export enum EmployeeLanguage {
 export enum EmployeeRole {
     ADMIN = 'ADMIN',
     USER = 'USER',
+}
+
+export enum DominantHand {
+    RIGHT = 'RIGHT',
+    LEFT = 'LEFT',
+}
+
+export enum EmploymentStatus {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
 }
 
 export enum CountryCode {
