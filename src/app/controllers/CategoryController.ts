@@ -23,18 +23,11 @@ export interface Category
   extends DefaultControllerRequired,
     CommonCategoryProperties,
     MenuItemsFunction {}
-export interface CreateCategoryInput {
-  name: string;
-  identifier: string;
-  description: string;
+export interface CreateCategoryInput extends Pick<Category, 'name' | 'identifier' | 'description' | 'sort_order'> {
   vendor_id: string;
-  sort_order?: number;
 }
-export interface UpdateCategoryInput {
-  name?: string;
-  identifier?: string;
-  description?: string;
-  sort_order?: number;
+export interface UpdateCategoryInput extends Partial<Omit<Category, '_id' | 'created_at' | 'update_at' >> {
+  
 }
 export interface BatchUpdateCategoriesInput {
   id: string;
