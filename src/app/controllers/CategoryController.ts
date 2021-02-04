@@ -26,7 +26,7 @@ export interface Category
 export interface CreateCategoryInput extends Pick<Category, 'name' | 'identifier' | 'description' | 'sort_order'> {
   vendor_id: string;
 }
-export interface UpdateCategoryInput extends Partial<Omit<Category, '_id' | 'created_at' | 'update_at'| 'menu_item_count' | 'vendor' >> {
+export interface UpdateCategoryInput extends Partial<Omit<Category, keyof DefaultControllerRequired | keyof MenuItemsFunction | 'menu_item_count' | 'vendor' >> {
   
 }
 export interface BatchUpdateCategoriesInput {
