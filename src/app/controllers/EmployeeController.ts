@@ -15,12 +15,8 @@ export interface CreateEmployeeInput {
   vendor_id: string;
   email_preferences: EmailPreferencesInput;
 }
-export interface UpdateEmployeeInput {
-  email_preferences?: EmailPreferencesInput;
-  email_address?: string;
-  password?: string;
-  phone_number?: string;
-  role?: EmployeeRole;
+export interface UpdateEmployeeInput extends Partial<Omit<Employee, keyof DefaultControllerRequired | 'username' | 'vendor' | 'terminal_fcm_tokens' | 'active_shift_time_period'>> {
+
 }
 export enum ResetCodeSendMethod {
   EMAIL = "EMAIL",
