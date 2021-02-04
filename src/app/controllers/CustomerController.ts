@@ -47,19 +47,16 @@ export interface Customer
     LoyaltyFunction,
     CommonCustomerProperties {}
 
-export interface CustomerOptions {
-  profile_picture?: string;
-  birthday?: string;
+export interface CustomerOptions extends Pick<CommonCustomerProperties, 'profile_picture' | 'birthday'>{
+
 }
 export interface EmailPreferencesInput {
   promotional: boolean;
   transactional: boolean;
   system: boolean;
 }
-export interface EmailPreferences {
-  promotional?: boolean;
-  transactional?: boolean;
-  system?: boolean;
+export interface EmailPreferences extends EmailPreferencesInput {
+
 }
 export interface CreateCustomerInput extends CustomerOptions {
   email_address: string;
@@ -70,9 +67,8 @@ export interface CreateCustomerInput extends CustomerOptions {
   verification_code: string;
   email_preferences: EmailPreferencesInput;
 }
-export interface UpdateCustomerInput extends CustomerOptions {
-  mobile_notifications?: boolean;
-  email_preferences?: EmailPreferencesInput;
+export interface UpdateCustomerInput extends Pick<CommonCustomerProperties, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' > {
+
 }
 /**
  * Controller for customers.
