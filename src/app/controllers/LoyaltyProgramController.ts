@@ -13,27 +13,11 @@ export interface LoyaltyCardAttributesInput {
   color: string;
   emoji: string;
 }
-export interface CreateLoyaltyProgramInput {
-  name: string;
-  description?: string;
-  vendor_id: string;
-  items_required: Array<string>;
-  points: number;
-  shareable_points: number;
-  min_purchase?: number; // default 0
-  program_type?: LoyaltyProgramType; // default DOLLAR
-  program_loyalty_card_attributes: LoyaltyCardAttributesInput;
+export interface CreateLoyaltyProgramInput extends Pick<LoyaltyProgram, 'name' | 'description' | 'items_required' | 'points' | 'shareable_points' | 'min_purchase' | 'program_type' | 'program_loyalty_card_attributes'> {
+  vendor_id: string;  
 }
-
-export interface UpdateLoyaltyProgramInput {
-  items_required?: Array<string>;
-  program_type?: LoyaltyProgramType;
-  name?: string;
-  description?: string;
-  points?: number;
-  shareable_points?: number;
-  min_purchase?: number;
-  program_loyalty_card_attributes?: LoyaltyCardAttributesInput;
+export interface UpdateLoyaltyProgramInput extends Partial<Omit<LoyaltyProgram, '_id' | 'vendor' | 'redeemable_items'>> {
+  
 }
 export interface LoyaltyProgram {
   _id: string;
