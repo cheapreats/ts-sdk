@@ -27,7 +27,7 @@ export interface CreateCouponInput extends Pick<Coupon, 'code' | 'coupon_type' |
   payment_methods?: PaymentMethodsInput;
 }
 
-export interface UpdateCouponInput extends Partial<Omit<Coupon, '_id' | 'created_at' | 'updated_at' | 'transactions' | 'real_value'>>{
+export interface UpdateCouponInput extends Partial<Omit<Coupon, keyof DefaultControllerRequired | keyof TransactionFunction | 'real_value'>>{
   payment_methods?: PaymentMethodsInput;
 }
 
