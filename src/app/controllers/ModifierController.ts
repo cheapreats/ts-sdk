@@ -8,28 +8,11 @@ export interface ModifierChoiceInput {
   available: boolean;
   price: number;
 }
-export interface CreateModifierInput {
-  name: string;
-  identifier: string;
-  description: string;
-  required: boolean;
-  choices: Array<ModifierChoiceInput>;
-  default?: string;
-  default_choices: Array<string>;
+export interface CreateModifierInput extends Pick<Modifier, 'name' | 'identifier' | 'description' | 'required' | 'choices' | 'default' | 'default_choices' | 'is_topping' | 'max_choice'> {
   menu_item_id: string;
-  is_topping: boolean;
-  max_choice?: number;
 }
-export interface UpdateModifierInput {
-  choices?: Array<ModifierChoiceInput>;
-  name?: string;
-  identifier?: string;
-  description?: string;
-  required?: boolean;
-  default?: string;
-  default_choices?: Array<string>;
-  is_topping?: boolean;
-  max_choice?: number;
+export interface UpdateModifierInput extends Partial<Omit<Modifier, keyof DefaultControllerRequired>>{
+  
 }
 export interface Modifier extends DefaultControllerRequired {
   choices: Array<ModifierChoiceInput>;
