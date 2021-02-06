@@ -47,7 +47,7 @@ export interface Customer
     LoyaltyFunction,
     CommonCustomerProperties {}
 
-export interface CustomerOptions extends Pick<CommonCustomerProperties, 'profile_picture' | 'birthday'>{
+export interface CustomerOptions extends Pick<Customer, 'profile_picture' | 'birthday'>{
 
 }
 export interface EmailPreferencesInput {
@@ -58,16 +58,12 @@ export interface EmailPreferencesInput {
 export interface EmailPreferences extends EmailPreferencesInput {
 
 }
-export interface CreateCustomerInput extends CustomerOptions {
-  email_address: string;
-  name: string;
-  password: string;
-  phone_number: string;
+export interface CreateCustomerInput extends Pick<Customer, 'email_address' | 'name' | 'password' | 'phone_number' | 'email_preferences' | 'profile_picture' | 'birthday' > {
   verification_request_id: string;
   verification_code: string;
-  email_preferences: EmailPreferencesInput;
+  
 }
-export interface UpdateCustomerInput extends Pick<CommonCustomerProperties, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' > {
+export interface UpdateCustomerInput extends Pick<Customer, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' > {
 
 }
 /**
