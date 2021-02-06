@@ -4,23 +4,13 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { Vendor } from "./VendorController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { EmployeeRole } from "../../enums";
+import { EmployeeRole, EmployeeLanguage, ResetCodeSendMethod } from "../../enums";
 
-export interface CreateEmployeeInput {
-  username: string;
-  password: string;
-  role: EmployeeRole;
-  email_address: string;
-  phone_number: string;
+export interface CreateEmployeeInput extends Pick<Employee, 'username' | 'password' | 'role' | 'email_address' | 'phone_number' | 'email_preferences' | 'language'>{
   vendor_id: string;
-  email_preferences: EmailPreferencesInput;
 }
 export interface UpdateEmployeeInput extends Partial<Omit<Employee, keyof DefaultControllerRequired | 'username' | 'vendor' | 'terminal_fcm_tokens' | 'active_shift_time_period'>> {
 
-}
-export enum ResetCodeSendMethod {
-  EMAIL = "EMAIL",
-  SMS = "SMS",
 }
 export interface Employee extends DefaultControllerRequired {
   username: string;
@@ -29,6 +19,8 @@ export interface Employee extends DefaultControllerRequired {
   terminal_fcm_tokens: Array<string>;
   email_address: string;
   password: string;
+  language: EmployeeLanguage;
+  profile_picture: string;
   phone_number: string;
   role: EmployeeRole;
   active_shift_time_period: ShiftTimePeriod;
