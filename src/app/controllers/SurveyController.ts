@@ -36,32 +36,17 @@ export interface Survey extends DefaultControllerRequired {
   archived_at: string;
 }
 
-export interface SurveyQuestionInput {
-  question: string;
-  description?: string;
-  question_type: SurveyQuestionType;
-  choices?: Array<string>;
-  max_rating?: number;
-  required?: boolean; // default False
+export interface SurveyQuestionInput extends Partial<Omit<SurveyQuestion, keyof DefaultControllerRequired>> {
+
 }
-export interface CreateSurveyInput {
-  title: string;
-  vendor_id: string;
-  questions: Array<SurveyQuestionInput>;
-  delivery_rule?: SurveyDeliveryRule; // default AFTER_ORDER
-  loyalty_reward?: number;
-  wallet_reward?: number;
+export interface CreateSurveyInput extends Partial<Omit<Survey, keyof DefaultControllerRequired | 'description' | 'responses' | 'released_at' | 'archived_at' >>{
+  
 }
-export interface UpdateSurveyInput {
-  title?: string;
-  questions?: Array<SurveyQuestionInput>;
-  delivery_rule?: SurveyDeliveryRule;
-  loyalty_reward?: number;
-  wallet_reward?: number;
+export interface UpdateSurveyInput extends Pick<Survey, 'title' | 'questions' | 'delivery_rule' | 'loyalty_reward' | 'wallet_reward'>{
+  
 }
-export interface SurveyQuestionResponseInput {
-  question_id: string;
-  answer: Array<string>;
+export interface SurveyQuestionResponseInput extends Pick<SurveyQuestionResponse, 'question_id' | 'answer'> {
+  
 }
 export interface CreateSurveyResponseInput {
   customer_id: string;
