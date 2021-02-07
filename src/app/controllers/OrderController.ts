@@ -8,17 +8,8 @@ import { Category } from "./CategoryController";
 import { TagInput, FeeInput } from "./MenuItemController";
 import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { OrderStatusIdentifier, OrderPaymentMethod, OrderType } from "../../enums";
+import { OrderStatusIdentifier, OrderPaymentMethod, OrderType, OrderCancellationReason } from "../../enums";
 
-export enum OrderCancellationReason {
-  VENDOR_CANCELLED = "VENDOR_CANCELLED",
-  VENDOR_PREP_CANCELLED = "VENDOR_PREP_CANCELLED",
-  VENDOR_ITEM_SOLD_OUT = "VENDOR_ITEM_SOLD_OUT",
-  VENDOR_STORE_CLOSING_SOON = "VENDOR_STORE_CLOSING_SOON",
-  CUSTOMER_NOT_PICKED_UP = "CUSTOMER_NOT_PICKED_UP",
-  CUSTOMER_CANCELLED = "CUSTOMER_CANCELLED",
-  OTHER = "OTHER",
-}
 export interface CreateOrderModifierInput {
   modifier_id: string;
   choices: Array<string>;
