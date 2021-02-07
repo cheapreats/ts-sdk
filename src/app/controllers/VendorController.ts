@@ -10,7 +10,7 @@ import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Survey } from "./SurveyController";
 import { FlashSale } from "./FlashSaleController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { VendorStatus } from '../../enums';
+import { VendorStatus, VendorApprovalStatus, PayoutAutoRequestSchedule, VendorAnalyticsCustomerType } from '../../enums';
 
 export interface CreateVendorWithEmployeeInput {
   name: string;
@@ -18,19 +18,6 @@ export interface CreateVendorWithEmployeeInput {
   username: string;
   password: string;
   plan: string;
-}
-
-export enum VendorApprovalStatus {
-  NOT_APPROVED = "NOT_APPROVED",
-  PENDING = "PENDING",
-  APPROVED = "APPROVED",
-}
-
-export enum PayoutAutoRequestSchedule {
-  OFF = "OFF",
-  WEEKLY = "WEEKLY",
-  BI_WEEKLY = "BI_WEEKLY",
-  MONTHLY = "MONTHLY",
 }
 
 export interface VendorDailyDealsMenu {
@@ -55,12 +42,6 @@ export interface VendorAnalyticsCouponUsage {
   use_count?: number;
 }
 
-export enum VendorAnalyticsCustomerType {
-  FIRST_TIME = "FIRST_TIME",
-  CASUAL = "CASUAL",
-  REGULAR = "REGULAR",
-}
-
 export interface VendorAnalyticsCustomerAnalysis {
   customer_id?: string;
   customer_name?: string;
@@ -73,8 +54,8 @@ export interface VendorAnalyticsCustomerAnalysis {
 }
 
 export interface VendorAnalyticsHourlySales {
-    hour?: string;
-    sales?: number;
+  hour?: string;
+  sales?: number;
 }
 
 export interface VendorAnalytics {
@@ -140,9 +121,8 @@ export interface TimeSpanInput {
   to: string;
 }
 
-export interface TimeSpan {
-  from?: string;
-  to?: string;
+export interface TimeSpan extends TimeSpanInput{
+
 }
 
 export interface OpenHoursInput {
@@ -155,14 +135,8 @@ export interface OpenHoursInput {
   sunday: Array<TimeSpanInput>;
 }
 
-export interface OpenHours {
-  monday?: Array<TimeSpanInput>;
-  tuesday?: Array<TimeSpanInput>;
-  wednesday?: Array<TimeSpanInput>;
-  thursday?: Array<TimeSpanInput>;
-  friday?: Array<TimeSpanInput>;
-  saturday?: Array<TimeSpanInput>;
-  sunday?: Array<TimeSpanInput>;
+export interface OpenHours extends OpenHoursInput{
+  
 }
 
 export interface LocationInput {
@@ -170,9 +144,8 @@ export interface LocationInput {
   latitude: number;
 }
 
-export interface Location {
-  longitude?: number;
-  latitude?: number;
+export interface Location extends LocationInput {
+  
 }
 
 export interface DirectDepositInfoInput {
@@ -182,11 +155,8 @@ export interface DirectDepositInfoInput {
   cheque_image: string;
 }
 
-export interface DirectDepositInfo {
-  transit_no?: string;
-  institution_no?: string;
-  account_no?: string;
-  cheque_image?: string;
+export interface DirectDepositInfo extends DirectDepositInfoInput{
+  
 }
 
 export interface VendorCommonProperties {
@@ -234,10 +204,8 @@ export interface UpdateVendorInput {
   website_link?: string;
 }
 
-export interface OrderTypesInput {
-  eat_in?: boolean;
-  take_out?: boolean;
-  delivery?: boolean;
+export interface OrderTypesInput extends VendorOrderTypes {
+  
 }
 
 export interface VendorTester {
