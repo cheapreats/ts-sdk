@@ -2,10 +2,8 @@ import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
-export interface UpdateRawConfigurationInput {
-  name?: string;
-  version_mask?: string;
-  data?: string;
+export interface UpdateRawConfigurationInput extends Partial<Omit<RawConfiguration, keyof DefaultControllerRequired >>{
+  
 }
 export interface CreateRawConfigurationInput {
   name: string;
