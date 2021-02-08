@@ -148,15 +148,15 @@ export interface Location extends LocationInput {
   
 }
 
-export interface DirectDepositInfoInput {
+export interface DirectDepositInfoInput extends DirectDepositInfo {
+  
+}
+
+export interface DirectDepositInfo  {
   transit_no: string;
   institution_no: string;
   account_no: string;
   cheque_image: string;
-}
-
-export interface DirectDepositInfo extends DirectDepositInfoInput{
-  
 }
 
 export interface VendorCommonProperties {
