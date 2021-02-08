@@ -34,13 +34,14 @@ interface CommonCustomerProperties {
   mobile_notifications: boolean;
   is_test: boolean;
   wallet: Coupon;
+  profile_picture: string;
+  supercharged_coupon: Coupon;
   cart: Cart;
   favourite_vendors: Array<Vendor>;
   favourite_items: Array<MenuItem>;
+  birthday: string;
   test_vendors: Array<Vendor>;
   groups: Array<Group>;
-  profile_picture: string;
-  birthday: string;
 }
 export interface Customer
   extends DefaultControllerRequired,
