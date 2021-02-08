@@ -20,7 +20,7 @@ export interface Modifier extends DefaultControllerRequired {
   identifier: string;
   description: string;
   required: boolean;
-  default: string;
+  default?: string;
   default_choices: Array<string>;
   is_topping: boolean;
   max_choice: number;
