@@ -81,6 +81,7 @@ export interface VendorCommonProperties {
   head_office: HeadOffice;
   tags: Array<TagInput>;
   location: LocationInput;
+  courier_pickup_instructions: string;
   open_hours: OpenHoursInput;
   payment_methods: PaymentMethodsInput;
   direct_deposit_info: DirectDepositInfoInput;
@@ -112,6 +113,7 @@ export interface VendorCommonProperties {
   global_tax_rate: number;
   postal_code: string;
   store_logo: string;
+  min_delivery_cart_total: number;
   max_group_seating_limit: number;
   website_link: string;
 }
@@ -125,7 +127,11 @@ export interface TimeSpan {
   to: string;
 }
 
-export interface OpenHoursInput {
+export interface OpenHoursInput extends OpenHours {
+
+}
+
+export interface OpenHours {
   monday: Array<TimeSpanInput>;
   tuesday: Array<TimeSpanInput>;
   wednesday: Array<TimeSpanInput>;
@@ -135,17 +141,13 @@ export interface OpenHoursInput {
   sunday: Array<TimeSpanInput>;
 }
 
-export interface OpenHours extends OpenHoursInput{
+export interface LocationInput extends Location {
   
 }
 
-export interface LocationInput {
+export interface Location {
   longitude: number;
   latitude: number;
-}
-
-export interface Location extends LocationInput {
-  
 }
 
 export interface DirectDepositInfoInput extends DirectDepositInfo {
@@ -159,50 +161,9 @@ export interface DirectDepositInfo  {
   cheque_image: string;
 }
 
-export interface VendorCommonProperties {
-  name: string;
-  description: string;
-  images: Array<string>;
-  address: string;
-  phone_number: string;
-  status: VendorStatus;
-  payout_email_address: string;
-  directions: string;
-  receive_sms_notifications: boolean;
-  auto_open: boolean;
-  auto_close: boolean;
-  payout_auto_request_schedule: PayoutAutoRequestSchedule;
-  global_tax_rate: number;
-  postal_code: string;
-  store_logo: string;
-  max_group_seating_limit: number;
-}
-
-export interface UpdateVendorInput {
-  tags?: Array<TagInput>;
-  open_hours?: OpenHoursInput;
-  location?: LocationInput;
-  direct_deposit_info?: DirectDepositInfoInput;
-  payment_methods?: PaymentMethodsInput;
-  order_types?: OrderTypesInput;
-  name?: string;
-  description?: string;
-  images?: Array<string>;
-  address?: string;
-  phone_number?: string;
-  status?: VendorStatus;
-  payout_email_address?: string;
-  directions?: string;
-  receive_sms_notifications?: boolean;
-  auto_open?: boolean;
-  auto_close?: boolean;
-  payout_auto_request_schedule?: PayoutAutoRequestSchedule;
-  global_tax_rate?: number;
-  postal_code?: string;
-  store_logo?: string;
-  max_group_seating_limit?: string;
-  website_link?: string;
-}
+export interface UpdateVendorInput extends Pick<Vendor, 'name' | 'description' | 'images' | 'tags' | 'open_hours' | 'address' | 'phone_number' | 'location' | 'courier_pickup_instructions' | 'status' | 'payout_email_address' | 'direct_deposit_info' | 'payment_methods' | 'directions' | 'receive_sms_notifications' | 'auto_open' | 'auto_close' | 'payout_auto_request_schedule' | 'global_tax_rate' | 'postal_code' | 'order_types' | 'store_logo' | 'min_delivery_cart_total' | 'max_group_seating_limit' | 'website_link' > {
+  
+} 
 
 export interface OrderTypesInput extends VendorOrderTypes {
   
