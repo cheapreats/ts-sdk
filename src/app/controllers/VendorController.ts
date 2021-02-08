@@ -116,13 +116,13 @@ export interface VendorCommonProperties {
   website_link: string;
 }
 
-export interface TimeSpanInput {
-  from: string;
-  to: string;
+export interface TimeSpanInput extends TimeSpan {
+  
 }
 
-export interface TimeSpan extends TimeSpanInput{
-
+export interface TimeSpan {
+  from: string;
+  to: string;
 }
 
 export interface OpenHoursInput {
