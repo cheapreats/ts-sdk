@@ -3,11 +3,8 @@ import { DefaultControllerRequired } from "./Controller";
 import { Coupon } from "./CouponController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { MenuItem } from "./MenuItemController";
-export interface AddAdvertisementInput {
-  title?: string;
-  link?: string;
-  image?: string;
-  description?: string;
+export interface AddAdvertisementInput extends Partial<Omit<Advertisement, '_id'>> {
+  
 }
 export interface Advertisement {
   _id: string;
@@ -16,8 +13,7 @@ export interface Advertisement {
   image: string;
   description: string;
 }
-export interface AddDailyDealInput {
-  link?: string;
+export interface AddDailyDealInput extends Partial<Omit<DailyDeal, '_id' | 'menu_item'>>{
   menu_item_id: string;
 }
 export interface DailyDeal {
@@ -27,12 +23,8 @@ export interface DailyDeal {
 }
 export interface AddSpecialDealInput extends AddDailyDealInput {}
 export interface SpecialDeal extends DailyDeal {}
-export interface AddTimelyDealInput {
+export interface AddTimelyDealInput extends Partial<Omit<TimelyDeal, '_id' | 'menu_item'>> {
   menu_item_id: string;
-  title?: string;
-  link?: string;
-  from?: string;
-  to?: string;
 }
 export interface TimelyDeal {
   _id: string;
