@@ -52,10 +52,10 @@ export class CartController {
     this.addItem = this.addItem.bind(this);
     this.create = this.create.bind(this);
     this.enableSharingForCart = this.enableSharingForCart.bind(this);
-    this.getCartOrderTotal = this.getCartOrderTotal.bind(this);
     this.updatePaymentMethod = this.updatePaymentMethod.bind(this);
     this.updateApprovalStatus = this.updateApprovalStatus.bind(this);
     this.changeCartHost = this.changeCartHost.bind(this);
+    this.removeCustomerFromParticipatingCustomers = this.removeCustomerFromParticipatingCustomers.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -294,37 +294,6 @@ export class CartController {
   }
 
   /**
-   * Get Cart order total for a customer
-   * @param {string} cartId
-   * @param {string} sharedToken
-   * @returns {Promise<number>}
-   */
-  getCartOrderTotal(cartId: string, sharedToken?: string): Promise<number> {
-    return new Promise((resolve, reject) => {
-      let mutationString = `
-                query ($cartId: String!, $sharedToken: String) {
-                    getCartOrderTotal(
-                      cart_id: $cartId, 
-                      shared_token: $sharedToken
-                    )
-                }
-            `;
-      this.app
-          .getAdaptor()
-          .mutate(mutationString, {
-            cartId,
-            sharedToken,
-          })
-          .then((result: MutateResult) => {
-            resolve(result.getCartOrderTotal);
-          })
-          .catch((e: any) => {
-            reject(e);
-          });
-    });
-  }
-
-  /**
    * Update the payment method for a customer
    * @param {string} cartId
    * @param {OrderPaymentMethod} paymentMethod
@@ -399,8 +368,7 @@ export class CartController {
   /**
    * Change the cart host
    * @param {string} cartId
-   * @param {boolean} approvalStatus
-   * @param {string} sharedToken
+   * @param {string} customerId
    * @returns {Promise<Cart>}
    */
   changeCartHost(cartId: string, customerId: string): Promise<Cart> {
@@ -430,4 +398,36 @@ export class CartController {
     });
   }
 
+  /**
+   * Remove Customer From Participating Customers
+   * @param {string} cartId
+   * @param {string} customerId
+   * @returns {Promise<Cart>}
+   */
+  removeCustomerFromParticipatingCustomers(cartId: string, customerId: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!, $customerId: String!) {
+                  removeCustomerFromParticipatingCustomers(
+                      cart_id: $cartId, 
+                      customer_id: $customerId
+                  ) {
+                      _id
+                  }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId,
+            customerId
+          })
+          .then((result: MutateResult) => {
+            resolve(result.removeCustomerFromParticipatingCustomers);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
 }

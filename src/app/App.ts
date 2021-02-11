@@ -130,10 +130,10 @@ export class App {
       addItem: this._cartController.addItem,
       create: this._cartController.create,
       enableSharingForCart: this._cartController.enableSharingForCart,
-      getCartOrderTotal: this._cartController.getCartOrderTotal,
       updatePaymentMethod: this._cartController.updatePaymentMethod,
       updateApprovalStatus: this._cartController.updateApprovalStatus,
       changeCartHost: this._cartController.changeCartHost,
+      removeCustomerFromParticipatingCustomers: this._cartController.removeCustomerFromParticipatingCustomers,
     };
   }
 

@@ -334,9 +334,6 @@ export interface UpdateAllMenuItemsStatusForVendor {
 export interface EnableSharingForCart {
   enableSharingForCart: Cart;
 }
-export interface GetCartOrderTotal {
-  getCartOrderTotal: number;
-}
 export interface UpdatePaymentMethod {
   updatePaymentMethod: Cart;
 }
@@ -345,7 +342,10 @@ export interface UpdateApprovalStatus {
 }
 export interface ChangeCartHost {
   changeCartHost: Cart;
-}
+} 
+export interface removeCustomerFromParticipatingCustomers {
+  removeCustomerFromParticipatingCustomers: Cart;
+} 
 
 export interface MutateResult
   extends CreateCategory,
@@ -443,10 +443,10 @@ export interface MutateResult
     DeleteCart,
     UpdateCategory,
     EnableSharingForCart,
-    GetCartOrderTotal,
     UpdatePaymentMethod,
     UpdateApprovalStatus,
     ChangeCartHost,
+    removeCustomerFromParticipatingCustomers,
     StartShift,
     EndShift,
     UpdateShiftTimePeriod,
