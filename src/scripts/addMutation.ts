@@ -14,7 +14,7 @@ if (args.length !== 2) {
   throw new Error("Argument must be in the format of Entity.methodName");
 }
 
-async function ensureControllerExists(name) {
+async function ensureControllerExists(name: any) {
   const controllerFilePath = `./src/app/controllers/${name}Controller`;
   const appFilePath = `./src/app/App`;
   try {

@@ -132,6 +132,7 @@ export interface VendorCommonProperties {
   postal_code: string;
   store_logo: string;
   max_group_seating_limit: number;
+  website_link: string;
 }
 
 export interface TimeSpanInput {
@@ -230,6 +231,7 @@ export interface UpdateVendorInput {
   postal_code?: string;
   store_logo?: string;
   max_group_seating_limit?: string;
+  website_link?: string;
 }
 
 export interface OrderTypesInput {
@@ -265,6 +267,9 @@ export class VendorController {
     this.update = this.update.bind(this);
     this.createWithEmployee = this.createWithEmployee.bind(this);
     this.updateAllMenuItemsStatus = this.updateAllMenuItemsStatus.bind(this);
+    this.createStoreHoursPreset = this.createStoreHoursPreset.bind(this);
+    this.deleteStoreHoursPreset = this.deleteStoreHoursPreset.bind(this);
+    this.changeOpenHours = this.changeOpenHours.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -501,6 +506,98 @@ export class VendorController {
         })
         .then((result: MutateResult) => {
           resolve(result.updateAllMenuItemsStatusForVendor);
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+  
+  /**
+   * Create store hours preset
+   * @param {string} vendor_id - The id of the Vendor Object
+   * @param {OpenHoursInput} openHours - Open hours
+   * @param {string} name - Name of the preset
+   * @returns {Promise<string>}
+   */
+  createStoreHoursPreset(vendor_id: string, openHours: OpenHoursInput, name: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($vendor_id: String!, $openHours: OpenHoursInput!, $name: String!) {
+                  createStoreHoursPreset(vendor_id: $vendor_id, open_hours: $openHours, name: $name) {
+                    _id
+                  }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          vendor_id,
+          openHours,
+          name,
+        })
+        .then((result: MutateResult) => {
+          resolve(result.createStoreHoursPreset._id);
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+  
+  /**
+   * Delete store hours preset
+   * @param {string} vendor_id - The id of the Vendor Object
+   * @param {string} name - Name of the preset
+   * @returns {Promise<string>}
+   */
+  deleteStoreHoursPreset(vendor_id: string, name: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($vendor_id: String!, $name: String!) {
+                  deleteStoreHoursPreset(vendor_id: $vendor_id, name: $name) {
+                    _id
+                  }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          vendor_id,
+          name,
+        })
+        .then((result: MutateResult) => {
+          resolve(result.deleteStoreHoursPreset._id);
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+  
+  /**
+   * Change open hours using preset name
+   * @param {string} vendor_id - The id of the Vendor Object
+   * @param {string} name - Name of the preset
+   * @returns {Promise<string>}
+   */
+  changeOpenHours(vendor_id: string, name: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($vendor_id: String!, $name: String!) {
+                  changeOpenHours(vendor_id: $vendor_id, name: $name) {
+                    _id
+                  }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          vendor_id,
+          name,
+        })
+        .then((result: MutateResult) => {
+          resolve(result.changeOpenHours._id);
         })
         .catch((e: any) => {
           reject(e);

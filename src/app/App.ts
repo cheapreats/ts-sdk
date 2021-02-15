@@ -134,6 +134,8 @@ export class App {
       updateApprovalStatus: this._cartController.updateApprovalStatus,
       changeCartHost: this._cartController.changeCartHost,
       removeCustomerFromParticipatingCustomers: this._cartController.removeCustomerFromParticipatingCustomers,
+      joinCart: this._cartController.joinCart,
+      leaveCart: this._cartController.leaveCart,
     };
   }
 
@@ -316,6 +318,9 @@ export class App {
       updateVendorApprovalStatus: this._vendorController
         .updateVendorApprovalStatus,
       requestVendorApproval: this._vendorController.requestVendorApproval,
+      createStoreHoursPreset: this._vendorController.createStoreHoursPreset,
+      deleteStoreHoursPreset: this._vendorController.deleteStoreHoursPreset,
+      changeOpenHours: this._vendorController.changeOpenHours
     };
   }
 

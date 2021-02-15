@@ -10,7 +10,7 @@ export class Observer {
    * Construct the observer class
    */
   constructor() {
-    this.onNotify = (instance, payload): void => {};
+    this.onNotify = (instance: any, payload: any): void => {};
   }
 
   /**

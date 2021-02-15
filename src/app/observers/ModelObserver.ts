@@ -20,7 +20,7 @@ export class ModelObserver extends Observer {
    * Add a new model to currently observing list
    * @param {Model} model
    */
-  addModel(model) {
+  addModel(model: any) {
     this._models.push(model);
   }
 
@@ -28,7 +28,7 @@ export class ModelObserver extends Observer {
    * Remove a model from currently observing list
    * @param model
    */
-  removeModel(model) {
+  removeModel(model: any) {
     let index = this._models.indexOf(model);
     if (index > -1) {
       this._models.splice(index, 1);

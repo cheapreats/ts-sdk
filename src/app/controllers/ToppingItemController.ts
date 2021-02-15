@@ -119,6 +119,7 @@ export class ToppingItemController {
           id
         })
         .then(() => {
+            //@ts-ignore deprecated I think ? https://github.com/cheapreats/CheaprEats-GraphQL-API/blob/master/controllers/ModifierController.js#L136
           resolve();
         })
         .catch((e: any) => {

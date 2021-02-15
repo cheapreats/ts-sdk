@@ -329,7 +329,7 @@ export interface VerifySmsVerificationSession {
   verifySmsVerificationSession: VerificationSession;
 }
 export interface UpdateAllMenuItemsStatusForVendor {
-  updateAllMenuItemsStatusForVendor: string;
+  updateAllMenuItemsStatusForVendor: string; 
 }
 export interface EnableSharingForCart {
   enableSharingForCart: Cart;
@@ -346,6 +346,21 @@ export interface ChangeCartHost {
 export interface removeCustomerFromParticipatingCustomers {
   removeCustomerFromParticipatingCustomers: Cart;
 } 
+export interface JoinCart {
+  joinCart: Cart;
+}
+export interface LeaveCart {
+  leaveCart: Cart;
+}
+export interface CreateStoreHoursPreset {
+  createStoreHoursPreset: Vendor; 
+}
+export interface DeleteStoreHoursPreset {
+  deleteStoreHoursPreset: Vendor; 
+}
+export interface ChangeOpenHours {
+  changeOpenHours: Vendor; 
+}
 
 export interface MutateResult
   extends CreateCategory,
@@ -356,6 +371,8 @@ export interface MutateResult
     UpdateNoteForCart,
     RemoveCouponFromCart,
     ApplyCouponToCart,
+    JoinCart,
+    LeaveCart,
     VerifySmsVerificationSession,
     CreateSmsVerificationSession,
     UpdateVendor,
@@ -409,6 +426,9 @@ export interface MutateResult
     CreateHeadOffice,
     UpdateFlashSale,
     CreateFlashSale,
+    CreateStoreHoursPreset,
+    DeleteStoreHoursPreset,
+    ChangeOpenHours,
     ReplaceExplorePage,
     CreateEmployeeToken,
     ResetEmployeePassword,

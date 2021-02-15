@@ -8,7 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["ES5", "dom"],
     "module": "commonjs",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strict": true,                           /* Enable all strict type-checking options. */
   },
   "exclude": ["node_modules", "scripts", "dist"]
 }
