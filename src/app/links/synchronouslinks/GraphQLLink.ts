@@ -249,6 +249,9 @@ export interface PreparedOrder {
 export interface CompleteOrder {
   completeOrder: Order;
 }
+export interface GetOrderTotal {
+  getOrderTotal: number;
+}
 export interface RequestPayout {
   requestPayout: Payout;
 }
@@ -331,6 +334,18 @@ export interface UpdateAllMenuItemsStatusForVendor {
 export interface EnableSharingForCart {
   enableSharingForCart: Cart;
 }
+export interface UpdatePaymentMethod {
+  updatePaymentMethod: Cart;
+}
+export interface UpdateApprovalStatus {
+  updateApprovalStatus: Cart;
+}
+export interface ChangeCartHost {
+  changeCartHost: Cart;
+} 
+export interface removeCustomerFromParticipatingCustomers {
+  removeCustomerFromParticipatingCustomers: Cart;
+} 
 export interface JoinCart {
   joinCart: Cart;
 }
@@ -384,6 +399,7 @@ export interface MutateResult
     UpdatePayout,
     RequestPayout,
     CompleteOrder,
+    GetOrderTotal,
     PreparedOrder,
     BeginPreparingOrder,
     CancelOrder,
@@ -447,6 +463,10 @@ export interface MutateResult
     DeleteCart,
     UpdateCategory,
     EnableSharingForCart,
+    UpdatePaymentMethod,
+    UpdateApprovalStatus,
+    ChangeCartHost,
+    removeCustomerFromParticipatingCustomers,
     StartShift,
     EndShift,
     UpdateShiftTimePeriod,
