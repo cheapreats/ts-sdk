@@ -29,6 +29,14 @@ export interface CartCoupon {
   _id: string;
   coupon: Coupon;
 }
+export interface ParticipatingCustomer {
+  _id: string;
+  name: string;
+  profile_picture: string;
+  customer_id: string;
+  approval_status: boolean;
+  payment_method: OrderPaymentMethod;
+}
 export interface Cart extends DefaultControllerRequired {
   customer: Customer;
   vendor: Vendor;
@@ -37,6 +45,7 @@ export interface Cart extends DefaultControllerRequired {
   total: number;
   coupons: Array<CartCoupon>;
   note: string;
+  participating_customers: Array<ParticipatingCustomer>;
 }
 
 export class CartController {

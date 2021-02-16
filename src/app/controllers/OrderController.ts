@@ -90,6 +90,11 @@ export interface OrderStatusHistory {
   data: string;
   created_at: string;
 }
+export interface ParticipatingCustomer {
+  _id: string;
+  customer_id: string;
+  payment_method: OrderPaymentMethod;
+}
 export interface Order extends DefaultControllerRequired {
   items: Array<OrderItem>;
   transactions: Array<Transaction>;
@@ -112,6 +117,7 @@ export interface Order extends DefaultControllerRequired {
   tip: Tip;
   order_type: OrderType;
   discount: number;
+  participating_customers: Array<ParticipatingCustomer>;
 }
 /**
  * Controller for orders.
