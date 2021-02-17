@@ -535,7 +535,7 @@ export class App {
         `;
     return new Promise((resolve, reject) => {
       this.Graph.query(queryString)
-        .then((data: QueryResult) => {
+        .then((data: any) => {
           resolve(data.is_sdk_version_supported);
         })
         .catch((e) => {

@@ -17,7 +17,7 @@ export class AuthorizationController {
       return this.app
         .getAdaptor()
         .query(queryString)
-        .then((data: QueryResult) => {
+        .then((data: any) => {
           resolve(data.auth_token_scope);
         })
         .catch((e: any) => {
