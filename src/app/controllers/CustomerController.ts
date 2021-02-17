@@ -1,5 +1,5 @@
 import { Cart } from "./CartController";
-import { ResetCodeSendMethod } from "./EmployeeController";
+import { ResetCodeSendMethod } from "../../enums";
 import { App } from "../App";
 import { DefaultControllerRequired } from "./Controller";
 import { LoyaltyCard } from "./LoyaltyCardController";
