@@ -173,17 +173,15 @@ export class CartController {
    * Remove an item from currently active cart.
    * @param {string} cartId
    * @param {string} cartItemId
-   * @param {string} sharedToken
    * @returns {Promise<string>}
    */
-  removeItem(cartId: string, cartItemId: string, sharedToken?: string): Promise<string> {
+  removeItem(cartId: string, cartItemId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $cartItemId: String!, $sharedToken: String) {
+                mutation ($cartId: String!, $cartItemId: String!) {
                     removeItemFromCart(
                         cart_id: $cartId,
-                        cart_item_id: $cartItemId,
-                        shared_token: $sharedToken
+                        cart_item_id: $cartItemId
                     ) {
                         _id
                     }
@@ -193,8 +191,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          cartItemId,
-          sharedToken
+          cartItemId
         })
         .then((result: MutateResult) => {
           resolve(result.removeItemFromCart._id);
@@ -209,17 +206,15 @@ export class CartController {
    * Add an new item to currently active cart.
    * @param {string} cartId
    * @param {AddItemToCartInput} item
-   * @param {string} sharedToken
    * @returns {Promise<string>}
    */
-  addItem(cartId: string, item: AddItemToCartInput, sharedToken?: string): Promise<string> {
+  addItem(cartId: string, item: AddItemToCartInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $item: AddItemToCartInput!, $sharedToken: String) {
+                mutation ($cartId: String!, $item: AddItemToCartInput!) {
                     addItemToCart(
                         cart_id: $cartId,
-                        item: $item,
-                        shared_token: $sharedToken
+                        item: $item
                     ) {
                         _id
                     }
@@ -229,8 +224,7 @@ export class CartController {
         .getAdaptor()
         .mutate(mutationString, {
           cartId,
-          item,
-          sharedToken
+          item
         })
         .then((result: MutateResult) => {
           resolve(result.addItemToCart._id);
@@ -371,17 +365,15 @@ export class CartController {
    * Update the payment method for a customer
    * @param {string} cartId
    * @param {OrderPaymentMethod} paymentMethod
-   * @param {string} sharedToken
    * @returns {Promise<Cart>}
    */
-  updatePaymentMethod(cartId: string, paymentMethod: OrderPaymentMethod, sharedToken?: string): Promise<Cart> {
+  updatePaymentMethod(cartId: string, paymentMethod: OrderPaymentMethod): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $paymentMethod: OrderPaymentMethod!, $sharedToken: String) {
+                mutation ($cartId: String!, $paymentMethod: OrderPaymentMethod!) {
                     updatePaymentMethod(
                         cart_id: $cartId, 
-                        payment_method: $paymentMethod, 
-                        shared_token: $sharedToken
+                        payment_method: $paymentMethod
                     ){
                         _id
                     }
@@ -391,8 +383,7 @@ export class CartController {
           .getAdaptor()
           .mutate(mutationString, {
             cartId,
-            paymentMethod,
-            sharedToken,
+            paymentMethod
           })
           .then((result: MutateResult) => {
             resolve(result.updatePaymentMethod);
@@ -407,17 +398,15 @@ export class CartController {
    * Update the approval status for a customer
    * @param {string} cartId
    * @param {boolean} approvalStatus
-   * @param {string} sharedToken
    * @returns {Promise<Cart>}
    */
-  updateApprovalStatus(cartId: string, approvalStatus: boolean, sharedToken?: string): Promise<Cart> {
+  updateApprovalStatus(cartId: string, approvalStatus: boolean): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $approvalStatus: Boolean!, $sharedToken: String) {
+                mutation ($cartId: String!, $approvalStatus: Boolean!) {
                     updateApprovalStatus(
                         cart_id: $cartId, 
-                        approval_status: $approvalStatus, 
-                        shared_token: $sharedToken
+                        approval_status: $approvalStatus
                     ){
                         _id
                     }
@@ -427,8 +416,7 @@ export class CartController {
           .getAdaptor()
           .mutate(mutationString, {
             cartId,
-            approvalStatus,
-            sharedToken
+            approvalStatus
           })
           .then((result: MutateResult) => {
             resolve(result.updateApprovalStatus);
