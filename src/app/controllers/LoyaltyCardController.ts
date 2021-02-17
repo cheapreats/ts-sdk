@@ -4,17 +4,14 @@ import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { Customer } from "./CustomerController";
 import { Order } from "./OrderController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { LoyaltyTransactionType } from '../../enums';
+
 export interface CreateLoyaltyCardInput {
   loyalty_program_id: string;
   customer_id?: string;
   phone_number?: string;
 }
-export enum LoyaltyTransactionType {
-  EARNING = "EARNING",
-  EARNING_FRIEND = "EARNING_FRIEND",
-  SHARING = "SHARING",
-  REDEEMING = "REDEEMING",
-}
+
 export interface LoyaltyTransaction {
   _id: string;
   loyalty_card: LoyaltyCard;

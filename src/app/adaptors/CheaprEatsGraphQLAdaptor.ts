@@ -41,7 +41,7 @@ export class CheaprEatsGraphQLAdaptor extends Adaptor {
    * @param  {string} query
    * @param  {object} variables = {}
    */
-  query(query: string, variables: object = {}) {
+  query<T, S = {}>(query: string, variables?: S): Promise<T> {
     return this._graphQLLink.query({ query, variables });
   }
 

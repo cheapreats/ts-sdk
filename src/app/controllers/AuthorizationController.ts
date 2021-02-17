@@ -1,5 +1,4 @@
 import { App } from "../App";
-import { QueryResult } from "./GraphController";
 export class AuthorizationController {
   app: App;
   constructor(app: App) {
@@ -17,7 +16,7 @@ export class AuthorizationController {
       return this.app
         .getAdaptor()
         .query(queryString)
-        .then((data: QueryResult) => {
+        .then((data: any) => {
           resolve(data.auth_token_scope);
         })
         .catch((e: any) => {
