@@ -3,6 +3,7 @@ import { MenuItem } from "./MenuItemController";
 import { Vendor } from "./VendorController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { CategoryType } from "../../enums";
 export interface MenuItemsFunction {
   menu_items: Array<MenuItem>;
 }
@@ -10,6 +11,7 @@ export interface CommonCategoryProperties {
   menu_item_count: number;
   vendor: Vendor;
   name: string;
+  type: CategoryType;
   identifier: string;
   description: string;
   sort_order: number;
@@ -23,18 +25,11 @@ export interface Category
   extends DefaultControllerRequired,
     CommonCategoryProperties,
     MenuItemsFunction {}
-export interface CreateCategoryInput {
-  name: string;
-  identifier: string;
-  description: string;
+export interface CreateCategoryInput extends Pick<Category, 'name' | 'identifier' | 'description' | 'sort_order' | 'type'> {
   vendor_id: string;
-  sort_order?: number;
 }
-export interface UpdateCategoryInput {
-  name?: string;
-  identifier?: string;
-  description?: string;
-  sort_order?: number;
+export interface UpdateCategoryInput extends Partial<Omit<Category, keyof DefaultControllerRequired | keyof MenuItemsFunction | 'menu_item_count' | 'vendor' >> {
+  
 }
 export interface BatchUpdateCategoriesInput {
   id: string;
