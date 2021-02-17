@@ -1,5 +1,4 @@
 import { App } from "../App";
-import { QueryResult } from "./GraphController";
 export class AuthorizationController {
   app: App;
   constructor(app: App) {

@@ -26,7 +26,6 @@ import { Vendor, VendorTester } from "../../controllers/VendorController";
 import { VerificationSession } from "../../controllers/VerificationController";
 import {
   MergedConfiguration,
-  QueryResult,
 } from "../../controllers/GraphController";
 import { CustomerToken } from "../../controllers/CustomerTokenController";
 import { EmployeeToken } from "../../controllers/EmployeeTokenController";
