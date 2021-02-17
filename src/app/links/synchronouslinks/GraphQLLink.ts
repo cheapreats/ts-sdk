@@ -507,13 +507,13 @@ export class GraphQLLink extends SynchronousLink {
    * @param config
    * @returns
    */
-  async query(config: {
+  async query<T, S = {}>(config: {
     query: string;
-    variables: object;
-  }): Promise<QueryResult> {
+    variables?: S;
+  }): Promise<T> {
     return await this.run(config);
   }
-
+  
   /**
    * Alias for run
    * @param config
@@ -532,7 +532,7 @@ export class GraphQLLink extends SynchronousLink {
    * @returns {Promise<Object>}
    */
 
-  async run(config: { query: string; variables: object }): Promise<any> {
+  async run<T, S = {}>(config: { query: string; variables?: S }): Promise<any> {
     return await this._client.request(config.query, config.variables || {});
   }
 }
