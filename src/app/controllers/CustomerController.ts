@@ -34,45 +34,38 @@ interface CommonCustomerProperties {
   mobile_notifications: boolean;
   is_test: boolean;
   wallet: Coupon;
+  profile_picture: string;
+  supercharged_coupon: Coupon;
   cart: Cart;
   favourite_vendors: Array<Vendor>;
   favourite_items: Array<MenuItem>;
+  birthday: string;
   test_vendors: Array<Vendor>;
   groups: Array<Group>;
-  profile_picture: string;
-  birthday: string;
 }
 export interface Customer
   extends DefaultControllerRequired,
     LoyaltyFunction,
     CommonCustomerProperties {}
 
-export interface CustomerOptions {
-  profile_picture?: string;
-  birthday?: string;
+export interface CustomerOptions extends Pick<Customer, 'profile_picture' | 'birthday'>{
+
 }
 export interface EmailPreferencesInput {
   promotional: boolean;
   transactional: boolean;
   system: boolean;
 }
-export interface EmailPreferences {
-  promotional?: boolean;
-  transactional?: boolean;
-  system?: boolean;
+export interface EmailPreferences extends EmailPreferencesInput {
+
 }
-export interface CreateCustomerInput extends CustomerOptions {
-  email_address: string;
-  name: string;
-  password: string;
-  phone_number: string;
+export interface CreateCustomerInput extends Pick<Customer, 'email_address' | 'name' | 'password' | 'phone_number' | 'email_preferences' | 'profile_picture' | 'birthday' > {
   verification_request_id: string;
   verification_code: string;
-  email_preferences: EmailPreferencesInput;
+  
 }
-export interface UpdateCustomerInput extends CustomerOptions {
-  mobile_notifications?: boolean;
-  email_preferences?: EmailPreferencesInput;
+export interface UpdateCustomerInput extends Pick<Customer, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' > {
+
 }
 /**
  * Controller for customers.

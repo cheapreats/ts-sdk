@@ -4,13 +4,13 @@ import { MenuItem } from "./MenuItemController";
 import { LoyaltyProgram } from "./LoyaltyProgramController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 
-export interface CreateRedeemableItemInput {
+export interface CreateRedeemableItemInput extends Pick<RedeemableItem, 'points_required'>{
   loyalty_program_id: string;
   menu_item_id: string;
-  points_required: number;
+
 }
-export interface UpdateRedeemableItemInput {
-  points_required?: number;
+export interface UpdateRedeemableItemInput extends Pick<RedeemableItem, 'points_required'> {
+  
 }
 export interface RedeemableItem extends DefaultControllerRequired {
   menu_item: MenuItem;

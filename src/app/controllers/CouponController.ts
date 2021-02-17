@@ -22,38 +22,15 @@ export interface CouponTransaction extends DefaultController {
   customer?: Customer;
   description: string;
 }
-export interface CreateCouponInput {
-  code: string;
-  coupon_type: CouponType;
-  value: number;
-  item_scope?: string;
-  vendor_scope?: string;
-  customer_scope?: string;
-  uses: number;
-  uses_per_customer: number;
-  can_combine: boolean;
-  carry_over: boolean;
-  expire_at: string;
-  paid_by_vendor: boolean;
-  min_purchase: number;
+  
+export interface CreateCouponInput extends Pick<Coupon, 'code' | 'coupon_type' | 'value' | 'item_scope' | 'vendor_scope' | 'customer_scope' | 'uses' | 'uses_per_customer' | 'can_combine' | 'carry_over' | 'expire_at' | 'paid_by_vendor' | 'min_purchase'> {
   payment_methods?: PaymentMethodsInput;
 }
-export interface UpdateCouponInput {
-  code?: string;
-  coupon_type?: CouponType;
-  value?: number;
-  item_scope?: string;
-  vendor_scope?: string;
-  customer_scope?: string;
-  uses?: number;
-  uses_per_customer?: number;
-  can_combine?: boolean;
-  carry_over?: boolean;
-  expire_at?: string;
-  paid_by_vendor?: boolean;
-  min_purchase?: number;
+
+export interface UpdateCouponInput extends Partial<Omit<Coupon, keyof DefaultControllerRequired | keyof TransactionFunction | 'real_value'>>{
   payment_methods?: PaymentMethodsInput;
 }
+
 export interface TransactionFunction {
   transactions: Array<CouponTransaction>;
 }
