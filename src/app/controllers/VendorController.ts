@@ -161,7 +161,9 @@ export interface DirectDepositInfo  {
   cheque_image: string;
 }
 
-export interface UpdateVendorInput extends Pick<Vendor, 'name' | 'description' | 'images' | 'tags' | 'open_hours' | 'address' | 'phone_number' | 'location' | 'courier_pickup_instructions' | 'status' | 'payout_email_address' | 'direct_deposit_info' | 'payment_methods' | 'directions' | 'receive_sms_notifications' | 'auto_open' | 'auto_close' | 'payout_auto_request_schedule' | 'global_tax_rate' | 'postal_code' | 'order_types' | 'store_logo' | 'min_delivery_cart_total' | 'max_group_seating_limit' | 'website_link' > {
+export interface UpdateVendorInput extends Partial<Pick<Vendor, 'name' | 'description' | 'images' | 'tags' | 'open_hours' | 'address' | 'phone_number' | 'location'
+  | 'courier_pickup_instructions' |'status' | 'payout_email_address' | 'direct_deposit_info' | 'payment_methods' | 'directions' | 'receive_sms_notifications' | 'auto_open' | 'auto_close' | 'payout_auto_request_schedule' | 'global_tax_rate' | 'postal_code'
+  | 'order_types' | 'store_logo' | 'min_delivery_cart_total' | 'max_group_seating_limit' | 'website_link'>> {
   
 } 
 
