@@ -64,7 +64,7 @@ export interface CreateCustomerInput extends Pick<Customer, 'email_address' | 'n
   verification_code: string;
   
 }
-export interface UpdateCustomerInput extends Pick<Customer, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' > {
+export interface UpdateCustomerInput extends Partial<Pick<Customer, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' >> {
 
 }
 /**
