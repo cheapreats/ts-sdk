@@ -53,6 +53,7 @@ export interface CouponCommonProperties {
   expire_at: string;
   paid_by_vendor: boolean;
   min_purchase: number;
+  payment_methods: PaymentMethodsInput;
 }
 
 /**
