@@ -1,6 +1,6 @@
-import { ReferralTransactionType } from "../../enums";
 import { App } from "../App";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
+import { ReferralTransactionType } from "../../enums";
 
 export interface CreateReferralCardInput
   extends Pick<ReferralCard, "referral_signup_code_used"> {
@@ -36,7 +36,7 @@ export class ReferralCardController {
   constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
-    this.isValid = this.isValid.bind(this);  /// Include???????
+    this.isValid = this.isValid.bind(this); /// Include this mutation ???????
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
@@ -49,28 +49,79 @@ export class ReferralCardController {
    * @param {CreateReferralCardInput} referral_card - Referral Card
    * @returns {Promise<ReferralCard>}
    */
-  create(
-    referral_card: CreateReferralCardInput
-  ): Promise<{ customer_id: string; referral_signup_code_used: string }> {
+  create(referral_card: CreateReferralCardInput): Promise<ReferralCard> {
+    // what goes here?
     return new Promise((resolve, reject) => {
       let mutationString = `
-                      mutation ($referral_card: ?????? ) {
+                      mutation ($referral_card: String! ) {
                           createReferralCard(referral_card: $referral_card) {
                             customer_id
                             referral_signup_code_used
+                            referrals_remaining_for_supercharged_coupon
                           }
                       }
                   `;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
-            referral_card,
+          referral_card,
         })
         .then((result: MutateResult) => {
-          resolve({
-            customer_id: result.requestPayout._id,
-            total: result.requestPayout.total,
-          });
+          resolve(result.createReferralCard.id); // result does not find any Referal
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+  /**
+   * Update a CardReferral and return the ID of the updated object if successful
+   * @param {string} id - The id of the Referral Card to be modified
+   * @param {UpdateReferralCardInput} referral_card - The Modified Referal Card Object
+   * @returns {Promise<ReferralCard>}
+   */
+  update(
+    id: string,
+    referral_card: UpdateReferralCardInput
+  ): Promise<ReferralCard> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($id: String!, $referral_card: UpdateReferralCardInput!) {
+                    updateSurvey(id: $id, referral_card: $referral_card) {
+                        _id
+                    }
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, { id, referral_card })
+        .then((result: MutateResult) => {
+          resolve(result.updateSurvey.customer_id);  // result does not find any Referal
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+  /**
+   * Delete a Referral Card
+   * @param {string} id - The id of the Referal Card Object
+   * @returns {Promise<string>} - Confirmation String
+   */
+  delete(id: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($id: String!) {
+                  deleteReferralCard(id: $id)
+                }
+            `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, { id })
+        .then((result: MutateResult) => {
+          resolve(result.deleteReferralCard.id); // result does not find any Referal
         })
         .catch((e: any) => {
           reject(e);
