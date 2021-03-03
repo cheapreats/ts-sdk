@@ -498,7 +498,7 @@ export class CartController {
   /**
    * Set host to pay for the entire order
    * @param {string} cartId
-   * @returns {Promise<Cart>}
+   * @returns {Promise<string>}
    */
   setHostToPayForEntireOrder(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
@@ -528,7 +528,7 @@ export class CartController {
   /**
    * Set everyone in cart to pay equally for order
    * @param {string} cartId
-   * @returns {Promise<Cart>}
+   * @returns {Promise<string>}
    */
   setSplitPayForOrderEqually(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
