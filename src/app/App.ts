@@ -134,6 +134,8 @@ export class App {
       updateApprovalStatus: this._cartController.updateApprovalStatus,
       changeCartHost: this._cartController.changeCartHost,
       removeCustomerFromParticipatingCustomers: this._cartController.removeCustomerFromParticipatingCustomers,
+      setHostToPayForEntireOrder: this._cartController.setHostToPayForEntireOrder,
+      setSplitPayForOrderEqually: this._cartController.setSplitPayForOrderEqually,
       joinCart: this._cartController.joinCart,
       leaveCart: this._cartController.leaveCart,
     };

@@ -344,7 +344,13 @@ export interface ChangeCartHost {
 } 
 export interface removeCustomerFromParticipatingCustomers {
   removeCustomerFromParticipatingCustomers: Cart;
-} 
+}  
+export interface setHostToPayForEntireOrder {
+  setHostToPayForEntireOrder: Cart;
+}   
+export interface setSplitPayForOrderEqually {
+  setSplitPayForOrderEqually: Cart;
+}   
 export interface JoinCart {
   joinCart: Cart;
 }
@@ -466,6 +472,8 @@ export interface MutateResult
     UpdateApprovalStatus,
     ChangeCartHost,
     removeCustomerFromParticipatingCustomers,
+    setHostToPayForEntireOrder,
+    setSplitPayForOrderEqually,
     StartShift,
     EndShift,
     UpdateShiftTimePeriod,
