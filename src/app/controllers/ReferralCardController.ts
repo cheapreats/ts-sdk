@@ -36,7 +36,7 @@ export class ReferralCardController {
   constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
-    this.isValid = this.isValid.bind(this); /// Include this mutation ???????
+    this.isValid = this.isValid.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
@@ -45,12 +45,36 @@ export class ReferralCardController {
   // ADD MUTATION METHODS BELOW
 
   /**
-   * Create a new payout request
+   * Check if Card is Valid
+   * @param {String} code - code of Card
+   * @returns {Promise<boolean>}
+   */
+  isValid(code: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                      mutation ($code: String! ) {
+                        isValidReferralCode(code: $code) {
+                          }
+                      }
+                  `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, { code })
+        .then((result: MutateResult) => {
+          resolve(result); // result return boolean
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+  /**
+   * Create a new Referral Card request
    * @param {CreateReferralCardInput} referral_card - Referral Card
    * @returns {Promise<ReferralCard>}
    */
   create(referral_card: CreateReferralCardInput): Promise<ReferralCard> {
-    // what goes here?
     return new Promise((resolve, reject) => {
       let mutationString = `
                       mutation ($referral_card: String! ) {
@@ -88,16 +112,16 @@ export class ReferralCardController {
     return new Promise((resolve, reject) => {
       let mutationString = `
                 mutation ($id: String!, $referral_card: UpdateReferralCardInput!) {
-                    updateSurvey(id: $id, referral_card: $referral_card) {
-                        _id
-                    }
+                  UpdateReferralCardInput(id: $id, referral_card: $referral_card) {
+                      _id
+                  }
                 }
             `;
       this.app
         .getAdaptor()
         .mutate(mutationString, { id, referral_card })
         .then((result: MutateResult) => {
-          resolve(result.updateSurvey.customer_id);  // result does not find any Referal
+          resolve(result.UpdateReferralCardInput.id);  // result does not find any Referal
         })
         .catch((e: any) => {
           reject(e);
@@ -115,6 +139,7 @@ export class ReferralCardController {
       let mutationString = `
                 mutation ($id: String!) {
                   deleteReferralCard(id: $id)
+                  _id
                 }
             `;
       this.app
