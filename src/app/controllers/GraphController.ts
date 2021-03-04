@@ -15,6 +15,7 @@ import { Survey } from "./SurveyController";
 import { Vendor } from "./VendorController";
 import { VerificationSession } from "./VerificationController";
 import { Shift } from "./ShiftController";
+import { ReferralCard } from "./ReferralCardController";
 
 export interface The_Customer {
   the_customer: Customer;
@@ -66,6 +67,9 @@ export interface Menu_Item {
 }
 export interface Loyalty_Cards {
   loyalty_cards: Array<LoyaltyCard>;
+}
+export interface Referral_Cards {
+  referral_cards: Array<ReferralCard>;
 }
 export interface Orders {
   orders: Array<Order>;

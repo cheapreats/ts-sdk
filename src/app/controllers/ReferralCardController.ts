@@ -25,7 +25,7 @@ export interface ReferralCard {
   referral_code: string;
   referral_signup_code_used: string;
   referrals_remaining_for_supercharged_coupon: number;
-  transactions: ReferralTransaction;
+  transactions: Array<ReferralTransaction>;
 }
 
 /**
@@ -61,7 +61,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { code })
         .then((result: MutateResult) => {
-          resolve(result); // result return boolean
+          resolve(result); 
         })
         .catch((e: any) => {
           reject(e);
@@ -91,7 +91,7 @@ export class ReferralCardController {
           referral_card,
         })
         .then((result: MutateResult) => {
-          resolve(result.createReferralCard.id); // result does not find any Referal
+          resolve(result.createReferralCard.id); 
         })
         .catch((e: any) => {
           reject(e);
@@ -121,7 +121,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { id, referral_card })
         .then((result: MutateResult) => {
-          resolve(result.UpdateReferralCardInput.id);  // result does not find any Referal
+          resolve(result.UpdateReferralCardInput.id);
         })
         .catch((e: any) => {
           reject(e);
@@ -146,7 +146,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { id })
         .then((result: MutateResult) => {
-          resolve(result.deleteReferralCard.id); // result does not find any Referal
+          resolve(result.deleteReferralCard.id); 
         })
         .catch((e: any) => {
           reject(e);
