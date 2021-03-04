@@ -1,6 +1,7 @@
 import { App } from "../App";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { ReferralTransactionType } from "../../enums";
+import { Coupon } from "./CouponController";
 
 export interface CreateReferralCardInput
   extends Pick<ReferralCard, "referral_signup_code_used"> {
@@ -37,6 +38,7 @@ export class ReferralCardController {
     this.app = app;
     // ADD BINDINGS BELOW
     this.isValid = this.isValid.bind(this);
+    this.awardCoupon = this.awardCoupon.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
@@ -69,6 +71,35 @@ export class ReferralCardController {
     });
   }
 
+    /**
+   * Give Award Coupon to Referer request
+   * @param {string} referral_card - Referral Card
+   * @returns {Promise<Coupon>}
+   */
+  awardCoupon(referral_card: string): Promise<Coupon> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                      mutation ($referral_card: String! ) {
+                        awardCouponToReferrer(referral_card: $referral_card) {
+                            _id
+                        }
+                      }
+                  `;
+      this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          referral_card,
+        })
+        .then((result: MutateResult) => {
+          resolve(result.AwardCouponToReferrer); 
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+
   /**
    * Create a new Referral Card request
    * @param {CreateReferralCardInput} referral_card - Referral Card
@@ -91,7 +122,7 @@ export class ReferralCardController {
           referral_card,
         })
         .then((result: MutateResult) => {
-          resolve(result.createReferralCard.id); 
+          resolve(result.CreateReferralCard.id); 
         })
         .catch((e: any) => {
           reject(e);
@@ -146,7 +177,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { id })
         .then((result: MutateResult) => {
-          resolve(result.deleteReferralCard.id); 
+          resolve(result.DeleteReferralCard.id); 
         })
         .catch((e: any) => {
           reject(e);

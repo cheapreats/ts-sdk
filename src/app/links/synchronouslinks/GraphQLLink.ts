@@ -34,6 +34,7 @@ import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
 import { Shift, ShiftTimePeriod } from "../../controllers/ShiftController";
+import { ReferralCard } from "../../controllers/ReferralCardController";
 
 export interface StartShift {
     startShift: Shift;
@@ -205,6 +206,21 @@ export interface UpdateLoyaltyProgram {
 }
 export interface DeleteLoyaltyProgram {
   deleteLoyaltyProgram: string;
+}
+export interface IsValidReferralCode{
+  isValidReferralCode: boolean;
+}
+export interface CreateReferralCard{
+  createReferralCard: ReferralCard
+}
+export interface UpdateReferralCard{
+  updateReferralCard: ReferralCard
+}
+export interface DeleteReferralCard{
+  deleteReferralCard: string;
+}
+export interface AwardCouponToReferrer{
+  awardCouponToReferrer: Coupon;
 }
 export interface CreateMenuItem {
   createMenuItem: MenuItem;
