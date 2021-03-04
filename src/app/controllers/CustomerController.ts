@@ -59,10 +59,11 @@ export interface EmailPreferencesInput {
 export interface EmailPreferences extends EmailPreferencesInput {
 
 }
-export interface CreateCustomerInput extends Pick<Customer, 'email_address' | 'name' | 'password' | 'phone_number' | 'email_preferences' | 'profile_picture' | 'birthday' > {
+export interface CreateCustomerInput extends Pick<Customer, 'email_address' | 'name' | 'password' | 'phone_number' | 'email_preferences' > {
   verification_request_id: string;
   verification_code: string;
-  
+  profile_picture?: string;
+  birthday?: string;
 }
 export interface UpdateCustomerInput extends Partial<Pick<Customer, 'profile_picture' | 'birthday' | 'mobile_notifications' | 'email_preferences' >> {
 
