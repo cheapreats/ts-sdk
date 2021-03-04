@@ -30,6 +30,7 @@ import { LoyaltyCardController } from "./controllers/LoyaltyCardController";
 import { RedeemableItemController } from "./controllers/RedeemableItemController";
 import { RemoteConfigurationController } from "./controllers/RemoteConfigurationController";
 import { ShiftController } from "./controllers/ShiftController";
+import { ReferralCardController } from "./controllers/ReferralCardController";
 import endpoints from "../config/endpoints";
 
 let config = {
@@ -69,6 +70,7 @@ export class App {
   _redeemableItemController: RedeemableItemController;
   _remoteConfigurationController: RemoteConfigurationController;
   _shiftController: ShiftController;
+  _referralCardController: ReferralCardController;
   /**
    * Construct the App instance.
    * @hideconstructor
@@ -110,6 +112,7 @@ export class App {
     this._remoteConfigurationController = new RemoteConfigurationController(
       this
     );
+    this._referralCardController = new ReferralCardController(this);
   }
 
   // ADD GETTERS BELOW
@@ -222,6 +225,20 @@ export class App {
   get EmployeeToken() {
     return {
       create: this._employeeTokenController.create,
+    };
+  }
+
+  /**
+   * Get graph related methods.
+   * @returns {{query: GraphController.query}}
+   */
+  get ReferralCard() {
+    return {
+      awardCoupon: this._referralCardController.awardCoupon,
+      create: this._referralCardController.create,
+      delete: this._referralCardController.delete,
+      isValid: this._referralCardController.isValid,
+      update: this._referralCardController.update,
     };
   }
 

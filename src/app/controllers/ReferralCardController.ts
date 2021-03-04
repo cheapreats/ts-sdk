@@ -63,7 +63,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { code })
         .then((result: MutateResult) => {
-          resolve(result); 
+          resolve(result.isValidReferralCode); 
         })
         .catch((e: any) => {
           reject(e);
@@ -91,7 +91,7 @@ export class ReferralCardController {
           referral_card,
         })
         .then((result: MutateResult) => {
-          resolve(result.AwardCouponToReferrer); 
+          resolve(result.awardCouponToReferrer); 
         })
         .catch((e: any) => {
           reject(e);
@@ -108,7 +108,7 @@ export class ReferralCardController {
   create(referral_card: CreateReferralCardInput): Promise<ReferralCard> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                      mutation ($referral_card: String! ) {
+                      mutation ($referral_card: CreateReferralCardInput! ) {
                           createReferralCard(referral_card: $referral_card) {
                             customer_id
                             referral_signup_code_used
@@ -122,7 +122,7 @@ export class ReferralCardController {
           referral_card,
         })
         .then((result: MutateResult) => {
-          resolve(result.CreateReferralCard.id); 
+          resolve(result.createReferralCard); 
         })
         .catch((e: any) => {
           reject(e);
@@ -152,7 +152,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { id, referral_card })
         .then((result: MutateResult) => {
-          resolve(result.UpdateReferralCardInput.id);
+          resolve(result.updateReferralCard);
         })
         .catch((e: any) => {
           reject(e);
@@ -177,7 +177,7 @@ export class ReferralCardController {
         .getAdaptor()
         .mutate(mutationString, { id })
         .then((result: MutateResult) => {
-          resolve(result.DeleteReferralCard.id); 
+          resolve(result.deleteReferralCard); 
         })
         .catch((e: any) => {
           reject(e);
