@@ -126,7 +126,7 @@ export class OrderController {
     this.beginPreparing = this.beginPreparing.bind(this);
     this.prepared = this.prepared.bind(this);
     this.complete = this.complete.bind(this);
-    this.getOrderTotal = this.getOrderTotal.bind(this);
+    this.getOrderDetails = this.getOrderDetails.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -358,13 +358,15 @@ export class OrderController {
   /**
    * Get the order total for a customer
    * @param {string} orderId - The id of the Order Object
-   * @returns {Promise<number>}
+   * @returns {Promise<Order>}
    */
-  getOrderTotal(orderId: string): Promise<number> {
+   getOrderDetails(orderId: string): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                query getOrderTotal ($orderId: String!){
-                    getOrderTotal(order_id: $orderId)
+                query getOrderDetails ($orderId: String!){
+                    getOrderDetails(order_id: $orderId) {
+                        _id
+                    }
                 }
             `;
       this.app
@@ -373,7 +375,7 @@ export class OrderController {
           orderId,
         })
         .then((result: MutateResult) => {
-          resolve(result.getOrderTotal);
+          resolve(result.getOrderDetails);
         })
         .catch((e: any) => {
           reject(e);
