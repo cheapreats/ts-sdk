@@ -557,7 +557,7 @@ export class CartController {
   }
   
   /**
-   * Set everyone in cart to pay equally for order
+   * Set tip amount in cents for a customer
    * @param {string} cartId
    * @param {number} tipAmount
    * @returns {Promise<string>}
