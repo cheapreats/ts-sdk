@@ -69,6 +69,7 @@ export class CartController {
     this.setSplitPayForOrderEqually = this.setSplitPayForOrderEqually.bind(this);
     this.joinCart = this.joinCart.bind(this);
     this.leaveCart = this.leaveCart.bind(this);
+    this.setTipAmount = this.setTipAmount.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -548,6 +549,39 @@ export class CartController {
           })
           .then((result: MutateResult) => {
             resolve(result.setSplitPayForOrderEqually);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+  
+  /**
+   * Set tip amount in cents for a customer
+   * @param {string} cartId
+   * @param {number} tipAmount
+   * @returns {Promise<string>}
+   */
+   setTipAmount(cartId: string, tipAmount: number): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!, $tipAmount: Int!) {
+                  setTipAmount(
+                      cart_id: $cartId
+                      tip_amount: $tipAmount
+                  ) {
+                      _id
+                  }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId,
+            tipAmount
+          })
+          .then((result: MutateResult) => {
+            resolve(result.setTipAmount);
           })
           .catch((e: any) => {
             reject(e);

@@ -264,9 +264,9 @@ export interface PreparedOrder {
 export interface CompleteOrder {
   completeOrder: Order;
 }
-export interface GetOrderTotal {
-  getOrderTotal: number;
-}
+export interface GetOrderDetails {
+  getOrderDetails: Order;
+} 
 export interface RequestPayout {
   requestPayout: Payout;
 }
@@ -373,6 +373,9 @@ export interface JoinCart {
 export interface LeaveCart {
   leaveCart: Cart;
 }
+export interface SetTipAmount {
+  setTipAmount: Cart;
+} 
 export interface CreateStoreHoursPreset {
   createStoreHoursPreset: Vendor; 
 }
@@ -394,6 +397,7 @@ export interface MutateResult
     ApplyCouponToCart,
     JoinCart,
     LeaveCart,
+    SetTipAmount,
     VerifySmsVerificationSession,
     CreateSmsVerificationSession,
     UpdateVendor,
@@ -420,7 +424,7 @@ export interface MutateResult
     UpdatePayout,
     RequestPayout,
     CompleteOrder,
-    GetOrderTotal,
+    GetOrderDetails,
     PreparedOrder,
     BeginPreparingOrder,
     CancelOrder,

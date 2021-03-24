@@ -141,6 +141,7 @@ export class App {
       setSplitPayForOrderEqually: this._cartController.setSplitPayForOrderEqually,
       joinCart: this._cartController.joinCart,
       leaveCart: this._cartController.leaveCart,
+      setTipAmount: this._cartController.setTipAmount,
     };
   }
 
@@ -281,7 +282,7 @@ export class App {
 
   /**
    * Get order related methods.
-   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete, getOrderTotal: OrderController.getOrderTotal}}
+   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete, GetOrderDetails: OrderController.getOrderDetails}}
    */
   get Order() {
     return {
@@ -292,7 +293,7 @@ export class App {
       beginPreparing: this._orderController.beginPreparing,
       prepared: this._orderController.prepared,
       complete: this._orderController.complete,
-      getOrderTotal: this._orderController.getOrderTotal,
+      getOrderDetails: this._orderController.getOrderDetails,
     };
   }
 
