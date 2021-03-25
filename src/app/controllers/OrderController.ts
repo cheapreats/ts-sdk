@@ -438,10 +438,7 @@ export class OrderController {
                       ...OrderFragment
                     }
                 }
-                ` 
-                +  OrderFragment +
-                `
-            `;
+                ` +  OrderFragment;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
