@@ -10,6 +10,76 @@ import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { OrderStatusIdentifier, OrderPaymentMethod, OrderType, OrderCancellationReason } from "../../enums";
 
+const OrderFragment = `
+
+fragment OrderFragment on Order {
+  _id
+  items {
+    _id
+  }
+  transactions { 
+    _id
+    data {
+      id
+      amount
+      captured
+      created
+    }
+    status
+    refund {
+      id
+      amount
+      status
+      created
+    }
+    charge_type
+  }
+  customer {
+    _id
+  }
+  vendor {
+    _id
+  }
+  subtotal
+  total
+  note
+  payment_method
+  status_history {
+    name
+    identifier
+    data
+    created_at
+  }
+  scheduled_pickup
+  status
+  cancel_reason
+  cancel_description
+  settled_at
+  preparing_at
+  estimated_preparing_sec
+  attached_survey {
+    _id
+  }
+  attached_survey_response { 
+    _id
+    customer {
+      _id
+    }
+  }
+  order_type
+  discount
+  participating_customers {
+    customer_id
+    payment_method
+    amount_paying_percentage
+    tip {
+      amount
+      description
+    }
+  }
+}
+`
+
 export interface CreateOrderModifierInput {
   modifier_id: string;
   choices: Array<string>;
@@ -365,10 +435,10 @@ export class OrderController {
       let mutationString = `
                 query getOrderDetails ($orderId: String!){
                     getOrderDetails(order_id: $orderId) {
-                        _id
+                      ...OrderFragment
                     }
                 }
-            `;
+                ` +  OrderFragment;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
