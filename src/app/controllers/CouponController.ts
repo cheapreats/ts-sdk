@@ -23,7 +23,7 @@ export interface CouponTransaction extends DefaultController {
   description: string;
 }
   
-export interface CreateCouponInput extends Pick<Coupon, 'code' | 'coupon_type' | 'value' | 'item_scope' | 'vendor_scope' | 'customer_scope' | 'uses' | 'uses_per_customer' | 'can_combine' | 'carry_over' | 'expire_at' | 'paid_by_vendor' | 'min_purchase'> {
+export interface CreateCouponInput extends Pick<Coupon, 'code' | 'coupon_type' | 'value' | 'item_scope' | 'vendor_scope' | 'customer_scope' | 'uses' | 'uses_per_customer' | 'can_combine' | 'carry_over' | 'expire_at' | 'paid_by_vendor' | 'min_purchase' | 'is_storefront_visible'> {
   payment_methods?: PaymentMethodsInput;
 }
 
@@ -53,6 +53,7 @@ export interface CouponCommonProperties {
   expire_at: string;
   paid_by_vendor: boolean;
   min_purchase: number;
+  is_storefront_visible: boolean;
 }
 
 /**
