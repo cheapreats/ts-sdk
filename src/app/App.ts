@@ -30,6 +30,7 @@ import { LoyaltyCardController } from "./controllers/LoyaltyCardController";
 import { RedeemableItemController } from "./controllers/RedeemableItemController";
 import { RemoteConfigurationController } from "./controllers/RemoteConfigurationController";
 import { ShiftController } from "./controllers/ShiftController";
+import { ReferralCardController } from "./controllers/ReferralCardController";
 import endpoints from "../config/endpoints";
 
 let config = {
@@ -69,6 +70,7 @@ export class App {
   _redeemableItemController: RedeemableItemController;
   _remoteConfigurationController: RemoteConfigurationController;
   _shiftController: ShiftController;
+  _referralCardController: ReferralCardController;
   /**
    * Construct the App instance.
    * @hideconstructor
@@ -110,6 +112,7 @@ export class App {
     this._remoteConfigurationController = new RemoteConfigurationController(
       this
     );
+    this._referralCardController = new ReferralCardController(this);
   }
 
   // ADD GETTERS BELOW
@@ -134,8 +137,11 @@ export class App {
       updateApprovalStatus: this._cartController.updateApprovalStatus,
       changeCartHost: this._cartController.changeCartHost,
       removeCustomerFromParticipatingCustomers: this._cartController.removeCustomerFromParticipatingCustomers,
+      setHostToPayForEntireOrder: this._cartController.setHostToPayForEntireOrder,
+      setSplitPayForOrderEqually: this._cartController.setSplitPayForOrderEqually,
       joinCart: this._cartController.joinCart,
       leaveCart: this._cartController.leaveCart,
+      setTipAmount: this._cartController.setTipAmount,
     };
   }
 
@@ -229,6 +235,20 @@ export class App {
    * Get graph related methods.
    * @returns {{query: GraphController.query}}
    */
+  get ReferralCard() {
+    return {
+      awardCoupon: this._referralCardController.awardCoupon,
+      create: this._referralCardController.create,
+      delete: this._referralCardController.delete,
+      isValid: this._referralCardController.isValid,
+      update: this._referralCardController.update,
+    };
+  }
+
+  /**
+   * Get graph related methods.
+   * @returns {{query: GraphController.query}}
+   */
   get Graph(): { query: GraphController["query"] } {
     return {
       query: this._graphController.query,
@@ -262,7 +282,7 @@ export class App {
 
   /**
    * Get order related methods.
-   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete, getOrderTotal: OrderController.getOrderTotal}}
+   * @returns {{create: OrderController.create, cancel: OrderController.cancel, beginPreparing: OrderController.beginPreparing, prepared: OrderController.prepared, complete: OrderController.complete, GetOrderDetails: OrderController.getOrderDetails}}
    */
   get Order() {
     return {
@@ -273,7 +293,7 @@ export class App {
       beginPreparing: this._orderController.beginPreparing,
       prepared: this._orderController.prepared,
       complete: this._orderController.complete,
-      getOrderTotal: this._orderController.getOrderTotal,
+      getOrderDetails: this._orderController.getOrderDetails,
     };
   }
 

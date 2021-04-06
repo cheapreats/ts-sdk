@@ -34,6 +34,7 @@ import { Modifier } from "../../controllers/ModifierController";
 import { RedeemableItem } from "../../controllers/RedeemableItemController";
 import { Tip } from "../../controllers/TipController";
 import { Shift, ShiftTimePeriod } from "../../controllers/ShiftController";
+import { ReferralCard } from "../../controllers/ReferralCardController";
 
 export interface StartShift {
     startShift: Shift;
@@ -206,6 +207,21 @@ export interface UpdateLoyaltyProgram {
 export interface DeleteLoyaltyProgram {
   deleteLoyaltyProgram: string;
 }
+export interface IsValidReferralCode{
+  isValidReferralCode: boolean;
+}
+export interface CreateReferralCard{
+  createReferralCard: ReferralCard
+}
+export interface UpdateReferralCard{
+  updateReferralCard: ReferralCard
+}
+export interface DeleteReferralCard{
+  deleteReferralCard: string;
+}
+export interface AwardCouponToReferrer{
+  awardCouponToReferrer: Coupon;
+}
 export interface CreateMenuItem {
   createMenuItem: MenuItem;
 }
@@ -248,9 +264,9 @@ export interface PreparedOrder {
 export interface CompleteOrder {
   completeOrder: Order;
 }
-export interface GetOrderTotal {
-  getOrderTotal: number;
-}
+export interface GetOrderDetails {
+  getOrderDetails: Order;
+} 
 export interface RequestPayout {
   requestPayout: Payout;
 }
@@ -344,13 +360,22 @@ export interface ChangeCartHost {
 } 
 export interface removeCustomerFromParticipatingCustomers {
   removeCustomerFromParticipatingCustomers: Cart;
-} 
+}  
+export interface setHostToPayForEntireOrder {
+  setHostToPayForEntireOrder: Cart;
+}   
+export interface setSplitPayForOrderEqually {
+  setSplitPayForOrderEqually: Cart;
+}   
 export interface JoinCart {
   joinCart: Cart;
 }
 export interface LeaveCart {
   leaveCart: Cart;
 }
+export interface SetTipAmount {
+  setTipAmount: Cart;
+} 
 export interface CreateStoreHoursPreset {
   createStoreHoursPreset: Vendor; 
 }
@@ -372,6 +397,7 @@ export interface MutateResult
     ApplyCouponToCart,
     JoinCart,
     LeaveCart,
+    SetTipAmount,
     VerifySmsVerificationSession,
     CreateSmsVerificationSession,
     UpdateVendor,
@@ -398,13 +424,18 @@ export interface MutateResult
     UpdatePayout,
     RequestPayout,
     CompleteOrder,
-    GetOrderTotal,
+    GetOrderDetails,
     PreparedOrder,
     BeginPreparingOrder,
     CancelOrder,
     CreateOrder,
     CreateOrderFromCart,
     ReOrder,
+    IsValidReferralCode,
+    CreateReferralCard,
+    UpdateReferralCard,
+    DeleteReferralCard,
+    AwardCouponToReferrer,
     DeleteModifier,
     UpdateModifier,
     CreateModifier,
@@ -466,6 +497,8 @@ export interface MutateResult
     UpdateApprovalStatus,
     ChangeCartHost,
     removeCustomerFromParticipatingCustomers,
+    setHostToPayForEntireOrder,
+    setSplitPayForOrderEqually,
     StartShift,
     EndShift,
     UpdateShiftTimePeriod,

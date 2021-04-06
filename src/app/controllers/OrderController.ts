@@ -10,6 +10,76 @@ import { ModifierChoiceInput } from "./ModifierController";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
 import { OrderStatusIdentifier, OrderPaymentMethod, OrderType, OrderCancellationReason } from "../../enums";
 
+const OrderFragment = `
+
+fragment OrderFragment on Order {
+  _id
+  items {
+    _id
+  }
+  transactions { 
+    _id
+    data {
+      id
+      amount
+      captured
+      created
+    }
+    status
+    refund {
+      id
+      amount
+      status
+      created
+    }
+    charge_type
+  }
+  customer {
+    _id
+  }
+  vendor {
+    _id
+  }
+  subtotal
+  total
+  note
+  payment_method
+  status_history {
+    name
+    identifier
+    data
+    created_at
+  }
+  scheduled_pickup
+  status
+  cancel_reason
+  cancel_description
+  settled_at
+  preparing_at
+  estimated_preparing_sec
+  attached_survey {
+    _id
+  }
+  attached_survey_response { 
+    _id
+    customer {
+      _id
+    }
+  }
+  order_type
+  discount
+  participating_customers {
+    customer_id
+    payment_method
+    amount_paying_percentage
+    tip {
+      amount
+      description
+    }
+  }
+}
+`
+
 export interface CreateOrderModifierInput {
   modifier_id: string;
   choices: Array<string>;
@@ -126,7 +196,7 @@ export class OrderController {
     this.beginPreparing = this.beginPreparing.bind(this);
     this.prepared = this.prepared.bind(this);
     this.complete = this.complete.bind(this);
-    this.getOrderTotal = this.getOrderTotal.bind(this);
+    this.getOrderDetails = this.getOrderDetails.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -358,22 +428,24 @@ export class OrderController {
   /**
    * Get the order total for a customer
    * @param {string} orderId - The id of the Order Object
-   * @returns {Promise<number>}
+   * @returns {Promise<Order>}
    */
-  getOrderTotal(orderId: string): Promise<number> {
+   getOrderDetails(orderId: string): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                query getOrderTotal ($orderId: String!){
-                    getOrderTotal(order_id: $orderId)
+                query getOrderDetails ($orderId: String!){
+                    getOrderDetails(order_id: $orderId) {
+                      ...OrderFragment
+                    }
                 }
-            `;
+                ` +  OrderFragment;
       this.app
         .getAdaptor()
         .mutate(mutationString, {
           orderId,
         })
         .then((result: MutateResult) => {
-          resolve(result.getOrderTotal);
+          resolve(result.getOrderDetails);
         })
         .catch((e: any) => {
           reject(e);

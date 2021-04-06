@@ -65,8 +65,11 @@ export class CartController {
     this.updateApprovalStatus = this.updateApprovalStatus.bind(this);
     this.changeCartHost = this.changeCartHost.bind(this);
     this.removeCustomerFromParticipatingCustomers = this.removeCustomerFromParticipatingCustomers.bind(this);
+    this.setHostToPayForEntireOrder = this.setHostToPayForEntireOrder.bind(this);
+    this.setSplitPayForOrderEqually = this.setSplitPayForOrderEqually.bind(this);
     this.joinCart = this.joinCart.bind(this);
     this.leaveCart = this.leaveCart.bind(this);
+    this.setTipAmount = this.setTipAmount.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -492,4 +495,98 @@ export class CartController {
           });
     });
   }
+
+  /**
+   * Set host to pay for the entire order
+   * @param {string} cartId
+   * @returns {Promise<string>}
+   */
+  setHostToPayForEntireOrder(cartId: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!) {
+                  setHostToPayForEntireOrder(
+                      cart_id: $cartId
+                  ) {
+                      _id
+                  }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId
+          })
+          .then((result: MutateResult) => {
+            resolve(result.setHostToPayForEntireOrder);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+  
+  /**
+   * Set everyone in cart to pay equally for order
+   * @param {string} cartId
+   * @returns {Promise<string>}
+   */
+  setSplitPayForOrderEqually(cartId: string): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!) {
+                  setSplitPayForOrderEqually(
+                      cart_id: $cartId
+                  ) {
+                      _id
+                  }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId
+          })
+          .then((result: MutateResult) => {
+            resolve(result.setSplitPayForOrderEqually);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+  
+  /**
+   * Set tip amount in cents for a customer
+   * @param {string} cartId
+   * @param {number} tipAmount
+   * @returns {Promise<string>}
+   */
+   setTipAmount(cartId: string, tipAmount: number): Promise<Cart> {
+    return new Promise((resolve, reject) => {
+      let mutationString = `
+                mutation ($cartId: String!, $tipAmount: Int!) {
+                  setTipAmount(
+                      cart_id: $cartId
+                      tip_amount: $tipAmount
+                  ) {
+                      _id
+                  }
+                }
+            `;
+      this.app
+          .getAdaptor()
+          .mutate(mutationString, {
+            cartId,
+            tipAmount
+          })
+          .then((result: MutateResult) => {
+            resolve(result.setTipAmount);
+          })
+          .catch((e: any) => {
+            reject(e);
+          });
+    });
+  }
+  
 }
