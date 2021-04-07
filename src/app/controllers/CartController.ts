@@ -45,6 +45,7 @@ export interface Cart extends DefaultControllerRequired {
   total: number;
   coupons: Array<CartCoupon>;
   note: string;
+  isSplitPaying: boolean;
   participating_customers: Array<ParticipatingCustomer>;
 }
 
