@@ -1,6 +1,6 @@
 {
   "name": "@cheapreats/ts-sdk",
-  "version": "1.13.21",
+  "version": "1.13.22",
   "description": "CheaprEats Typescript SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,8 @@
     "clone-graphql": "node ./scripts/clone-graphql.js",
     "transpile-gql-enums": "npx transpile-file --file=./graphql-api/graphql/enums/index.js --output=./src/enums.ts --parse-types=TsEnum",
     "del-graphql": "rm -rf ./graphql-api",
-    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gql-enums && npm run del-graphql"
+    "transpile": "npm run install-graphql-enum-transpiler && npm run clone-graphql && npm run transpile-gql-enums && npm run del-graphql",
+    "publish:types": "tsc --outDir types --emitDeclarationOnly && cd types && npm publish"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,9 @@
 node_modules
 /dist
 .idea/
+./types/app
+./types/config
+./types/scripts
+./types/enums.d.ts
+./types/index.d.ts
+./types/version.d.ts

@@ -1,0 +1,8 @@
+{
+  "name": "@cheapreats/types",
+  "version": "1.0.0",
+  "description": "CheaprEats Typescript Types",
+  "main": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/cheapreats/ts-sdk"
+}
