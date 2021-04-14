@@ -75,6 +75,9 @@ export interface CreateCoupon {
 export interface UpdateCoupon {
   updateCoupon: Coupon;
 }
+export interface DeleteCoupon {
+  deleteCoupon: string;
+}
 export interface RemoveItemFromCart {
   removeItemFromCart: Cart;
 }
@@ -390,6 +393,7 @@ export interface MutateResult
   extends CreateCategory,
     CreateCoupon,
     UpdateCoupon,
+    DeleteCoupon,
     UpdateAllMenuItemsStatusForVendor,
     UpdateCustomer,
     UpdateNoteForCart,

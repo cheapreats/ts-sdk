@@ -202,6 +202,7 @@ export class App {
     return {
       create: this._couponController.create,
       update: this._couponController.update,
+      delete: this._couponController.delete,
     };
   }
 
