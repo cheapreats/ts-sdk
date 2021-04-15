@@ -122,7 +122,7 @@ export interface OrderItem {
   tags: TagInput;
   recycle_info: string;
   price: number;
-  fees: FeeInput;
+  fees: FeeInput[];
   estimated_time: number;
   modifiers: Array<OrderModifier>;
 }
