@@ -68,6 +68,7 @@ export class CouponController {
     // ADD BINDINGS BELOW
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   // ADD MUTATION METHODS BELOW
@@ -122,6 +123,29 @@ export class CouponController {
           coupon: updateFields,
         });
       return result.updateCoupon._id;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+  /**
+   * Delete a coupon
+   * @param {string} couponId - The id of the Coupon Object
+   * @returns {Promise<string>} - The string response the coupon was deleted
+   */
+  async delete(couponId: string): Promise<string> {
+    const mutationString = `
+          mutation deleteCouponMutation ($couponId: String!) {
+            deleteCoupon(coupon_id: $couponId) 
+          }
+      `;
+
+    try {
+      let result: MutateResult = await this.app
+        .getAdaptor()
+        .mutate(mutationString, {
+          couponId
+        });
+      return result.deleteCoupon;
     } catch (e) {
       throw new Error(e);
     }
