@@ -91,7 +91,7 @@ export interface CreateOrdersItemsInput {
 }
 export interface CreateOrderInput {
   vendor_id: string;
-  payment_method: string;
+  payment_method: OrderPaymentMethod;
   items: Array<CreateOrdersItemsInput>;
   note?: string;
   coupons?: Array<string>;
@@ -164,7 +164,7 @@ export interface Order extends DefaultControllerRequired {
   subtotal: number;
   total: number;
   note: string;
-  payment_method: string;
+  payment_method: OrderPaymentMethod;
   status_history: Array<OrderStatusHistory>;
   scheduled_pickup: string;
   status: OrderStatusIdentifier;
