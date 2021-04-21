@@ -30,12 +30,13 @@ export interface CartCoupon {
   coupon: Coupon;
 }
 export interface ParticipatingCustomer {
-  _id: string;
   name: string;
   profile_picture: string;
   customer_id: string;
   approval_status: boolean;
   payment_method: OrderPaymentMethod;
+  amount_paying_percentage: number;
+  tip_amount: number;
 }
 export interface Cart extends DefaultControllerRequired {
   customer: Customer;

@@ -152,9 +152,10 @@ export interface OrderStatusHistory {
   created_at: string;
 }
 export interface ParticipatingCustomer {
-  _id: string;
   customer_id: string;
   payment_method: OrderPaymentMethod;
+  amount_paying_percentage: number;
+  tip: Tip;
 }
 export interface Order extends DefaultControllerRequired {
   items: Array<OrderItem>;
