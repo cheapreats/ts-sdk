@@ -87,6 +87,7 @@ export interface VendorCommonProperties {
   tags: Array<TagInput>;
   location: LocationInput;
   courier_pickup_instructions: string;
+  back_story: string,
   open_hours: OpenHoursInput;
   payment_methods: PaymentMethodsInput;
   direct_deposit_info: DirectDepositInfoInput;
@@ -168,7 +169,7 @@ export interface DirectDepositInfo  {
   cheque_image: string;
 }
 
-export interface UpdateVendorInput extends Partial<Pick<Vendor, 'name' | 'description' | 'images' | 'tags' | 'open_hours' | 'address' | 'phone_number' | 'location'
+export interface UpdateVendorInput extends Partial<Pick<Vendor, 'name' | 'description' | 'images' | 'tags' | 'open_hours' |'back_story'| 'address' | 'phone_number' | 'location'
   | 'courier_pickup_instructions' | 'ui_configuration' | 'status' | 'payout_email_address' | 'direct_deposit_info' | 'payment_methods' | 'directions' | 'receive_sms_notifications' | 'auto_open' | 'auto_close' | 'payout_auto_request_schedule' | 'global_tax_rate' | 'postal_code'
   | 'order_types' | 'store_logo' | 'min_delivery_cart_total' | 'max_group_seating_limit' | 'website_link' | 'max_in_person_subtotal_limit'>> {
   
