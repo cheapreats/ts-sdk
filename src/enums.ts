@@ -114,7 +114,9 @@ export enum UiBaseDisplayType {
 
 export enum VendorStatus {
     OPEN = 'OPEN',
+    OPENING_SOON = 'OPENING_SOON',
     CLOSED = 'CLOSED',
+    CLOSING_SOON = 'CLOSING_SOON',
     HIDDEN = 'HIDDEN',
     NOT_ACCEPTING = 'NOT_ACCEPTING',
     LEAVE = 'LEAVE',
