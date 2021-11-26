@@ -89,20 +89,8 @@ export interface CreateOrdersItemsInput {
   modifiers: Array<CreateOrderModifierInput>;
   added_by_customer: string;
 }
-export interface CreateOrderInput {
-  vendor_id: string;
-  payment_method: OrderPaymentMethod;
-  items: Array<CreateOrdersItemsInput>;
-  note?: string;
-  coupons?: Array<string>;
-  scheduled_pickup: string;
-  order_type?: OrderType; // default TAKE_OUT
-}
 export interface CreateOrderFromCartInput {
-  payment_method: OrderPaymentMethod;
   cart_id: string;
-  scheduled_pickup: Date;
-  order_type?: OrderType; // default TAKE_OUT
 }
 export interface ReOrderInput {
   order_id: string;
@@ -190,7 +178,6 @@ export class OrderController {
   constructor(app: App) {
     this.app = app;
     // ADD BINDINGS BELOW
-    this.create = this.create.bind(this);
     this.createFromCart = this.createFromCart.bind(this);
     this.reOrder = this.reOrder.bind(this);
     this.cancel = this.cancel.bind(this);
@@ -201,42 +188,6 @@ export class OrderController {
   }
 
   // ADD MUTATION METHODS BELOW
-
-  /**
-   * Place a new order, you must be authenticated as a customer to use this
-   * @param {CreateOrderInput} order - The Order Object
-   * @param {boolean} [dry] - Indicator for dry order placement
-   * @param {boolean} [clear_cart] - Indicator to clear all cart after order placement
-   * @returns {Promise<string>} - The id of the Order Object
-   */
-  create(
-    order: CreateOrderInput,
-    dry: boolean | null, // default False
-    clear_cart: boolean | null // default False
-  ): Promise<string> {
-    return new Promise((resolve, reject) => {
-      let mutationString = `
-                mutation createOrderMutation ($order: CreateOrderInput!, $dry: Boolean, $clear_cart: Boolean) {
-                    createOrder(order: $order, dry: $dry, clear_cart: $clear_cart) {
-                        _id
-                    }
-                }
-            `;
-      this.app
-        .getAdaptor()
-        .mutate(mutationString, {
-          order,
-          dry,
-          clear_cart,
-        })
-        .then((result: MutateResult) => {
-          resolve(result.createOrder._id);
-        })
-        .catch((e: any) => {
-          reject(e);
-        });
-    });
-  }
 
   /**
    * Place a cart order, you must be authenticated as a customer to use this

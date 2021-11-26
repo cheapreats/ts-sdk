@@ -6,7 +6,7 @@ import { MenuItem } from "./MenuItemController";
 import { Modifier } from "./ModifierController";
 import { DefaultControllerRequired } from "./Controller";
 import { MutateResult } from "../links/synchronouslinks/GraphQLLink";
-import { OrderPaymentMethod } from "../../enums";
+import { OrderPaymentMethod, OrderType } from "../../enums";
 
 export interface AddItemToCartModifierInput {
   modifier_id: string;
@@ -48,6 +48,9 @@ export interface Cart extends DefaultControllerRequired {
   note: string;
   isSplitPaying: boolean;
   participating_customers: Array<ParticipatingCustomer>;
+  payment_method: OrderPaymentMethod,
+  scheduled_pickup: Date,
+  order_type: OrderType;
 }
 
 export class CartController {
