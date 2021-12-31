@@ -86,7 +86,7 @@ export class EmployeeController {
   update(id: string, employee: UpdateEmployeeInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateEmployeeMutation ($id: String!, $employee: UpdateEmployeeInput!) {
+                mutation updateEmployeeMutation ($Id: ObjectID!, $employee: UpdateEmployeeInput!) {
                     updateEmployee(id: $id, employee: $employee) {
                         _id
                     }
@@ -115,7 +115,7 @@ export class EmployeeController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation deleteEmployee ($id: String!) {
+                mutation deleteEmployee ($Id: ObjectID!) {
                     deleteEmployee(id: $id)
                 }
             `;
@@ -142,7 +142,7 @@ export class EmployeeController {
   enrollTerminalFcm(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation enrollEmployeeTerminalFcmToken ($id: String!, $token: String!) {
+                mutation enrollEmployeeTerminalFcmToken ($Id: ObjectID!, $token: String!) {
                     enrollEmployeeTerminalFcmToken(id: $id, token: $token) {
                         _id
                     }

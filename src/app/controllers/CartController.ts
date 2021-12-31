@@ -82,7 +82,7 @@ export class CartController {
   updateNote(cartId: string, note: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $note: String!) {
+                mutation ($cartId: ObjectID!, $note: String!) {
                     updateNoteForCart(cart_id: $cartId, note: $note) {
                         _id
                     }
@@ -106,7 +106,7 @@ export class CartController {
   removeCoupon(cartId: string, cartCouponId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $cartCouponId: String!) {
+                mutation ($cartId: ObjectID!, $cartCouponId: ObjectID!) {
                     removeCouponFromCart(cart_id: $cartId, cart_coupon_id: $cartCouponId) {
                         _id
                     }
@@ -130,7 +130,7 @@ export class CartController {
   applyCoupon(cartId: string, couponCode: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $couponCode: String!) {
+                mutation ($cartId: ObjectID!, $couponCode: String!) {
                     applyCouponToCart(cart_id: $cartId, coupon_code: $couponCode) {
                         _id
                     }
@@ -159,7 +159,7 @@ export class CartController {
   delete(cartId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!) {
+                mutation ($cartId: ObjectID!) {
                     deleteCart(cart_id: $cartId)
                 }
             `;
@@ -186,7 +186,7 @@ export class CartController {
   removeItem(cartId: string, cartItemId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $cartItemId: String!) {
+                mutation ($cartId: ObjectID!, $cartItemId: ObjectID!) {
                     removeItemFromCart(
                         cart_id: $cartId,
                         cart_item_id: $cartItemId
@@ -219,7 +219,7 @@ export class CartController {
   addItem(cartId: string, item: AddItemToCartInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $item: AddItemToCartInput!) {
+                mutation ($cartId: ObjectID!, $item: AddItemToCartInput!) {
                     addItemToCart(
                         cart_id: $cartId,
                         item: $item
@@ -252,7 +252,7 @@ export class CartController {
   create(customerId: string, vendorId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($customerId: String!, $vendorId: String!) {
+                mutation ($customerId: ObjectID!, $vendorId: ObjectID!) {
                     createCart(
                         customer_id: $customerId,
                         vendor_id: $vendorId
@@ -284,7 +284,7 @@ export class CartController {
   enableSharingForCart(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!) {
+                mutation ($cartId: ObjectID!) {
                     enableSharingForCart(
                         cart_id: $cartId,
                     ) {
@@ -315,7 +315,7 @@ export class CartController {
   joinCart(cartId: string, sharedToken: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $sharedToken: String!) {
+                mutation ($cartId: ObjectID!, $sharedToken: String!) {
                     joinCart(
                         cart_id: $cartId,
                         shared_token: $sharedToken
@@ -347,7 +347,7 @@ export class CartController {
   leaveCart(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!) {
+                mutation ($cartId: ObjectID!) {
                     leaveCart(
                         cart_id: $cartId
                     ) {
@@ -378,7 +378,7 @@ export class CartController {
   updatePaymentMethod(cartId: string, paymentMethod: OrderPaymentMethod): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $paymentMethod: OrderPaymentMethod!) {
+                mutation ($cartId: ObjectID!, $paymentMethod: OrderPaymentMethod!) {
                     updatePaymentMethod(
                         cart_id: $cartId, 
                         payment_method: $paymentMethod
@@ -411,7 +411,7 @@ export class CartController {
   updateApprovalStatus(cartId: string, approvalStatus: boolean): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $approvalStatus: Boolean!) {
+                mutation ($cartId: ObjectID!, $approvalStatus: Boolean!) {
                     updateApprovalStatus(
                         cart_id: $cartId, 
                         approval_status: $approvalStatus
@@ -444,7 +444,7 @@ export class CartController {
   changeCartHost(cartId: string, customerId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $customerId: String!) {
+                mutation ($cartId: ObjectID!, $customerId: ObjectID!) {
                   changeCartHost(
                       cart_id: $cartId, 
                       customer_id: $customerId
@@ -477,7 +477,7 @@ export class CartController {
   removeCustomerFromParticipatingCustomers(cartId: string, customerId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $customerId: String!) {
+                mutation ($cartId: ObjectID!, $customerId: ObjectID!) {
                   removeCustomerFromParticipatingCustomers(
                       cart_id: $cartId, 
                       customer_id: $customerId
@@ -509,7 +509,7 @@ export class CartController {
   setHostToPayForEntireOrder(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!) {
+                mutation ($cartId: ObjectID!) {
                   setHostToPayForEntireOrder(
                       cart_id: $cartId
                   ) {
@@ -539,7 +539,7 @@ export class CartController {
   setSplitPayForOrderEqually(cartId: string): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!) {
+                mutation ($cartId: ObjectID!) {
                   setSplitPayForOrderEqually(
                       cart_id: $cartId
                   ) {
@@ -570,7 +570,7 @@ export class CartController {
    setTipAmount(cartId: string, tipAmount: number): Promise<Cart> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($cartId: String!, $tipAmount: Int!) {
+                mutation ($cartId: ObjectID!, $tipAmount: Int!) {
                   setTipAmount(
                       cart_id: $cartId
                       tip_amount: $tipAmount

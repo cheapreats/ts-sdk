@@ -72,7 +72,7 @@ export class PayoutController {
   ): Promise<{ _id: string; total: number }> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($vendor_id: String!, $dry: Boolean) {
+                mutation ($vendor_Id: ObjectID!, $dry: Boolean) {
                     requestPayout(vendor_id: $vendor_id, dry: $dry) {
                         _id
                         total
@@ -107,7 +107,7 @@ export class PayoutController {
   update(id: string, payout: UpdatePayoutInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $payout:UpdatePayoutInput!) {
+                mutation ($Id: ObjectID!, $payout:UpdatePayoutInput!) {
                     updatePayout(id: $id, payout: $payout) {
                         _id
                     }
@@ -136,7 +136,7 @@ export class PayoutController {
   cancel(id: string): Promise<Payout> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     cancelPayout(id: $id)
                 }
             `;

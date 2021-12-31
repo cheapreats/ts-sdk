@@ -142,7 +142,7 @@ export class ReferralCardController {
   ): Promise<ReferralCard> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $referral_card: UpdateReferralCardInput!) {
+                mutation ($Id: ObjectID!, $referral_card: UpdateReferralCardInput!) {
                   UpdateReferralCardInput(id: $id, referral_card: $referral_card) {
                       _id
                   }
@@ -168,7 +168,7 @@ export class ReferralCardController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                   deleteReferralCard(id: $id)
                   _id
                 }

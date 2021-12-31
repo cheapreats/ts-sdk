@@ -97,7 +97,7 @@ export class LoyaltyCardController {
   awardPointsToLoyaltyCard(id: string, amount: number): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $amount: Int!) {
+                mutation ($Id: ObjectID!, $amount: Int!) {
                     awardPointsToLoyaltyCard(id: $id, amount: $amount) {
                         _id
                     }
@@ -130,7 +130,7 @@ export class LoyaltyCardController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $amount: Int!) {
+                mutation ($Id: ObjectID!, $amount: Int!) {
                     awardShareablePointsToLoyaltyCard(id: $id, amount: $amount) {
                         _id
                     }
@@ -167,7 +167,7 @@ export class LoyaltyCardController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($sender_customer_id: String!, $receiver_phone_number: String!, $loyalty_program_id: String!, $no_of_points_to_share: Int!) {
+                mutation ($sender_customer_Id: ObjectID!, $receiver_phone_number: String!, $loyalty_program_Id: ObjectID!, $no_of_points_to_share: Int!) {
                     shareLoyaltyPoints(sender_customer_id: $sender_customer_id, receiver_phone_number: $receiver_phone_number, loyalty_program_id: $loyalty_program_id, no_of_points_to_share: $no_of_points_to_share) {
                         _id
                     }
@@ -202,7 +202,7 @@ export class LoyaltyCardController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($loyalty_card_id: String!, $menu_item_id: String!) {
+                mutation ($loyalty_card_Id: ObjectID!, $menu_item_Id: ObjectID!) {
                     redeemLoyaltyPointsForCoupon(loyalty_card_id: $loyalty_card_id, menu_item_id: $menu_item_id) {
                         _id
                     }

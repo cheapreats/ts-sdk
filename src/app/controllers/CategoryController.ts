@@ -88,7 +88,7 @@ export class CategoryController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation deleteCategoryMutation ($id: String!) {
+                mutation deleteCategoryMutation ($Id: ObjectID!) {
                     deleteCategory(id: $id)
                 }
             `;
@@ -115,7 +115,7 @@ export class CategoryController {
   update(id: string, category: UpdateCategoryInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateCategoryMutation ($id: String!, $category: UpdateCategoryInput!) {
+                mutation updateCategoryMutation ($Id: ObjectID!, $category: UpdateCategoryInput!) {
                     updateCategory(id: $id, category: $category) {
                         _id
                     }

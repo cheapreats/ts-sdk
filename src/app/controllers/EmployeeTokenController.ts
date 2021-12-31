@@ -33,7 +33,7 @@ export class EmployeeTokenController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation createEmployeeTokenMutation ($vendor_id: String!, $username: String!, $password: String!) {
+                mutation createEmployeeTokenMutation ($vendor_Id: ObjectID!, $username: String!, $password: String!) {
                     createEmployeeToken(vendor_id: $vendor_id, username: $username, password: $password) {
                         body
                     }

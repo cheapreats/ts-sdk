@@ -106,7 +106,7 @@ export class SurveyController {
   update(id: string, survey: UpdateSurveyInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $survey: UpdateSurveyInput!) {
+                mutation ($Id: ObjectID!, $survey: UpdateSurveyInput!) {
                     updateSurvey(id: $id, survey: $survey) {
                         _id
                     }
@@ -135,7 +135,7 @@ export class SurveyController {
   archive(id: string): Promise<Survey> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     archiveSurvey(id: $id)
                 }
             `;
@@ -161,7 +161,7 @@ export class SurveyController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     deleteSurvey(id: $id)
                 }
             `;
@@ -187,7 +187,7 @@ export class SurveyController {
   release(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     releaseSurvey(id: $id) {
                         _id
                     }
@@ -219,7 +219,7 @@ export class SurveyController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($survey_id: String!, $survey_response: CreateSurveyResponseInput!) {
+                mutation ($survey_Id: ObjectID!, $survey_response: CreateSurveyResponseInput!) {
                     createSurveyResponse(survey_id: $survey_id, survey_response: $survey_response) {
                         _id
                     }

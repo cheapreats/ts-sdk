@@ -62,7 +62,7 @@ export class RemoteConfigurationController {
   deleteRawConfiguration(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     deleteRawConfiguration(id: $id)
                 }
             `;
@@ -86,7 +86,7 @@ export class RemoteConfigurationController {
   ): Promise<RawConfiguration> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $rawConfiguration: UpdateRawConfigurationInput!) {
+                mutation ($Id: ObjectID!, $rawConfiguration: UpdateRawConfigurationInput!) {
                     updateRawConfiguration(id: $id, raw_configuration: $rawConfiguration) {
                         _id
                     }

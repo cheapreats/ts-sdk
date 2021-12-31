@@ -29,7 +29,7 @@ export class TipController {
   create(order_id: string, amount: number): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($order_id:String!, $amount:Int!) {
+                mutation ($order_Id: ObjectID!, $amount:Int!) {
                     createTip(order_id:$order_id, amount:$amount) {
                         _id,
                     }

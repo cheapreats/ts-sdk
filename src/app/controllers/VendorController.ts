@@ -220,7 +220,7 @@ export class VendorController {
   deleteVendorTester(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     deleteVendorTester(id: $id)
                 }
             `;
@@ -250,7 +250,7 @@ export class VendorController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $email_address: String!) {
+                mutation ($Id: ObjectID!, $email_address: String!) {
                     addVendorTesterByEmailAddress(id: $id, email_address: $email_address) {
                         _id
                     }
@@ -284,7 +284,7 @@ export class VendorController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $approval_status: VendorApprovalStatus!) {
+                mutation ($Id: ObjectID!, $approval_status: VendorApprovalStatus!) {
                     updateVendorApprovalStatus(id: $id, approval_status: $approval_status) {
                         _id
                     }
@@ -313,7 +313,7 @@ export class VendorController {
   requestVendorApproval(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     requestVendorApproval(id: $id)
                 }
             `;
@@ -402,7 +402,7 @@ export class VendorController {
   update(id: string, vendor: UpdateVendorInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateVendorMutation ($id: String!, $vendor: UpdateVendorInput!) {
+                mutation updateVendorMutation ($Id: ObjectID!, $vendor: UpdateVendorInput!) {
                     updateVendor(id: $id, vendor: $vendor) {
                         _id
                     }
@@ -432,7 +432,7 @@ export class VendorController {
   updateAllMenuItemsStatus(vendor_id: string, status: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($vendor_id: String!, $status: String!) {
+                mutation ($vendor_Id: ObjectID!, $status: String!) {
                     updateAllMenuItemsStatusForVendor(vendor_id: $vendor_id, status: $status)
                 }
             `;
@@ -461,7 +461,7 @@ export class VendorController {
   createStoreHoursPreset(vendor_id: string, openHours: OpenHoursInput, name: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($vendor_id: String!, $openHours: OpenHoursInput!, $name: String!) {
+                mutation ($vendor_Id: ObjectID!, $openHours: OpenHoursInput!, $name: String!) {
                   createStoreHoursPreset(vendor_id: $vendor_id, open_hours: $openHours, name: $name) {
                     _id
                   }
@@ -492,7 +492,7 @@ export class VendorController {
   deleteStoreHoursPreset(vendor_id: string, name: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($vendor_id: String!, $name: String!) {
+                mutation ($vendor_Id: ObjectID!, $name: String!) {
                   deleteStoreHoursPreset(vendor_id: $vendor_id, name: $name) {
                     _id
                   }
@@ -522,7 +522,7 @@ export class VendorController {
   changeOpenHours(vendor_id: string, name: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($vendor_id: String!, $name: String!) {
+                mutation ($vendor_Id: ObjectID!, $name: String!) {
                   changeOpenHours(vendor_id: $vendor_id, name: $name) {
                     _id
                   }

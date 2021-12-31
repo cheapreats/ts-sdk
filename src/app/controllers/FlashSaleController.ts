@@ -56,7 +56,7 @@ export class FlashSaleController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation($vendor_id: String!, $type: FlashSaleType!, $amount: Int!, $items: [FlashSaleItemInput]!, $start_at: String!, $end_at: String!) {
+                mutation($vendor_Id: ObjectID!, $type: FlashSaleType!, $amount: Int!, $items: [FlashSaleItemInput]!, $start_at: String!, $end_at: String!) {
                     createFlashSale(vendor_id: $vendor_id, type: $type, amount: $amount, items:$items, start_at:$start_at, end_at:$end_at) {
                         _id
                     }
@@ -95,7 +95,7 @@ export class FlashSaleController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation($id: String!, $items: [FlashSaleItemInput], $end_at: String) {
+                mutation($Id: ObjectID!, $items: [FlashSaleItemInput], $end_at: String) {
                     updateFlashSale(id: $id, items:$items, end_at:$end_at) {
                         _id
                     }

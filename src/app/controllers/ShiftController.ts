@@ -46,7 +46,7 @@ export class ShiftController {
     startShift(employee_id: string): Promise<Shift>{
         return new Promise((resolve, reject) => {
             let mutationString = `
-                mutation($employee_id: String!) {
+                mutation($employee_Id: ObjectID!) {
                     startShift(employee_id: $employee_id) {
                         _id
                         employee_id
@@ -86,7 +86,7 @@ export class ShiftController {
     endShift(employee_id: string): Promise<Shift>{
         return new Promise((resolve, reject) => {
             let mutationString = `
-                mutation($employee_id: String!) {
+                mutation($employee_Id: ObjectID!) {
                     endShift(employee_id: $employee_id) {
                         _id
                         employee_id

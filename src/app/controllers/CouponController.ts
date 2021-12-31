@@ -108,7 +108,7 @@ export class CouponController {
    */
   async update(id: string, updateFields: UpdateCouponInput): Promise<string> {
     const mutationString = `
-          mutation updateCouponMutation ($id: String!, $coupon: UpdateCouponInput!) {
+          mutation updateCouponMutation ($Id: ObjectID!, $coupon: UpdateCouponInput!) {
               updateCoupon(id: $id, coupon: $coupon) {
                   _id
               }
@@ -134,7 +134,7 @@ export class CouponController {
    */
   async delete(couponId: string): Promise<string> {
     const mutationString = `
-          mutation deleteCouponMutation ($couponId: String!) {
+          mutation deleteCouponMutation ($couponId: ObjectID!) {
             deleteCoupon(coupon_id: $couponId) 
           }
       `;

@@ -73,7 +73,7 @@ export class RedeemableItemController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id:String!, $redeemable_item: UpdateRedeemableItemInput!) {
+                mutation ($Id: ObjectID!, $redeemable_item: UpdateRedeemableItemInput!) {
                     updateRedeemableItem(id: $id, redeemable_item: $redeemable_item) {
                         _id
                     }
@@ -102,7 +102,7 @@ export class RedeemableItemController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     deleteRedeemableItem(id: $id)
                 }
             `;

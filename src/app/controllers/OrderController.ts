@@ -266,7 +266,7 @@ export class OrderController {
   ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation cancelOrderMutation ($id: String!, $reason: OrderCancellationReason!, $description: String){
+                mutation cancelOrderMutation ($Id: ObjectID!, $reason: OrderCancellationReason!, $description: String){
                     cancelOrder(id: $id, reason: $reason, description: $description){
                         _id
                     }
@@ -300,7 +300,7 @@ export class OrderController {
   ): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation beginPreparingOrder($id: String!, $estimated_preparing_sec: Int!){
+                mutation beginPreparingOrder($Id: ObjectID!, $estimated_preparing_sec: Int!){
                     beginPreparingOrder(id: $id, estimated_preparing_sec: $estimated_preparing_sec){
                         _id
                     }
@@ -329,7 +329,7 @@ export class OrderController {
   prepared(id: string): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation preparedOrderMutation ($id: String!){
+                mutation preparedOrderMutation ($Id: ObjectID!){
                     preparedOrder (id: $id){
                         _id
                     }
@@ -357,7 +357,7 @@ export class OrderController {
   complete(id: string): Promise<MutateResult> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation completeOrderMutation ($id: String!){
+                mutation completeOrderMutation ($Id: ObjectID!){
                     completeOrder(id: $id){
                         _id
                     }
@@ -385,7 +385,7 @@ export class OrderController {
    getOrderDetails(orderId: string): Promise<Order> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                query getOrderDetails ($orderId: String!){
+                query getOrderDetails ($orderId: ObjectID!){
                     getOrderDetails(order_id: $orderId) {
                       ...OrderFragment
                     }

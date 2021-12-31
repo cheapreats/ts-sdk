@@ -59,7 +59,7 @@ export class HeadOfficeController {
   update(id: string, identifier: string | null): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateHeadOffice ($id: String!, $identifier: String!) {
+                mutation updateHeadOffice ($Id: ObjectID!, $identifier: String!) {
                     updateHeadOffice(id: $id, identifier: $identifier) {
                         _id
                     }
@@ -88,7 +88,7 @@ export class HeadOfficeController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation deleteHeadOffice ($id: String!) {
+                mutation deleteHeadOffice ($Id: ObjectID!) {
                     deleteHeadOffice(id: $id)
                 }
             `;

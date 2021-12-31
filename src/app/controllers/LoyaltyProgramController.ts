@@ -88,7 +88,7 @@ export class LoyaltyProgramController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id:String!, $loyalty_program: UpdateLoyaltyProgramInput!) {
+                mutation ($Id: ObjectID!, $loyalty_program: UpdateLoyaltyProgramInput!) {
                     updateLoyaltyProgram(id:$id, loyalty_program: $loyalty_program) {
                         _id
                     }
@@ -117,7 +117,7 @@ export class LoyaltyProgramController {
   delete(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!) {
+                mutation ($Id: ObjectID!) {
                     deleteLoyaltyProgram(id: $id)
                 }
             `;

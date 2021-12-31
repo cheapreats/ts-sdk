@@ -106,7 +106,7 @@ export class MenuItemController {
   update(id: string, menu_item: UpdateMenuItemInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateMenuItemMutation ($id: String!, $menu_item: UpdateMenuItemInput!) {
+                mutation updateMenuItemMutation ($Id: ObjectID!, $menu_item: UpdateMenuItemInput!) {
                     updateMenuItem(id: $id, menu_item: $menu_item) {
                         _id
                     }
@@ -166,7 +166,7 @@ export class MenuItemController {
   delete(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation deleteMenuItemMutation ($id: String!) {
+                mutation deleteMenuItemMutation ($Id: ObjectID!) {
                     deleteMenuItem(id: $id)
                 }
             `;

@@ -135,7 +135,7 @@ export class CustomerController {
   update(id: string, customer: UpdateCustomerInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateCustomerMutation ($id: String!, $customer: UpdateCustomerInput!) {
+                mutation updateCustomerMutation ($Id: ObjectID!, $customer: UpdateCustomerInput!) {
                     updateCustomer(id: $id, customer: $customer) {
                         _id
                     }
@@ -165,7 +165,7 @@ export class CustomerController {
   enrollApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation enrollCustomerApnsTokenMutation ($id: String!, $token: String!) {
+                mutation enrollCustomerApnsTokenMutation ($Id: ObjectID!, $token: String!) {
                     enrollCustomerApnsToken(id: $id, token: $token) {
                         _id
                     }
@@ -195,7 +195,7 @@ export class CustomerController {
   revokeApnsToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation revokeCustomerApnsTokenMutation ($id: String!, $token: String!) {
+                mutation revokeCustomerApnsTokenMutation ($Id: ObjectID!, $token: String!) {
                     revokeCustomerApnsToken(id: $id, token: $token) {
                         _id
                     }
@@ -225,7 +225,7 @@ export class CustomerController {
   enrollFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation enrollCustomerFcmTokenMutation ($id: String!, $token: String!) {
+                mutation enrollCustomerFcmTokenMutation ($Id: ObjectID!, $token: String!) {
                     enrollCustomerFcmToken(id: $id, token: $token) {
                         _id
                     }
@@ -255,7 +255,7 @@ export class CustomerController {
   revokeFcmToken(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation revokeCustomerFcmTokenMutation ($id: String!, $token: String!) {
+                mutation revokeCustomerFcmTokenMutation ($Id: ObjectID!, $token: String!) {
                     revokeCustomerFcmToken(id: $id, token: $token) {
                         _id
                     }
@@ -285,7 +285,7 @@ export class CustomerController {
   updateCreditCard(id: string, token: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateCustomerCreditCardMutation ($id: String!, $token: String!) {
+                mutation updateCustomerCreditCardMutation ($Id: ObjectID!, $token: String!) {
                     updateCustomerCreditCard(id: $id, token: $token) {
                         _id
                     }
@@ -315,7 +315,7 @@ export class CustomerController {
   createWallet(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation createCustomerWallet ($id: String!) {
+                mutation createCustomerWallet ($Id: ObjectID!) {
                     createCustomerWallet(id: $id) {
                         _id
                     }
@@ -350,7 +350,7 @@ export class CustomerController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation reloadCustomerWallet ($id: String!, $amount: Int!, $payment_method: ReloadWalletPaymentMethod!) {
+                mutation reloadCustomerWallet ($Id: ObjectID!, $amount: Int!, $payment_method: ReloadWalletPaymentMethod!) {
                     reloadCustomerWallet(id: $id, amount: $amount, payment_method: $payment_method) {
                         _id
                     }
@@ -456,7 +456,7 @@ export class CustomerController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $vendor_id: String!, $amount: Int!, $order_id: String) {
+                mutation ($Id: ObjectID!, $vendor_Id: ObjectID!, $amount: Int!, $order_id: String) {
                     refundCustomerWallet(id: $id, vendor_id: $vendor_id, amount: $amount, order_id: $order_id) {
                         _id
                     }
@@ -496,7 +496,7 @@ export class CustomerController {
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $transaction_type: CouponTransactionType!, $amount: Int!, $description: String) {
+                mutation ($Id: ObjectID!, $transaction_type: CouponTransactionType!, $amount: Int!, $description: String) {
                     createCustomerWalletTransaction(id: $id, transaction_type: $transaction_type, amount: $amount, description: $description) {
                         _id
                     }
@@ -528,7 +528,7 @@ export class CustomerController {
   addFavouriteVendor(id: string, vendor_id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $vendor_id: String!) {
+                mutation ($Id: ObjectID!, $vendor_Id: ObjectID!) {
                     addFavouriteVendorForCustomer (id: $id, vendor_id: $vendor_id) {
                         _id
                     }
@@ -558,7 +558,7 @@ export class CustomerController {
   removeFavouriteVendor(id: string, vendor_id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $vendor_id: String!) {
+                mutation ($Id: ObjectID!, $vendor_Id: ObjectID!) {
                     removeFavouriteVendorForCustomer (id: $id, vendor_id: $vendor_id) {
                         _id
                     }
@@ -588,7 +588,7 @@ export class CustomerController {
   addFavouriteItem(id: string, item_id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id: String!, $item_id: String!) {
+                mutation ($Id: ObjectID!, $item_Id: ObjectID!) {
                     addFavouriteItemForCustomer (id: $id, item_id: $item_id) {
                         _id
                     }
@@ -618,7 +618,7 @@ export class CustomerController {
   removeFavouriteItem(id: string, item_id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation ($id:String!, $item_id:String!) {
+                mutation ($Id: ObjectID!, $item_Id: ObjectID!) {
                     removeFavouriteItemForCustomer (id:$id, item_id:$item_id) {
                         _id
                     }

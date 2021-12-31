@@ -78,7 +78,7 @@ export class ModifierController {
   update(id: string, modifier: UpdateModifierInput): Promise<string> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation updateModifier ($id: String!, $modifier: UpdateModifierInput!) {
+                mutation updateModifier ($Id: ObjectID!, $modifier: UpdateModifierInput!) {
                     updateModifier(id: $id, modifier: $modifier) {
                         _id
                     }
@@ -108,7 +108,7 @@ export class ModifierController {
   delete(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
       let mutationString = `
-                mutation deleteModifier ($id: String!) {
+                mutation deleteModifier ($Id: ObjectID!) {
                     deleteModifier(id: $id)
                 }
             `;
